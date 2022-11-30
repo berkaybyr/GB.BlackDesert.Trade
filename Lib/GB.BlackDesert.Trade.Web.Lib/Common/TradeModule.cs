@@ -4,7 +4,7 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
@@ -48,9 +48,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                         ObjectParameter worldNo = new ObjectParameter("worldNo", typeof(int));
                         ObjectParameter isAdmissionToSpeedServer = new ObjectParameter("isAdmissionToSpeedServer", typeof(byte));
                         ObjectParameter isUpdatePackageBuff = new ObjectParameter("isUpdatePackageBuff", typeof(bool));
-                        using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                        using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                         {
-                            tradeWorlddb.uspAccessByTradeWeb(new long?(userInfo._userNo), serviceType, worldNo, isAdmissionToSpeedServer, isUpdatePackageBuff, symNo, rv);
+                            SA_BETA_WORLDDB_0002.uspAccessByTradeWeb(new long?(userInfo._userNo), serviceType, worldNo, isAdmissionToSpeedServer, isUpdatePackageBuff, symNo, rv);
                             commonResult.resultCode = Convert.ToInt32(rv.Value);
                             if (commonResult.resultCode != 0)
                             {
@@ -61,9 +61,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                         }
                         if (1 == Convert.ToInt32(isAdmissionToSpeedServer.Value) && Convert.ToBoolean(isUpdatePackageBuff.Value))
                         {
-                            using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName("", Convert.ToInt32(worldNo.Value))))
+                            using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002()) //TradeModule.MakeGameDbName("", Convert.ToInt32(worldNo.Value))
                             {
-                                tradeGameDb.uspUpdatePackageBuffByWeb(new long?(userInfo._userNo), new short?(Convert.ToInt16(serviceType.Value)), symNo, rv);
+                                SA_BETA_GAMEDB_0002.uspUpdatePackageBuffByWeb(new long?(userInfo._userNo), new short?(Convert.ToInt16(serviceType.Value)), symNo, rv);
                                 commonResult.resultCode = Convert.ToInt32(rv.Value);
                                 if (commonResult.resultCode != 0)
                                 {
@@ -85,7 +85,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     return commonResult;
                 }
                 userInfo = new UserInfomationModel();
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     DateTime customTime = CommonModule.GetCustomTime();
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -93,7 +93,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     ObjectParameter serviceType = new ObjectParameter("serviceType", typeof(int));
                     ObjectParameter worldNo = new ObjectParameter("worldNo", typeof(int));
                     ObjectParameter userNickName = new ObjectParameter("userNickName", typeof(string));
-                    tradeWorlddb.uspCheckAuthKey(new long?(userNo), certifiedKey, new DateTime?(customTime), serviceType, worldNo, userNickName, symNo, rv);
+                    ObjectParameter date = new ObjectParameter("requestDate", typeof(DateTime));
+                    SA_BETA_WORLDDB_0002.uspCheckAuthKey(new long?(userNo), certifiedKey, date, serviceType, worldNo, userNickName, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_ERROR_MSG_UNAUTHORIZED");
                     if (commonResult.resultCode != 0)
@@ -134,11 +135,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             CommonResult commonResult = new CommonResult();
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002()) //TradeModule.MakeGameDbName(hostName, worldNo)
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspUsingTicket(new long?(userNo), new byte?(ticketType), ticketNo, rv, symNo);
+                    SA_BETA_GAMEDB_0002.uspUsingTicket(new long?(userNo), new byte?(ticketType), ticketNo, rv, symNo);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_ERROR_MSG_UNAUTHORIZED");
                     if (commonResult.resultCode != 0)
@@ -160,18 +161,18 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
 
         public static string MakeGameDbName(string hostName, int worldNo)
         {
-            string str = "TradeGameDB";
+            string str = "SA_BETA_GAMEDB_0002";
             char[] chArray = new char[3] { '.', '/', '-' };
             string[] strArray = hostName.Split(chArray);
             if (ConstantMgr._serviceProject.Equals("BDO"))
-                str = "TradeGameDB_" + Convert.ToString(worldNo);
+                str = "SA_BETA_GAMEDB_0002_" + Convert.ToString(worldNo);
             else if (ConstantMgr._serviceProject.Equals("BDM"))
             {
                 if (!strArray[0].Equals("local") && !strArray[0].Equals("dev"))
-                    str = "TradeGameDB" + strArray[1];
+                    str = "SA_BETA_GAMEDB_0002" + strArray[1];
             }
             else if (ConstantMgr._serviceProject.Equals("CDO"))
-                str = "TradeGameDB";
+                str = "SA_BETA_GAMEDB_0002";
             return str;
         }
 
@@ -183,12 +184,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, userInfo._worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(hostName, userInfo._worldNo)))
                 {
                     ObjectParameter packageExpiration = new ObjectParameter("packageExpiration", typeof(DateTime));
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspGetPremiumPackageExpiration(new long?(userInfo._userNo), packageExpiration, symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspGetPremiumPackageExpiration(new long?(userInfo._userNo), packageExpiration, symNo, rv);
                     Convert.ToInt32(rv.Value);
                     Convert.ToString(symNo.Value);
                     return Convert.ToDateTime(packageExpiration.Value);
@@ -210,12 +211,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, userInfo._worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002()) //TradeModule.MakeGameDbName(hostName, userInfo._worldNo)
                 {
                     ObjectParameter packageExpiration = new ObjectParameter("packageExpiration", typeof(DateTime));
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspGetChargeBuffExpiration(new long?(userInfo._userNo), new byte?(buffType), packageExpiration, symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspGetChargeBuffExpiration(new long?(userInfo._userNo), new byte?(buffType), packageExpiration, symNo, rv);
                     Convert.ToInt32(rv.Value);
                     Convert.ToString(symNo.Value);
                     return Convert.ToDateTime(packageExpiration.Value);
@@ -235,7 +236,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(hostName, worldNo)))
                 {
                     ObjectParameter objectParameter = new ObjectParameter("packageExpiration", typeof(DateTime));
                     ObjectParameter levelPoint = new ObjectParameter("levelPoint", typeof(int));
@@ -243,7 +244,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     ObjectParameter etcPoint = new ObjectParameter("etcPoint", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("rv", typeof(int));
                     ObjectParameter rv = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspGetFamilyPointForWorldTradeMarket(new long?(userNo), levelPoint, lifeLevelPoint, etcPoint, rv, symNo);
+                    SA_BETA_GAMEDB_0002.uspGetFamilyPointForWorldTradeMarket(new long?(userNo), levelPoint, lifeLevelPoint, etcPoint, rv, symNo);
                     num = Convert.ToInt32(symNo.Value);
                     empty = Convert.ToString(rv.Value);
                     familyPoint = Convert.ToInt32(levelPoint.Value) + Convert.ToInt32(lifeLevelPoint.Value) + Convert.ToInt32(etcPoint.Value);
@@ -269,12 +270,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(hostName, worldNo)))
                 {
                     ObjectParameter maidCount2 = new ObjectParameter("maidCount", typeof(int));
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspGetTradeMaidCount(new long?(userNo), maidCount2, rv, symNo);
+                    SA_BETA_GAMEDB_0002.uspGetTradeMaidCount(new long?(userNo), maidCount2, rv, symNo);
                     num = Convert.ToInt32(rv.Value);
                     empty = Convert.ToString(symNo.Value);
                     maidCount1 = Convert.ToInt32(maidCount2.Value);
@@ -300,12 +301,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter isGameMaster = new ObjectParameter(nameof(isGameMaster), typeof(bool));
                     ObjectParameter symNo = new ObjectParameter("rv", typeof(int));
                     ObjectParameter rv = new ObjectParameter("symNo", typeof(string));
-                    tradeWorlddb.uspIsGameMaster(new long?(userNo), isGameMaster, symNo, rv);
+                    SA_BETA_WORLDDB_0002.uspIsGameMaster(new long?(userNo), isGameMaster, symNo, rv);
                     num = Convert.ToInt32(symNo.Value);
                     empty = Convert.ToString(rv.Value);
                     flag = Convert.ToBoolean(isGameMaster.Value);
@@ -330,10 +331,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             CommonModule.GetCustomTime();
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeWebDb.uspIsMarketOpen__XXX(symNo);
+                    SA_BETA_TRADEDB_0002.uspIsMarketOpen__XXX(symNo);
                     maintenanceInfo = symNo.Value.ToString().Trim();
                 }
             }
@@ -354,11 +355,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             List<uspFamilySKillListFromWorldMarket_Result> familySkillList = new List<uspFamilySKillListFromWorldMarket_Result>();
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(hostName, worldNo)))
                 {
                     ObjectParameter symNo = new ObjectParameter("rv", typeof(int));
                     ObjectParameter rv = new ObjectParameter("symNo", typeof(string));
-                    familySkillList = ((IEnumerable<uspFamilySKillListFromWorldMarket_Result>)tradeGameDb.uspFamilySKillListFromWorldMarket(new long?(userNo), symNo, rv)).ToList<uspFamilySKillListFromWorldMarket_Result>();
+                    familySkillList = ((IEnumerable<uspFamilySKillListFromWorldMarket_Result>)SA_BETA_GAMEDB_0002.uspFamilySKillListFromWorldMarket(new long?(userNo), symNo, rv)).ToList<uspFamilySKillListFromWorldMarket_Result>();
                     num = Convert.ToInt32(symNo.Value);
                     empty = Convert.ToString(rv.Value);
                 }
@@ -377,12 +378,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(hostName, worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(hostName, worldNo)))
                 {
                     ObjectParameter symNo = new ObjectParameter("rv", typeof(int));
                     ObjectParameter ringBuffMaxCount = new ObjectParameter("ringBuffMaxCount", typeof(int));
                     ObjectParameter rv = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspGetTradeRingBuff(new long?(userNo), ringBuffMaxCount, symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspGetTradeRingBuff(new long?(userNo), ringBuffMaxCount, symNo, rv);
                     int int32 = Convert.ToInt32(symNo.Value);
                     string str = Convert.ToString(rv.Value);
                     if (int32 == 0)
@@ -404,10 +405,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string defaultCulture = ConstantMgr._defaultCulture;
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
-                    webMaintanace = ((IEnumerable<uspGetShutDownCheckUseWeb_Result>)tradeWebDb.uspGetShutDownCheckUseWeb(defaultCulture, resultCode)).Count<uspGetShutDownCheckUseWeb_Result>() > 0;
+                    webMaintanace = ((IEnumerable<uspGetShutDownCheckUseWeb_Result>)SA_BETA_TRADEDB_0002.uspGetShutDownCheckUseWeb(defaultCulture, resultCode)).Count<uspGetShutDownCheckUseWeb_Result>() > 0;
                 }
             }
             catch (Exception ex)
@@ -423,11 +424,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string empty = string.Empty;
             try
             {
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeWorlddb.uspClearTradeAuthHistory(symNo, rv);
+                    SA_BETA_WORLDDB_0002.uspClearTradeAuthHistory(symNo, rv);
                     num = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     if (Convert.ToInt32(rv.Value) != 0)
@@ -454,16 +455,16 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 List<string> stringList = new List<string>();
                 foreach (ConnectionStringSettings connectionString in (ConfigurationElementCollection)ConfigurationManager.ConnectionStrings)
                 {
-                    if (connectionString.Name.ToLower().IndexOf("tradegamedb") == 0)
+                    if (connectionString.Name.ToLower().IndexOf("SA_BETA_GAMEDB_0002") == 0)
                         stringList.Add(connectionString.Name);
                 }
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 foreach (string name in stringList)
                 {
-                    using (TradeGameDB tradeGameDb = new TradeGameDB(name))
+                    using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
                     {
-                        tradeGameDb.uspClearNoticeItemList(symNo, rv);
+                        SA_BETA_GAMEDB_0002.uspClearNoticeItemList(symNo, rv);
                         num = Convert.ToInt32(rv.Value);
                         string str = Convert.ToString(symNo.Value);
                         if (Convert.ToInt32(rv.Value) != 0)
@@ -490,9 +491,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspClearNoticeItemList(symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspClearNoticeItemList(symNo, rv);
                     num = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     if (Convert.ToInt32(rv.Value) != 0)
@@ -550,9 +551,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             ObjectParameter afterCount1 = new ObjectParameter("afterCount1", typeof(long));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspUpdateWaitFail(new long?(model.waitNo), new long?(weight), beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspUpdateWaitFail(new long?(model.waitNo), new long?(weight), beforeCount1, afterCount1, symNo, rv);
                     num = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     if (Convert.ToInt32(rv.Value) != 0)
@@ -595,12 +596,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             result = false;
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter isOTPItem = new ObjectParameter("isOTPItem", typeof(bool));
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeWebDb.uspCheckOTPItem(new int?(keyType), new int?(mainKey), new int?(subKey), isOTPItem, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCheckOTPItem(new int?(keyType), new int?(mainKey), new int?(subKey), isOTPItem, symNo, rv);
                     num = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     if (Convert.ToInt32(rv.Value) != 0)

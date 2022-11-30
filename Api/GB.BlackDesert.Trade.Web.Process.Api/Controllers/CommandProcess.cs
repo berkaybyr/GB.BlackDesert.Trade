@@ -1,5 +1,5 @@
 ﻿using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System.Data.Entity.Core.Objects;
@@ -55,13 +55,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             int int32_2 = Convert.ToInt32(argumentList[1]);
             if (!ItemInfoManager.This().getInfo(int32_1, int32_2).isValid())
                 return 8;
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspInsertBlockItem(new int?(0), new int?(int32_1), new long?((long)int32_2), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspInsertBlockItem(new int?(0), new int?(int32_1), new long?((long)int32_2), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {
@@ -87,13 +87,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             int int32_2 = Convert.ToInt32(argumentList[1]);
             if (!ItemInfoManager.This().getInfo(int32_1, int32_2).isValid())
                 return 8;
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspRemoveBlockItem(new int?(0), new int?(int32_1), new long?((long)int32_2), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspRemoveBlockItem(new int?(0), new int?(int32_1), new long?((long)int32_2), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {
@@ -122,13 +122,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             if ((long)int.MaxValue < int64_2)
                 return 19;
             DateTime dateTime = CommonModule.GetCustomTime().AddSeconds((double)int64_2);
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspInsertBlockUser(new int?(int32_1), new int?(int32_2), new long?(int64_1), new DateTime?(dateTime), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspInsertBlockUser(new int?(int32_1), new int?(int32_2), new long?(int64_1), new DateTime?(dateTime), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {
@@ -153,13 +153,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             int int32_1 = Convert.ToInt32(argumentList[0]);
             int int32_2 = Convert.ToInt32(argumentList[1]);
             long int64 = Convert.ToInt64(argumentList[2]);
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspRemoveBlockUser(new int?(int32_1), new int?(int32_2), new long?(int64), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspRemoveBlockUser(new int?(int32_1), new int?(int32_2), new long?(int64), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {
@@ -216,13 +216,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             if (1 != argumentList.Count)
                 return 18;
             bool flag = argumentList[0].Equals("1");
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspUpdateMarketState(new bool?(flag), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspUpdateMarketState(new bool?(flag), symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     if (int32 != 0)
                     {
@@ -249,13 +249,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             bool flag = argumentList[2].Equals("1");
             if (!ItemInfoManager.This().getInfo(int32_1, int32_2).isValid())
                 return 8;
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspSetMaxPrice(new int?(0), new int?(int32_1), new long?((long)int32_2), new bool?(flag), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspSetMaxPrice(new int?(0), new int?(int32_1), new long?((long)int32_2), new bool?(flag), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {
@@ -283,13 +283,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
             long int64_2 = Convert.ToInt64(argumentList[3]);
             if (!ItemInfoManager.This().getInfo(int32_1, int32_2).isValid())
                 return 8;
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 try
                 {
-                    tradeWebDb.uspAddTrade(new int?(0), new int?(int32_1), new long?((long)int32_2), new long?(int64_1), new long?(int64_2), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspAddTrade(new int?(0), new int?(int32_1), new long?((long)int32_2), new long?(int64_1), new long?(int64_2), symNo, rv);
                     int int32_3 = Convert.ToInt32(rv.Value);
                     if (int32_3 != 0)
                     {

@@ -7,7 +7,7 @@
 using GB.BlackDesert.Trade.Web.Api.App_Start;
 using GB.BlackDesert.Trade.Web.Api.Models;
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
@@ -1012,17 +1012,17 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             int num = -99;
             try
             {
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                     AuthenticationInfo = AuthenticateManager.GetAuthInfo();
-                    tradeWorlddb.uspCheckSecondPwd(new long?(AuthenticationInfo.userInfoModel._userNo), secondPwd, resultCode);
+                    SA_BETA_WORLDDB_0002.uspCheckSecondPwd(new long?(AuthenticationInfo.userInfoModel._userNo), secondPwd, resultCode);
                     num = Convert.ToInt32(resultCode.Value);
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter failCount = new ObjectParameter("failCount", typeof(int));
-                    tradeWebDb.uspGetSecondPwdInfo(new int?(AuthenticationInfo.userInfoModel._worldNo), new long?(AuthenticationInfo.userInfoModel._userNo), new bool?(false), failCount);
+                    SA_BETA_TRADEDB_0002.uspGetSecondPwdInfo(new int?(AuthenticationInfo.userInfoModel._worldNo), new long?(AuthenticationInfo.userInfoModel._userNo), new bool?(false), failCount);
                     if (Convert.ToInt32(failCount.Value) >= 5)
                     {
                         commonResult.resultCode = 1;
@@ -1038,7 +1038,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                     }
                     else
                     {
-                        tradeWebDb.uspGetSecondPwdInfo(new int?(AuthenticationInfo.userInfoModel._worldNo), new long?(AuthenticationInfo.userInfoModel._userNo), new bool?(true), failCount);
+                        SA_BETA_TRADEDB_0002.uspGetSecondPwdInfo(new int?(AuthenticationInfo.userInfoModel._worldNo), new long?(AuthenticationInfo.userInfoModel._userNo), new bool?(true), failCount);
                         commonResult.resultCode = 1;
                         commonResult.resultMsg = "TRADE_MARKET_SECONDPWD_FAIL";
                     }

@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
 using System.Collections.Generic;

@@ -7,7 +7,7 @@
 using EasMe;
 using EasMe.Extensions;
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using log4net;

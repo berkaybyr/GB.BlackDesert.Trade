@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -72,11 +72,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                     BiddingGroupPriceList biddingGroupPriceList = new BiddingGroupPriceList();
-                    using (TradeWebDB tradeWebDb = new TradeWebDB())
+                    using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                     {
                         try
                         {
-                            biddingGroupPriceList.list = ((IEnumerable<uspListGroupBiddingPrice_Result>)tradeWebDb.uspListGroupBiddingPrice(new long?(key), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(groupWeaponPriceList._currentPrice), symNo, rv)).ToList<uspListGroupBiddingPrice_Result>();
+                            biddingGroupPriceList.list = ((IEnumerable<uspListGroupBiddingPrice_Result>)SA_BETA_TRADEDB_0002.uspListGroupBiddingPrice(new long?(key), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(groupWeaponPriceList._currentPrice), symNo, rv)).ToList<uspListGroupBiddingPrice_Result>();
                         }
                         catch (Exception ex)
                         {
@@ -152,11 +152,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         FluctuationType fluctuationType = FluctuationType.eWorldMarket_FluctuationType_Normal;
                         long fluctuationPrice = 0;
                         TickCountCommon.fluctuationCalc(price, groupWeaponPriceList._currentPrice, ref fluctuationType, ref fluctuationPrice);
-                        using (TradeWebDB tradeWebDb = new TradeWebDB())
+                        using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                         {
                             try
                             {
-                                tradeWebDb.uspUpdateWorldMarketGroupPrice(new long?(key), new long?(price), new long?(num3), new byte?((byte)fluctuationType), new long?(fluctuationPrice), symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspUpdateWorldMarketGroupPrice(new long?(key), new long?(price), new long?(num3), new byte?((byte)fluctuationType), new long?(fluctuationPrice), symNo, rv);
                                 int int32 = Convert.ToInt32(rv.Value);
                                 if (int32 != 0)
                                 {
@@ -180,12 +180,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     {
                         ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                         ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                        using (TradeWebDB tradeWebDb = new TradeWebDB())
+                        using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                         {
                             try
                             {
                                 uspListWorldMarketAccumulateTrade_Result record = weaponChanger._record;
-                                tradeWebDb.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
                                 int int32 = Convert.ToInt32(rv.Value);
                                 if (int32 == 0)
                                     return;

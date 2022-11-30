@@ -4,7 +4,7 @@
 // MVID: 3DEAC0B8-1FEA-450C-A995-66A8A3C53BCF
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +28,10 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             uspGetShutDownCheckUseWeb_Result checkUseWebResult = new uspGetShutDownCheckUseWeb_Result();
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
-                    checkUseWebResult = ((IEnumerable<uspGetShutDownCheckUseWeb_Result>)tradeWebDb.uspGetShutDownCheckUseWeb(cultureCode, resultCode)).FirstOrDefault<uspGetShutDownCheckUseWeb_Result>();
+                    checkUseWebResult = ((IEnumerable<uspGetShutDownCheckUseWeb_Result>)SA_BETA_TRADEDB_0002.uspGetShutDownCheckUseWeb(cultureCode, resultCode)).FirstOrDefault<uspGetShutDownCheckUseWeb_Result>();
                     if (checkUseWebResult == null)
                         return (ActionResult)this.Redirect("/AuthCallback/Index");
                 }

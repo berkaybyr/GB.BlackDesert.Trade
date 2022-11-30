@@ -4,7 +4,7 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using System;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -57,8 +57,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 try
                 {
-                    using (TradeWebDB tradeWebDb = new TradeWebDB())
-                        commonDbResult.list = ((IEnumerable<uspListWaitBiddingSell_Result>)tradeWebDb.uspListWaitBiddingSell(symNo, rv)).ToList<uspListWaitBiddingSell_Result>();
+                    using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
+                        commonDbResult.list = ((IEnumerable<uspListWaitBiddingSell_Result>)SA_BETA_TRADEDB_0002.uspListWaitBiddingSell(symNo, rv)).ToList<uspListWaitBiddingSell_Result>();
                 }
                 catch (Exception ex)
                 {
@@ -175,12 +175,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                         itemInfo.enchantLevel2 = 0;
                                         DateTime customTime = CommonModule.GetCustomTime();
                                         List<string> buyUserIdList = new List<string>();
-                                        using (TradeWebDB tradeWebDb = new TradeWebDB())
+                                        using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                                         {
                                             try
                                             {
                                                 ObjectParameter blocked = new ObjectParameter("blocked", typeof(bool));
-                                                tradeWebDb.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
+                                                SA_BETA_TRADEDB_0002.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
                                                 if (Convert.ToBoolean(blocked.Value))
                                                 {
                                                     LogUtil.WriteLog("[DB Exception]waitSellItem() - uspCheckAndUpdateBlackUser(" + model.toString() + ") Exception ", "WARN");
@@ -208,7 +208,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                             {
                                                 try
                                                 {
-                                                    tradeWebDb.uspSellBiddingToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num2), new long?(model.waitNo), new bool?(model.isRingBuff), new long?(0L), walletMoney, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, buyNo, buyUserNo, buyUserId, buyLeftCount, stopType, isNextApplyRingBuff, resultWaitNo, raceCount, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, soldCount, leftCount, moneyCount, calculateMoney, isCalculateRingBuff, symNo, rv);
+                                                    SA_BETA_TRADEDB_0002.uspSellBiddingToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num2), new long?(model.waitNo), new bool?(model.isRingBuff), new long?(0L), walletMoney, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, buyNo, buyUserNo, buyUserId, buyLeftCount, stopType, isNextApplyRingBuff, resultWaitNo, raceCount, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, soldCount, leftCount, moneyCount, calculateMoney, isCalculateRingBuff, symNo, rv);
                                                     int int32_1 = Convert.ToInt32(rv.Value);
                                                     StopReasonType int32_2 = (StopReasonType)Convert.ToInt32(stopType.Value);
                                                     if (int32_1 == 0)
@@ -285,7 +285,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                                 try
                                                 {
                                                     ObjectParameter isAppledRingBuff = new ObjectParameter("isAppledRingBuff", typeof(bool));
-                                                    tradeWebDb.uspSellToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag), new long?(info1._weight), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num2), new long?(model.waitNo), sellPricePerOne, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, sellNo, isAppledRingBuff, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
+                                                    SA_BETA_TRADEDB_0002.uspSellToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag), new long?(info1._weight), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num2), new long?(model.waitNo), sellPricePerOne, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, sellNo, isAppledRingBuff, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
                                                     int int32 = Convert.ToInt32(rv.Value);
                                                     if (int32 == 0)
                                                     {

@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Newtonsoft.Json;
@@ -71,7 +71,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             List<string> stringList = new List<string>();
             foreach (ConnectionStringSettings connectionString in (ConfigurationElementCollection)ConfigurationManager.ConnectionStrings)
             {
-                if (connectionString.Name.ToLower().IndexOf("tradegamedb") == 0)
+                if (connectionString.Name.ToLower().IndexOf("SA_BETA_GAMEDB_0002") == 0)
                     stringList.Add(connectionString.Name);
             }
             foreach (string name in stringList)
@@ -80,8 +80,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 {
                     try
                     {
-                        using (TradeGameDB tradeGameDb = new TradeGameDB(name))
-                            tradeGameDb.uspUpdateCurrentPrice(new int?(currentPriceResult.C_mainKey), new int?(currentPriceResult.C_subKey), new long?(currentPriceResult.C_pricePerOne), rv, symNo);
+                        using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
+                            SA_BETA_GAMEDB_0002.uspUpdateCurrentPrice(new int?(currentPriceResult.C_mainKey), new int?(currentPriceResult.C_subKey), new long?(currentPriceResult.C_pricePerOne), rv, symNo);
                     }
                     catch (Exception ex)
                     {

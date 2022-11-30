@@ -4,7 +4,7 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
@@ -931,12 +931,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     commonResult.resultMsg = string.Empty;
                     return commonResult;
                 }
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter userId = new ObjectParameter("userId", typeof(string));
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                     ObjectParameter resultMsg = new ObjectParameter("resultMsg", typeof(string));
-                    tradeWorlddb.uspGetUserId(new long?(otpAuthModel.userNo), userId, resultCode, resultMsg);
+                    SA_BETA_WORLDDB_0002.uspGetUserId(new long?(otpAuthModel.userNo), userId, resultCode, resultMsg);
                     empty2 = userId.Value.ToString();
                     if (Convert.ToInt32(resultCode.Value) != 0)
                         LogUtil.WriteLog(string.Format("[DB Exception] Otpauth - uspGetUserId({0} {1})", (object)Convert.ToInt32(resultCode.Value), (object)Convert.ToString(resultMsg.Value)), "WARN");
@@ -991,10 +991,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     commonResult.resultMsg = string.Empty;
                     return commonResult;
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
-                    tradeWebDb.uspSetLastOtpTime(new long?(otpAuthModel.userNo), new int?(otpAuthModel.worldNo), new int?(otpAuthModel.nationCode), resultCode);
+                    SA_BETA_TRADEDB_0002.uspSetLastOtpTime(new long?(otpAuthModel.userNo), new int?(otpAuthModel.worldNo), new int?(otpAuthModel.nationCode), resultCode);
                     num = Convert.ToInt32(resultCode.Value);
                     flag2 = num.Equals(0);
                     if (flag2.Equals(false))
@@ -1021,10 +1021,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     LogUtil.WriteLog("CommonModule checkLastOtpTime PARAM Warn " + CommonModule.SerializeObjectToJsonString<CheckOtpParamModel>(checkOtpParam), "WARN");
                     flag = true;
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
-                    tradeWebDb.uspCheckLastOtpTime(new long?(checkOtpParam.userNo), new int?(checkOtpParam.worldNo), new int?(checkOtpParam.nationCode), resultCode);
+                    SA_BETA_TRADEDB_0002.uspCheckLastOtpTime(new long?(checkOtpParam.userNo), new int?(checkOtpParam.worldNo), new int?(checkOtpParam.nationCode), resultCode);
                     if (Convert.ToInt32(resultCode.Value).Equals(0).Equals(false))
                         flag = true;
                 }
@@ -1047,11 +1047,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     LogUtil.WriteLog("CommonModule GetLastOtpTimeUtc PARAM Warn " + CommonModule.SerializeObjectToJsonString<CheckOtpParamModel>(checkOtpParam), "WARN");
                     lastOtpTimeUtc = 0;
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                     ObjectParameter lastConfirmOtpTime = new ObjectParameter("lastConfirmOtpTime", typeof(DateTime));
-                    tradeWebDb.uspGetLastOtpTime(new long?(checkOtpParam.userNo), new int?(checkOtpParam.worldNo), new int?(checkOtpParam.nationCode), lastConfirmOtpTime, resultCode);
+                    SA_BETA_TRADEDB_0002.uspGetLastOtpTime(new long?(checkOtpParam.userNo), new int?(checkOtpParam.worldNo), new int?(checkOtpParam.nationCode), lastConfirmOtpTime, resultCode);
                     Convert.ToInt32(resultCode.Value);
                     lastOtpTimeUtc = Convert.ToInt32(CommonModule.ConvertUnixTime(Convert.ToDateTime(lastConfirmOtpTime.Value).ToUniversalTime()));
                 }

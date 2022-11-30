@@ -4,7 +4,7 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -37,11 +37,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         {
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-            using (TradeLogDB tradeLogDb = new TradeLogDB())
+            using (PF_BETA_LOGDB_0001 PF_BETA_LOGDB_0001 = new PF_BETA_LOGDB_0001())
             {
                 try
                 {
-                    tradeLogDb.uspLogWorldMarketForOperation(new short?((short)operationType), new DateTime?(currentTime), new int?(userInfo.nationCode), new int?(userInfo.serverNo), new long?(userInfo.userNo), new int?(itemInfo.keyType1), new int?(itemInfo.itemKey1), new int?(itemInfo.enchantLevel1), new long?(itemInfo.count1), new long?(itemInfo.beforeCount1), new long?(itemInfo.afterCount1), new int?(itemInfo.keyType2), new int?(itemInfo.itemKey2), new int?(itemInfo.enchantLevel2), new long?(itemInfo.count2), new long?(itemInfo.beforeCount2), new long?(itemInfo.afterCount2), new long?(param1), new long?(param2), new long?(param3), new long?(param4), new long?(param5), new long?(param6), new long?(param7), new long?(param8), new long?(param9), new long?(param10), new long?(param11), new long?(param12), textParam1, textParam2, new short?(reasonType), symNo, rv);
+                    PF_BETA_LOGDB_0001.uspLogWorldMarketForOperation(new short?((short)operationType), new DateTime?(currentTime), new int?(userInfo.nationCode), new int?(userInfo.serverNo), new long?(userInfo.userNo), new int?(itemInfo.keyType1), new int?(itemInfo.itemKey1), new int?(itemInfo.enchantLevel1), new long?(itemInfo.count1), new long?(itemInfo.beforeCount1), new long?(itemInfo.afterCount1), new int?(itemInfo.keyType2), new int?(itemInfo.itemKey2), new int?(itemInfo.enchantLevel2), new long?(itemInfo.count2), new long?(itemInfo.beforeCount2), new long?(itemInfo.afterCount2), new long?(param1), new long?(param2), new long?(param3), new long?(param4), new long?(param5), new long?(param6), new long?(param7), new long?(param8), new long?(param9), new long?(param10), new long?(param11), new long?(param12), textParam1, textParam2, new short?(reasonType), symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     if (int32 == 0)
                         return;
@@ -103,7 +103,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         {
             try
             {
-                using (new TradeLogDB())
+                using (new PF_BETA_LOGDB_0001())
                     ;
             }
             catch (Exception ex)

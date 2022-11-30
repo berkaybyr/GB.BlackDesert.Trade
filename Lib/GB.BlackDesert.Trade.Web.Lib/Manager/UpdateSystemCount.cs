@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -60,11 +60,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         TradeMarketMainGroupList marketMainGroupList = new TradeMarketMainGroupList();
                         ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                         ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                        using (TradeWebDB tradeWebDb = new TradeWebDB())
+                        using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                         {
                             try
                             {
-                                marketMainGroupList.list = ((IEnumerable<uspListWorldMarketByMainGroup_Result>)tradeWebDb.uspListWorldMarketByMainGroup(new int?(num1), symNo, rv)).ToList<uspListWorldMarketByMainGroup_Result>();
+                                marketMainGroupList.list = ((IEnumerable<uspListWorldMarketByMainGroup_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketByMainGroup(new int?(num1), symNo, rv)).ToList<uspListWorldMarketByMainGroup_Result>();
                             }
                             catch (Exception ex)
                             {
@@ -134,13 +134,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     long num3 = 0;
                     int num4 = 0;
                     DateTime customTime = CommonModule.GetCustomTime();
-                    using (TradeWebDB tradeWebDb = new TradeWebDB())
+                    using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                     {
                         while (0L < num1)
                         {
                             try
                             {
-                                tradeWebDb.uspBuyBiddingFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspBuyBiddingFromWorldMarketBySystem(1,new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
                                 int int32_1 = Convert.ToInt32(rv.Value);
                                 StopReasonType int32_2 = (StopReasonType)Convert.ToInt32(stopType.Value);
                                 if (int32_1 == 0)
@@ -199,7 +199,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             return;
                         try
                         {
-                            tradeWebDb.uspBuyFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, buyNo, symNo, rv);
+                            SA_BETA_TRADEDB_0002.uspBuyFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, buyNo, symNo, rv);
                             int int32 = Convert.ToInt32(rv.Value);
                             if (int32 == 0)
                             {

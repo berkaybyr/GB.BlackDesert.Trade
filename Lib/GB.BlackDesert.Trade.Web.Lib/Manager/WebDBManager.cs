@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -26,9 +26,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    user.list = ((IEnumerable<uspFindUser_Result>)tradeWebDb.uspFindUser(serverNo, userNickName, symNo, rv)).ToList<uspFindUser_Result>();
+                    user.list = ((IEnumerable<uspFindUser_Result>)SA_BETA_TRADEDB_0002.uspFindUser(serverNo, userNickName, symNo, rv)).ToList<uspFindUser_Result>();
                     user.resultCode = Convert.ToInt32(rv.Value);
                     user.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -52,9 +52,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketMyWallet_Result>)tradeWebDb.uspListWorldMarketMyWallet(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListWorldMarketMyWallet_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketMyWallet_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketMyWallet(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListWorldMarketMyWallet_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -78,9 +78,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspPersonalTradeList_Result>)tradeWebDb.uspPersonalTradeList(nationCode, serverNo, userNo, symNo, rv)).ToList<uspPersonalTradeList_Result>();
+                    commonDbResult.list = ((IEnumerable<uspPersonalTradeList_Result>)SA_BETA_TRADEDB_0002.uspPersonalTradeList(nationCode, serverNo, userNo, symNo, rv)).ToList<uspPersonalTradeList_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -105,9 +105,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspUpdateMyWalletWeight(nationCode, serverNo, userNo, new long?(totalWeight), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspUpdateMyWalletWeight(nationCode, serverNo, userNo, new long?(totalWeight), symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -137,9 +137,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter count1 = new ObjectParameter(nameof(count), typeof(long));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspWorldMarketMyWallet(nationCode, serverNo, userNo, keyType, mainKey, subKey, isSealed, count1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspWorldMarketMyWallet(nationCode, serverNo, userNo, keyType, mainKey, subKey, isSealed, count1, symNo, rv);
                     count = Convert.ToString(count1.Value);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = Convert.ToString(symNo.Value);
@@ -164,9 +164,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspBuyablePersonalTradeList_Result>)tradeWebDb.uspBuyablePersonalTradeList(nationCode, serverNo, userNo, symNo, rv)).ToList<uspBuyablePersonalTradeList_Result>();
+                    commonDbResult.list = ((IEnumerable<uspBuyablePersonalTradeList_Result>)SA_BETA_TRADEDB_0002.uspBuyablePersonalTradeList(nationCode, serverNo, userNo, symNo, rv)).ToList<uspBuyablePersonalTradeList_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -186,9 +186,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter familySkillAddTaxDiscountRate = new ObjectParameter("familySkillAddTaxDiscountRate", typeof(int));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspGetAddTaxDiscountRate(new int?(_nationCode), new int?(_worldNo), new long?(_userNo), addTaxDiscountRate, familySkillAddTaxDiscountRate);
+                    SA_BETA_TRADEDB_0002.uspGetAddTaxDiscountRate(new int?(_nationCode), new int?(_worldNo), new long?(_userNo), addTaxDiscountRate, familySkillAddTaxDiscountRate);
                     return Convert.ToInt32(addTaxDiscountRate.Value) + Convert.ToInt32(familySkillAddTaxDiscountRate.Value);
                 }
             }
@@ -209,9 +209,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarket_Result>)tradeWebDb.uspListWorldMarket(new int?((int)keyType), new int?(mainCategory), new int?(subCategory), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarket_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarket_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarket(new int?((int)keyType), new int?(mainCategory), new int?(subCategory), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarket_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -233,9 +233,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspSearchListWorldMarket_Result>)tradeWebDb.uspSearchListWorldMarket(searchResult, new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspSearchListWorldMarket_Result>();
+                    commonDbResult.list = ((IEnumerable<uspSearchListWorldMarket_Result>)SA_BETA_TRADEDB_0002.uspSearchListWorldMarket(searchResult, new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspSearchListWorldMarket_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -259,9 +259,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketDetail_Result>)tradeWebDb.uspListWorldMarketDetail(new int?((int)keyType), new int?(mainKey), new bool?(isUsedTotalTradeCount), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketDetail_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketDetail_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketDetail(new int?((int)keyType), new int?(mainKey), new bool?(isUsedTotalTradeCount), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketDetail_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -285,9 +285,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketDetailByCategory_Result>)tradeWebDb.uspListWorldMarketDetailByCategory(mainCategory, subCategory, new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketDetailByCategory_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketDetailByCategory_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketDetailByCategory(mainCategory, subCategory, new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketDetailByCategory_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -308,9 +308,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketHot_Result>)tradeWebDb.uspListWorldMarketHot(new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketHot_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketHot_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketHot(new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv)).ToList<uspListWorldMarketHot_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -331,9 +331,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketWait_Result>)tradeWebDb.uspListWorldMarketWait(symNo, rv)).ToList<uspListWorldMarketWait_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketWait_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketWait(symNo, rv)).ToList<uspListWorldMarketWait_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -370,9 +370,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter lastTradeTime1 = new ObjectParameter(nameof(lastTradeTime), typeof(DateTime));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspWorldMarketDetailOne(mainKey, new int?(enchantGroup), pricePerOne1, count1, minPrice1, maxPrice1, totalTradeCount1, lastTradePrice1, lastTradeTime1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspWorldMarketDetailOne(mainKey, new int?(enchantGroup), pricePerOne1, count1, minPrice1, maxPrice1, totalTradeCount1, lastTradePrice1, lastTradeTime1, symNo, rv);
                     pricePerOne = Convert.ToInt64(pricePerOne1.Value == null || string.IsNullOrEmpty(pricePerOne1.Value.ToString()) ? (object)0 : pricePerOne1.Value);
                     count = Convert.ToInt64(count1.Value == null || string.IsNullOrEmpty(count1.Value.ToString()) ? (object)0 : count1.Value);
                     minPrice = Convert.ToInt64(minPrice1.Value == null || string.IsNullOrEmpty(minPrice1.Value.ToString()) ? (object)0 : minPrice1.Value);
@@ -416,9 +416,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListBiddingInfo_Result>)tradeWebDb.uspListBiddingInfo(keyType, mainKey, subKey, new int?(enchantMaterialKey), new double?(biddingRate), symNo, rv)).ToList<uspListBiddingInfo_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListBiddingInfo_Result>)SA_BETA_TRADEDB_0002.uspListBiddingInfo(keyType, mainKey, subKey, new int?(enchantMaterialKey), new double?(biddingRate), symNo, rv)).ToList<uspListBiddingInfo_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -442,9 +442,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListUserBiddingBuy_Result>)tradeWebDb.uspListUserBiddingBuy(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListUserBiddingBuy_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListUserBiddingBuy_Result>)SA_BETA_TRADEDB_0002.uspListUserBiddingBuy(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListUserBiddingBuy_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -468,9 +468,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspListUserBiddingSell_Result>)tradeWebDb.uspListUserBiddingSell(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListUserBiddingSell_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListUserBiddingSell_Result>)SA_BETA_TRADEDB_0002.uspListUserBiddingSell(nationCode, serverNo, userNo, symNo, rv)).ToList<uspListUserBiddingSell_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(rv.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -503,9 +503,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ringBuffCount = 0;
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspGetPearlItemLimitedCount(userNo, serverNo, nationCode, addPearlItemLimitedCount1, currentPearlItemLimitedCount1, addWeight1, ringBuffCount1);
+                    SA_BETA_TRADEDB_0002.uspGetPearlItemLimitedCount(userNo, serverNo, nationCode, addPearlItemLimitedCount1, currentPearlItemLimitedCount1, addWeight1, ringBuffCount1);
                     addPearlItemLimitedCount = Convert.ToInt32(addPearlItemLimitedCount1.Value);
                     currentPearlItemLimitedCount = Convert.ToInt32(currentPearlItemLimitedCount1.Value);
                     addWeight = Convert.ToInt64(addWeight1.Value);
@@ -528,9 +528,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    commonDbResult.list = ((IEnumerable<uspGetMarketPriceInfo_Result>)tradeWebDb.uspGetMarketPriceInfo(keyType, mainKey, subKey, symNo)).ToList<uspGetMarketPriceInfo_Result>();
+                    commonDbResult.list = ((IEnumerable<uspGetMarketPriceInfo_Result>)SA_BETA_TRADEDB_0002.uspGetMarketPriceInfo(keyType, mainKey, subKey, symNo)).ToList<uspGetMarketPriceInfo_Result>();
                     commonDbResult.resultCode = Convert.ToInt32(objectParameter.Value);
                     commonDbResult.resultMsg = Convert.ToString(symNo.Value);
                 }
@@ -560,9 +560,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             resultServantNo = 0L;
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspGetServantNo(nationCode, serverNo, userNo, keyType, mainKey, subKey, servantNo, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspGetServantNo(nationCode, serverNo, userNo, keyType, mainKey, subKey, servantNo, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult.resultCode != 0)
@@ -588,8 +588,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             CommonDBResult<uspWorldMarketWaitNoticeList_Result> commonDbResult = new CommonDBResult<uspWorldMarketWaitNoticeList_Result>();
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
-                    commonDbResult.list = ((IEnumerable<uspWorldMarketWaitNoticeList_Result>)tradeWebDb.uspWorldMarketWaitNoticeList(new int?(nationCode), new int?(serverNo), new long?(userNo))).ToList<uspWorldMarketWaitNoticeList_Result>();
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
+                    commonDbResult.list = ((IEnumerable<uspWorldMarketWaitNoticeList_Result>)SA_BETA_TRADEDB_0002.uspWorldMarketWaitNoticeList(new int?(nationCode), new int?(serverNo), new long?(userNo))).ToList<uspWorldMarketWaitNoticeList_Result>();
             }
             catch (Exception ex)
             {

@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Newtonsoft.Json;
@@ -51,11 +51,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string errorMsg = string.Empty;
             try
             {
-                using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    commandList.list = ((IEnumerable<uspListWorldTradeMarketCommand_Result>)tradeWorlddb.uspListWorldTradeMarketCommand(symNo, rv)).ToList<uspListWorldTradeMarketCommand_Result>();
+                    commandList.list = ((IEnumerable<uspListWorldTradeMarketCommand_Result>)SA_BETA_WORLDDB_0002.uspListWorldTradeMarketCommand(symNo, rv)).ToList<uspListWorldTradeMarketCommand_Result>();
                     num1 = Convert.ToInt32(rv.Value);
                     if (num1 != 0)
                     {
@@ -89,11 +89,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 }
                 try
                 {
-                    using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                    using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                     {
                         ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                         ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                        tradeWorlddb.uspSetWorldTradeMarketCommandResult(new long?(num2), new byte?(num3), symNo, rv);
+                        SA_BETA_WORLDDB_0002.uspSetWorldTradeMarketCommandResult(new long?(num2), new byte?(num3), symNo, rv);
                         int int32 = Convert.ToInt32(rv.Value);
                         if (int32 != 0)
                             LogUtil.WriteLog(string.Format("[DB Error] uspListWorldTradeMarketCommand({0}/{1}), rv({2})", (object)num2, (object)num3, (object)int32), "WARN");

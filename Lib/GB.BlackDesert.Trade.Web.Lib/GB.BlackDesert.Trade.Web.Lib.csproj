@@ -100,6 +100,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -112,6 +113,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -138,6 +141,592 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sql\GameDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GameDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\GameDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GameDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\GameDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GameDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\LogDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\LogDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\LogDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\TradeDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\TradeDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\TradeDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TradeDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnDateTimeInterval_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnParseEntitlementItemForRefund_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnParseEntitlementItemForUpdate_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnParseItemListByXboxCashInfo_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnParseSearchItemKey_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnParseServerInfoListByUpdateAdminTool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\ufnSplitWord_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspAuthenticateOrCreateUser_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspBuyablePersonalTradeList_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspDeletePCRoomRequest_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspFamilySKillListFromWorldMarket_Result.cs" />
+    <Compile Include="Sql\uspFindUser_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetAllBlockTypeList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBiddingBuy_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBiddingSell_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockedUserByUserIdForDaum_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockListForPublisher_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockTypeByBlockCode_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockTypeList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockUserByBlockCode_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockUserByRegisterDate_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBlockUserByUserNo_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetBriefCharacterInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetChangeNameDelay_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetFoolsDayEvent_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetItemLogByUserIdWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetItemLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetLogWriteEnable_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMarketPriceInfo_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMinusLoanDetailData_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMinusLoanInsertData_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMinusLoanResultData_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMiscLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMiscLogByUserIdWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetMiscLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetNewOrReturnUser_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetOperationTicket_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetPCRoomGatewayServerList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetProhibitedWord_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetReportNegativUserLogForSha_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetReportNegativUserLog_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetServerChannelChatInfoList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetServerFamilyInfoList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetServerInstanceFieldInfoList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetShutDownCheckUseWeb_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetTranslationList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetUserInfoByUserId_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetUserInformation4SHA_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetUserInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetUserRoleGroupNo_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetUserRoleList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWebBoardGameLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWebBoardGameLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWebBoardGameLogByUserNoWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWorldMarketLogByReason_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWorldMarketLogByUserNoLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWorldMarketLogByUserNo_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWorldMarketWalletInfo_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspGetWorldMarketWallet_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspInsertRoleGroupMemberOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspInsertRoleGroupMemberWithWebAdminTool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspInsertRoleGroupMember_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspIntervalListCommand_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListAccessibleServerInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListAdminToolCommand_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListAuctionLogByReasonLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListBiddingInfo_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListBiddingPrice_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListBlockedHistory_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListBlockedUserByUserIdForDaum_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListBlockType_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListCashProductLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListCashProductLogByProductNoWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListCashProductLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListChattingMacro_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListCommandInfoByWebAdminTool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListContentsOptionsLog_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListFailPayload_Result.cs">
+      <DependentUpon>GameDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGMCommandLogByAllUserWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGMCommandLogByAllUserWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGMCommandLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGMCommandLogByUserIdWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGMCommandLogByUserIdWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGmCommandType_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListGroupBiddingPrice_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByItemKeyWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByItemKeyWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByItemNoWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByItemNoWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListItemLogByReasonWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListKeyWord_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListLogReasonGroupName_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListLogReasonGroup_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListLogReason_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListMarketServerNoNationCode_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListMiscLogByReasonWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListNoticeItem_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListOperationMentionForField_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListOperationMention_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPointResourceLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPointResourceLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPS4CashInfoWorldWithAdmintool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPS4CashInfoWorld_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPS4CashProductRefundInfo_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPS4InventoryHistoryWithProductId_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListPS4InventoryHistory_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRegistedPS4CashProducNotWorld_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRegistedXboxCashProducNotWorld_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListReplaceSubItemGroup_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRole1_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupMemberByUserNickname_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupMemberLoginIpOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupMember_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupNameOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupName_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroupOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleGroup_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleInGroupOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleInGroupWithAdmintool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRoleOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListRole_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServantLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServantLogByServantNoWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServantLogByServantNoWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServantLogByUserIdWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServantLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerChannelChatInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerDataCRC_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerFamilyInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerGroup_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerInfomation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerInfoOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerInformationPreset_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerInstanceFieldInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListServerMovableTime_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListShaMiscTrioLogBygameId_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListTickCount_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListTicket_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListTicket_v3_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserBiddingBuy_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserBiddingSell_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserLogByCharacterNameWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserLogByUserIdWithWebAdminToolLive_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserLogByUserIdWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserLogByUserIpWithWebAdminTool_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListUserOnTheSecondDay_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListValidServerInformation_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWaitBiddingSell_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWebBoardGameLogByCharacterName_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWebBoardGameLogByUserId_Result.cs">
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketAccumulateTradeByStock_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketAccumulateTrade_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketByMainGroup_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketCurrentPrice_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketDetailByCategory_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketDetail_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketHot_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketMyWallet_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarketWait_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldMarket_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListWorldTradeMarketCommand_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListXboxCashInfoWorldWithAdmintool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListXboxCashInfoWorld_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspListXboxCashProductRefundInfo_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspLoadListServerSetting_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspLoadWorldMarketInfo_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspPCRoomLoginList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspPCRoomRequestList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspPersonalTradeList_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspSearchListWorldMarket_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspSearchUniqueNameByName_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspServerInfoList_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspUpdateRoleGroupMemberOasis_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspUpdateRoleGroupMemberWithWebAdminTool_Result.cs">
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\uspWorldMarketWaitNoticeList_Result.cs">
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\WorldDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorldDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\WorldDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sql\WorldDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WorldDb.edmx</DependentUpon>
+    </Compile>
     <Compile Include="System\ObjectExtensions.cs" />
     <Compile Include="Aes.cs" />
     <Compile Include="clsCrypt.cs" />
@@ -262,42 +851,6 @@
     <Compile Include="Manager\Auth\GetWalletInfoModel.cs" />
     <Compile Include="Manager\Auth\OtpCheckParamModel.cs" />
     <Compile Include="Manager\Auth\OtpAuthParamModel.cs" />
-    <Compile Include="DB\BaseRepository.cs" />
-    <Compile Include="DB\TradeGameDB.cs" />
-    <Compile Include="DB\TradeLogDB.cs" />
-    <Compile Include="DB\TradeWebDB.cs" />
-    <Compile Include="DB\TradeWORLDDB.cs" />
-    <Compile Include="DB\uspBuyablePersonalTradeList_Result.cs" />
-    <Compile Include="DB\uspFamilySKillListFromWorldMarket_Result.cs" />
-    <Compile Include="DB\uspFindUser_Result.cs" />
-    <Compile Include="DB\uspGetLogWriteEnable_Result.cs" />
-    <Compile Include="DB\uspGetMarketPriceInfo_Result.cs" />
-    <Compile Include="DB\uspGetShutDownCheckUseWeb_Result.cs" />
-    <Compile Include="DB\uspGetShutDownInfo_Result.cs" />
-    <Compile Include="DB\uspListBiddingInfo_Result.cs" />
-    <Compile Include="DB\uspListBiddingPrice_Result.cs" />
-    <Compile Include="DB\uspListFailPayload_Result.cs" />
-    <Compile Include="DB\uspListGroupBiddingPrice_Result.cs" />
-    <Compile Include="DB\uspListNoticeItem_Result.cs" />
-    <Compile Include="DB\uspListTickCount_Result.cs" />
-    <Compile Include="DB\uspListUserBiddingBuy_Result.cs" />
-    <Compile Include="DB\uspListUserBiddingSell_Result.cs" />
-    <Compile Include="DB\uspListWaitBiddingSell_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketAccumulateTradeByStock_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketAccumulateTrade_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketByMainGroup_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketCurrentPrice_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketDetailByCategory_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketDetail_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketHot_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketMyWallet_Result.cs" />
-    <Compile Include="DB\uspListWorldMarketWait_Result.cs" />
-    <Compile Include="DB\uspListWorldMarket_Result.cs" />
-    <Compile Include="DB\uspListWorldTradeMarketCommand_Result.cs" />
-    <Compile Include="DB\uspLoadWorldMarketInfo_Result.cs" />
-    <Compile Include="DB\uspPersonalTradeList_Result.cs" />
-    <Compile Include="DB\uspSearchListWorldMarket_Result.cs" />
-    <Compile Include="DB\uspWorldMarketWaitNoticeList_Result.cs" />
     <Compile Include="Common\CommonDDLB.cs" />
     <Compile Include="Common\CommonModule.cs" />
     <Compile Include="Common\ErrorNo.cs" />
@@ -322,26 +875,90 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DB\TradeGameDB.csdl" />
-    <EmbeddedResource Include="DB\TradeGameDB.msl" />
-    <EmbeddedResource Include="DB\TradeGameDB.ssdl" />
-    <EmbeddedResource Include="DB\TradeLogDB.csdl" />
-    <EmbeddedResource Include="DB\TradeLogDB.msl" />
-    <EmbeddedResource Include="DB\TradeLogDB.ssdl" />
-    <EmbeddedResource Include="DB\TradeWebDB.csdl" />
-    <EmbeddedResource Include="DB\TradeWebDB.msl" />
-    <EmbeddedResource Include="DB\TradeWebDB.ssdl" />
-    <EmbeddedResource Include="DB\TradeWorldDB.csdl" />
-    <EmbeddedResource Include="DB\TradeWorldDB.msl" />
-    <EmbeddedResource Include="DB\TradeWorldDB.ssdl" />
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <EntityDeploy Include="Sql\TradeDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TradeDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Sql\LogDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LogDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Sql\GameDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GameDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Sql\GameDb.edmx.diagram">
+      <DependentUpon>GameDb.edmx</DependentUpon>
+    </None>
+    <None Include="Sql\LogDb.edmx.diagram">
+      <DependentUpon>LogDb.edmx</DependentUpon>
+    </None>
+    <None Include="Sql\TradeDb.edmx.diagram">
+      <DependentUpon>TradeDb.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Sql\WorldDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WorldDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Sql\WorldDb.edmx.diagram">
+      <DependentUpon>WorldDb.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.S3.3.7.101.25\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sql\GameDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GameDb.edmx</DependentUpon>
+      <LastGenOutput>GameDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\GameDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GameDb.edmx</DependentUpon>
+      <LastGenOutput>GameDb.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\LogDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogDb.edmx</DependentUpon>
+      <LastGenOutput>LogDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\LogDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LogDb.edmx</DependentUpon>
+      <LastGenOutput>LogDb.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\TradeDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TradeDb.edmx</DependentUpon>
+      <LastGenOutput>TradeDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\TradeDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TradeDb.edmx</DependentUpon>
+      <LastGenOutput>TradeDb.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\WorldDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorldDb.edmx</DependentUpon>
+      <LastGenOutput>WorldDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sql\WorldDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WorldDb.edmx</DependentUpon>
+      <LastGenOutput>WorldDb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GameDb\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,5 +1,5 @@
 ﻿using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
@@ -114,13 +114,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                     ObjectParameter payload = new ObjectParameter("payload", typeof(long));
                     ObjectParameter isNotError = new ObjectParameter("isNotError", typeof(bool));
-                    tradeWebDb.uspPrepareDepositToWorldMarket(new int?(tradeMarketItemInfo2.nationCode), new int?(tradeMarketItemInfo2.serverNo), new long?(tradeMarketItemInfo2.userNo), new int?(tradeMarketItemInfo2.keyType), new int?(tradeMarketItemInfo2.mainKey), new int?(tradeMarketItemInfo2.subKey), new long?(tradeMarketItemInfo2.param0), new long?(tradeMarketItemInfo2.param1), new long?(tradeMarketItemInfo2.param2), new long?(tradeMarketItemInfo2.param3), new long?(tradeMarketItemInfo2.param4), new long?(tradeMarketItemInfo2.count), new bool?(tradeMarketItemInfo2.isSealed), new long?(tradeMarketItemInfo3._weight), new long?(WorldMarketOptionManager.This().getMaxWeight()), payload, isNotError, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspPrepareDepositToWorldMarket(new int?(tradeMarketItemInfo2.nationCode), new int?(tradeMarketItemInfo2.serverNo), new long?(tradeMarketItemInfo2.userNo), new int?(tradeMarketItemInfo2.keyType), new int?(tradeMarketItemInfo2.mainKey), new int?(tradeMarketItemInfo2.subKey), new long?(tradeMarketItemInfo2.param0), new long?(tradeMarketItemInfo2.param1), new long?(tradeMarketItemInfo2.param2), new long?(tradeMarketItemInfo2.param3), new long?(tradeMarketItemInfo2.param4), new long?(tradeMarketItemInfo2.count), new bool?(tradeMarketItemInfo2.isSealed), new long?(tradeMarketItemInfo3._weight), new long?(WorldMarketOptionManager.This().getMaxWeight()), payload, isNotError, symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     num = Convert.ToInt64(payload.Value);
@@ -222,9 +222,9 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             ObjectParameter afterCount1 = new ObjectParameter("afterCount1", typeof(long));
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspProcessDepositToWorldMarket(new long?(marketIncludePayload2.payload), reason, keyType, mainKey, subKey, isSealed, objectParameter1, objectParameter2, objectParameter3, objectParameter4, objectParameter5, count, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspProcessDepositToWorldMarket(new long?(marketIncludePayload2.payload), reason, keyType, mainKey, subKey, isSealed, objectParameter1, objectParameter2, objectParameter3, objectParameter4, objectParameter5, count, beforeCount1, afterCount1, symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     string textParam1 = Convert.ToString(symNo.Value);
                     num = Convert.ToInt32(reason.Value);
@@ -383,7 +383,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
@@ -393,7 +393,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     ObjectParameter objectParameter3 = new ObjectParameter("param2", typeof(long));
                     ObjectParameter objectParameter4 = new ObjectParameter("param3", typeof(long));
                     ObjectParameter objectParameter5 = new ObjectParameter("param4", typeof(long));
-                    tradeWebDb.uspPrepareWithdrawFromWorldMarket(new int?(tradeMarketItemInfo2.nationCode), new int?(tradeMarketItemInfo2.serverNo), new long?(tradeMarketItemInfo2.userNo), new int?(tradeMarketItemInfo2.keyType), new int?(tradeMarketItemInfo2.mainKey), new int?(tradeMarketItemInfo2.subKey), new bool?(tradeMarketItemInfo2.isSealed), new long?(tradeMarketItemInfo2.count), new long?(tradeMarketItemInfo3._weight), payload, objectParameter1, objectParameter2, objectParameter3, objectParameter4, objectParameter5, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspPrepareWithdrawFromWorldMarket(new int?(tradeMarketItemInfo2.nationCode), new int?(tradeMarketItemInfo2.serverNo), new long?(tradeMarketItemInfo2.userNo), new int?(tradeMarketItemInfo2.keyType), new int?(tradeMarketItemInfo2.mainKey), new int?(tradeMarketItemInfo2.subKey), new bool?(tradeMarketItemInfo2.isSealed), new long?(tradeMarketItemInfo2.count), new long?(tradeMarketItemInfo3._weight), payload, objectParameter1, objectParameter2, objectParameter3, objectParameter4, objectParameter5, symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     if (int32 != 0)
@@ -495,9 +495,9 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             int num = 0;
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspProcessWithdrawFromWorldMarket(new long?(marketIncludePayload2.payload), reason, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspProcessWithdrawFromWorldMarket(new long?(marketIncludePayload2.payload), reason, beforeCount1, afterCount1, symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     string textParam1 = Convert.ToString(symNo.Value);
                     num = Convert.ToInt32(reason.Value);
@@ -605,12 +605,12 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter isCreateWallet = new ObjectParameter("isCreateWallet", typeof(bool));
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeWebDb.uspCreateMyWallet(tradeMarketUserInfo2.userId, new int?(tradeMarketUserInfo2.nationCode), new int?(tradeMarketUserInfo2.worldNo), new long?(tradeMarketUserInfo2.userNo), tradeMarketUserInfo2.userNickName, new DateTime?(tradeMarketUserInfo2.packageExpiration), new DateTime?(tradeMarketUserInfo2.addWeightBuffExpiration), new int?(num1), new int?(tradeMarketUserInfo2.maidCount), new bool?(tradeMarketUserInfo2.isGameMaster), new double?(num2), new int?(num3), new int?(num4), new int?(num5), new int?(tradeMarketUserInfo2.ringMaxCount), isCreateWallet, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCreateMyWallet(tradeMarketUserInfo2.userId, new int?(tradeMarketUserInfo2.nationCode), new int?(tradeMarketUserInfo2.worldNo), new long?(tradeMarketUserInfo2.userNo), tradeMarketUserInfo2.userNickName, new DateTime?(tradeMarketUserInfo2.packageExpiration), new DateTime?(tradeMarketUserInfo2.addWeightBuffExpiration), new int?(num1), new int?(tradeMarketUserInfo2.maidCount), new bool?(tradeMarketUserInfo2.isGameMaster), new double?(num2), new int?(num3), new int?(num4), new int?(num5), new int?(tradeMarketUserInfo2.ringMaxCount), isCreateWallet, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     commonResult.resultMsg = Convert.ToString(symNo.Value);
                     flag = Convert.ToBoolean(isCreateWallet.Value);
@@ -856,12 +856,12 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             itemInfo.itemKey2 = 1;
             itemInfo.enchantLevel2 = 0;
             List<string> sellUserIdList = new List<string>();
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
                     ObjectParameter blocked = new ObjectParameter("blocked", typeof(bool));
-                    tradeWebDb.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
                     if (Convert.ToBoolean(blocked.Value))
                     {
                         LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspCheckAndUpdateBlackUser({0}/{1})", (object)end, (object)buyCount), "WARN");
@@ -883,7 +883,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 {
                     try
                     {
-                        tradeWebDb.uspBuyBiddingFromWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.buyKeyType), new int?(model.buyMainKey), new int?(model.buySubKey), new long?(model.buyPrice), new long?(buyCount), new int?(model.buyChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?(num5 == 0 ? model.retryBiddingNo : 0L), walletMoney, realBuyCount, totalMoneyCount, sellNo, sellUserNo, sellUserId, sellLeftCount, raceCount, stopType, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, leftCount, registerMoneyCount, boughtCount, symNo, rv);
+                        SA_BETA_TRADEDB_0002.uspBuyBiddingFromWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.buyKeyType), new int?(model.buyMainKey), new int?(model.buySubKey), new long?(model.buyPrice), new long?(buyCount), new int?(model.buyChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?(num5 == 0 ? model.retryBiddingNo : 0L), walletMoney, realBuyCount, totalMoneyCount, sellNo, sellUserNo, sellUserId, sellLeftCount, raceCount, stopType, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, leftCount, registerMoneyCount, boughtCount, symNo, rv);
                         commonResult1.resultCode = Convert.ToInt32(rv.Value);
                         long int64_1 = Convert.ToInt64(sellUserNo.Value);
                         string textParam1 = Convert.ToString(sellUserId.Value);
@@ -1025,7 +1025,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     flag2 = true;
                 try
                 {
-                    tradeWebDb.uspBuyFromWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.buyKeyType), new int?(model.buyMainKey), new int?(model.buySubKey), new long?(model.buyPrice), new long?(buyCount), new int?(model.buyChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag2), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), realBuyCount, totalMoneyCount, buyNo, biddingMoneyCount, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspBuyFromWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.buyKeyType), new int?(model.buyMainKey), new int?(model.buySubKey), new long?(model.buyPrice), new long?(buyCount), new int?(model.buyChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag2), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), realBuyCount, totalMoneyCount, buyNo, biddingMoneyCount, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
                     commonResult1.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult1.resultCode == 0)
                     {
@@ -1133,13 +1133,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     long num3 = 0;
                     int num4 = 0;
                     DateTime customTime = CommonModule.GetCustomTime();
-                    using (TradeWebDB tradeWebDb = new TradeWebDB())
+                    using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                     {
                         while (0L < num1)
                         {
                             try
                             {
-                                tradeWebDb.uspBuyBiddingFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspBuyBiddingFromWorldMarketBySystem(1,new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
                                 int int32_1 = Convert.ToInt32(rv.Value);
                                 StopReasonType int32_2 = (StopReasonType)Convert.ToInt32(stopType.Value);
                                 if (int32_1 == 0)
@@ -1198,7 +1198,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                             return;
                         try
                         {
-                            tradeWebDb.uspBuyFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, buyNo, symNo, rv);
+                            SA_BETA_TRADEDB_0002.uspBuyFromWorldMarketBySystem(new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, buyNo, symNo, rv);
                             int int32 = Convert.ToInt32(rv.Value);
                             if (int32 == 0)
                             {
@@ -1435,12 +1435,12 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             itemInfo.enchantLevel2 = 0;
             long num5 = 0;
             List<string> buyUserIdList = new List<string>();
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
                     ObjectParameter blocked = new ObjectParameter("blocked", typeof(bool));
-                    tradeWebDb.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
                     if (Convert.ToBoolean(blocked.Value))
                     {
                         LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspCheckAndUpdateBlackUser({0}) Exception ", (object)end), "WARN");
@@ -1472,7 +1472,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 {
                     try
                     {
-                        tradeWebDb.uspSellBiddingToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag1), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num1), new long?(num2), new bool?(model.isRingBuff), new long?(num9 == 0 ? model.retryBiddingNo : 0L), walletMoney, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, buyNo, buyUserNo, buyUserId, buyLeftCount, stopType, isNextApplyRingBuff, resultWaitNo, raceCount, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, soldCount, leftCount, moneyCount, calculateMoney, isCalculateRingBuff, symNo, rv);
+                        SA_BETA_TRADEDB_0002.uspSellBiddingToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag1), new long?(info1._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num1), new long?(num2), new bool?(model.isRingBuff), new long?(num9 == 0 ? model.retryBiddingNo : 0L), walletMoney, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, buyNo, buyUserNo, buyUserId, buyLeftCount, stopType, isNextApplyRingBuff, resultWaitNo, raceCount, beforeCount1, afterCount1, beforeCount2, afterCount2, beforeCount3, afterCount3, beforeCount4, afterCount4, soldCount, leftCount, moneyCount, calculateMoney, isCalculateRingBuff, symNo, rv);
                         commonResult1.resultCode = Convert.ToInt32(rv.Value);
                         StopReasonType int32 = (StopReasonType)Convert.ToInt32(stopType.Value);
                         if (commonResult1.resultCode == 0)
@@ -1625,7 +1625,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 try
                 {
                     ObjectParameter isAppledRingBuff = new ObjectParameter("isAppledRingBuff", typeof(bool));
-                    tradeWebDb.uspSellToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag1), new long?(info1._weight), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num1), new long?(num2), sellPricePerOne, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, sellNo, isAppledRingBuff, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspSellToWorldMarket(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), new int?(model.sellKeyType), new int?(model.sellMainKey), new int?(model.sellSubKey), new int?(info1._mainGroupNo), new bool?(model.isSealed), new long?(model.sellPrice), new long?(sellCount), new int?(model.sellChooseKey), new int?(tradeMarketItemInfo._mainKey), new long?(info1._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), new bool?(flag1), new long?(info1._weight), new long?((long)WorldMarketOptionManager.This().getPearlItemLimitedMaxCount()), new DateTime?(customTime), new byte?(num1), new long?(num2), sellPricePerOne, realSellCount, totalMoneyCount, originalTotalMoneyCount, packageExpiration, sellNo, isAppledRingBuff, beforeCount1, afterCount1, beforeCount2, afterCount2, symNo, rv);
                     commonResult1.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult1.resultCode == 0)
                     {
@@ -1750,11 +1750,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
             }
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tradeWebDb.uspWithdrawBiddingBuy(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new long?(marketBiddingInfo2.count), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new int?(marketBiddingInfo2.subKey), differenceMoney, withdrawMoneyCount, isDelete, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspWithdrawBiddingBuy(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new long?(marketBiddingInfo2.count), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new int?(marketBiddingInfo2.subKey), differenceMoney, withdrawMoneyCount, isDelete, beforeCount1, afterCount1, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
@@ -1849,11 +1849,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
             }
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tradeWebDb.uspCalculateBiddingBuy(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new long?(info._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), boughtCount, chooseSubKey, isDelete, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCalculateBiddingBuy(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new long?(info._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), boughtCount, chooseSubKey, isDelete, beforeCount1, afterCount1, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
@@ -1944,11 +1944,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             DateTime customTime = CommonModule.GetCustomTime();
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tradeWebDb.uspWithdrawBiddingSell(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new bool?(marketBiddingInfo2.isSealed), new long?(marketBiddingInfo2.count), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new long?(info._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getBiddingPercent()), new DateTime?(customTime), chooseSubKey, isDelete, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspWithdrawBiddingSell(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new bool?(marketBiddingInfo2.isSealed), new long?(marketBiddingInfo2.count), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new long?(info._weight), new long?(WorldMarketOptionManager.This().getMaxWeight() * (long)WorldMarketOptionManager.This().getMaxWeightRate()), new long?((long)WorldMarketOptionManager.This().getBiddingPercent()), new DateTime?(customTime), chooseSubKey, isDelete, beforeCount1, afterCount1, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
@@ -2043,11 +2043,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
             }
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tradeWebDb.uspCalculateBiddingSell(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new int?(info._mainGroupNo), new bool?(marketBiddingInfo2.isSealed), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new int?(marketBiddingInfo2.subKey), soldCount, isDelete, amountMoney, originalTotalMoneyCount, packageExpiration, isAppledRingBuff, beforeCount1, afterCount1, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspCalculateBiddingSell(new long?(marketBiddingInfo2.biddingNo), new int?(marketBiddingInfo2.keyType), new int?(marketBiddingInfo2.mainKey), new int?(info._enchantGroup), new int?(info._mainGroupNo), new bool?(marketBiddingInfo2.isSealed), new int?(marketBiddingInfo2.nationCode), new int?(marketBiddingInfo2.serverNo), new long?(marketBiddingInfo2.userNo), new int?(marketBiddingInfo2.subKey), soldCount, isDelete, amountMoney, originalTotalMoneyCount, packageExpiration, isAppledRingBuff, beforeCount1, afterCount1, symNo, rv);
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
@@ -2152,11 +2152,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 commonDbResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonDbResult);
             }
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    commonDbResult.list = ((IEnumerable<uspListNoticeItem_Result>)tradeWebDb.uspListNoticeItem(new long?(num), rv, symNo)).ToList<uspListNoticeItem_Result>();
+                    commonDbResult.list = ((IEnumerable<uspListNoticeItem_Result>)SA_BETA_TRADEDB_0002.uspListNoticeItem(new long?(num), rv, symNo)).ToList<uspListNoticeItem_Result>();
                 }
                 catch (Exception ex)
                 {
@@ -2185,8 +2185,8 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             KeyValuePair<int, int> nextCategory = CategoryInfoManager.This().getNextCategory(ref GameProcessController.currentIndex);
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
-                    commonDbResult.list = ((IEnumerable<uspListWorldMarketCurrentPrice_Result>)tradeWebDb.uspListWorldMarketCurrentPrice(new int?(nextCategory.Key), new int?(nextCategory.Value), symNo, rv)).ToList<uspListWorldMarketCurrentPrice_Result>();
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
+                    commonDbResult.list = ((IEnumerable<uspListWorldMarketCurrentPrice_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketCurrentPrice(new int?(nextCategory.Key), new int?(nextCategory.Value), symNo, rv)).ToList<uspListWorldMarketCurrentPrice_Result>();
             }
             catch (Exception ex)
             {
@@ -2220,35 +2220,35 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter objectParameter = new ObjectParameter("groupContentNo", typeof(int));
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                     if (maintenanceRequestModel._setType == "Insert")
                     {
-                        tradeWebDb.uspSetContentsInsUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
+                        SA_BETA_TRADEDB_0002.uspSetContentsInsUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
                         if (Convert.ToInt32(resultCode.Value).Equals(0).Equals(false))
                         {
                             commonResult.resultCode = Convert.ToInt32(resultCode.Value);
                             return this.Json((object)commonResult);
                         }
                         foreach (MaintensnceDetailModel maintenanceInfo in maintenanceRequestModel._maintenanceInfoList)
-                            tradeWebDb.uspSetShutDownInfoInsUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
+                            SA_BETA_TRADEDB_0002.uspSetShutDownInfoInsUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
                     }
                     else if (maintenanceRequestModel._setType == "Update")
                     {
-                        tradeWebDb.uspSetContentsUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
+                        SA_BETA_TRADEDB_0002.uspSetContentsUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
                         if (Convert.ToInt32(resultCode.Value).Equals(0).Equals(false))
                         {
                             commonResult.resultCode = Convert.ToInt32(resultCode.Value);
                             return this.Json((object)commonResult);
                         }
                         foreach (MaintensnceDetailModel maintenanceInfo in maintenanceRequestModel._maintenanceInfoList)
-                            tradeWebDb.uspSetShutDownInfoUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
+                            SA_BETA_TRADEDB_0002.uspSetShutDownInfoUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
                     }
                     else if (maintenanceRequestModel._setType == "Update_Content")
                     {
-                        tradeWebDb.uspSetContentsUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
+                        SA_BETA_TRADEDB_0002.uspSetContentsUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceStartDate)), new DateTime?(Convert.ToDateTime(maintenanceRequestModel._maintenanceExpireDate)), new byte?(maintenanceRequestModel._isDisplay), new byte?(maintenanceRequestModel._isDelete), resultCode);
                         if (Convert.ToInt32(resultCode.Value).Equals(0).Equals(false))
                         {
                             commonResult.resultCode = Convert.ToInt32(resultCode.Value);
@@ -2258,7 +2258,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     else if (maintenanceRequestModel._setType == "Update_Shutdown")
                     {
                         foreach (MaintensnceDetailModel maintenanceInfo in maintenanceRequestModel._maintenanceInfoList)
-                            tradeWebDb.uspSetShutDownInfoUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
+                            SA_BETA_TRADEDB_0002.uspSetShutDownInfoUpdUseWeb(new int?(maintenanceRequestModel._groupContentsNo), maintenanceInfo._culture, maintenanceInfo._mainText, maintenanceInfo._subText, string.Empty, maintenanceInfo._memo, resultCode);
                     }
                     commonResult.resultCode = 0;
                     commonResult.resultMsg = JsonConvert.SerializeObject((object)maintenanceResponseModel);
@@ -2316,9 +2316,9 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 ObjectParameter state = new ObjectParameter("state", typeof(int));
                 ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                 ObjectParameter rv = new ObjectParameter("rv", typeof(int));
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
-                    tradeWebDb.uspGetWithDrawPayLoadState(new long?(marketIncludePayload2.userNo), new int?(marketIncludePayload2.nationCode), new int?(marketIncludePayload2.serverNo), new long?(marketIncludePayload2.payload), new int?(marketIncludePayload2.mainKey), new int?(marketIncludePayload2.subKey), new bool?(marketIncludePayload2.isSealed), new long?(marketIncludePayload2.count), new long?(marketIncludePayload2.param0), new long?(marketIncludePayload2.param1), new long?(marketIncludePayload2.param2), new long?(marketIncludePayload2.param3), new long?(marketIncludePayload2.param4), state, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspGetWithDrawPayLoadState(new long?(marketIncludePayload2.userNo), new int?(marketIncludePayload2.nationCode), new int?(marketIncludePayload2.serverNo), new long?(marketIncludePayload2.payload), new int?(marketIncludePayload2.mainKey), new int?(marketIncludePayload2.subKey), new bool?(marketIncludePayload2.isSealed), new long?(marketIncludePayload2.count), new long?(marketIncludePayload2.param0), new long?(marketIncludePayload2.param1), new long?(marketIncludePayload2.param2), new long?(marketIncludePayload2.param3), new long?(marketIncludePayload2.param4), state, symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     string str = Convert.ToString(symNo.Value);
                     tradeMarketState.state = Convert.ToInt32(state.Value);
@@ -2394,8 +2394,8 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
-                    tradeWebDb.uspGetMyWalletInfo(tradeMarketUserId2._accountNo.ToString(), userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
+                    SA_BETA_TRADEDB_0002.uspGetMyWalletInfo(tradeMarketUserId2._accountNo.ToString(), userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
                 if (Convert.ToInt64(userNo.Value) == 0L)
                 {
                     LogUtil.WriteLog(string.Format("[DB ERROR]uspGetMyWalletInfo({0}) - can't find userinfo ", (object)tradeMarketUserId2._accountNo), "WARN");

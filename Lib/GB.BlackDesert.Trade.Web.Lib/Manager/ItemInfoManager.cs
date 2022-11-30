@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -230,7 +230,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 try
                 {
-                    using (TradeWebDB tradeWebDb = new TradeWebDB())
+                    using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                     {
                         foreach (KeyValuePair<KeyValuePair<int, int>, TradeMarketItemInfo> keyValuePair in this.getItemListXXX())
                         {
@@ -239,7 +239,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                 long num = 0;
                                 if (keyValuePair.Value.hasPriceGroup() && WorldMarketOptionManager.This().getCashGroupNo() != keyValuePair.Value._mainGroupNo)
                                     num = keyValuePair.Value._marketPriceGroup;
-                                tradeWebDb.uspUpdateItemInfo(new int?(keyValuePair.Value._keyType), new int?(keyValuePair.Value._mainKey), new int?(keyValuePair.Value._subKey), new int?(keyValuePair.Value._mainGroupNo), new int?(keyValuePair.Value._subGroupNo), new long?(0L), new long?(0L), new long?(0L), new long?(keyValuePair.Value._basePrice), new long?(keyValuePair.Value._maxPrice), new long?(keyValuePair.Value._minPrice), new long?(keyValuePair.Value._realMaxPrice), new long?(keyValuePair.Value._realMinPrice), new long?(num), new bool?(keyValuePair.Value._isForceDisplay), symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspUpdateItemInfo(new int?(keyValuePair.Value._keyType), new int?(keyValuePair.Value._mainKey), new int?(keyValuePair.Value._subKey), new int?(keyValuePair.Value._mainGroupNo), new int?(keyValuePair.Value._subGroupNo), new long?(0L), new long?(0L), new long?(0L), new long?(keyValuePair.Value._basePrice), new long?(keyValuePair.Value._maxPrice), new long?(keyValuePair.Value._minPrice), new long?(keyValuePair.Value._realMaxPrice), new long?(keyValuePair.Value._realMinPrice), new long?(num), new bool?(keyValuePair.Value._isForceDisplay), symNo, rv);
                             }
                         }
                         foreach (KeyValuePair<KeyValuePair<int, int>, TradeMarketItemInfo> keyValuePair in this.getServantListXXX())
@@ -249,7 +249,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                 long num = 0;
                                 if (keyValuePair.Value.hasPriceGroup() && WorldMarketOptionManager.This().getCashGroupNo() != keyValuePair.Value._mainGroupNo)
                                     num = keyValuePair.Value._marketPriceGroup;
-                                tradeWebDb.uspUpdateItemInfo(new int?(keyValuePair.Value._keyType), new int?(keyValuePair.Value._mainKey), new int?(keyValuePair.Value._subKey), new int?(keyValuePair.Value._mainGroupNo), new int?(keyValuePair.Value._subGroupNo), new long?(0L), new long?(0L), new long?(0L), new long?(keyValuePair.Value._basePrice), new long?(keyValuePair.Value._maxPrice), new long?(keyValuePair.Value._minPrice), new long?(keyValuePair.Value._realMaxPrice), new long?(keyValuePair.Value._realMinPrice), new long?(num), new bool?(keyValuePair.Value._isForceDisplay), symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspUpdateItemInfo(new int?(keyValuePair.Value._keyType), new int?(keyValuePair.Value._mainKey), new int?(keyValuePair.Value._subKey), new int?(keyValuePair.Value._mainGroupNo), new int?(keyValuePair.Value._subGroupNo), new long?(0L), new long?(0L), new long?(0L), new long?(keyValuePair.Value._basePrice), new long?(keyValuePair.Value._maxPrice), new long?(keyValuePair.Value._minPrice), new long?(keyValuePair.Value._realMaxPrice), new long?(keyValuePair.Value._realMinPrice), new long?(num), new bool?(keyValuePair.Value._isForceDisplay), symNo, rv);
                             }
                         }
                     }

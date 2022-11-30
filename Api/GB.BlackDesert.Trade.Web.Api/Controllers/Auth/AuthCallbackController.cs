@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
@@ -91,7 +91,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 else
                     flag2 = true;
                 AuthenticationInfo AuthenticationInfo = new AuthenticationInfo();
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter userNo = new ObjectParameter("userNo", typeof(string));
                     ObjectParameter userNickName = new ObjectParameter("userNickName", typeof(string));
@@ -101,7 +101,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     ObjectParameter addWeightBuff = new ObjectParameter("addWeightBuff", typeof(DateTime));
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                     ObjectParameter resultMsg = new ObjectParameter("resultMsg", typeof(string));
-                    tradeWebDb.uspGetMyWalletInfo(userId, userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
+                    SA_BETA_TRADEDB_0002.uspGetMyWalletInfo(userId, userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
                     int int32_2 = Convert.ToInt32(resultCode.Value);
                     LogUtil.WriteLog(string.Format("AuthCallback AuthToken={0} / UserID={1} / resultCode={2}", (object)callbackParam, (object)userId, (object)int32_2), "DEBUG");
                     flag1 = int32_2.Equals(0);

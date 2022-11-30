@@ -1,7 +1,7 @@
 ﻿
 using GB.BlackDesert.Trade.Web.Game.Api.Models;
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
@@ -146,11 +146,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspRemoveForDepositToWorldMarket(new long?(tradeMarketPayload.payload), new int?(marketItemInfoModel.nationCode), new int?(marketItemInfoModel.serverNo), new long?(marketItemInfoModel.userNo), new int?(marketItemInfoModel.keyType), new int?(marketItemInfoModel.mainKey), new int?(marketItemInfoModel.subKey), new bool?(marketItemInfoModel.isSealed), new long?(marketItemInfoModel.param0), new long?(marketItemInfoModel.param1), new long?(marketItemInfoModel.param2), new long?(marketItemInfoModel.param3), new long?(marketItemInfoModel.param4), new long?(marketItemInfoModel.count), new short?((short)0), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspRemoveForDepositToWorldMarket(new long?(tradeMarketPayload.payload), new int?(marketItemInfoModel.nationCode), new int?(marketItemInfoModel.serverNo), new long?(marketItemInfoModel.userNo), new int?(marketItemInfoModel.keyType), new int?(marketItemInfoModel.mainKey), new int?(marketItemInfoModel.subKey), new bool?(marketItemInfoModel.isSealed), new long?(marketItemInfoModel.param0), new long?(marketItemInfoModel.param1), new long?(marketItemInfoModel.param2), new long?(marketItemInfoModel.param3), new long?(marketItemInfoModel.param4), new long?(marketItemInfoModel.count), new short?((short)0), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -200,11 +200,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             };
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspCheckPayloadForRegisterItem(new int?(marketIncludePayload1.nationCode), new int?(marketIncludePayload1.serverNo), new long?(marketIncludePayload1.userNo), new int?(model.keyType), new int?(model.mainKey), new int?(model.subKey), new long?(model.count), new bool?(model.isSealed), new long?(model.payload), new long?(model.param0), new long?(model.param1), new long?(model.param2), new long?(model.param3), new long?(model.param4), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspCheckPayloadForRegisterItem(new int?(marketIncludePayload1.nationCode), new int?(marketIncludePayload1.serverNo), new long?(marketIncludePayload1.userNo), new int?(model.keyType), new int?(model.mainKey), new int?(model.subKey), new long?(model.count), new bool?(model.isSealed), new long?(model.payload), new long?(model.param0), new long?(model.param1), new long?(model.param2), new long?(model.param3), new long?(model.param4), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -252,11 +252,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(TradeModule.MakeGameDbName(this.Request.Host.ToString(), userInfo._worldNo)))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspCompletePayloadForRegisterItem(new int?(marketIncludePayload1.nationCode), new int?(marketIncludePayload1.serverNo), new long?(marketIncludePayload1.userNo), new int?(model.keyType), new int?(model.mainKey), new int?(model.subKey), new long?(model.count), new bool?(model.isSealed), new long?(model.payload), new long?(model.param0), new long?(model.param1), new long?(model.param2), new long?(model.param3), new long?(model.param4), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspCompletePayloadForRegisterItem(new int?(marketIncludePayload1.nationCode), new int?(marketIncludePayload1.serverNo), new long?(marketIncludePayload1.userNo), new int?(model.keyType), new int?(model.mainKey), new int?(model.subKey), new long?(model.count), new bool?(model.isSealed), new long?(model.payload), new long?(model.param0), new long?(model.param1), new long?(model.param2), new long?(model.param3), new long?(model.param4), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -349,11 +349,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(name))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspCreateForWithdrawToWorldMarket(new long?(marketIncludePayload1.payload), new int?(marketItemInfoModel.nationCode), new int?(marketItemInfoModel.serverNo), new long?(marketItemInfoModel.userNo), new int?(marketItemInfoModel.keyType), new int?(marketItemInfoModel.mainKey), new int?(marketItemInfoModel.subKey), new bool?(marketItemInfoModel.isSealed), new long?(marketIncludePayload1.param0), new long?(marketIncludePayload1.param1), new long?(marketIncludePayload1.param2), new long?(marketIncludePayload1.param3), new long?(marketIncludePayload1.param4), new long?(marketItemInfoModel.count), new short?((short)0), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspCreateForWithdrawToWorldMarket(new long?(marketIncludePayload1.payload), new int?(marketItemInfoModel.nationCode), new int?(marketItemInfoModel.serverNo), new long?(marketItemInfoModel.userNo), new int?(marketItemInfoModel.keyType), new int?(marketItemInfoModel.mainKey), new int?(marketItemInfoModel.subKey), new bool?(marketItemInfoModel.isSealed), new long?(marketIncludePayload1.param0), new long?(marketIncludePayload1.param1), new long?(marketIncludePayload1.param2), new long?(marketIncludePayload1.param3), new long?(marketIncludePayload1.param4), new long?(marketItemInfoModel.count), new short?((short)0), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -417,11 +417,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(name))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspUpdateForWithdrawToWorldMarket(new long?(tradeMarketPayload.payload), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspUpdateForWithdrawToWorldMarket(new long?(tradeMarketPayload.payload), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -517,11 +517,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             {
                 try
                 {
-                    using (TradeGameDB tradeGameDb = new TradeGameDB(name))
+                    using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
                     {
                         ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                         ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                        tradeGameDb.uspWithdrawPayloadDestroy(new long?(marketIncludePayload.userNo), new int?(marketIncludePayload.nationCode), new int?(marketIncludePayload.serverNo), new long?(marketIncludePayload.payload), new int?(marketIncludePayload.mainKey), new int?(marketIncludePayload.subKey), new bool?(marketIncludePayload.isSealed), new long?(marketIncludePayload.count), new long?(marketIncludePayload.param0), new long?(marketIncludePayload.param1), new long?(marketIncludePayload.param2), new long?(marketIncludePayload.param3), new long?(marketIncludePayload.param4), symNo, rv);
+                        SA_BETA_GAMEDB_0002.uspWithdrawPayloadDestroy(new long?(marketIncludePayload.userNo), new int?(marketIncludePayload.nationCode), new int?(marketIncludePayload.serverNo), new long?(marketIncludePayload.payload), new int?(marketIncludePayload.mainKey), new int?(marketIncludePayload.subKey), new bool?(marketIncludePayload.isSealed), new long?(marketIncludePayload.count), new long?(marketIncludePayload.param0), new long?(marketIncludePayload.param1), new long?(marketIncludePayload.param2), new long?(marketIncludePayload.param3), new long?(marketIncludePayload.param4), symNo, rv);
                         commonResult2.resultCode = Convert.ToInt32(rv.Value);
                         commonResult2.resultMsg = Convert.ToString(symNo.Value);
                         if (commonResult2.resultCode != 0)
@@ -543,11 +543,11 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             try
             {
-                using (TradeGameDB tradeGameDb = new TradeGameDB(name))
+                using (SA_BETA_GAMEDB_0002 SA_BETA_GAMEDB_0002 = new SA_BETA_GAMEDB_0002(name))
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeGameDb.uspUpdateForWithdrawToWorldMarket(new long?(model.payload), symNo, rv);
+                    SA_BETA_GAMEDB_0002.uspUpdateForWithdrawToWorldMarket(new long?(model.payload), symNo, rv);
                     commonResult2.resultCode = Convert.ToInt32(rv.Value);
                     commonResult2.resultMsg = Convert.ToString(symNo.Value);
                     if (commonResult2.resultCode != 0)
@@ -600,12 +600,12 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             {
                 try
                 {
-                    using (TradeWORLDDB tradeWorlddb = new TradeWORLDDB())
+                    using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                     {
                         ObjectParameter userId = new ObjectParameter("userId", typeof(string));
                         ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                         ObjectParameter resultMsg = new ObjectParameter("resultMsg", typeof(string));
-                        tradeWorlddb.uspGetUserId(new long?(userInfo._userNo), userId, resultCode, resultMsg);
+                        SA_BETA_WORLDDB_0002.uspGetUserId(new long?(userInfo._userNo), userId, resultCode, resultMsg);
                         empty = userId.Value.ToString();
                         commonResult2.resultCode = Convert.ToInt32(resultCode.Value);
                         commonResult2.resultMsg = Convert.ToString(resultMsg.Value);

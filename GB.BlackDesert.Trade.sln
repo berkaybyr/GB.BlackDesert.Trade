@@ -8,11 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{9704EED6-AF6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB.BlackDesert.Trade.Web.Lib", "Lib\GB.BlackDesert.Trade.Web.Lib\GB.BlackDesert.Trade.Web.Lib.csproj", "{5DF25510-BAC4-4C10-A3B6-15BB1E13EC00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB.BlackDesert.Trade.Web.Api", "Api\GB.BlackDesert.Trade.Web.Api\GB.BlackDesert.Trade.Web.Api.csproj", "{AE899031-1861-4099-8017-684A95B0FF46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GB.BlackDesert.Trade.Web.Api", "Api\GB.BlackDesert.Trade.Web.Api\GB.BlackDesert.Trade.Web.Api.csproj", "{AE899031-1861-4099-8017-684A95B0FF46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB.BlackDesert.Trade.Web.Game.Api", "Api\GB.BlackDesert.Trade.Web.Game.Api\GB.BlackDesert.Trade.Web.Game.Api.csproj", "{840FDA9E-75E0-4582-8E11-F14F7AD8C9D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GB.BlackDesert.Trade.Web.Game.Api", "Api\GB.BlackDesert.Trade.Web.Game.Api\GB.BlackDesert.Trade.Web.Game.Api.csproj", "{840FDA9E-75E0-4582-8E11-F14F7AD8C9D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB.BlackDesert.Trade.Web.Process.Api", "Api\GB.BlackDesert.Trade.Web.Process.Api\GB.BlackDesert.Trade.Web.Process.Api.csproj", "{3EED77E0-1C8D-4607-BE66-7D70E5F9A305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GB.BlackDesert.Trade.Web.Process.Api", "Api\GB.BlackDesert.Trade.Web.Process.Api\GB.BlackDesert.Trade.Web.Process.Api.csproj", "{3EED77E0-1C8D-4607-BE66-7D70E5F9A305}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

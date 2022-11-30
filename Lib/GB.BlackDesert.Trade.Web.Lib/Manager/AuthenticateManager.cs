@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
@@ -255,8 +255,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             ObjectParameter addWeightBuff = new ObjectParameter("addWeightBuff", typeof(DateTime));
                             ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
                             ObjectParameter resultMsg = new ObjectParameter("resultMsg", typeof(string));
-                            using (TradeWebDB tradeWebDb = new TradeWebDB())
-                                tradeWebDb.uspGetMyWalletInfo(json4._accountNo.ToString(), userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
+                            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
+                                SA_BETA_TRADEDB_0002.uspGetMyWalletInfo(json4._accountNo.ToString(), userNo, userNickName, serviceType, worldNo, valuepackage, addWeightBuff, resultCode, resultMsg);
                             int int32 = Convert.ToInt32(resultCode.Value);
                             if (int32 != 0)
                             {

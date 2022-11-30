@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
@@ -86,13 +86,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 {
                     LogUtil.WriteLog("TickCountManager Load XML Fail Exception=" + ex.ToString(), "ERROR");
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
                     try
                     {
-                        tickCountList.list = ((IEnumerable<uspListTickCount_Result>)tradeWebDb.uspListTickCount(symNo, rv)).ToList<uspListTickCount_Result>();
+                        tickCountList.list = ((IEnumerable<uspListTickCount_Result>)SA_BETA_TRADEDB_0002.uspListTickCount(symNo, rv)).ToList<uspListTickCount_Result>();
                     }
                     catch (Exception ex)
                     {
@@ -144,11 +144,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             TickCountList tickCountList = new TickCountList();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tickCountList.list = ((IEnumerable<uspListTickCount_Result>)tradeWebDb.uspListTickCount(symNo, rv)).ToList<uspListTickCount_Result>();
+                    tickCountList.list = ((IEnumerable<uspListTickCount_Result>)SA_BETA_TRADEDB_0002.uspListTickCount(symNo, rv)).ToList<uspListTickCount_Result>();
                 }
                 catch (Exception ex)
                 {
@@ -175,11 +175,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 int key = keyValuePair.Key;
                 int num = keyValuePair.Value;
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     try
                     {
-                        tradeWebDb.uspSetUpdateTickCount(new int?(key), new int?(num), symNo, rv);
+                        SA_BETA_TRADEDB_0002.uspSetUpdateTickCount(new int?(key), new int?(num), symNo, rv);
                         int int32 = Convert.ToInt32(rv.Value);
                         if (int32 != 0)
                             LogUtil.WriteLog(string.Format("[DB Error] uspListWorldTradeMarketCommand(), rv({0})", (object)int32), "WARN");
@@ -204,11 +204,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter isUpdatePrice = new ObjectParameter("isUpdatePrice", typeof(bool));
             foreach (int mainGroup in this._mainGroupList)
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     try
                     {
-                        tradeWebDb.uspIncreaseTickCount(new int?(mainGroup), isUpdatePrice, symNo, rv);
+                        SA_BETA_TRADEDB_0002.uspIncreaseTickCount(new int?(mainGroup), isUpdatePrice, symNo, rv);
                         int int32 = Convert.ToInt32(rv.Value);
                         if (int32 != 0)
                             LogUtil.WriteLog(string.Format("[DB Error] uspIncreaseTickCount({0}), rv({1})", (object)mainGroup, (object)int32), "WARN");
@@ -231,11 +231,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
             long beforeEnchantPrice = 0;
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    listAccumulateTrade.list = ((IEnumerable<uspListWorldMarketAccumulateTrade_Result>)tradeWebDb.uspListWorldMarketAccumulateTrade(new int?(mainGroupNo), symNo, rv)).ToList<uspListWorldMarketAccumulateTrade_Result>();
+                    listAccumulateTrade.list = ((IEnumerable<uspListWorldMarketAccumulateTrade_Result>)SA_BETA_TRADEDB_0002.uspListWorldMarketAccumulateTrade(new int?(mainGroupNo), symNo, rv)).ToList<uspListWorldMarketAccumulateTrade_Result>();
                 }
                 catch (Exception ex)
                 {
@@ -243,7 +243,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     return;
                 }
             }
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 GroupPriceChangerManager.This().clear();
                 GroupWeaponPriceChangerManager.This().clear();
@@ -284,7 +284,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                 {
                                     try
                                     {
-                                        tradeWebDb.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
+                                        SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
                                         int int32 = Convert.ToInt32(rv.Value);
                                         if (int32 != 0)
                                             LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, rv - {3}", (object)record.C_keyType, (object)record.C_mainKey, (object)record.C_subKey, (object)int32), "WARN");
@@ -315,7 +315,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                         BiddingPriceList biddingPriceList = new BiddingPriceList();
                                         try
                                         {
-                                            biddingPriceList.list = ((IEnumerable<uspListBiddingPrice_Result>)tradeWebDb.uspListBiddingPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new int?(enchantMaxGroup), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(record.C_pricePerOne), symNo, rv)).ToList<uspListBiddingPrice_Result>();
+                                            biddingPriceList.list = ((IEnumerable<uspListBiddingPrice_Result>)SA_BETA_TRADEDB_0002.uspListBiddingPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new int?(enchantMaxGroup), new double?(WorldMarketOptionManager.This().BiddingRatio), new long?(record.C_pricePerOne), symNo, rv)).ToList<uspListBiddingPrice_Result>();
                                         }
                                         catch (Exception ex)
                                         {
@@ -380,7 +380,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                         TickCountCommon.fluctuationCalc(price, cPricePerOne, ref fluctuationType, ref fluctuationPrice);
                                         try
                                         {
-                                            tradeWebDb.uspUpdateWorldMarketPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new long?(price), new long?(nextGraphPrice), new byte?((byte)fluctuationType), new long?(fluctuationPrice), new long?(0L), symNo, rv);
+                                            SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new long?(price), new long?(nextGraphPrice), new byte?((byte)fluctuationType), new long?(fluctuationPrice), new long?(0L), symNo, rv);
                                             int int32 = Convert.ToInt32(rv.Value);
                                             if (int32 != 0)
                                             {
@@ -413,7 +413,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         try
                         {
                             uspListWorldMarketAccumulateTrade_Result record = changer._record;
-                            tradeWebDb.uspUpdateWorldMarketPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new long?(changer.nextPrice), new long?(changer.nextGraphPrice), new byte?((byte)fluctuationType), new long?(fluctuationPrice), new long?(cMaxTradeCount), symNo, rv);
+                            SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPrice(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new long?(changer.nextPrice), new long?(changer.nextGraphPrice), new byte?((byte)fluctuationType), new long?(fluctuationPrice), new long?(cMaxTradeCount), symNo, rv);
                             int int32 = Convert.ToInt32(rv.Value);
                             if (int32 != 0)
                                 LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}, rv - {4}", (object)record.C_keyType, (object)record.C_mainKey, (object)record.C_subKey, (object)changer.nextPrice, (object)int32), "WARN");
@@ -428,7 +428,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         try
                         {
                             uspListWorldMarketAccumulateTrade_Result record = changer._record;
-                            tradeWebDb.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
+                            SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPassCount(new int?(record.C_keyType), new int?(record.C_mainKey), new int?(record.C_subKey), new double?(WorldMarketOptionManager.This().BiddingRatio), symNo, rv);
                             int int32 = Convert.ToInt32(rv.Value);
                             if (int32 != 0)
                                 LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, rv - {3}", (object)record.C_keyType, (object)record.C_mainKey, (object)record.C_subKey, (object)int32), "WARN");
@@ -453,11 +453,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             ObjectParameter pricePerOne = new ObjectParameter("pricePerOne", typeof(long));
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
             ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-            using (TradeWebDB tradeWebDb = new TradeWebDB())
+            using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
                 {
-                    tradeWebDb.uspGetItemPrice(new int?(keyType), new int?(mainKey), new int?(subKey), pricePerOne, symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspGetItemPrice(new int?(keyType), new int?(mainKey), new int?(subKey), pricePerOne, symNo, rv);
                 }
                 catch (Exception ex)
                 {
@@ -490,11 +490,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     fluctuationType = FluctuationType.eWorldMarket_FluctuationType_Down;
                     num = int64 - price;
                 }
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     try
                     {
-                        tradeWebDb.uspUpdateWorldMarketPrice(new int?(keyType), new int?(mainKey), new int?(subKey), new long?(price), new long?(price), new byte?((byte)fluctuationType), new long?(num), new long?(0L), symNo, rv);
+                        SA_BETA_TRADEDB_0002.uspUpdateWorldMarketPrice(new int?(keyType), new int?(mainKey), new int?(subKey), new long?(price), new long?(price), new byte?((byte)fluctuationType), new long?(num), new long?(0L), symNo, rv);
                     }
                     catch (Exception ex)
                     {

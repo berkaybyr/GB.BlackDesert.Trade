@@ -4,7 +4,7 @@
 // MVID: 4566C30B-F0F5-4951-81D2-B4EE3D7A09A1
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Game.dll
 
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 
 namespace GB.BlackDesert.Trade.Web.Game.Api.Models
 {

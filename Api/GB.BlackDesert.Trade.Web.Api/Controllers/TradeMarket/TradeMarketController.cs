@@ -7,7 +7,7 @@
 using GB.BlackDesert.Trade.Web.Api.Models;
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Common.Compression;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;

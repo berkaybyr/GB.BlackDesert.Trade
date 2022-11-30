@@ -5,7 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.DB;
+using GB.BlackDesert.Trade.Web.Lib.Sql;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System;
 using System.Data.Entity.Core.Objects;
@@ -293,11 +293,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             stopwatch.Start();
             try
             {
-                using (TradeWebDB tradeWebDb = new TradeWebDB())
+                using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
                 {
                     ObjectParameter rv = new ObjectParameter("rv", typeof(int));
                     ObjectParameter symNo = new ObjectParameter("symNo", typeof(string));
-                    tradeWebDb.uspUpdateRingBuffRate(new int?(this._ringBuffRate), symNo, rv);
+                    SA_BETA_TRADEDB_0002.uspUpdateRingBuffRate(new int?(this._ringBuffRate), symNo, rv);
                     int int32 = Convert.ToInt32(rv.Value);
                     Convert.ToString(symNo.Value);
                     if (int32 != 0)
