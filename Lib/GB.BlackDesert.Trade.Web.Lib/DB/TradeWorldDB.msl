@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TradeWORLDDB_ModelStoreContainer" CdmEntityContainer="TradeWORLDDB">
+    <FunctionImportMapping FunctionImportName="uspSetWorldTradeMarketCommandResult" FunctionName="TradeWORLDDB_Model.Store.uspSetWorldTradeMarketCommandResult" />
+    <FunctionImportMapping FunctionImportName="uspListWorldTradeMarketCommand" FunctionName="TradeWORLDDB_Model.Store.uspListWorldTradeMarketCommand">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWORLDDB_Model.uspListWorldTradeMarketCommand_Result">
+          <ScalarProperty Name="C_commandNo" ColumnName="_commandNo" />
+          <ScalarProperty Name="C_registerDate" ColumnName="_registerDate" />
+          <ScalarProperty Name="C_commandString" ColumnName="_commandString" />
+          <ScalarProperty Name="C_status" ColumnName="_status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetUserId" FunctionName="TradeWORLDDB_Model.Store.uspGetUserId" />
+    <FunctionImportMapping FunctionImportName="uspIsGameMaster" FunctionName="TradeWORLDDB_Model.Store.uspIsGameMaster" />
+    <FunctionImportMapping FunctionImportName="uspGetSecondPwd" FunctionName="TradeWORLDDB_Model.Store.uspGetSecondPwd" />
+    <FunctionImportMapping FunctionImportName="uspAccessByTradeWeb" FunctionName="TradeWORLDDB_Model.Store.uspAccessByTradeWeb" />
+    <FunctionImportMapping FunctionImportName="uspCheckAuthKey" FunctionName="TradeWORLDDB_Model.Store.uspCheckAuthKey" />
+    <FunctionImportMapping FunctionImportName="uspClearTradeAuthHistory" FunctionName="TradeWORLDDB_Model.Store.uspClearTradeAuthHistory" />
+    <FunctionImportMapping FunctionImportName="uspCheckSecondPwd" FunctionName="TradeWORLDDB_Model.Store.uspCheckSecondPwd" />
+  </EntityContainerMapping>
+</Mapping>

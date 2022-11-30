@@ -1,0 +1,912 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeWebDB_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="uspAddTrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="bigint" Mode="In" />
+    <Parameter Name="price" Type="bigint" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyablePersonalTradeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyBiddingFromWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="buyKeyType" Type="int" Mode="In" />
+    <Parameter Name="buyMainKey" Type="int" Mode="In" />
+    <Parameter Name="buySubKey" Type="int" Mode="In" />
+    <Parameter Name="buyPrice" Type="bigint" Mode="In" />
+    <Parameter Name="buyCount" Type="bigint" Mode="In" />
+    <Parameter Name="buyChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="buyerMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="retryBiddingNo" Type="bigint" Mode="In" />
+    <Parameter Name="walletMoney" Type="bigint" Mode="InOut" />
+    <Parameter Name="realBuyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="sellNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="sellUserNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="sellUserId" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="sellLeftCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="raceCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="stopType" Type="int" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount3" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount3" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount4" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount4" Type="bigint" Mode="InOut" />
+    <Parameter Name="leftCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="registerMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="boughtCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyBiddingFromWorldMarketBySystem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="buyKeyType" Type="int" Mode="In" />
+    <Parameter Name="buyMainKey" Type="int" Mode="In" />
+    <Parameter Name="buySubKey" Type="int" Mode="In" />
+    <Parameter Name="buyCount" Type="bigint" Mode="In" />
+    <Parameter Name="buyChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="buyerMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="realBuyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="sellNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="stopType" Type="int" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyFromWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="buyKeyType" Type="int" Mode="In" />
+    <Parameter Name="buyMainKey" Type="int" Mode="In" />
+    <Parameter Name="buySubKey" Type="int" Mode="In" />
+    <Parameter Name="buyPrice" Type="bigint" Mode="In" />
+    <Parameter Name="buyCount" Type="bigint" Mode="In" />
+    <Parameter Name="buyChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="needMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="isCashCategory" Type="bit" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="realBuyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="buyNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="biddingMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyFromWorldMarketBySystem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="buyKeyType" Type="int" Mode="In" />
+    <Parameter Name="buyMainKey" Type="int" Mode="In" />
+    <Parameter Name="buySubKey" Type="int" Mode="In" />
+    <Parameter Name="buyCount" Type="bigint" Mode="In" />
+    <Parameter Name="buyChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="needMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="realBuyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="buyNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspBuyItemFromPersonalTrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="marketNo" Type="bigint" Mode="In" />
+    <Parameter Name="buyKeyType" Type="int" Mode="In" />
+    <Parameter Name="buyMainKey" Type="int" Mode="In" />
+    <Parameter Name="buySubKey" Type="int" Mode="In" />
+    <Parameter Name="buyCount" Type="bigint" Mode="In" />
+    <Parameter Name="moneyKeyType" Type="int" Mode="In" />
+    <Parameter Name="moneyMainKey" Type="int" Mode="In" />
+    <Parameter Name="moneySubKey" Type="int" Mode="In" />
+    <Parameter Name="moneyCount" Type="bigint" Mode="In" />
+    <Parameter Name="toNationCode" Type="int" Mode="In" />
+    <Parameter Name="toServerNo" Type="int" Mode="In" />
+    <Parameter Name="toUserNo" Type="bigint" Mode="In" />
+    <Parameter Name="maxBuyCount" Type="int" Mode="In" />
+    <Parameter Name="maxSellCount" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCalculateBiddingBuy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="buyNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="boughtCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="chooseSubKey" Type="int" Mode="InOut" />
+    <Parameter Name="isDelete" Type="bit" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCalculateBiddingSell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="sellNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="mainCategory" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="chooseSubKey" Type="int" Mode="In" />
+    <Parameter Name="soldCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="isDelete" Type="bit" Mode="InOut" />
+    <Parameter Name="amountMoney" Type="bigint" Mode="InOut" />
+    <Parameter Name="originalTotalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="packageExpiration" Type="datetime" Mode="InOut" />
+    <Parameter Name="isAppledRingBuff" Type="bit" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCheckAndUpdateBlackUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="blocked" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCheckLastOtpTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="worldNo" Type="int" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCheckOTPItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="isOTPItem" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspClearNoticeItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCreateMyWallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="userNickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="packageExpiration" Type="datetime" Mode="In" />
+    <Parameter Name="addWeightBuffExpiration" Type="datetime" Mode="In" />
+    <Parameter Name="addPearlItemLimitedCount" Type="int" Mode="In" />
+    <Parameter Name="maidCount" Type="int" Mode="In" />
+    <Parameter Name="isGameMaster" Type="bit" Mode="In" />
+    <Parameter Name="addTaxDiscountRate" Type="float" Mode="In" />
+    <Parameter Name="familySkillAddTaxDiscountRate" Type="int" Mode="In" />
+    <Parameter Name="inceaseWeight" Type="int" Mode="In" />
+    <Parameter Name="inceaseWeightByBuff" Type="int" Mode="In" />
+    <Parameter Name="ringCount" Type="int" Mode="In" />
+    <Parameter Name="isCreateWallet" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspFindUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetAddTaxDiscountRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="addTaxDiscountRate" Type="int" Mode="InOut" />
+    <Parameter Name="familySkillAddTaxDiscountRate" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetAndUpdatePersonalTradeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="personalTradeBuyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="personalTradeSellCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetAppPushEnable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic" />
+  <Function Name="uspGetItemPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetLastOtpTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="worldNo" Type="int" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="lastConfirmOtpTime" Type="datetime" Mode="InOut" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetMarketPriceInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetMyWalletInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userId" Type="nvarchar" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="userNickName" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="serviceType" Type="int" Mode="InOut" />
+    <Parameter Name="worldNo" Type="int" Mode="InOut" />
+    <Parameter Name="valuepackage" Type="datetime" Mode="InOut" />
+    <Parameter Name="addWeightBuff" Type="datetime" Mode="InOut" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+    <Parameter Name="resultMsg" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetPearlItemLimitedCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="addPearlItemLimitedCount" Type="int" Mode="InOut" />
+    <Parameter Name="currentPearlItemLimitedCount" Type="int" Mode="InOut" />
+    <Parameter Name="addWeight" Type="bigint" Mode="InOut" />
+    <Parameter Name="ringBuffCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetSecondPwdInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="failFlag" Type="bit" Mode="In" />
+    <Parameter Name="failCount" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetServantNo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="servantNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetShutDownCheckUseWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="cultureCode" Type="varchar" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetWithDrawPayLoadState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="payload" Type="bigint" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="param0" Type="bigint" Mode="In" />
+    <Parameter Name="param1" Type="bigint" Mode="In" />
+    <Parameter Name="param2" Type="bigint" Mode="In" />
+    <Parameter Name="param3" Type="bigint" Mode="In" />
+    <Parameter Name="param4" Type="bigint" Mode="In" />
+    <Parameter Name="state" Type="smallint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspIncreaseTickCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="isUpdatePrice" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspInsertBlockItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspInsertBlockUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="dueDate" Type="datetime" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspIsBlockUser__XXX" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspIsMarketOpen__XXX" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspListBiddingInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListBiddingPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="maxGroupKey" Type="int" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListGroupBiddingPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="priceGroupKey" Type="bigint" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListNoticeItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="checkDateTimeStamp" Type="bigint" Mode="In" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspListTickCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListUserBiddingBuy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListUserBiddingSell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWaitBiddingSell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainCategory" Type="int" Mode="In" />
+    <Parameter Name="subCategory" Type="int" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketAccumulateTrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketAccumulateTradeByStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketByMainGroup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketCurrentPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainCategory" Type="int" Mode="In" />
+    <Parameter Name="subCategory" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="isUseTotalTradeCount" Type="bit" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketDetailByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainCategory" Type="int" Mode="In" />
+    <Parameter Name="subCategory" Type="int" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketHot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketMyWallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldMarketWait" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspLoadWorldMarketInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspPayloadRestoration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="payload" Type="bigint" Mode="In" />
+    <Parameter Name="state" Type="smallint" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="param0" Type="bigint" Mode="In" />
+    <Parameter Name="param1" Type="bigint" Mode="In" />
+    <Parameter Name="param2" Type="bigint" Mode="In" />
+    <Parameter Name="param3" Type="bigint" Mode="In" />
+    <Parameter Name="param4" Type="bigint" Mode="In" />
+    <Parameter Name="isNot" Type="bit" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <Function Name="uspPersonalTradeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspPrepareDepositToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="param0" Type="bigint" Mode="In" />
+    <Parameter Name="param1" Type="bigint" Mode="In" />
+    <Parameter Name="param2" Type="bigint" Mode="In" />
+    <Parameter Name="param3" Type="bigint" Mode="In" />
+    <Parameter Name="param4" Type="bigint" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="itemWeight" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="payload" Type="bigint" Mode="InOut" />
+    <Parameter Name="isNotError" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspPrepareWithdrawFromWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="itemWeight" Type="bigint" Mode="In" />
+    <Parameter Name="payload" Type="bigint" Mode="InOut" />
+    <Parameter Name="param0" Type="bigint" Mode="InOut" />
+    <Parameter Name="param1" Type="bigint" Mode="InOut" />
+    <Parameter Name="param2" Type="bigint" Mode="InOut" />
+    <Parameter Name="param3" Type="bigint" Mode="InOut" />
+    <Parameter Name="param4" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspProcessDepositToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="payload" Type="bigint" Mode="In" />
+    <Parameter Name="reason" Type="smallint" Mode="InOut" />
+    <Parameter Name="keyType" Type="int" Mode="InOut" />
+    <Parameter Name="mainKey" Type="int" Mode="InOut" />
+    <Parameter Name="subKey" Type="int" Mode="InOut" />
+    <Parameter Name="isSealed" Type="bit" Mode="InOut" />
+    <Parameter Name="param0" Type="bigint" Mode="InOut" />
+    <Parameter Name="param1" Type="bigint" Mode="InOut" />
+    <Parameter Name="param2" Type="bigint" Mode="InOut" />
+    <Parameter Name="param3" Type="bigint" Mode="InOut" />
+    <Parameter Name="param4" Type="bigint" Mode="InOut" />
+    <Parameter Name="count" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspProcessWithdrawFromWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="payload" Type="bigint" Mode="In" />
+    <Parameter Name="reason" Type="smallint" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspRegisterPersonalTrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="chooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="metarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="fromNationCode" Type="int" Mode="In" />
+    <Parameter Name="fromServerNo" Type="int" Mode="In" />
+    <Parameter Name="fromUserNo" Type="bigint" Mode="In" />
+    <Parameter Name="toNationCode" Type="int" Mode="In" />
+    <Parameter Name="toServerNo" Type="int" Mode="In" />
+    <Parameter Name="toUserNickname" Type="nvarchar" Mode="In" />
+    <Parameter Name="maxSellCount" Type="int" Mode="In" />
+    <Parameter Name="toUserNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="marketNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspRemoveBlockItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspRemoveBlockUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspSearchListWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="searchResultString" Type="nvarchar" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspSellBiddingToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="sellKeyType" Type="int" Mode="In" />
+    <Parameter Name="sellMainKey" Type="int" Mode="In" />
+    <Parameter Name="sellSubKey" Type="int" Mode="In" />
+    <Parameter Name="sellMainCategory" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="sellPrice" Type="bigint" Mode="In" />
+    <Parameter Name="sellCount" Type="bigint" Mode="In" />
+    <Parameter Name="sellChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="needMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="isNoticeItem" Type="bit" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="maxPearlItemLimitedCount" Type="bigint" Mode="In" />
+    <Parameter Name="currentTime" Type="datetime" Mode="In" />
+    <Parameter Name="applyRingBuffType" Type="tinyint" Mode="In" />
+    <Parameter Name="waitNo" Type="bigint" Mode="In" />
+    <Parameter Name="isRingBuff" Type="bit" Mode="In" />
+    <Parameter Name="retryBiddingNo" Type="bigint" Mode="In" />
+    <Parameter Name="walletMoney" Type="bigint" Mode="InOut" />
+    <Parameter Name="realSellCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="originalTotalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="packageExpiration" Type="datetime" Mode="InOut" />
+    <Parameter Name="buyNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="buyUserNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="buyUserId" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="buyLeftCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="stopType" Type="int" Mode="InOut" />
+    <Parameter Name="isNextApplyRingBuff" Type="bit" Mode="InOut" />
+    <Parameter Name="resultWaitNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="raceCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount3" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount3" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount4" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount4" Type="bigint" Mode="InOut" />
+    <Parameter Name="soldCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="leftCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="moneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="calculateMoney" Type="bigint" Mode="InOut" />
+    <Parameter Name="isCalculateRingBuff" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspSellToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="sellKeyType" Type="int" Mode="In" />
+    <Parameter Name="sellMainKey" Type="int" Mode="In" />
+    <Parameter Name="sellSubKey" Type="int" Mode="In" />
+    <Parameter Name="sellMainCategory" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="sellPrice" Type="bigint" Mode="In" />
+    <Parameter Name="sellCount" Type="bigint" Mode="In" />
+    <Parameter Name="sellChooseKey" Type="int" Mode="In" />
+    <Parameter Name="metarialMainKey" Type="int" Mode="In" />
+    <Parameter Name="needMetarialCount" Type="bigint" Mode="In" />
+    <Parameter Name="BiddingRate" Type="float" Mode="In" />
+    <Parameter Name="isNoticeItem" Type="bit" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxPearlItemLimitedCount" Type="bigint" Mode="In" />
+    <Parameter Name="currentTime" Type="datetime" Mode="In" />
+    <Parameter Name="applyRingBuffType" Type="tinyint" Mode="In" />
+    <Parameter Name="waitNo" Type="bigint" Mode="In" />
+    <Parameter Name="sellPricePerOne" Type="bigint" Mode="InOut" />
+    <Parameter Name="realSellCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="originalTotalMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="packageExpiration" Type="datetime" Mode="InOut" />
+    <Parameter Name="sellNo" Type="bigint" Mode="InOut" />
+    <Parameter Name="isAppledRingBuff" Type="bit" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="beforeCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount2" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetContentsInsUseWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="groupContentNo" Type="int" Mode="In" />
+    <Parameter Name="contentStartDate" Type="datetime" Mode="In" />
+    <Parameter Name="contentEndDate" Type="datetime" Mode="In" />
+    <Parameter Name="isDisplay" Type="tinyint" Mode="In" />
+    <Parameter Name="isDelete" Type="tinyint" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetContentsUpdUseWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="groupContentNo" Type="int" Mode="In" />
+    <Parameter Name="contentStartDate" Type="datetime" Mode="In" />
+    <Parameter Name="contentEndDate" Type="datetime" Mode="In" />
+    <Parameter Name="isDisplay" Type="tinyint" Mode="In" />
+    <Parameter Name="isDelete" Type="tinyint" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetLastOtpTime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="worldNo" Type="int" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetMaxPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="bigint" Mode="In" />
+    <Parameter Name="isMax" Type="bit" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetShutDownInfoInsUseWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="groupContentsNo" Type="int" Mode="In" />
+    <Parameter Name="cultureCode" Type="varchar" Mode="In" />
+    <Parameter Name="mainMessage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="subMessage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="redirectUrl" Type="varchar" Mode="In" />
+    <Parameter Name="memo" Type="nvarchar" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetShutDownInfoUpdUseWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="groupContentsNo" Type="int" Mode="In" />
+    <Parameter Name="cultureCode" Type="varchar" Mode="In" />
+    <Parameter Name="mainMessage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="subMessage" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="redirectUrl" Type="varchar" Mode="In" />
+    <Parameter Name="memo" Type="nvarchar" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetUpdateTickCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="updateTickCount" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUnregisterPersonalTrade" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="marketNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="fromNationCode" Type="int" Mode="In" />
+    <Parameter Name="fromServerNo" Type="int" Mode="In" />
+    <Parameter Name="fromUserNo" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateItemInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="mainGroupNo" Type="int" Mode="In" />
+    <Parameter Name="subGroupNo" Type="int" Mode="In" />
+    <Parameter Name="baseCount" Type="bigint" Mode="In" />
+    <Parameter Name="minCount" Type="bigint" Mode="In" />
+    <Parameter Name="maxCount" Type="bigint" Mode="In" />
+    <Parameter Name="basePrice" Type="bigint" Mode="In" />
+    <Parameter Name="maxPrice" Type="bigint" Mode="In" />
+    <Parameter Name="minPrice" Type="bigint" Mode="In" />
+    <Parameter Name="realMaxPrice" Type="bigint" Mode="In" />
+    <Parameter Name="realMinPrice" Type="bigint" Mode="In" />
+    <Parameter Name="marketPriceGroupKey" Type="bigint" Mode="In" />
+    <Parameter Name="isDisplay" Type="bit" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateMarketState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="isOpen" Type="bit" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateMyWalletWeight" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="calculateWeight" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateRingBuffRate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="ringRate" Type="int" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateWaitFail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="waitNo" Type="bigint" Mode="In" />
+    <Parameter Name="pushWeight" Type="bigint" Mode="In" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateWorldMarketGroupPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="priceGroupKey" Type="bigint" Mode="In" />
+    <Parameter Name="newPrice" Type="bigint" Mode="In" />
+    <Parameter Name="newGraphPrice" Type="bigint" Mode="In" />
+    <Parameter Name="fluctuationType" Type="tinyint" Mode="In" />
+    <Parameter Name="fluctuationPrice" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateWorldMarketPassCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="biddingRate" Type="float" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateWorldMarketPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="newPrice" Type="bigint" Mode="In" />
+    <Parameter Name="newGraphPrice" Type="bigint" Mode="In" />
+    <Parameter Name="fluctuationType" Type="tinyint" Mode="In" />
+    <Parameter Name="fluctuationPrice" Type="bigint" Mode="In" />
+    <Parameter Name="newStockCount" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspUpdateWorldMarketStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="newStockCount" Type="bigint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspWithdrawBiddingBuy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="buyNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="chooseSubKey" Type="int" Mode="In" />
+    <Parameter Name="differenceMoney" Type="bigint" Mode="InOut" />
+    <Parameter Name="withdrawMoneyCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="isDelete" Type="bit" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspWithdrawBiddingSell" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="sellNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="weightPerOne" Type="bigint" Mode="In" />
+    <Parameter Name="maxWeight" Type="bigint" Mode="In" />
+    <Parameter Name="maxPearlItemLimitedCount" Type="bigint" Mode="In" />
+    <Parameter Name="currentTime" Type="datetime" Mode="In" />
+    <Parameter Name="chooseSubKey" Type="int" Mode="InOut" />
+    <Parameter Name="isDelete" Type="bit" Mode="InOut" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspWorldMarketDetailOne" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="pricePerOne" Type="bigint" Mode="InOut" />
+    <Parameter Name="count" Type="bigint" Mode="InOut" />
+    <Parameter Name="minPrice" Type="bigint" Mode="InOut" />
+    <Parameter Name="maxPrice" Type="bigint" Mode="InOut" />
+    <Parameter Name="totalTradeCount" Type="bigint" Mode="InOut" />
+    <Parameter Name="lastTradePrice" Type="bigint" Mode="InOut" />
+    <Parameter Name="lastTradeTime" Type="datetime" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspWorldMarketMyWallet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType" Type="int" Mode="In" />
+    <Parameter Name="mainKey" Type="int" Mode="In" />
+    <Parameter Name="subKey" Type="int" Mode="In" />
+    <Parameter Name="isSealed" Type="bit" Mode="In" />
+    <Parameter Name="count" Type="bigint" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="bigint" Mode="InOut" />
+  </Function>
+  <Function Name="uspWorldMarketWaitNoticeList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="uspGetLogWriteEnable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaWebPublic" />
+  <EntityContainer Name="TradeWebDB_ModelStoreContainer" />
+</Schema>

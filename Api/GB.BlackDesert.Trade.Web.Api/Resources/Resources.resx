@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TRADE_MARKET_MAIN_MENU_MARKET" xml:space="preserve">
+    <value>MoonBD Central Market</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_WALLET" xml:space="preserve">
+    <value>My Items</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_BUY" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_SELL" xml:space="preserve">
+    <value>Items Listed</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_NEED_TEXT" xml:space="preserve">
+    <value>Enter the name of the item.</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_REFRESH" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_REGIST_COUNT" xml:space="preserve">
+    <value>Listed Amount</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CUMULATIVE_VOLUME" xml:space="preserve">
+    <value>Total Trades</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MY_ACCOUNT" xml:space="preserve">
+    <value>Warehouse</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CURRENT_SILVER" xml:space="preserve">
+    <value>Silver</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_WEIGHT" xml:space="preserve">
+    <value>Weight</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_AMOUNT" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_BUY" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_EXCEPTION" xml:space="preserve">
+    <value>There was an error.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_USER" xml:space="preserve">
+    <value>The user information is not available.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM_COUNT" xml:space="preserve">
+    <value>The number of items is not valid.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM" xml:space="preserve">
+    <value>The item information is invalid.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_BUY_FAIL" xml:space="preserve">
+    <value>The item was not bought.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_SELL_FAIL" xml:space="preserve">
+    <value>The item was not sold.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_PRICE_WORNG" xml:space="preserve">
+    <value>The price is inaccurate.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_ITEM" xml:space="preserve">
+    <value>The item information is not available.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_SEARCH_TEXT" xml:space="preserve">
+    <value>The search is invalid.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNAUTHORIZED" xml:space="preserve">
+    <value>There was an error with account  authentication. Please log in again.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_REGIST_ITEM_FAIL" xml:space="preserve">
+    <value>Item registration failed.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_WITHDRAW_ITEM_FAIL" xml:space="preserve">
+    <value>Item retrieval failed.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXISTS_WALLET" xml:space="preserve">
+    <value>You do not have enough Silver in the Central Market Warehouse.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_ITEM" xml:space="preserve">
+    <value>The item cannot be traded.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_USER" xml:space="preserve">
+    <value>The user has been blocked from the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CLOSE_MARKET" xml:space="preserve">
+    <value>Central Market is not available right now.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_OVER_WEIGHT" xml:space="preserve">
+    <value>You have exceeded the maximum volume allowed.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BIDDING_FAIL" xml:space="preserve">
+    <value>There was an error while attempting to place your order.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_ENOUGH_MONEY" xml:space="preserve">
+    <value>You do not have enough Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_HAVE_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>You cannot place an order for an item that you have listed for sale.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>The item was not listed for sale.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CREATE_WALLET_FAIL" xml:space="preserve">
+    <value>The Central Marketplace Warehouse failed to be created.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CALC_ITEM_FAIL" xml:space="preserve">
+    <value>Item collection failed.</value>
+  </data>
+  <data name="TRADE_MARKET_FAVORIT_LIST" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="TRADE_MARKET_ALL_LIST" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_AVG_PRICE" xml:space="preserve">
+    <value>Average Price</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_HIGH" xml:space="preserve">
+    <value>High to Low</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LOW" xml:space="preserve">
+    <value>Low to High</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGDATE" xml:space="preserve">
+    <value>Registration Date</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_RECENT" xml:space="preserve">
+    <value>Recent to Old</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LATER" xml:space="preserve">
+    <value>Old to Recent</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_COUNT" xml:space="preserve">
+    <value>Listed Amount</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_MANY" xml:space="preserve">
+    <value>High to Low</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_LOW" xml:space="preserve">
+    <value>Low to High</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_ENCHANT" xml:space="preserve">
+    <value>Enhancement Level</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_INITIALIZE" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CONFIRM" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE" xml:space="preserve">
+    <value>Purchase Price</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_QUANTITY" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE_CHANGE" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_ENCHANT" xml:space="preserve">
+    <value>Enhancement Level</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_OK" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST" xml:space="preserve">
+    <value>List Item</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_BASE_PRICE" xml:space="preserve">
+    <value>Base Price</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_QUANTITY" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SELL_COUNT" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE_CHANGE" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_OK" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_PRICE_PER_ONE" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_RESERVE_COUNT" xml:space="preserve">
+    <value>Ordered Amount</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_COMPLETE_COUNT" xml:space="preserve">
+    <value>Orders Completed</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>Total Cost</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TEX_INFO" xml:space="preserve">
+    <value>There will be a 30% commission charged.</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CONFIRM" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_PRICE_PER_ONE" xml:space="preserve">
+    <value>Unit Price</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_RESERVE_COUNT" xml:space="preserve">
+    <value>Listed Amount</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_COMPLETE_COUNT" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TEX_INFO" xml:space="preserve">
+    <value>There will be a 30% commission charged.</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CONFIRM" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_SUCCESS" xml:space="preserve">
+    <value>You've purchased the item.</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_SUCCESS" xml:space="preserve">
+    <value>You've listed the items for sale.</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_SUCCESS" xml:space="preserve">
+    <value>You've placed the order.</value>
+  </data>
+  <data name="TRADE_MARKET_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT]</value>
+  </data>
+  <data name="TRADE_MARKET_TOTAL_SALE_COUNT" xml:space="preserve">
+    <value>Total in Stock</value>
+  </data>
+  <data name="TRADE_MARKET_MY_WALLET_SELL" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_RESERVE_COUNT" xml:space="preserve">
+    <value>Order Amount</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_BOUGHT_COUNT" xml:space="preserve">
+    <value>Orders Completed</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_WITHDRAW" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CALCULATE" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_RESERVE_COUNT" xml:space="preserve">
+    <value>Listed Amount</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SOLD_COUNT" xml:space="preserve">
+    <value>Sold</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_WITHDRAW" xml:space="preserve">
+    <value>Retrieve</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CALCULATE" xml:space="preserve">
+    <value>Collect</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_FAIL" xml:space="preserve">
+    <value>Failed Purchases</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CANCEL_CONFIRM" xml:space="preserve">
+    <value>Do you want to cancel the order?</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL_CONFIRM" xml:space="preserve">
+    <value>Do you want to cancel the item listing?</value>
+  </data>
+  <data name="TRADE_MARKET_HOT_LIST" xml:space="preserve">
+    <value>Volatile Price Items</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRegistItemFail" xml:space="preserve">
+    <value>Item registration failed.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWithdrawItemFail" xml:space="preserve">
+    <value>Item retrieval failed.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemInvalidCount" xml:space="preserve">
+    <value>The amount is invalid.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoInventoryItemNotExist" xml:space="preserve">
+    <value>Item does not exist.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNotExistWallet" xml:space="preserve">
+    <value>The Warehouse does not exist.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockItem" xml:space="preserve">
+    <value>This item cannot be purchased or sold in the Marketplace.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockUser" xml:space="preserve">
+    <value>The user has been blocked from the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCloseWorldMarket" xml:space="preserve">
+    <value>Central Market is currently not available.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketIsNotMaxWeight" xml:space="preserve">
+    <value>You've exceeded the maximum volume allowed in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuybiddingFail" xml:space="preserve">
+    <value>There was an error while attempting to order an item in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBusinessNotEnoughMoney" xml:space="preserve">
+    <value>You do not have enough Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveSellBiddingInfoWorldMarket" xml:space="preserve">
+    <value>You cannot place an order for an item that you have listed for sale.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuyFail" xml:space="preserve">
+    <value>There was an error while attempting to purchase an item in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellbiddingFail" xml:space="preserve">
+    <value>There was an error while attempting to list an item to sell in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemCountIsInvalid" xml:space="preserve">
+    <value>The number of items is not correct.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveBuyBiddingInfoWorldMarket" xml:space="preserve">
+    <value>You cannot list an item that you have ordered.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellFail" xml:space="preserve">
+    <value>There was an error while attempting to sell the item in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketCreateWalletFail" xml:space="preserve">
+    <value>The Warehouse failed to be created.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoDbInternalError" xml:space="preserve">
+    <value>There was an internal error.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNoCalculateItemWorldMarket" xml:space="preserve">
+    <value>Item collection failed.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoPublisherFailAuthetication" xml:space="preserve">
+    <value>Account authentication failed.</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>Total Amount</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>Total Cost</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL" xml:space="preserve">
+    <value>You sold [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING" xml:space="preserve">
+    <value>You listed [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] to sell for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL" xml:space="preserve">
+    <value>You cancelled your listing of [STR:SUBTYPE][STR:ITEMNAME] x[STR:ITEMCOUNT] to be sold for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>Your sale of [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] for [STR:SILVER] Silver is complete.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY" xml:space="preserve">
+    <value>You purchased [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING" xml:space="preserve">
+    <value>You ordered [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL" xml:space="preserve">
+    <value>You cancelled your order of [STR:SUBTYPE][STR:ITEMNAME] x[STR:ITEMCOUNT] to be bought for [STR:SILVER] Silver.</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>Your order of [STR:SUBTYPE] [STR:ITEMNAME] x[STR:ITEMCOUNT] for [STR:SILVER] Silver is complete.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException" xml:space="preserve">
+    <value>There was an internal error with the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException" xml:space="preserve">
+    <value>There was an connection error with the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException" xml:space="preserve">
+    <value>There was an error with the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull" xml:space="preserve">
+    <value>There was an error with the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_UserNotExist" xml:space="preserve">
+    <value>The user information is not available in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidCount" xml:space="preserve">
+    <value>The number of items in the Central Market is not correct.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem" xml:space="preserve">
+    <value>This item cannot be registered on the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup" xml:space="preserve">
+    <value>This item cannot be registered on the Central Market due to its enhancement level.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingFail" xml:space="preserve">
+    <value>There was an error while finalizing the purchase.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingRepeatOverFail" xml:space="preserve">
+    <value>There was an error while attempting to finalize the purchase.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingFail" xml:space="preserve">
+    <value>There was an error while processing the sale.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingRepeatOverFail" xml:space="preserve">
+    <value>There was an error while selling the item.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PriceWrong" xml:space="preserve">
+    <value>The price is invalid.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemNotExist" xml:space="preserve">
+    <value>There are no such item in the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack" xml:space="preserve">
+    <value>You have exceeded the maximum number of items you can register/retrieve at a time.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PayloadIsZero" xml:space="preserve">
+    <value>There was an error with the Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemCountOver" xml:space="preserve">
+    <value>You have exceeded the maximum amount of total trades, so you cannot make any sales or purchases.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_StringOver" xml:space="preserve">
+    <value>There are too many results for this search.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveBuyBiddingFail" xml:space="preserve">
+    <value>You need to list a higher price in order to order an item.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveSellBiddingFail" xml:space="preserve">
+    <value>To register an item for sale, it must registered at a price lower than the base price.</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_BIDDING_SUCCESS" xml:space="preserve">
+    <value>The item was successfully listed.</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_KO-KR" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_EN-US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ZH-TW" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_JA-JP" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TR-TR" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TH-TH" xml:space="preserve">
+    <value>ไทย</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_RU-RU" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="TRADE_MARKET_BROWSER_MSG" xml:space="preserve">
+    <value>This website is optimized for mobile browsers.</value>
+  </data>
+  <data name="TRADE_MARKET_SEARCH_RESULT_TEXT" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>You can receive a 30% bonus with an active Value Pack. Continue without a Value Pack?</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_1" xml:space="preserve">
+    <value>PRI</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_2" xml:space="preserve">
+    <value>DUO</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_3" xml:space="preserve">
+    <value>TRI</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_4" xml:space="preserve">
+    <value>TET</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_5" xml:space="preserve">
+    <value>PEN</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_TITLE" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION_SHOW" xml:space="preserve">
+    <value>See Details</value>
+  </data>
+  <data name="WEB_CONTENTS_COPYRIGHT_COMMON" xml:space="preserve">
+    <value>Copyright ⓒ PearlAbyss Corp. All rights reserved.</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_ERROR" xml:space="preserve">
+    <value>This website is optimized for mobile browsers.</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TITLE" xml:space="preserve">
+    <value>Caution</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT1" xml:space="preserve">
+    <value>You must have a Black Desert Online account with an active Family to use the Central Market through a browser.</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT2" xml:space="preserve">
+    <value>You must use the Central Market Warehouse in the game at least once before you can access the Central Market through a browser.</value>
+  </data>
+  <data name="TRADE_MARKET_GO_NOTICE" xml:space="preserve">
+    <value>Go to the Official Website</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_TITLE" xml:space="preserve">
+    <value>Maintenance Notice</value>
+  </data>
+  <data name="TRADE_MARKET_GUIDE_TITLE" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_1" xml:space="preserve">
+    <value>We are performing a maintenance.&lt;br /&gt;We apologize for any inconvenience.</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_2" xml:space="preserve">
+    <value>We are performing a maintenance.&lt;br /&gt;We apologize for any inconvenience.</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_BUY_WAIT" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_SELL_WAIT" xml:space="preserve">
+    <value>Items Listed</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT]</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoAlreadyReservationDay" xml:space="preserve">
+    <value>The order cannot be placed as an identical order already exists.</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-ES" xml:space="preserve">
+    <value>Español (Latinoamérica)</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_DE-DE" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_CH-CH" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_FR-FR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ID-ID" xml:space="preserve">
+    <value>Bahasa Indonesia</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_PT-PT" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-US" xml:space="preserve">
+    <value>Español (España)</value>
+  </data>
+  <data name="WEB_CONTENTS_TITLE" xml:space="preserve">
+    <value>Black Desert Online - Web Central Market</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_CALCULATE_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>You can receive a 30% bonus with an active Value Pack. Continue without a Value Pack?</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_FAIL" xml:space="preserve">
+    <value>Please make sure your secondary password is correct.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT1" xml:space="preserve">
+    <value>Please enter your in-game secondary password.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT2" xml:space="preserve">
+    <value>Secondary passwords must be at least 6 characters long.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CONFIRM" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CANCEL" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_MYINFO" xml:space="preserve">
+    <value>Identity Verification</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_NOT_ALLOW" xml:space="preserve">
+    <value>You cannot access the Central Market from this browser.&lt;br /&gt;Please use your mobile device or the Chrome browser on your PC.</value>
+  </data>
+  <data name="NEW_WEB_MSG_DEFAULT_AUTHENTICATEACCOUNT_FAIL_AGE" xml:space="preserve">
+    <value>Users under the age of [STR:AGE] cannot use the game.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_RETRY" xml:space="preserve">
+    <value>You have exceeded the maximum number of attempts for entering your secondary password.\nPlease try again after 24 hours.</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF" xml:space="preserve">
+    <value>Rich Merchant</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF_PREF" xml:space="preserve">
+    <value>Market Benefit</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_ONE" xml:space="preserve">
+    <value>Desperate</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_TWO" xml:space="preserve">
+    <value>Distorted</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_THREE" xml:space="preserve">
+    <value>Silent</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FOUR" xml:space="preserve">
+    <value>Wailing</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FIVE" xml:space="preserve">
+    <value>Obliterating</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_TITLE" xml:space="preserve">
+    <value>Select Region</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_DESC" xml:space="preserve">
+    <value>Select the region&lt;br/&gt;of Central Market.</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_KOREA" xml:space="preserve">
+    <value>Asia</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_GLOBAL" xml:space="preserve">
+    <value>Global</value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_TITLE" xml:space="preserve">
+    <value>Good to see you again, &lt;br/&gt;Returning Adventurer!</value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_DESC" xml:space="preserve">
+    <value>Welcome back to Black Desert! &lt;br/&gt;&lt;br/&gt;We've prepared a gift for all the returning adventurers! You'll be given a warm welcome-back with special rewards and benefits depending on how long you've been away. &lt;br/&gt;If you want to know more about the details, please check out Event Notices posted for the New/Returning Adventurers! &lt;br/&gt;&lt;br/&gt;Don't forget that we'll always be together! &lt;br/&gt;We wish you a merry looting and the best of luck in Black Desert! &lt;br/&gt;&lt;br/&gt;- Black Desert -</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_NA" xml:space="preserve">
+    <value>North America</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_EU" xml:space="preserve">
+    <value>Europe</value>
+  </data>
+  <data name="TRADE_MARKET_OTP_TITLE" xml:space="preserve">
+    <value>OTP Verification</value>
+  </data>
+  <data name="TRADE_MARKET_OTP_TITLE_DESC" xml:space="preserve">
+    <value>Please enter the OTP code from the authenticator.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNUSE_OTP" xml:space="preserve">
+    <value>You need to register your OTP to trade this item.&lt;br /&gt;OTP Settings can be found in Account Information &gt; Account Security Center .</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_MAXFAIL_OTP" xml:space="preserve">
+    <value>Entering the incorrect verification code for 10 or more times will restrict further attempts for 24 hours.&lt;br/&gt;Please contact Customer Support.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOTMATCH_OTP" xml:space="preserve">
+    <value>Incorrect verification code. Please try again.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BACKUPCODE_ALREADY_USE" xml:space="preserve">
+    <value>Backup code already used.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCantSellItemShutDown" xml:space="preserve">
+    <value>Cannot list orderable items within 20 minutes of maintenance.</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_SELLBUY" xml:space="preserve">
+    <value>Re-list</value>
+  </data>
+  <data name="TRADE_MARKET_WAIT_LIST" xml:space="preserve">
+    <value>In Registration Queue</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRowPriceGroupBuy" xml:space="preserve">
+    <value>Someone has already placed a pre-order for your item at a higher price. Fix your price to match or sell it at a higher price.</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_CHECK" xml:space="preserve">
+    <value>Place item in the Central Market warehouse to re-list.</value>
+  </data>
+</root>

@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TradeWebDB_ModelStoreContainer" CdmEntityContainer="TradeWebDB">
+    <FunctionImportMapping FunctionImportName="uspGetAndUpdatePersonalTradeCount" FunctionName="TradeWebDB_Model.Store.uspGetAndUpdatePersonalTradeCount" />
+    <FunctionImportMapping FunctionImportName="uspLoadWorldMarketInfo" FunctionName="TradeWebDB_Model.Store.uspLoadWorldMarketInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspLoadWorldMarketInfo_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_maxPrice" ColumnName="_maxPrice" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_mainCategory" ColumnName="_mainCategory" />
+          <ScalarProperty Name="C_subCategory" ColumnName="_subCategory" />
+          <ScalarProperty Name="C_maxTradeCount" ColumnName="_maxTradeCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspBuyablePersonalTradeList" FunctionName="TradeWebDB_Model.Store.uspBuyablePersonalTradeList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspBuyablePersonalTradeList_Result">
+          <ScalarProperty Name="C_marketNo" ColumnName="_marketNo" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_fromNationCode" ColumnName="_fromNationCode" />
+          <ScalarProperty Name="C_fromServerNo" ColumnName="_fromServerNo" />
+          <ScalarProperty Name="C_fromUserNo" ColumnName="_fromUserNo" />
+          <ScalarProperty Name="C_userNickName" ColumnName="_userNickName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspPersonalTradeList" FunctionName="TradeWebDB_Model.Store.uspPersonalTradeList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspPersonalTradeList_Result">
+          <ScalarProperty Name="C_marketNo" ColumnName="_marketNo" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_toNationCode" ColumnName="_toNationCode" />
+          <ScalarProperty Name="C_toServerNo" ColumnName="_toServerNo" />
+          <ScalarProperty Name="C_toUserNo" ColumnName="_toUserNo" />
+          <ScalarProperty Name="C_userNickName" ColumnName="_userNickName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUnregisterPersonalTrade" FunctionName="TradeWebDB_Model.Store.uspUnregisterPersonalTrade" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketAccumulateTradeByStock" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketAccumulateTradeByStock">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketAccumulateTradeByStock_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_maxTradeCount" ColumnName="_maxTradeCount" />
+          <ScalarProperty Name="C_sumTradeCountByStock" ColumnName="_sumTradeCountByStock" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUpdateWorldMarketStock" FunctionName="TradeWebDB_Model.Store.uspUpdateWorldMarketStock" />
+    <FunctionImportMapping FunctionImportName="uspFindUser" FunctionName="TradeWebDB_Model.Store.uspFindUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspFindUser_Result">
+          <ScalarProperty Name="C_nationCode" ColumnName="_nationCode" />
+          <ScalarProperty Name="C_serverNo" ColumnName="_serverNo" />
+          <ScalarProperty Name="C_userNo" ColumnName="_userNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspSetUpdateTickCount" FunctionName="TradeWebDB_Model.Store.uspSetUpdateTickCount" />
+    <FunctionImportMapping FunctionImportName="uspInsertBlockItem" FunctionName="TradeWebDB_Model.Store.uspInsertBlockItem" />
+    <FunctionImportMapping FunctionImportName="uspRemoveBlockItem" FunctionName="TradeWebDB_Model.Store.uspRemoveBlockItem" />
+    <FunctionImportMapping FunctionImportName="uspBuyItemFromPersonalTrade" FunctionName="TradeWebDB_Model.Store.uspBuyItemFromPersonalTrade" />
+    <FunctionImportMapping FunctionImportName="uspRegisterPersonalTrade" FunctionName="TradeWebDB_Model.Store.uspRegisterPersonalTrade" />
+    <FunctionImportMapping FunctionImportName="uspIsBlockUser__XXX" FunctionName="TradeWebDB_Model.Store.uspIsBlockUser__XXX" />
+    <FunctionImportMapping FunctionImportName="uspRemoveBlockUser" FunctionName="TradeWebDB_Model.Store.uspRemoveBlockUser" />
+    <FunctionImportMapping FunctionImportName="uspUpdateMyWalletWeight" FunctionName="TradeWebDB_Model.Store.uspUpdateMyWalletWeight" />
+    <FunctionImportMapping FunctionImportName="uspBuyBiddingFromWorldMarketBySystem" FunctionName="TradeWebDB_Model.Store.uspBuyBiddingFromWorldMarketBySystem" />
+    <FunctionImportMapping FunctionImportName="uspBuyFromWorldMarketBySystem" FunctionName="TradeWebDB_Model.Store.uspBuyFromWorldMarketBySystem" />
+    <FunctionImportMapping FunctionImportName="uspUpdateMarketState" FunctionName="TradeWebDB_Model.Store.uspUpdateMarketState" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketByMainGroup" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketByMainGroup">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketByMainGroup_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspPrepareWithdrawFromWorldMarket" FunctionName="TradeWebDB_Model.Store.uspPrepareWithdrawFromWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketMyWallet" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketMyWallet">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketMyWallet_Result">
+          <ScalarProperty Name="C_nationCode" ColumnName="_nationCode" />
+          <ScalarProperty Name="C_serverNo" ColumnName="_serverNo" />
+          <ScalarProperty Name="C_userNo" ColumnName="_userNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_isSealed" ColumnName="_isSealed" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspWorldMarketMyWallet" FunctionName="TradeWebDB_Model.Store.uspWorldMarketMyWallet" />
+    <FunctionImportMapping FunctionImportName="uspListNoticeItem" FunctionName="TradeWebDB_Model.Store.uspListNoticeItem">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListNoticeItem_Result">
+          <ScalarProperty Name="C_registTimeStamp" ColumnName="_registTimeStamp" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_price" ColumnName="_price" />
+          <ScalarProperty Name="C_changedValue" ColumnName="_changedValue" />
+          <ScalarProperty Name="C_noticeType" ColumnName="_noticeType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUpdateWorldMarketPassCount" FunctionName="TradeWebDB_Model.Store.uspUpdateWorldMarketPassCount" />
+    <FunctionImportMapping FunctionImportName="uspListBiddingInfo" FunctionName="TradeWebDB_Model.Store.uspListBiddingInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListBiddingInfo_Result">
+          <ScalarProperty Name="C_buyCount" ColumnName="_buyCount" />
+          <ScalarProperty Name="C_sellCount" ColumnName="_sellCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspIsMarketOpen__XXX" FunctionName="TradeWebDB_Model.Store.uspIsMarketOpen__XXX" />
+    <FunctionImportMapping FunctionImportName="uspGetMarketPriceInfo" FunctionName="TradeWebDB_Model.Store.uspGetMarketPriceInfo">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspGetMarketPriceInfo_Result">
+          <ScalarProperty Name="C_price" ColumnName="_price" />
+          <ScalarProperty Name="C_datetime" ColumnName="_datetime" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspPayloadRestoration" FunctionName="TradeWebDB_Model.Store.uspPayloadRestoration" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketCurrentPrice" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketCurrentPrice">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketCurrentPrice_Result">
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetLogWriteEnable" FunctionName="TradeWebDB_Model.Store.uspGetLogWriteEnable">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspGetLogWriteEnable_Result">
+          <ScalarProperty Name="C_writeDebugLog" ColumnName="_writeDebugLog" />
+          <ScalarProperty Name="C_writeInfoLog" ColumnName="_writeInfoLog" />
+          <ScalarProperty Name="C_writeWarringLog" ColumnName="_writeWarringLog" />
+          <ScalarProperty Name="C_writeErrorLog" ColumnName="_writeErrorLog" />
+          <ScalarProperty Name="C_writeFatalLog" ColumnName="_writeFatalLog" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspAddTrade" FunctionName="TradeWebDB_Model.Store.uspAddTrade" />
+    <FunctionImportMapping FunctionImportName="uspListBiddingPrice" FunctionName="TradeWebDB_Model.Store.uspListBiddingPrice">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListBiddingPrice_Result">
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspCheckAndUpdateBlackUser" FunctionName="TradeWebDB_Model.Store.uspCheckAndUpdateBlackUser" />
+    <FunctionImportMapping FunctionImportName="uspSetMaxPrice" FunctionName="TradeWebDB_Model.Store.uspSetMaxPrice" />
+    <FunctionImportMapping FunctionImportName="uspListTickCount" FunctionName="TradeWebDB_Model.Store.uspListTickCount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListTickCount_Result">
+          <ScalarProperty Name="C_serverIp" ColumnName="_serverIp" />
+          <ScalarProperty Name="C_mainGroupNo" ColumnName="_mainGroupNo" />
+          <ScalarProperty Name="C_updateTickCount" ColumnName="_updateTickCount" />
+          <ScalarProperty Name="C_allowIndex" ColumnName="_allowIndex" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetWithDrawPayLoadState" FunctionName="TradeWebDB_Model.Store.uspGetWithDrawPayLoadState" />
+    <FunctionImportMapping FunctionImportName="uspWorldMarketDetailOne" FunctionName="TradeWebDB_Model.Store.uspWorldMarketDetailOne" />
+    <FunctionImportMapping FunctionImportName="uspSetContentsInsUseWeb" FunctionName="TradeWebDB_Model.Store.uspSetContentsInsUseWeb" />
+    <FunctionImportMapping FunctionImportName="uspSetContentsUpdUseWeb" FunctionName="TradeWebDB_Model.Store.uspSetContentsUpdUseWeb" />
+    <FunctionImportMapping FunctionImportName="uspSetShutDownInfoInsUseWeb" FunctionName="TradeWebDB_Model.Store.uspSetShutDownInfoInsUseWeb" />
+    <FunctionImportMapping FunctionImportName="uspSetShutDownInfoUpdUseWeb" FunctionName="TradeWebDB_Model.Store.uspSetShutDownInfoUpdUseWeb" />
+    <FunctionImportMapping FunctionImportName="uspGetShutDownCheckUseWeb" FunctionName="TradeWebDB_Model.Store.uspGetShutDownCheckUseWeb">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspGetShutDownCheckUseWeb_Result">
+          <ScalarProperty Name="C_mainMessage" ColumnName="_mainMessage" />
+          <ScalarProperty Name="C_subMessage" ColumnName="_subMessage" />
+          <ScalarProperty Name="C_memo" ColumnName="_memo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetAddTaxDiscountRate" FunctionName="TradeWebDB_Model.Store.uspGetAddTaxDiscountRate" />
+    <FunctionImportMapping FunctionImportName="uspGetSecondPwdInfo" FunctionName="TradeWebDB_Model.Store.uspGetSecondPwdInfo" />
+    <FunctionImportMapping FunctionImportName="uspGetAppPushEnable" FunctionName="TradeWebDB_Model.Store.uspGetAppPushEnable" />
+    <FunctionImportMapping FunctionImportName="uspGetMyWalletInfo" FunctionName="TradeWebDB_Model.Store.uspGetMyWalletInfo" />
+    <FunctionImportMapping FunctionImportName="uspPrepareDepositToWorldMarket" FunctionName="TradeWebDB_Model.Store.uspPrepareDepositToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketDetailByCategory" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketDetailByCategory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketDetailByCategory_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_totalTradeCount" ColumnName="_totalTradeCount" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_maxPrice" ColumnName="_maxPrice" />
+          <ScalarProperty Name="C_isDisplay" ColumnName="_isDisplay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketHot" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketHot">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketHot_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_totalTradeCount" ColumnName="_totalTradeCount" />
+          <ScalarProperty Name="C_fluctuationType" ColumnName="_fluctuationType" />
+          <ScalarProperty Name="C_fluctuationPrice" ColumnName="_fluctuationPrice" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_maxPrice" ColumnName="_maxPrice" />
+          <ScalarProperty Name="C_lastTradeTime" ColumnName="_lastTradeTime" />
+          <ScalarProperty Name="C_lastTradePrice" ColumnName="_lastTradePrice" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspSearchListWorldMarket" FunctionName="TradeWebDB_Model.Store.uspSearchListWorldMarket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspSearchListWorldMarket_Result">
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_sumCount" ColumnName="_sumCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_totalTradeCount" ColumnName="_totalTradeCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetItemPrice" FunctionName="TradeWebDB_Model.Store.uspGetItemPrice" />
+    <FunctionImportMapping FunctionImportName="uspCreateMyWallet" FunctionName="TradeWebDB_Model.Store.uspCreateMyWallet" />
+    <FunctionImportMapping FunctionImportName="uspUpdateRingBuffRate" FunctionName="TradeWebDB_Model.Store.uspUpdateRingBuffRate" />
+    <FunctionImportMapping FunctionImportName="uspGetPearlItemLimitedCount" FunctionName="TradeWebDB_Model.Store.uspGetPearlItemLimitedCount" />
+    <FunctionImportMapping FunctionImportName="uspListUserBiddingSell" FunctionName="TradeWebDB_Model.Store.uspListUserBiddingSell">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListUserBiddingSell_Result">
+          <ScalarProperty Name="C_sellNo" ColumnName="_sellNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_chooseSubKey" ColumnName="_chooseSubKey" />
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_soldCount" ColumnName="_soldCount" />
+          <ScalarProperty Name="C_accumulateMoneyCount" ColumnName="_accumulateMoneyCount" />
+          <ScalarProperty Name="C_isSealed" ColumnName="_isSealed" />
+          <ScalarProperty Name="C_isRingBuff" ColumnName="_isRingBuff" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetServantNo" FunctionName="TradeWebDB_Model.Store.uspGetServantNo" />
+    <FunctionImportMapping FunctionImportName="uspInsertBlockUser" FunctionName="TradeWebDB_Model.Store.uspInsertBlockUser" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarket" FunctionName="TradeWebDB_Model.Store.uspListWorldMarket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarket_Result">
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_sumCount" ColumnName="_sumCount" />
+          <ScalarProperty Name="C_totalSumCount" ColumnName="_totalSumCount" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_isDisplay" ColumnName="_isDisplay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketDetail" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketDetail_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_totalTradeCount" ColumnName="_totalTradeCount" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_maxPrice" ColumnName="_maxPrice" />
+          <ScalarProperty Name="C_lastTradeTime" ColumnName="_lastTradeTime" />
+          <ScalarProperty Name="C_lastTradePrice" ColumnName="_lastTradePrice" />
+          <ScalarProperty Name="C_isDisplay" ColumnName="_isDisplay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUpdateItemInfo" FunctionName="TradeWebDB_Model.Store.uspUpdateItemInfo" />
+    <FunctionImportMapping FunctionImportName="uspUpdateWorldMarketPrice" FunctionName="TradeWebDB_Model.Store.uspUpdateWorldMarketPrice" />
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketAccumulateTrade" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketAccumulateTrade">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketAccumulateTrade_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_sumTradeCount" ColumnName="_sumTradeCount" />
+          <ScalarProperty Name="C_sumTradePrice" ColumnName="_sumTradePrice" />
+          <ScalarProperty Name="C_maxPrice" ColumnName="_maxPrice" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_maxTradeCount" ColumnName="_maxTradeCount" />
+          <ScalarProperty Name="C_accumulateTickCount" ColumnName="_accumulateTickCount" />
+          <ScalarProperty Name="C_accumulateBiddingCount" ColumnName="_accumulateBiddingCount" />
+          <ScalarProperty Name="C_priceGroupKey" ColumnName="_priceGroupKey" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspListGroupBiddingPrice" FunctionName="TradeWebDB_Model.Store.uspListGroupBiddingPrice">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListGroupBiddingPrice_Result">
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUpdateWorldMarketGroupPrice" FunctionName="TradeWebDB_Model.Store.uspUpdateWorldMarketGroupPrice" />
+    <FunctionImportMapping FunctionImportName="uspListWaitBiddingSell" FunctionName="TradeWebDB_Model.Store.uspListWaitBiddingSell">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWaitBiddingSell_Result">
+          <ScalarProperty Name="C_waitNo" ColumnName="_waitNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_isSealed" ColumnName="_isSealed" />
+          <ScalarProperty Name="C_chooseSubKey" ColumnName="_chooseSubKey" />
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_isRingBuff" ColumnName="_isRingBuff" />
+          <ScalarProperty Name="C_nationCode" ColumnName="_nationCode" />
+          <ScalarProperty Name="C_serverNo" ColumnName="_serverNo" />
+          <ScalarProperty Name="C_userNo" ColumnName="_userNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspWorldMarketWaitNoticeList" FunctionName="TradeWebDB_Model.Store.uspWorldMarketWaitNoticeList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspWorldMarketWaitNoticeList_Result">
+          <ScalarProperty Name="C_waitNo" ColumnName="_waitNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_chooseSubKey" ColumnName="_chooseSubKey" />
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_resultMoneyCount" ColumnName="_resultMoneyCount" />
+          <ScalarProperty Name="C_usedType" ColumnName="_usedType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspIncreaseTickCount" FunctionName="TradeWebDB_Model.Store.uspIncreaseTickCount" />
+    <FunctionImportMapping FunctionImportName="uspClearNoticeItemList" FunctionName="TradeWebDB_Model.Store.uspClearNoticeItemList" />
+    <FunctionImportMapping FunctionImportName="uspCheckOTPItem" FunctionName="TradeWebDB_Model.Store.uspCheckOTPItem" />
+    <FunctionImportMapping FunctionImportName="uspBuyBiddingFromWorldMarket" FunctionName="TradeWebDB_Model.Store.uspBuyBiddingFromWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspSellBiddingToWorldMarket" FunctionName="TradeWebDB_Model.Store.uspSellBiddingToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspUpdateWaitFail" FunctionName="TradeWebDB_Model.Store.uspUpdateWaitFail" />
+    <FunctionImportMapping FunctionImportName="uspCalculateBiddingBuy" FunctionName="TradeWebDB_Model.Store.uspCalculateBiddingBuy" />
+    <FunctionImportMapping FunctionImportName="uspWithdrawBiddingBuy" FunctionName="TradeWebDB_Model.Store.uspWithdrawBiddingBuy" />
+    <FunctionImportMapping FunctionImportName="uspCalculateBiddingSell" FunctionName="TradeWebDB_Model.Store.uspCalculateBiddingSell" />
+    <FunctionImportMapping FunctionImportName="uspWithdrawBiddingSell" FunctionName="TradeWebDB_Model.Store.uspWithdrawBiddingSell" />
+    <FunctionImportMapping FunctionImportName="uspSellToWorldMarket" FunctionName="TradeWebDB_Model.Store.uspSellToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspBuyFromWorldMarket" FunctionName="TradeWebDB_Model.Store.uspBuyFromWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspProcessDepositToWorldMarket" FunctionName="TradeWebDB_Model.Store.uspProcessDepositToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspProcessWithdrawFromWorldMarket" FunctionName="TradeWebDB_Model.Store.uspProcessWithdrawFromWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspListUserBiddingBuy" FunctionName="TradeWebDB_Model.Store.uspListUserBiddingBuy">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListUserBiddingBuy_Result">
+          <ScalarProperty Name="C_buyNo" ColumnName="_buyNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_chooseSubKey" ColumnName="_chooseSubKey" />
+          <ScalarProperty Name="C_leftCount" ColumnName="_leftCount" />
+          <ScalarProperty Name="C_boughtCount" ColumnName="_boughtCount" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_basePrice" ColumnName="_basePrice" />
+          <ScalarProperty Name="C_minPrice" ColumnName="_minPrice" />
+          <ScalarProperty Name="C_addEnchantPrice" ColumnName="_addEnchantPrice" />
+          <ScalarProperty Name="C_registerMoneyCount" ColumnName="_registerMoneyCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspListWorldMarketWait" FunctionName="TradeWebDB_Model.Store.uspListWorldMarketWait">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeWebDB_Model.uspListWorldMarketWait_Result">
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_chooseSubKey" ColumnName="_chooseSubKey" />
+          <ScalarProperty Name="C_pricePerOne" ColumnName="_pricePerOne" />
+          <ScalarProperty Name="C_waitEndTime" ColumnName="_waitEndTime" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspCheckLastOtpTime" FunctionName="TradeWebDB_Model.Store.uspCheckLastOtpTime" />
+    <FunctionImportMapping FunctionImportName="uspGetLastOtpTime" FunctionName="TradeWebDB_Model.Store.uspGetLastOtpTime" />
+    <FunctionImportMapping FunctionImportName="uspSetLastOtpTime" FunctionName="TradeWebDB_Model.Store.uspSetLastOtpTime" />
+  </EntityContainerMapping>
+</Mapping>

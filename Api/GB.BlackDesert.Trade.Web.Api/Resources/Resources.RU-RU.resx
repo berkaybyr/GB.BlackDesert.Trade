@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TRADE_MARKET_MAIN_MENU_MARKET" xml:space="preserve">
+    <value>Центральный аукцион </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_WALLET" xml:space="preserve">
+    <value>Мои товары </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_BUY" xml:space="preserve">
+    <value>Предпокупка </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_SELL" xml:space="preserve">
+    <value>Предпродажа </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_NEED_TEXT" xml:space="preserve">
+    <value>Введите название товара.</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH" xml:space="preserve">
+    <value>Поиск </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_REFRESH" xml:space="preserve">
+    <value>Обновить </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_REGIST_COUNT" xml:space="preserve">
+    <value>Кол-во</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CUMULATIVE_VOLUME" xml:space="preserve">
+    <value>Объем продаж </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MY_ACCOUNT" xml:space="preserve">
+    <value>Склад</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CURRENT_SILVER" xml:space="preserve">
+    <value>Серебро </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_WEIGHT" xml:space="preserve">
+    <value>Грузоподъемность </value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_AMOUNT" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_BUY" xml:space="preserve">
+    <value>Покупка </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_EXCEPTION" xml:space="preserve">
+    <value>Произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_USER" xml:space="preserve">
+    <value>Информация о пользователе отсутствует. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM_COUNT" xml:space="preserve">
+    <value>Недопустимое количество предметов. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM" xml:space="preserve">
+    <value>Информация о предмете недействительна. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_BUY_FAIL" xml:space="preserve">
+    <value>Купить предмет не удалось. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_SELL_FAIL" xml:space="preserve">
+    <value>Продать предмет не удалось. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_PRICE_WORNG" xml:space="preserve">
+    <value>Некорректная цена. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_ITEM" xml:space="preserve">
+    <value>Информация о предмете отсутствует. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_SEARCH_TEXT" xml:space="preserve">
+    <value>Некорректная информация поиска. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNAUTHORIZED" xml:space="preserve">
+    <value>Ошибка подтверждения. Попробуйте войти позже.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_REGIST_ITEM_FAIL" xml:space="preserve">
+    <value>Не удалось зарегистрировать предмет.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_WITHDRAW_ITEM_FAIL" xml:space="preserve">
+    <value>Не удалось забрать предмет.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXISTS_WALLET" xml:space="preserve">
+    <value>Недостаточное количество серебра на складе Центрального аукциона. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_ITEM" xml:space="preserve">
+    <value>Сделки по данному предмету приостановлены.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_USER" xml:space="preserve">
+    <value>Сделки с данным игроком приостановлены.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CLOSE_MARKET" xml:space="preserve">
+    <value>Центральный аукцион не доступен в данный момент. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_OVER_WEIGHT" xml:space="preserve">
+    <value>Был превышен максимально допустимый вес. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BIDDING_FAIL" xml:space="preserve">
+    <value>Во время предпокупки произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_ENOUGH_MONEY" xml:space="preserve">
+    <value>Недостаточно средств. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_HAVE_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>Не удалось сделать предзаказ на покупку, так как предмет уже выставлен на продажу.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>Не удалось сделать предзаказ на продажу.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CREATE_WALLET_FAIL" xml:space="preserve">
+    <value>Не удалось создать склад на Центральном аукционе.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CALC_ITEM_FAIL" xml:space="preserve">
+    <value>Не удалось произвести расчет за предмет.</value>
+  </data>
+  <data name="TRADE_MARKET_FAVORIT_LIST" xml:space="preserve">
+    <value>Избранное</value>
+  </data>
+  <data name="TRADE_MARKET_ALL_LIST" xml:space="preserve">
+    <value>Все </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH" xml:space="preserve">
+    <value>Поиск по фильтру</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_AVG_PRICE" xml:space="preserve">
+    <value>Средняя цена </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_HIGH" xml:space="preserve">
+    <value>По возрастанию</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LOW" xml:space="preserve">
+    <value>По убыванию</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGDATE" xml:space="preserve">
+    <value>Дата регистрации </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_RECENT" xml:space="preserve">
+    <value>Недавние </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LATER" xml:space="preserve">
+    <value>Ранние </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_COUNT" xml:space="preserve">
+    <value>Зарегистрированное количество</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_MANY" xml:space="preserve">
+    <value>По возрастанию</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_LOW" xml:space="preserve">
+    <value>По убыванию</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_ENCHANT" xml:space="preserve">
+    <value>Уровень усиления </value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_INITIALIZE" xml:space="preserve">
+    <value>Сброс </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CONFIRM" xml:space="preserve">
+    <value>Подтвердить покупку </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE" xml:space="preserve">
+    <value>Цена покупки </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_QUANTITY" xml:space="preserve">
+    <value>Количество покупки </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE_CHANGE" xml:space="preserve">
+    <value>Изменить </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_ENCHANT" xml:space="preserve">
+    <value>Уровень усиления </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_OK" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CANCEL" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST" xml:space="preserve">
+    <value>Зарегистрировать товары на продажу </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CLOSE" xml:space="preserve">
+    <value>Закрыть </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_BASE_PRICE" xml:space="preserve">
+    <value>Основная цена </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_QUANTITY" xml:space="preserve">
+    <value>Кол-во</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SELL_COUNT" xml:space="preserve">
+    <value>Объем продаж </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE" xml:space="preserve">
+    <value>Цена за 1 шт. </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE_CHANGE" xml:space="preserve">
+    <value>Изменить </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_OK" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY" xml:space="preserve">
+    <value>Получить товар </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CLOSE" xml:space="preserve">
+    <value>Закрыть </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_PRICE_PER_ONE" xml:space="preserve">
+    <value>Цена за 1 шт. </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_RESERVE_COUNT" xml:space="preserve">
+    <value>Количество товаров на предзаказ </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_COMPLETE_COUNT" xml:space="preserve">
+    <value>Покупка завершена </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>Общая стоимость покупок</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TEX_INFO" xml:space="preserve">
+    <value>Комиссия составляет 30%. </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CONFIRM" xml:space="preserve">
+    <value>Получить товар </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CANCEL" xml:space="preserve">
+    <value>Отменить </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL" xml:space="preserve">
+    <value>Продажа успешно завершена</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CLOSE" xml:space="preserve">
+    <value>Закрыть </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_PRICE_PER_ONE" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_RESERVE_COUNT" xml:space="preserve">
+    <value>Регистрируемое количество </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_COMPLETE_COUNT" xml:space="preserve">
+    <value>Количество продаваемого товара </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>Общая стоимость продаж</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TEX_INFO" xml:space="preserve">
+    <value>Комиссия составляет 30%. </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CONFIRM" xml:space="preserve">
+    <value>Расчет </value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CANCEL" xml:space="preserve">
+    <value>Отмена </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_SUCCESS" xml:space="preserve">
+    <value>Покупка успешно завершена.</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_SUCCESS" xml:space="preserve">
+    <value>Регистрация на продажу успешно завершена. </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_SUCCESS" xml:space="preserve">
+    <value>Предзаказ на покупку успешно завершен. </value>
+  </data>
+  <data name="TRADE_MARKET_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT] шт.</value>
+  </data>
+  <data name="TRADE_MARKET_TOTAL_SALE_COUNT" xml:space="preserve">
+    <value>Всего товаров</value>
+  </data>
+  <data name="TRADE_MARKET_MY_WALLET_SELL" xml:space="preserve">
+    <value>Продажа </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_RESERVE_COUNT" xml:space="preserve">
+    <value>Количество товаров на предзаказ </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_BOUGHT_COUNT" xml:space="preserve">
+    <value>Покупка завершена.</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_WITHDRAW" xml:space="preserve">
+    <value>Отмена </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CALCULATE" xml:space="preserve">
+    <value>Расчет</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_RESERVE_COUNT" xml:space="preserve">
+    <value>Регистрируемое количество </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SOLD_COUNT" xml:space="preserve">
+    <value>Продажа завершена</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_WITHDRAW" xml:space="preserve">
+    <value>Забрать</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CALCULATE" xml:space="preserve">
+    <value>Расчет </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_FAIL" xml:space="preserve">
+    <value>Совершить покупку не удалось </value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CANCEL_CONFIRM" xml:space="preserve">
+    <value>Желаете отменить предзаказ на покупку?</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL_CONFIRM" xml:space="preserve">
+    <value>Желаете отменить зарегистрованную продажу товаров? </value>
+  </data>
+  <data name="TRADE_MARKET_HOT_LIST" xml:space="preserve">
+    <value>Товары с изм. ценами</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRegistItemFail" xml:space="preserve">
+    <value>Не удалось зарегистрировать предмет.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWithdrawItemFail" xml:space="preserve">
+    <value>Не удалось забрать предмет.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemInvalidCount" xml:space="preserve">
+    <value>Неверное количество товара.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoInventoryItemNotExist" xml:space="preserve">
+    <value>Данный предмет не существует.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNotExistWallet" xml:space="preserve">
+    <value>Склад не существует. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockItem" xml:space="preserve">
+    <value>Сделки по данному предмету приостановлены.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockUser" xml:space="preserve">
+    <value>Сделки с данным игроком приостановлены.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCloseWorldMarket" xml:space="preserve">
+    <value>Центральный аукцион в данный момент недоступен. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketIsNotMaxWeight" xml:space="preserve">
+    <value>На Центральном аукционе был превышен максимально допустимый вес. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuybiddingFail" xml:space="preserve">
+    <value>На Центральном аукционе во время предпокупки произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBusinessNotEnoughMoney" xml:space="preserve">
+    <value>Недостаточно средств. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveSellBiddingInfoWorldMarket" xml:space="preserve">
+    <value>Не удалось сделать предзаказ на покупку, так как предмет уже выставлен на продажу.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuyFail" xml:space="preserve">
+    <value>На Центральном аукционе во время предпродажи произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellbiddingFail" xml:space="preserve">
+    <value>Во время предпродажи на Центральном аукционе произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemCountIsInvalid" xml:space="preserve">
+    <value>Выбрано некорректное количество предметов.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveBuyBiddingInfoWorldMarket" xml:space="preserve">
+    <value>Так как уже сделан предзаказ на покупку, выставить предмет на продажу невозможно. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellFail" xml:space="preserve">
+    <value>Во время продажи на Центральном аукционе произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketCreateWalletFail" xml:space="preserve">
+    <value>Не удалось создать счет на складе Центрального аукциона. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoDbInternalError" xml:space="preserve">
+    <value>Во время обработки данных возникла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNoCalculateItemWorldMarket" xml:space="preserve">
+    <value>Не удалось произвести расчет.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoPublisherFailAuthetication" xml:space="preserve">
+    <value>Ошибка подтверждения. </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>Общая стоимость продаж</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>Общая стоимость покупок </value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL" xml:space="preserve">
+    <value>Продан предмет [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING" xml:space="preserve">
+    <value>Предпродажа предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. была завершена. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL" xml:space="preserve">
+    <value>Предпродажа предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. была отменена. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>Получен расчет за предпродажу предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY" xml:space="preserve">
+    <value>Приобретен предмет [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING" xml:space="preserve">
+    <value>Предпокупка предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. была завершена. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL" xml:space="preserve">
+    <value>Предпокупка предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. была отменена. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>Совершен расчет за предпокупку предмета [STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT] шт. ([STR:SILVER] серебра)</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException" xml:space="preserve">
+    <value>Во время обработки данных на Центральном аукционе произошла внутренняя ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException" xml:space="preserve">
+    <value>Во время использования Центрального аукциона произошла ошибка соединения.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException" xml:space="preserve">
+    <value>Во время обработки данных на Центральном аукционе произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull" xml:space="preserve">
+    <value>На Центральном аукционе произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_UserNotExist" xml:space="preserve">
+    <value>Информация о пользователе отсутствует на Центральном аукционе. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidCount" xml:space="preserve">
+    <value>Некорректное количество предметов на Центральном аукционе. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem" xml:space="preserve">
+    <value>Данный предмет невозможно зарегистрировать на Центральном аукционе. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup" xml:space="preserve">
+    <value>Предмет с данным уровнем усиления невозможно зарегистрировать на Центральном аукционе.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingFail" xml:space="preserve">
+    <value>При осуществлении покупки произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingRepeatOverFail" xml:space="preserve">
+    <value>Во время покупки возникла ошибка.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingFail" xml:space="preserve">
+    <value>При осуществлении продажи произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingRepeatOverFail" xml:space="preserve">
+    <value>Во время продажи произошла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PriceWrong" xml:space="preserve">
+    <value>Некорректное значение цены.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemNotExist" xml:space="preserve">
+    <value>Предмет отсутствует на Центральном аукционе. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack" xml:space="preserve">
+    <value>Превышено максимальное количество предметов, которые можно зарегистрировать/забрать за один раз.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PayloadIsZero" xml:space="preserve">
+    <value>На Центральном аукционе возникла ошибка. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemCountOver" xml:space="preserve">
+    <value>Превышено максимальное количество сделок, потому совершить продажу или покупку невозможно.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_StringOver" xml:space="preserve">
+    <value>Превышено допустимое макс. количество предметов для поиска за один раз.</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveBuyBiddingFail" xml:space="preserve">
+    <value>Забронировать предмет для покупки можно после установки цены выше основной. </value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveSellBiddingFail" xml:space="preserve">
+    <value>Выставить предмет на продажу можно только при установке цены ниже основной. </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_BIDDING_SUCCESS" xml:space="preserve">
+    <value>Предпродажа завершена. </value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_KO-KR" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_EN-US" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ZH-TW" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_JA-JP" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TR-TR" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TH-TH" xml:space="preserve">
+    <value>ไทย</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_RU-RU" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="TRADE_MARKET_BROWSER_MSG" xml:space="preserve">
+    <value>Данный сайт был оптимизирован для мобильного браузера. Советуем Вам использовать мобильный браузер для удобного использования Центрального аукциона. </value>
+  </data>
+  <data name="TRADE_MARKET_SEARCH_RESULT_TEXT" xml:space="preserve">
+    <value>Результаты поиска </value>
+  </data>
+  <data name="TRADE_MARKET_SELL_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>При использовании Премиум-набора можно получить дополнительно 30% с выручки. Вы уверены, что хотите продать сейчас? </value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_1" xml:space="preserve">
+    <value>I</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_2" xml:space="preserve">
+    <value>II</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_3" xml:space="preserve">
+    <value>III</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_4" xml:space="preserve">
+    <value>IV</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_5" xml:space="preserve">
+    <value>V</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_TITLE" xml:space="preserve">
+    <value>Оповещения</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_CLOSE" xml:space="preserve">
+    <value>Закрыть </value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION" xml:space="preserve">
+    <value>Рыночная цена </value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION_SHOW" xml:space="preserve">
+    <value>Показать </value>
+  </data>
+  <data name="WEB_CONTENTS_COPYRIGHT_COMMON" xml:space="preserve">
+    <value>Copyright ⓒ PearlAbyss Corp. All rights reserved.</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_ERROR" xml:space="preserve">
+    <value>Данный сайт был оптимизирован для мобильного браузера. &lt;br /&gt;Советуем Вам использовать мобильный браузер для удобного использования Центрального аукциона. </value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TITLE" xml:space="preserve">
+    <value>Для того, чтобы воспользоваться мобильным Центральным аукционом, &lt;br /&gt;обратите внимание на информацию приведенную ниже. </value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT1" xml:space="preserve">
+    <value>Для того, чтобы воспользоваться мобильным Центральным аукционом необходимо использовать аккаунт, на котором создана семья (фамилия). </value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT2" xml:space="preserve">
+    <value>Для того, чтобы использовать Веб/Мобильный Центральный аукцион, необходимо воспользоваться инвентарем Центрального аукциона в игре хотя бы 1 раз. </value>
+  </data>
+  <data name="TRADE_MARKET_GO_NOTICE" xml:space="preserve">
+    <value>Перейти на официальный сайт </value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_TITLE" xml:space="preserve">
+    <value>Информация о технических работах </value>
+  </data>
+  <data name="TRADE_MARKET_GUIDE_TITLE" xml:space="preserve">
+    <value>Информация </value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_1" xml:space="preserve">
+    <value>Приносим извинения за доставленные неудобства. &lt;br /&gt;Для обновления контента и стабилизации серверов проводятся тех. работы.</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_2" xml:space="preserve">
+    <value>Для стабилизации серверов проводятся технические работы.</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_BUY_WAIT" xml:space="preserve">
+    <value>Покупка</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_SELL_WAIT" xml:space="preserve">
+    <value>Продажа </value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT] шт.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoAlreadyReservationDay" xml:space="preserve">
+    <value>Сделать предзаказ невозможно, так как он уже сделан.</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-ES" xml:space="preserve">
+    <value>Español (Latinoamérica)</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_DE-DE" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_CH-CH" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_FR-FR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ID-ID" xml:space="preserve">
+    <value>Bahasa Indonesia</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_PT-PT" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-US" xml:space="preserve">
+    <value>Español (España)</value>
+  </data>
+  <data name="WEB_CONTENTS_TITLE" xml:space="preserve">
+    <value>Black Desert - мобильный Центральный аукцион</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_CALCULATE_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>При использовании Премиум-набора можно получить дополнительно 30% с выручки. Вы уверены, что хотите произвести расчет сейчас?</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_FAIL" xml:space="preserve">
+    <value>Неверный пин-код.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT1" xml:space="preserve">
+    <value>Введите используемый в игре пин-код.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT2" xml:space="preserve">
+    <value>Пин-код должен состоять из 6 и более цифр.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CONFIRM" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CANCEL" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_MYINFO" xml:space="preserve">
+    <value>Подтвердить данные</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_NOT_ALLOW" xml:space="preserve">
+    <value>Использование Центрального аукциона с помощью данного браузера невозможно. &lt;br /&gt;Воспользуйтесь мобильным устройством или браузером Google Chrome для ПК.</value>
+  </data>
+  <data name="NEW_WEB_MSG_DEFAULT_AUTHENTICATEACCOUNT_FAIL_AGE" xml:space="preserve">
+    <value>Игра недоступна для пользователей младше [STR:AGE] лет.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_RETRY" xml:space="preserve">
+    <value>Превышено количество вводов пин-кода.\nВ течение 24 часов осуществить вход будет невозможно.</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF" xml:space="preserve">
+    <value>Старьевщик</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF_PREF" xml:space="preserve">
+    <value>Бонус сделки</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_ONE" xml:space="preserve">
+    <value>Жажда:</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_TWO" xml:space="preserve">
+    <value>Искажение:</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_THREE" xml:space="preserve">
+    <value>Молчание:</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FOUR" xml:space="preserve">
+    <value>Рев:</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FIVE" xml:space="preserve">
+    <value>Трепет:</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_TITLE" xml:space="preserve">
+    <value>Выбор региона</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_DESC" xml:space="preserve">
+    <value>Пожалуйста, выберите регион, в котором будет использоваться &lt;br/&gt;Центральный аукцион.</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_KOREA" xml:space="preserve">
+    <value>Азия</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_GLOBAL" xml:space="preserve">
+    <value>Мировой</value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_TITLE" xml:space="preserve">
+    <value>C возвращением, искатель приключений! </value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_DESC" xml:space="preserve">
+    <value>Мы рады, что вы вновь с нами! &lt;br/&gt;&lt;br/&gt;У нас подготовлены подарки для всех вернувшихся игроков. &lt;br/&gt;Подробная информация доступна в разделе «Ивенты» в публикации «Для начинающих и вернувшихся игроков!». &lt;br/&gt;&lt;br/&gt;Желаем вам удачи, и не забывайте, что мы всегда с вами! &lt;br/&gt;&lt;br/&gt;- Black Desert -</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_NA" xml:space="preserve">
+    <value>Северная Америка</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_EU" xml:space="preserve">
+    <value>Европа</value>
+  </data>
+  <data name="TRADE_MARKET_OTP_TITLE" xml:space="preserve">
+    <value>Подтверждение через OTP</value>
+  </data>
+  <data name="TRADE_MARKET_OTP_TITLE_DESC" xml:space="preserve">
+    <value>Введите код подтверждения OTP из мобильного приложения.</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNUSE_OTP" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_MAXFAIL_OTP" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOTMATCH_OTP" xml:space="preserve">
+    <value>Код подтверждения не совпадает. Пожалуйста, повторите попытку. </value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BACKUPCODE_ALREADY_USE" xml:space="preserve">
+    <value>Данный код уже был использован.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCantSellItemShutDown" xml:space="preserve">
+    <value>В случае предметов, к которым применяется время ожидания продажи, регистрация невозможна за 20 минут до технических работ.</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_SELLBUY" xml:space="preserve">
+    <value>Повторить</value>
+  </data>
+  <data name="TRADE_MARKET_WAIT_LIST" xml:space="preserve">
+    <value>Товары, ожидающ. рег.</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRowPriceGroupBuy" xml:space="preserve">
+    <value>Имеется товар из другой группы, покупаемый по более высокой цене. Цена продажи должна быть не ниже этого значения.</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_CHECK" xml:space="preserve">
+    <value>Для повторной регистрации переместите товар на склад аукциона.</value>
+  </data>
+</root>

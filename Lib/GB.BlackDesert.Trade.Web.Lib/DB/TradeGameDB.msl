@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TradeGameDB_ModelStoreContainer" CdmEntityContainer="TradeGameDB">
+    <FunctionImportMapping FunctionImportName="uspUpdateForWithdrawToWorldMarket" FunctionName="TradeGameDB_Model.Store.uspUpdateForWithdrawToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspGetPremiumPackageExpiration" FunctionName="TradeGameDB_Model.Store.uspGetPremiumPackageExpiration" />
+    <FunctionImportMapping FunctionImportName="uspRemoveForDepositToWorldMarket" FunctionName="TradeGameDB_Model.Store.uspRemoveForDepositToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspCreateForWithdrawToWorldMarket" FunctionName="TradeGameDB_Model.Store.uspCreateForWithdrawToWorldMarket" />
+    <FunctionImportMapping FunctionImportName="uspGetFamilyPointForWorldTradeMarket" FunctionName="TradeGameDB_Model.Store.uspGetFamilyPointForWorldTradeMarket" />
+    <FunctionImportMapping FunctionImportName="uspInsertToNoticeItem" FunctionName="TradeGameDB_Model.Store.uspInsertToNoticeItem" />
+    <FunctionImportMapping FunctionImportName="uspGetTradeMaidCount" FunctionName="TradeGameDB_Model.Store.uspGetTradeMaidCount" />
+    <FunctionImportMapping FunctionImportName="uspUpdateCurrentPrice" FunctionName="TradeGameDB_Model.Store.uspUpdateCurrentPrice" />
+    <FunctionImportMapping FunctionImportName="uspListFailPayload" FunctionName="TradeGameDB_Model.Store.uspListFailPayload">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeGameDB_Model.uspListFailPayload_Result">
+          <ScalarProperty Name="C_payload" ColumnName="_payload" />
+          <ScalarProperty Name="C_state" ColumnName="_state" />
+          <ScalarProperty Name="C_nationCode" ColumnName="_nationCode" />
+          <ScalarProperty Name="C_serverNo" ColumnName="_serverNo" />
+          <ScalarProperty Name="C_userNo" ColumnName="_userNo" />
+          <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+          <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+          <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+          <ScalarProperty Name="C_isSealed" ColumnName="_isSealed" />
+          <ScalarProperty Name="C_param0" ColumnName="_param0" />
+          <ScalarProperty Name="C_param1" ColumnName="_param1" />
+          <ScalarProperty Name="C_param2" ColumnName="_param2" />
+          <ScalarProperty Name="C_param3" ColumnName="_param3" />
+          <ScalarProperty Name="C_param4" ColumnName="_param4" />
+          <ScalarProperty Name="C_count" ColumnName="_count" />
+          <ScalarProperty Name="C_isMovingTradeWeb" ColumnName="_isMovingTradeWeb" />
+          <ScalarProperty Name="C_registerDate" ColumnName="_registerDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspUsingTicket" FunctionName="TradeGameDB_Model.Store.uspUsingTicket" />
+    <FunctionImportMapping FunctionImportName="uspCheckPayloadForRegisterItem" FunctionName="TradeGameDB_Model.Store.uspCheckPayloadForRegisterItem" />
+    <FunctionImportMapping FunctionImportName="uspCompletePayloadForRegisterItem" FunctionName="TradeGameDB_Model.Store.uspCompletePayloadForRegisterItem" />
+    <FunctionImportMapping FunctionImportName="uspWithdrawPayloadDestroy" FunctionName="TradeGameDB_Model.Store.uspWithdrawPayloadDestroy" />
+    <FunctionImportMapping FunctionImportName="uspFamilySKillListFromWorldMarket" FunctionName="TradeGameDB_Model.Store.uspFamilySKillListFromWorldMarket">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TradeGameDB_Model.uspFamilySKillListFromWorldMarket_Result">
+          <ScalarProperty Name="C_skillNo" ColumnName="_skillNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="uspGetChargeBuffExpiration" FunctionName="TradeGameDB_Model.Store.uspGetChargeBuffExpiration" />
+    <FunctionImportMapping FunctionImportName="uspGetTradeRingBuff" FunctionName="TradeGameDB_Model.Store.uspGetTradeRingBuff" />
+    <FunctionImportMapping FunctionImportName="uspUpdatePackageBuffByWeb" FunctionName="TradeGameDB_Model.Store.uspUpdatePackageBuffByWeb" />
+    <FunctionImportMapping FunctionImportName="uspClearNoticeItemList" FunctionName="TradeGameDB_Model.Store.uspClearNoticeItemList" />
+  </EntityContainerMapping>
+</Mapping>

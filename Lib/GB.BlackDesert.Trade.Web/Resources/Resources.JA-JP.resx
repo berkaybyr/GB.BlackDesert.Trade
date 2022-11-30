@@ -1,0 +1,813 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TRADE_MARKET_MAIN_MENU_MARKET" xml:space="preserve">
+    <value>取引市場</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_WALLET" xml:space="preserve">
+    <value>マイアイテム</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_BUY" xml:space="preserve">
+    <value>予約購入</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MENU_BIDDING_SELL" xml:space="preserve">
+    <value>予約販売</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_NEED_TEXT" xml:space="preserve">
+    <value>アイテム名を入力してください</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH" xml:space="preserve">
+    <value>検索</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_SEARCH_REFRESH" xml:space="preserve">
+    <value>リロード</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_REGIST_COUNT" xml:space="preserve">
+    <value>登録個数</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CUMULATIVE_VOLUME" xml:space="preserve">
+    <value>累積取引量</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_MY_ACCOUNT" xml:space="preserve">
+    <value>自分の口座</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_CURRENT_SILVER" xml:space="preserve">
+    <value>保有金額</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_WEIGHT" xml:space="preserve">
+    <value>重量</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_AMOUNT" xml:space="preserve">
+    <value>数量</value>
+  </data>
+  <data name="TRADE_MARKET_MAIN_BUY" xml:space="preserve">
+    <value>購入</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_EXCEPTION" xml:space="preserve">
+    <value>処理中エラーが発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_USER" xml:space="preserve">
+    <value>ユーザー情報が存在しません。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM_COUNT" xml:space="preserve">
+    <value>アイテムの数量が無効です。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_ITEM" xml:space="preserve">
+    <value>アイテムの情報が無効です。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_BUY_FAIL" xml:space="preserve">
+    <value>アイテムの購入に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_ITEM_SELL_FAIL" xml:space="preserve">
+    <value>アイテムの販売に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_PRICE_WORNG" xml:space="preserve">
+    <value>値段の情報が正しくありません。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXSITS_ITEM" xml:space="preserve">
+    <value>アイテムの情報がありません。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_INVALID_SEARCH_TEXT" xml:space="preserve">
+    <value>検索語が無効です。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNAUTHORIZED" xml:space="preserve">
+    <value>認証情報が正しくありません。もう一度ログインしてください。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_REGIST_ITEM_FAIL" xml:space="preserve">
+    <value>アイテム登録に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_WITHDRAW_ITEM_FAIL" xml:space="preserve">
+    <value>アイテム回収に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_EXISTS_WALLET" xml:space="preserve">
+    <value>取引所口座がありません。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_ITEM" xml:space="preserve">
+    <value>取引が中止されたアイテムです。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BLOCK_USER" xml:space="preserve">
+    <value>取引が中止されたユーザーです。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CLOSE_MARKET" xml:space="preserve">
+    <value>統合取引所の利用ができない状態です。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_OVER_WEIGHT" xml:space="preserve">
+    <value>収容できる最大積載量を超えました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BIDDING_FAIL" xml:space="preserve">
+    <value>予約購入途中で問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOT_ENOUGH_MONEY" xml:space="preserve">
+    <value>保有金額が足りません。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_HAVE_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>すでにアイテムを販売予約しているため購入予約に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_SELL_BIDDING_FAIL" xml:space="preserve">
+    <value>アイテムの予約販売に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CREATE_WALLET_FAIL" xml:space="preserve">
+    <value>取引所の口座作成に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_CALC_ITEM_FAIL" xml:space="preserve">
+    <value>アイテムの精算に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_FAVORIT_LIST" xml:space="preserve">
+    <value>ブックマークリスト</value>
+  </data>
+  <data name="TRADE_MARKET_ALL_LIST" xml:space="preserve">
+    <value>全体リスト</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH" xml:space="preserve">
+    <value>フィルター検索</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_AVG_PRICE" xml:space="preserve">
+    <value>平均価格</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_HIGH" xml:space="preserve">
+    <value>高い順</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LOW" xml:space="preserve">
+    <value>低い順</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGDATE" xml:space="preserve">
+    <value>登録日</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_RECENT" xml:space="preserve">
+    <value>最近</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_LATER" xml:space="preserve">
+    <value>古い</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_COUNT" xml:space="preserve">
+    <value>登録個数</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_MANY" xml:space="preserve">
+    <value>多い順</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_REGIST_LOW" xml:space="preserve">
+    <value>少ない順</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_ENCHANT" xml:space="preserve">
+    <value>強化段階</value>
+  </data>
+  <data name="TRADE_MARKET_FILTER_SEARCH_INITIALIZE" xml:space="preserve">
+    <value>リセット</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CONFIRM" xml:space="preserve">
+    <value>購入確認</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE" xml:space="preserve">
+    <value>購入価格</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_QUANTITY" xml:space="preserve">
+    <value>購入数量</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_PRICE_CHANGE" xml:space="preserve">
+    <value>変更</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_ENCHANT" xml:space="preserve">
+    <value>強化段階</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_OK" xml:space="preserve">
+    <value>購入確認</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_CANCEL" xml:space="preserve">
+    <value>購入キャンセル</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST" xml:space="preserve">
+    <value>販売登録</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CLOSE" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_BASE_PRICE" xml:space="preserve">
+    <value>基準価格</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_QUANTITY" xml:space="preserve">
+    <value>アイテム個数</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SELL_COUNT" xml:space="preserve">
+    <value>販売数量</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE" xml:space="preserve">
+    <value>1個当たりの価格</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_PRICE_PER_ONE_CHANGE" xml:space="preserve">
+    <value>変更</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_OK" xml:space="preserve">
+    <value>アイテム登録</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL" xml:space="preserve">
+    <value>登録キャンセル</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY" xml:space="preserve">
+    <value>アイテム受領</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CLOSE" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_PRICE_PER_ONE" xml:space="preserve">
+    <value>1個当たりの単価</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_RESERVE_COUNT" xml:space="preserve">
+    <value>予約個数</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_COMPLETE_COUNT" xml:space="preserve">
+    <value>購入完了</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>総購入金額</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_TEX_INFO" xml:space="preserve">
+    <value>アイテム取引の手数料は30％です。</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CONFIRM" xml:space="preserve">
+    <value>アイテム受領</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_BUY_CANCEL" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL" xml:space="preserve">
+    <value>販売精算</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CLOSE" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_PRICE_PER_ONE" xml:space="preserve">
+    <value>登録金額</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_RESERVE_COUNT" xml:space="preserve">
+    <value>登録個数</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_COMPLETE_COUNT" xml:space="preserve">
+    <value>販売個数</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>総販売金額</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_TEX_INFO" xml:space="preserve">
+    <value>アイテム取引の手数料は30％です。</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CONFIRM" xml:space="preserve">
+    <value>精算</value>
+  </data>
+  <data name="TRADE_MARKET_CALC_SELL_CANCEL" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_SUCCESS" xml:space="preserve">
+    <value>購入しました。</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_SUCCESS" xml:space="preserve">
+    <value>販売登録しました。</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_SUCCESS" xml:space="preserve">
+    <value>購入予約しました</value>
+  </data>
+  <data name="TRADE_MARKET_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT]個</value>
+  </data>
+  <data name="TRADE_MARKET_TOTAL_SALE_COUNT" xml:space="preserve">
+    <value>総販売数</value>
+  </data>
+  <data name="TRADE_MARKET_MY_WALLET_SELL" xml:space="preserve">
+    <value>販売</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_RESERVE_COUNT" xml:space="preserve">
+    <value>予約個数</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_BOUGHT_COUNT" xml:space="preserve">
+    <value>購入完了</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_WITHDRAW" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CALCULATE" xml:space="preserve">
+    <value>精算</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_RESERVE_COUNT" xml:space="preserve">
+    <value>登録個数</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_SOLD_COUNT" xml:space="preserve">
+    <value>販売完了</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_WITHDRAW" xml:space="preserve">
+    <value>回収</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CALCULATE" xml:space="preserve">
+    <value>精算</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_FAIL" xml:space="preserve">
+    <value>購入失敗</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_BIDDING_CANCEL_CONFIRM" xml:space="preserve">
+    <value>購入予約をキャンセルしますか？</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_REGIST_CANCEL_CONFIRM" xml:space="preserve">
+    <value>販売登録をキャンセルしますか？</value>
+  </data>
+  <data name="TRADE_MARKET_HOT_LIST" xml:space="preserve">
+    <value>急騰落アイテム</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRegistItemFail" xml:space="preserve">
+    <value>アイテムの登録に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWithdrawItemFail" xml:space="preserve">
+    <value>アイテムの回収に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemInvalidCount" xml:space="preserve">
+    <value>カウントに誤りがあります。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoInventoryItemNotExist" xml:space="preserve">
+    <value>アイテムが存在しません。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNotExistWallet" xml:space="preserve">
+    <value>存在しない口座です。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockItem" xml:space="preserve">
+    <value>取引が中止になったアイテムです。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBlockUser" xml:space="preserve">
+    <value>取引が中止になったユーザーです。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCloseWorldMarket" xml:space="preserve">
+    <value>総合取引所が利用できない状態です。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketIsNotMaxWeight" xml:space="preserve">
+    <value>統合取引所の収容できる最大積載量を超えました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuybiddingFail" xml:space="preserve">
+    <value>統合取引所の予約購入途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoBusinessNotEnoughMoney" xml:space="preserve">
+    <value>保有量が不足しています。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveSellBiddingInfoWorldMarket" xml:space="preserve">
+    <value>すでにアイテムを販売予約しているため購入予約に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketBuyFail" xml:space="preserve">
+    <value>統合取引所で購入途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellbiddingFail" xml:space="preserve">
+    <value>統合取引所予約販売を行う途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoItemCountIsInvalid" xml:space="preserve">
+    <value>アイテムの個数が異常です。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoHaveBuyBiddingInfoWorldMarket" xml:space="preserve">
+    <value>すでにアイテムを購入予約しているため購入予約に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketSellFail" xml:space="preserve">
+    <value>統合取引所販売を行う途中で問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoWorldMarketCreateWalletFail" xml:space="preserve">
+    <value>口座作成に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoDbInternalError" xml:space="preserve">
+    <value>処理中に内部エラーが発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoNoCalculateItemWorldMarket" xml:space="preserve">
+    <value>アイテム精算に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoPublisherFailAuthetication" xml:space="preserve">
+    <value>アカウントの認証に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_TOTAL_PRICE" xml:space="preserve">
+    <value>総販売金額</value>
+  </data>
+  <data name="TRADE_MARKET_BUY_TOTAL_PRICE" xml:space="preserve">
+    <value>総購入金額</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を販売完了しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を販売予約完了しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を販売予約から回収しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_SELL_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>販売予約した[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を精算しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を購入完了しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を購入予約完了しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL" xml:space="preserve">
+    <value>[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を購入予約から回収しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_BUY_BIDDING_CANCEL_CALCULATE" xml:space="preserve">
+    <value>購入予約した[STR:SUBTYPE] [STR:ITEMNAME] [STR:ITEMCOUNT]個を精算しました。[STR:SILVER]シルバー</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException" xml:space="preserve">
+    <value>統合取引所の内部処理途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException" xml:space="preserve">
+    <value>統合取引所処理中ネットワークトラブルが発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException" xml:space="preserve">
+    <value>統合取引所の処理途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull" xml:space="preserve">
+    <value>統合取引所の処理結果に問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_UserNotExist" xml:space="preserve">
+    <value>統合取引所にユーザー情報がありません。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidCount" xml:space="preserve">
+    <value>統合取引所のアイテムの数に異常があります。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem" xml:space="preserve">
+    <value>統合取引所に登録できないアイテムです。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup" xml:space="preserve">
+    <value>統合取引所に登録できない強化レベルが含まれています。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingFail" xml:space="preserve">
+    <value>購入処理途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingRepeatOverFail" xml:space="preserve">
+    <value>購入処理中失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingFail" xml:space="preserve">
+    <value>販売処理途中問題が発生しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingRepeatOverFail" xml:space="preserve">
+    <value>販売処理に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PriceWrong" xml:space="preserve">
+    <value>価格が異常です。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemNotExist" xml:space="preserve">
+    <value>統合取引所にアイテムがありません。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack" xml:space="preserve">
+    <value>登録又は回収時、一度に処理できる数を超えました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_PayloadIsZero" xml:space="preserve">
+    <value>統合取引所の結果に異常があります。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemCountOver" xml:space="preserve">
+    <value>最大取引量を超えて販売又は購入できません。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_StringOver" xml:space="preserve">
+    <value>一度に検索できるアイテム数を超過しました。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveBuyBiddingFail" xml:space="preserve">
+    <value>基準価より高く値段を設定してから購入予約できます。</value>
+  </data>
+  <data name="TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveSellBiddingFail" xml:space="preserve">
+    <value>基準価格より低く値段を設定してから出品できます。</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_BIDDING_SUCCESS" xml:space="preserve">
+    <value>販売予約完了しました。</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_KO-KR" xml:space="preserve">
+    <value>韓国語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_EN-US" xml:space="preserve">
+    <value>英語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ZH-TW" xml:space="preserve">
+    <value>中国語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_JA-JP" xml:space="preserve">
+    <value>日本語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TR-TR" xml:space="preserve">
+    <value>トルコ語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_TH-TH" xml:space="preserve">
+    <value>タイ語</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_RU-RU" xml:space="preserve">
+    <value>ロシア語</value>
+  </data>
+  <data name="TRADE_MARKET_BROWSER_MSG" xml:space="preserve">
+    <value>このサイトはモバイルブラウザに最適化されています。統合取引所を円滑に利用するためモバイルブラウザの利用を推薦します。</value>
+  </data>
+  <data name="TRADE_MARKET_SEARCH_RESULT_TEXT" xml:space="preserve">
+    <value>検索結果</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>プレミアムパッケージのバフ適用時、受け取り額の30%を追加で貰えます。今販売受領をしますか？</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_1" xml:space="preserve">
+    <value>真I</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_2" xml:space="preserve">
+    <value>真II</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_3" xml:space="preserve">
+    <value>真III</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_4" xml:space="preserve">
+    <value>真IV</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_ENCHANT_GRADE_5" xml:space="preserve">
+    <value>真V</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_TITLE" xml:space="preserve">
+    <value>お知らせ内訳</value>
+  </data>
+  <data name="TRADE_MARKET_ALRAM_CLOSE" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION" xml:space="preserve">
+    <value>相場価格</value>
+  </data>
+  <data name="TRADE_MARKET_CONDITION_SHOW" xml:space="preserve">
+    <value>表示</value>
+  </data>
+  <data name="WEB_CONTENTS_COPYRIGHT_COMMON" xml:space="preserve">
+    <value>Copyright ⓒ PearlAbyss Corp. All rights reserved.</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_ERROR" xml:space="preserve">
+    <value>このサイトはモバイルブラウザに最適化されています。&lt;br /&gt;統合取引所を利用する場合はモバイルブラウザをご利用ください。</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TITLE" xml:space="preserve">
+    <value>モバイルブラウザを使うためには&lt;br /&gt;下記の内容をご参考お願いします。</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT1" xml:space="preserve">
+    <value>統合取引所を使うためには家名が作成されているアカウントでログインする必要があります。</value>
+  </data>
+  <data name="TRADE_MARKET_NOT_EXISTS_MY_WALLET_TEXT2" xml:space="preserve">
+    <value>ゲーム内で取引所バッグを1回以上使うことでWEB/モバイル統合取引所を正常に利用できます。</value>
+  </data>
+  <data name="TRADE_MARKET_GO_NOTICE" xml:space="preserve">
+    <value>公式ページへ</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_TITLE" xml:space="preserve">
+    <value>メンテナンス案内</value>
+  </data>
+  <data name="TRADE_MARKET_GUIDE_TITLE" xml:space="preserve">
+    <value>案内</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_1" xml:space="preserve">
+    <value>メンテナンス案内サービスの利用に不便をおかけして申し訳ございません。&lt;br /&gt;コンテンツアップデート及びサーバー安定化のためのメンテ中です。</value>
+  </data>
+  <data name="TRADE_MARKET_MAINTENANCE_CONTENTS_2" xml:space="preserve">
+    <value>サーバー安定化のためのメンテナンス中です。</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_BUY_WAIT" xml:space="preserve">
+    <value>購入待機</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_SELL_WAIT" xml:space="preserve">
+    <value>販売待機</value>
+  </data>
+  <data name="TRADE_MARKET_BIDDING_EA" xml:space="preserve">
+    <value>[STR:ITEMCOUNT] 件</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoAlreadyReservationDay" xml:space="preserve">
+    <value>既に予約済みのため予約に失敗しました。</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-ES" xml:space="preserve">
+    <value>Español (Latinoamérica)</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_DE-DE" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_CH-CH" xml:space="preserve">
+    <value>中文</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_FR-FR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ID-ID" xml:space="preserve">
+    <value>Bahasa Indonesia</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_PT-PT" xml:space="preserve">
+    <value>Português</value>
+  </data>
+  <data name="TRADE_MARKET_LANGUAGE_ES-US" xml:space="preserve">
+    <value>Español (España)</value>
+  </data>
+  <data name="WEB_CONTENTS_TITLE" xml:space="preserve">
+    <value>BlackDesert - ウェブ統合取引所</value>
+  </data>
+  <data name="TRADE_MARKET_SELL_CALCULATE_VALUE_PACKAGE_CONFIRM" xml:space="preserve">
+    <value>プレミアムパッケージのバフ適用時、受け取り額の30%を追加で貰えます。今精算をしますか？</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_FAIL" xml:space="preserve">
+    <value>2次パスワードが異なります。</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT1" xml:space="preserve">
+    <value>ゲームで使用中の2次パスワードを入力してください。</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_INSERT2" xml:space="preserve">
+    <value>6桁以上の数字を空欄が無いように入力してください。</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CONFIRM" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_CANCEL" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_MYINFO" xml:space="preserve">
+    <value>本人確認</value>
+  </data>
+  <data name="TRADE_MARKET_PC_BROWSER_NOT_ALLOW" xml:space="preserve">
+    <value>該当ブラウザでは、統合取引所をご利用頂けません。&lt;br /&gt;モバイルウェブ、もしくはPC Chromeブラウザをご利用ください。</value>
+  </data>
+  <data name="NEW_WEB_MSG_DEFAULT_AUTHENTICATEACCOUNT_FAIL_AGE" xml:space="preserve">
+    <value>만 [STR:AGE]세 미만인 사용자는 게임을 이용할 수 없습니다.</value>
+  </data>
+  <data name="TRADE_MARKET_SECONDPWD_RETRY" xml:space="preserve">
+    <value>2次パスワードの入力可能回数を超過しました。\n24時間、ログインできなくなります。</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF" xml:space="preserve">
+    <value>巨商</value>
+  </data>
+  <data name="TRADE_MARKET_RINGBUFF_PREF" xml:space="preserve">
+    <value>取引優待</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_ONE" xml:space="preserve">
+    <value>渇望する</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_TWO" xml:space="preserve">
+    <value>歪む</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_THREE" xml:space="preserve">
+    <value>沈黙する</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FOUR" xml:space="preserve">
+    <value>泣き喚く</value>
+  </data>
+  <data name="TRADE_MARKET_ITEM_DEAD_FIVE" xml:space="preserve">
+    <value>破滅する</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_TITLE" xml:space="preserve">
+    <value>地域選択</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_DESC" xml:space="preserve">
+    <value>統合取引所を利用する&lt;br/&gt;地域を選択してください。</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_KOREA" xml:space="preserve">
+    <value>アジア</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_GLOBAL" xml:space="preserve">
+    <value>グローバル</value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_TITLE" xml:space="preserve">
+    <value>復帰された冒険者様、お久しぶりです！</value>
+  </data>
+  <data name="TRADE_MARKET_WELCOME_RETURNERS_DESC" xml:space="preserve">
+    <value>黒い砂漠の世界にお戻りくださったことを、心から歓迎します。 &lt;br/&gt;&lt;br/&gt;冒険者様がここを離れていた時間に応じて、復帰者様向けの特別な支援を始めました。 &lt;br/&gt;詳細については、イベント掲示板内の新規/復帰冒険者のためのお知らせをご確認ください！&lt;br/&gt;&lt;br/&gt;どうかこれからも、私たちみんなは一つであることをお忘れなく！&lt;br/&gt;黒い砂漠での素晴らしい活躍と幸運をお祈りしています。&lt;br/&gt;&lt;br/&gt;-黒い砂漠より-</value>
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_NA" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_SELECT_SERVER_EU" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_OTP_TITLE_DESC" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_UNUSE_OTP" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_MAXFAIL_OTP" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_NOTMATCH_OTP" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_ERROR_MSG_BACKUPCODE_ALREADY_USE" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoCantSellItemShutDown" xml:space="preserve">
+    <value>販売待機になるアイテムの場合、メンテナンス開始20分前からは登録ができません。</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_SELLBUY" xml:space="preserve">
+    <value>再登録</value>
+  </data>
+  <data name="TRADE_MARKET_WAIT_LIST" xml:space="preserve">
+    <value>登録待機アイテム</value>
+  </data>
+  <data name="TRADE_MARKET_GAME_ERROR_eErrNoRowPriceGroupBuy" xml:space="preserve">
+    <value>現在、販売価格よりも高い価格で購入中の、他のクラスのアイテムがあります。その価格と同じか、もしくは高い価格で販売する必要があります。</value>
+  </data>
+  <data name="TRADE_MARKET_RETRY_CHECK" xml:space="preserve">
+    <value>再登録をご希望の場合は、取引用倉庫にアイテムを格納してください。</value>
+  </data>
+</root>

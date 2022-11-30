@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeLogDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TradeLogDB" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="uspLogWorldMarketForOperation">
+      <Parameter Name="operationLogType" Mode="In" Type="Int16" />
+      <Parameter Name="registerDate" Mode="In" Type="DateTime" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType1" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey1" Mode="In" Type="Int32" />
+      <Parameter Name="subKey1" Mode="In" Type="Int32" />
+      <Parameter Name="count1" Mode="In" Type="Int64" />
+      <Parameter Name="beforeCount1" Mode="In" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="In" Type="Int64" />
+      <Parameter Name="keyType2" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey2" Mode="In" Type="Int32" />
+      <Parameter Name="subKey2" Mode="In" Type="Int32" />
+      <Parameter Name="count2" Mode="In" Type="Int64" />
+      <Parameter Name="beforeCount2" Mode="In" Type="Int64" />
+      <Parameter Name="afterCount2" Mode="In" Type="Int64" />
+      <Parameter Name="param1" Mode="In" Type="Int64" />
+      <Parameter Name="param2" Mode="In" Type="Int64" />
+      <Parameter Name="param3" Mode="In" Type="Int64" />
+      <Parameter Name="param4" Mode="In" Type="Int64" />
+      <Parameter Name="param5" Mode="In" Type="Int64" />
+      <Parameter Name="param6" Mode="In" Type="Int64" />
+      <Parameter Name="param7" Mode="In" Type="Int64" />
+      <Parameter Name="param8" Mode="In" Type="Int64" />
+      <Parameter Name="param9" Mode="In" Type="Int64" />
+      <Parameter Name="param10" Mode="In" Type="Int64" />
+      <Parameter Name="param11" Mode="In" Type="Int64" />
+      <Parameter Name="param12" Mode="In" Type="Int64" />
+      <Parameter Name="textParam1" Mode="In" Type="String" />
+      <Parameter Name="textParam2" Mode="In" Type="String" />
+      <Parameter Name="reason" Mode="In" Type="Int16" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

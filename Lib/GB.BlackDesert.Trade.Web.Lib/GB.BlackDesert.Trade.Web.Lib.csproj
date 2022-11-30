@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll-->
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5DF25510-BAC4-4C10-A3B6-15BB1E13EC00}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>GB.BlackDesert.Trade.Web.Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>GB.BlackDesert.Trade.Web.Lib</RootNamespace>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.7.100.25\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.S3.3.7.101.25\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net.Ext.Json, Version=2.0.10.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.Ext.Json.2.0.10.1\lib\net452\log4net.Ext.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="System\ObjectExtensions.cs" />
+    <Compile Include="Aes.cs" />
+    <Compile Include="clsCrypt.cs" />
+    <Compile Include="Decryptor.cs" />
+    <Compile Include="DecryptTransformer.cs" />
+    <Compile Include="Encryptor.cs" />
+    <Compile Include="EncryptionAlgorithm.cs" />
+    <Compile Include="EncryptTransformer.cs" />
+    <Compile Include="SecurityLib.cs" />
+    <Compile Include="SecurityMgr.cs" />
+    <Compile Include="Properties\Resources.cs" />
+    <Compile Include="Properties\Settings.cs" />
+    <Compile Include="Util\AESCrypto.cs" />
+    <Compile Include="Util\CacheService.cs" />
+    <Compile Include="Util\CookieLib.cs" />
+    <Compile Include="Util\HttpClientUtil.cs" />
+    <Compile Include="Util\PushUtil.cs" />
+    <Compile Include="Util\LogDetailFlag.cs" />
+    <Compile Include="Util\LogMessageModel.cs" />
+    <Compile Include="Util\LogUtil.cs" />
+    <Compile Include="Models\AuthenticationInfo.cs" />
+    <Compile Include="Models\PakageAuthInfo.cs" />
+    <Compile Include="Models\LogEnableModel.cs" />
+    <Compile Include="Models\MaintenanceRequestModel.cs" />
+    <Compile Include="Models\MaintensnceDetailModel.cs" />
+    <Compile Include="Models\MaintenanceResponseModel.cs" />
+    <Compile Include="Models\MaintenanceContentMasterModel.cs" />
+    <Compile Include="Models\TradeMarketServerInfo.cs" />
+    <Compile Include="Models\TradeMarketListAccumulateTrade.cs" />
+    <Compile Include="Models\TradeMarketListAccumulateTradeByStock.cs" />
+    <Compile Include="Models\BiddingPriceList.cs" />
+    <Compile Include="Models\BiddingGroupPriceList.cs" />
+    <Compile Include="Models\TickCountList.cs" />
+    <Compile Include="Models\TradeMarketMainGroupList.cs" />
+    <Compile Include="Models\TickCountCommon.cs" />
+    <Compile Include="Models\UserInfomationModel.cs" />
+    <Compile Include="Models\UserInfomationResultModel.cs" />
+    <Compile Include="Models\MarketValue.cs" />
+    <Compile Include="Models\MarketHotValue.cs" />
+    <Compile Include="Models\MarketWaitValue.cs" />
+    <Compile Include="Models\MarketItemInfo.cs" />
+    <Compile Include="Models\MarketGroupInfo.cs" />
+    <Compile Include="Models\DetailInfo.cs" />
+    <Compile Include="Models\MarketHotItemInfo.cs" />
+    <Compile Include="Models\CommonModel.cs" />
+    <Compile Include="Models\CommonResult.cs" />
+    <Compile Include="Models\CommonDBResult`1.cs" />
+    <Compile Include="Models\CommandList.cs" />
+    <Compile Include="Models\HttpRequestResult.cs" />
+    <Compile Include="Models\HttpRequestModel.cs" />
+    <Compile Include="Models\ProxySettingModel.cs" />
+    <Compile Include="Models\waitItemModel.cs" />
+    <Compile Include="Models\SendAlarmModel.cs" />
+    <Compile Include="Models\AlarmTradeMarketModel.cs" />
+    <Compile Include="Models\CustomTimeModel.cs" />
+    <Compile Include="Models\CheckOtpParamModel.cs" />
+    <Compile Include="Models\OtpAuthModel.cs" />
+    <Compile Include="Models\TradeMarketListLoadItemInfo.cs" />
+    <Compile Include="Models\TradeMarketList.cs" />
+    <Compile Include="Models\TradeMarketListDetail.cs" />
+    <Compile Include="Models\TradeMarketListDetailByCategory.cs" />
+    <Compile Include="Models\TradeMarketItemInfo.cs" />
+    <Compile Include="Models\TradeMarketVariedPriceInfo.cs" />
+    <Compile Include="Models\TradeMarketVariedTradeCountInfo.cs" />
+    <Compile Include="Models\MarketPriceGroup.cs" />
+    <Compile Include="Manager\AuthenticateManager.cs" />
+    <Compile Include="Manager\TradeMarketBiddingInfo.cs" />
+    <Compile Include="Manager\TradeMarketBiddingCount.cs" />
+    <Compile Include="Manager\BiddingInfoManager.cs" />
+    <Compile Include="Manager\CategoryInfoManager.cs" />
+    <Compile Include="Manager\EnumMgr.cs" />
+    <Compile Include="Manager\FamilySkillManager.cs" />
+    <Compile Include="Manager\HistoryManager.cs" />
+    <Compile Include="Manager\ServerControlManager.cs" />
+    <Compile Include="Manager\ServerLogManager.cs" />
+    <Compile Include="Manager\StringManager.cs" />
+    <Compile Include="Manager\GroupPriceChanger.cs" />
+    <Compile Include="Manager\GroupPriceChangerManager.cs" />
+    <Compile Include="Manager\GroupWeaponPriceChanger.cs" />
+    <Compile Include="Manager\GroupWeaponPriceList.cs" />
+    <Compile Include="Manager\GroupWeaponPriceChangerManager.cs" />
+    <Compile Include="Manager\TickCountManager.cs" />
+    <Compile Include="Manager\Recycle.cs" />
+    <Compile Include="Manager\WaitSellItem.cs" />
+    <Compile Include="Manager\UpdateTickCount.cs" />
+    <Compile Include="Manager\UpdateSystemCount.cs" />
+    <Compile Include="Manager\FetchCommand.cs" />
+    <Compile Include="Manager\SyncNoticeItemList.cs" />
+    <Compile Include="Manager\UpdateCurrentPrice.cs" />
+    <Compile Include="Manager\TimerManager.cs" />
+    <Compile Include="Manager\VariedTradeCountManager.cs" />
+    <Compile Include="Manager\WebDBManager.cs" />
+    <Compile Include="Manager\WorldMarketItemInfoManager.cs" />
+    <Compile Include="Manager\WorldMarketServantInfoManager.cs" />
+    <Compile Include="Manager\WorldMarketServerInfoManager.cs" />
+    <Compile Include="Manager\stockInfoListWrapper.cs" />
+    <Compile Include="Manager\ItemInfoManager.cs" />
+    <Compile Include="Manager\VariedPriceInfoManager.cs" />
+    <Compile Include="Manager\WorldMarketOptionManager.cs" />
+    <Compile Include="Manager\ConstantMgr.cs" />
+    <Compile Include="Manager\Interface\StockInfoManger.cs" />
+    <Compile Include="Manager\Auth\Oauth2CallBackModel.cs" />
+    <Compile Include="Manager\Auth\AccessTokenParamModel.cs" />
+    <Compile Include="Manager\Auth\AccessTokenResultModel.cs" />
+    <Compile Include="Manager\Auth\GetSessionInfoParamModel.cs" />
+    <Compile Include="Manager\Auth\GetSessionInfoResultModel.cs" />
+    <Compile Include="Manager\Auth\UseRefreshtokenModel.cs" />
+    <Compile Include="Manager\Auth\GetSessionAuthTicketParamModel.cs" />
+    <Compile Include="Manager\Auth\GetSessionAuthTicketResultModel.cs" />
+    <Compile Include="Manager\Auth\AuthModel.cs" />
+    <Compile Include="Manager\Auth\PAAuthModel.cs" />
+    <Compile Include="Manager\Auth\PearlAppTokenModel.cs" />
+    <Compile Include="Manager\Auth\PearAppSessionInfoModel.cs" />
+    <Compile Include="Manager\Auth\CheckAccessTokenModel.cs" />
+    <Compile Include="Manager\Auth\CheckAccessToeknParamModel.cs" />
+    <Compile Include="Manager\Auth\CheckAccessToeknResultModel.cs" />
+    <Compile Include="Manager\Auth\CheckPakageParamModel.cs" />
+    <Compile Include="Manager\Auth\CheckPakageResultModel.cs" />
+    <Compile Include="Manager\Auth\CommonResultModel.cs" />
+    <Compile Include="Manager\Auth\GetGameAccessModel.cs" />
+    <Compile Include="Manager\Auth\GetWalletInfoModel.cs" />
+    <Compile Include="Manager\Auth\OtpCheckParamModel.cs" />
+    <Compile Include="Manager\Auth\OtpAuthParamModel.cs" />
+    <Compile Include="DB\BaseRepository.cs" />
+    <Compile Include="DB\TradeGameDB.cs" />
+    <Compile Include="DB\TradeLogDB.cs" />
+    <Compile Include="DB\TradeWebDB.cs" />
+    <Compile Include="DB\TradeWORLDDB.cs" />
+    <Compile Include="DB\uspBuyablePersonalTradeList_Result.cs" />
+    <Compile Include="DB\uspFamilySKillListFromWorldMarket_Result.cs" />
+    <Compile Include="DB\uspFindUser_Result.cs" />
+    <Compile Include="DB\uspGetLogWriteEnable_Result.cs" />
+    <Compile Include="DB\uspGetMarketPriceInfo_Result.cs" />
+    <Compile Include="DB\uspGetShutDownCheckUseWeb_Result.cs" />
+    <Compile Include="DB\uspGetShutDownInfo_Result.cs" />
+    <Compile Include="DB\uspListBiddingInfo_Result.cs" />
+    <Compile Include="DB\uspListBiddingPrice_Result.cs" />
+    <Compile Include="DB\uspListFailPayload_Result.cs" />
+    <Compile Include="DB\uspListGroupBiddingPrice_Result.cs" />
+    <Compile Include="DB\uspListNoticeItem_Result.cs" />
+    <Compile Include="DB\uspListTickCount_Result.cs" />
+    <Compile Include="DB\uspListUserBiddingBuy_Result.cs" />
+    <Compile Include="DB\uspListUserBiddingSell_Result.cs" />
+    <Compile Include="DB\uspListWaitBiddingSell_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketAccumulateTradeByStock_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketAccumulateTrade_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketByMainGroup_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketCurrentPrice_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketDetailByCategory_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketDetail_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketHot_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketMyWallet_Result.cs" />
+    <Compile Include="DB\uspListWorldMarketWait_Result.cs" />
+    <Compile Include="DB\uspListWorldMarket_Result.cs" />
+    <Compile Include="DB\uspListWorldTradeMarketCommand_Result.cs" />
+    <Compile Include="DB\uspLoadWorldMarketInfo_Result.cs" />
+    <Compile Include="DB\uspPersonalTradeList_Result.cs" />
+    <Compile Include="DB\uspSearchListWorldMarket_Result.cs" />
+    <Compile Include="DB\uspWorldMarketWaitNoticeList_Result.cs" />
+    <Compile Include="Common\AmazonS3.cs" />
+    <Compile Include="Common\AWSS3ObjectList.cs" />
+    <Compile Include="Common\CommonDDLB.cs" />
+    <Compile Include="Common\CommonModule.cs" />
+    <Compile Include="Common\ErrorNo.cs" />
+    <Compile Include="Common\WebResultNo.cs" />
+    <Compile Include="Common\ServerType.cs" />
+    <Compile Include="Common\ServerLoading.cs" />
+    <Compile Include="Common\ServerLogType.cs" />
+    <Compile Include="Common\KeyType.cs" />
+    <Compile Include="Common\CommonType.cs" />
+    <Compile Include="Common\FluctuationType.cs" />
+    <Compile Include="Common\StopReasonType.cs" />
+    <Compile Include="Common\SpecialKey.cs" />
+    <Compile Include="Common\ContentsMasterType.cs" />
+    <Compile Include="Common\ViewAuthType.cs" />
+    <Compile Include="Common\RingBuffType.cs" />
+    <Compile Include="Common\TradeModule.cs" />
+    <Compile Include="Common\WorldMarketBase.cs" />
+    <Compile Include="Common\WorldMarketLog.cs" />
+    <Compile Include="Common\Compression\CompressionModule.cs" />
+    <Compile Include="Common\Compression\Huffman.cs" />
+    <Compile Include="Common\Compression\PQ.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DB\TradeGameDB.csdl" />
+    <EmbeddedResource Include="DB\TradeGameDB.msl" />
+    <EmbeddedResource Include="DB\TradeGameDB.ssdl" />
+    <EmbeddedResource Include="DB\TradeLogDB.csdl" />
+    <EmbeddedResource Include="DB\TradeLogDB.msl" />
+    <EmbeddedResource Include="DB\TradeLogDB.ssdl" />
+    <EmbeddedResource Include="DB\TradeWebDB.csdl" />
+    <EmbeddedResource Include="DB\TradeWebDB.msl" />
+    <EmbeddedResource Include="DB\TradeWebDB.ssdl" />
+    <EmbeddedResource Include="DB\TradeWorldDB.csdl" />
+    <EmbeddedResource Include="DB\TradeWorldDB.msl" />
+    <EmbeddedResource Include="DB\TradeWorldDB.ssdl" />
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.S3.3.7.101.25\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

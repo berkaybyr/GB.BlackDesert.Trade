@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeWORLDDB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TradeWORLDDB" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="uspSetWorldTradeMarketCommandResult">
+      <Parameter Name="commandNo" Mode="In" Type="Int64" />
+      <Parameter Name="status" Mode="In" Type="Byte" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldTradeMarketCommand" ReturnType="Collection(TradeWORLDDB_Model.uspListWorldTradeMarketCommand_Result)">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetUserId">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="userId" Mode="InOut" Type="String" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+      <Parameter Name="resultMsg" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspIsGameMaster">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="isGameMaster" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetSecondPwd" ReturnType="Collection(String)">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspAccessByTradeWeb">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="serviceType" Mode="InOut" Type="Int32" />
+      <Parameter Name="worldNo" Mode="InOut" Type="Int32" />
+      <Parameter Name="isAdmissionToSpeedServer" Mode="InOut" Type="Byte" />
+      <Parameter Name="isUpdatePackageBuff" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspCheckAuthKey">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="certifeidKey" Mode="In" Type="String" />
+      <Parameter Name="requestDate" Mode="In" Type="DateTime" />
+      <Parameter Name="serviceType" Mode="InOut" Type="Int32" />
+      <Parameter Name="worldNo" Mode="InOut" Type="Int32" />
+      <Parameter Name="userNickName" Mode="InOut" Type="String" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspClearTradeAuthHistory">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspCheckSecondPwd">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="secondPW" Mode="In" Type="String" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="uspListWorldTradeMarketCommand_Result">
+    <Property Type="Int64" Name="C_commandNo" Nullable="true" />
+    <Property Type="DateTime" Name="C_registerDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="C_commandString" Nullable="true" />
+    <Property Type="Byte" Name="C_status" Nullable="true" />
+  </ComplexType>
+</Schema>
