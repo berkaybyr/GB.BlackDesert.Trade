@@ -17,7 +17,6 @@ namespace GB.BlackDesert.Trade.Web.Lib
 {
     public class SecurityLib : SecurityMgr
     {
-        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public string Encrypt(string strMsg, SecurityMgr.Enum enumType)
         {
             switch (enumType)

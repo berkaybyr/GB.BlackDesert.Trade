@@ -154,6 +154,7 @@
     <Compile Include="Util\CacheService.cs" />
     <Compile Include="Util\CookieLib.cs" />
     <Compile Include="Util\HttpClientUtil.cs" />
+    <Compile Include="Util\ContextAccess.cs" />
     <Compile Include="Util\PushUtil.cs" />
     <Compile Include="Util\LogDetailFlag.cs" />
     <Compile Include="Util\LogMessageModel.cs" />

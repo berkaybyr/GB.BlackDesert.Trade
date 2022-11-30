@@ -15,6 +15,11 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
     [Route("[controller]/[action]")]
     public class GameProcessController : Controller
     {
+        public GameProcessController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         private CommandProcess _commnadProcess = new CommandProcess();
         private static int currentIndex;
 

@@ -20,6 +20,11 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
     [Route("[controller]/[action]")]
     public class TradeMarketController : Controller
     {
+        public TradeMarketController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         [HttpPost]
         private CommonResult CheckAuthKeyToView(
           long userNo,

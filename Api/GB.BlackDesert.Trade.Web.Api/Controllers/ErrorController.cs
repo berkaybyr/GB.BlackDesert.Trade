@@ -7,6 +7,7 @@
 using GB.BlackDesert.Trade.Web.Api.Models.Base;
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
+using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GB.BlackDesert.Trade.Web.Api.Controllers
@@ -15,6 +16,11 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
     [Route("[controller]/[action]")]
     public class ErrorController : Controller
     {
+        public ErrorController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         [HttpGet]
         [Route("/")]
         public IActionResult Error(string param)

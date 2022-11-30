@@ -85,9 +85,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         public static readonly string _authCookieName = ConfigurationManager.AppSettings["authCookie"] ?? string.Empty;
         public static readonly string _branches = ConfigurationManager.AppSettings["Branches"];
         public static readonly string _platform = ConfigurationManager.AppSettings["PlatForm"] != null ? ConfigurationManager.AppSettings["PlatForm"] : "BDO";
-
         public static string _accountDomain => ConfigurationManager.AppSettings["accountDomain"] + "/" + CommonModule.GetCulture();
-
         public static string GetDefaultLanguage => CommonModule.GetCulture() ?? CommonModule.getBrowserCulture();
 
         //public static string GetDataFilePath() => ConstantMgr._tradeXMLDomain + "/Common/xml";

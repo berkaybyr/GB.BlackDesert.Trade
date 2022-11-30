@@ -21,6 +21,11 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
     //[Route("[controller]/[action]")]
     public class AuthCallbackController : Controller
     {
+        public AuthCallbackController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         [HttpGet]
         public ActionResult Index(string callbackParam)
         {

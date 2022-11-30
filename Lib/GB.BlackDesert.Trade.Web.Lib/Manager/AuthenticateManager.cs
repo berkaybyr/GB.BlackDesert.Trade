@@ -19,10 +19,9 @@ using System.Text;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Manager
 {
-    public class AuthenticateManager
+    public static class AuthenticateManager
     {
 
-        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public static ServerType _servcerType = ServerType.eCount;
 
         public static bool IsAutheticated
@@ -58,7 +57,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<AuthenticationInfo>(AuthenticationInfo), SecurityMgr.Enum.Des);
-                httpContext.Session.Set(ConstantMgr._authCookieName,Encoding.Default.GetBytes(str));
+                ContextAccess.Current.Session.Set(ConstantMgr._authCookieName,Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -72,7 +71,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<GetSessionInfoResultModel>(sessionInfo), SecurityMgr.Enum.AES);
-                httpContext.Session.Set(ConstantMgr._authCookieName, Encoding.Default.GetBytes(str));
+                ContextAccess.Current.Session.Set(ConstantMgr._authCookieName, Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -83,8 +82,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         public static void RemoveAuthTicket()
         {
 
-            httpContext.Session.Remove(ConstantMgr._authCookieName);
-            httpContext.Session.Clear();
+            ContextAccess.Current.Session.Remove(ConstantMgr._authCookieName);
+            ContextAccess.Current.Session.Clear();
             CookieLib.Delete(ConstantMgr._cookieDomain, "ASP.NET_SessionId");
         }
 
@@ -96,7 +95,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string str = string.Empty;
             try
             {
-                if (httpContext.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
+                if (ContextAccess.Current.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                 {
 
                     str = Encoding.Default.GetString(bytes);
@@ -136,9 +135,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             bool flag = false;
             try
             {
-                if (!httpContext.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
+                if (!ContextAccess.Current.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                     return (AuthenticationInfo)null;
-                string absolutePath = httpContext.Request.Path;
+                string absolutePath = ContextAccess.Current.Request.Path;
                 var sessionVal = Encoding.Default.GetString(bytes);
                 GetSessionInfoResultModel json1 = CommonModule.DeserializeOjectToJson<GetSessionInfoResultModel>(new SecurityLib().Decrypt(sessionVal, SecurityMgr.Enum.AES));
                 DateTime dateTime1 = Convert.ToDateTime(json1._expireDate);
@@ -152,7 +151,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     }
                     if (dateTime1.AddMinutes(-10.0) < customTime && customTime < dateTime1)
                     {
-                        absolutePath = httpContext.Request.Path;
+                        absolutePath = ContextAccess.Current.Request.Path;
                         UseRefreshtokenModel deserializeObject = new UseRefreshtokenModel();
                         deserializeObject._refreshtoken = json1._refreshToken;
                         HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._apiBaseOauthUrl + "/Authorize/RefreshToken", CommonModule.SerializeObjectToJsonString<UseRefreshtokenModel>(deserializeObject), "POST", "application/json"));
@@ -350,10 +349,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         //{
         //    if (string.IsNullOrEmpty(url))
         //        return false;
-        //    foreach (string allKey in httpContext.Application.AllKeys)
+        //    foreach (string allKey in ContextAccess.Current.Application.AllKeys)
         //    {
-        //        int length = httpContext.Application[allKey].ToString().Length;
-        //        if (url.Length >= length && url.Substring(0, length) == httpContext.Application[allKey].ToString())
+        //        int length = ContextAccess.Current.Application[allKey].ToString().Length;
+        //        if (url.Length >= length && url.Substring(0, length) == ContextAccess.Current.Application[allKey].ToString())
         //            return true;
         //    }
         //    return false;
@@ -381,7 +380,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 var str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<PakageAuthInfo>(pakageAuthInfo), SecurityMgr.Enum.Des); ;
                 var bytes = Encoding.Default.GetBytes(str);
-                httpContext.Session.Set("PakageAuth", bytes); 
+                ContextAccess.Current.Session.Set("PakageAuth", bytes); 
             }
             catch (Exception ex)
             {
@@ -395,7 +394,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string str = string.Empty;
             try
             {
-                if (httpContext.Session.TryGetValue("PakageAuth", out var bytes))
+                if (ContextAccess.Current.Session.TryGetValue("PakageAuth", out var bytes))
                 {
                     str = Encoding.Default.GetString(bytes);
                     if (!string.IsNullOrEmpty(str))

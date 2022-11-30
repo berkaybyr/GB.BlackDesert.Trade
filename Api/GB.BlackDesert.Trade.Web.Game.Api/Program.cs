@@ -1,3 +1,6 @@
+using GB.BlackDesert.Trade.Web.Game.Api;
+using GB.BlackDesert.Trade.Web.Lib.Util;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +20,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+LogUtil.ConfigureLoggerConfigDebug("Game");
 
 app.UseHttpsRedirection();
 
@@ -24,5 +28,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//GameApplication.InitializeOnceAsync();
+GameApplication.InitializeOnce();
 app.Run();

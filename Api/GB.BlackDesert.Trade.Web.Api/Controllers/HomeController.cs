@@ -20,11 +20,17 @@ using System.Text;
 namespace GB.BlackDesert.Trade.Web.Api.Controllers
 {
 
+
     [WebFilter]
     [ApiController]
     [Route("[controller]/[action]")]
     public class HomeController : BaseController
     {
+        public HomeController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         private const int CACHE_SECOND = 1;
 
         [Route("")]

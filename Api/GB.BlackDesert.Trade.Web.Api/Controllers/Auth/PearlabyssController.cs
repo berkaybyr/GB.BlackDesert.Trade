@@ -19,6 +19,11 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
     //[Route("[controller]/[action]")]
     public class PearlabyssController : BaseController
     {
+        public PearlabyssController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         private string _path = "/Pearlabyss";
 
         [HttpGet]

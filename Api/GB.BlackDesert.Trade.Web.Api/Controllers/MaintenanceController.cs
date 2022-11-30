@@ -14,6 +14,10 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
 {
     public class MaintenanceController : Controller
     {
+        public MaintenanceController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
         public ActionResult Index() => (ActionResult)this.View();
 
         public ActionResult WebMaintanace()

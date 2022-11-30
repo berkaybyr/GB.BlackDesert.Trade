@@ -1,10 +1,17 @@
 ﻿using GB.BlackDesert.Trade.Web.Lib.Manager;
+using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GB.BlackDesert.Trade.Web.Api.Controllers
 {
     public class IntroController : BaseController
     {
+
+        public IntroController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
+
         [HttpGet]
         public IActionResult Index()
         {

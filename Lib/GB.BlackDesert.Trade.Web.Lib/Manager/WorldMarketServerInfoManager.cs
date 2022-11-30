@@ -94,6 +94,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                             return -3;
                                         }
                                         this._serverInfoList.Add(marketServerInfo._ip, marketServerInfo);
+#if DEBUG
+                                        var first = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(x => x.AddressFamily == AddressFamily.InterNetwork).ToString();
+                                        var debugServ = marketServerInfo;
+                                        debugServ._ip = first;
+                                        this._serverInfoList.Add(debugServ._ip, debugServ);
+
+#endif
                                         LogUtil.WriteLog(string.Format("[XML INFO] serverInfoInsert : Ip{0} ", (object)marketServerInfo._ip.ToString()), "INFO");
                                     }
                                 }
@@ -130,7 +137,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         public List<string> getIpList()
         {
             List<string> ipList = new List<string>();
-            foreach (IPAddress address in Dns.GetHostEntry(Dns.GetHostName()).AddressList)
+            var addresses = Dns.GetHostEntry(Dns.GetHostName()).AddressList;
+            foreach (IPAddress address in addresses)
             {
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                     ipList.Add(address.ToString());

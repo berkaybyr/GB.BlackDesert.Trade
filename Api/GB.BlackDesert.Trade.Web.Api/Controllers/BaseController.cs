@@ -13,6 +13,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
 {
     public class BaseController : Controller
     {
+
         public AuthenticationInfo _userinfo = AuthenticateManager.GetAuthInfo();
 
         public UserInfomationModel AuthUserInfo

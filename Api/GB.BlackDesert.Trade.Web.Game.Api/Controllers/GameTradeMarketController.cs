@@ -16,6 +16,10 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
     [Route("[controller]/[action]")]
     public class GameTradeMarketController : BaseController
     {
+        public GameTradeMarketController(IHttpContextAccessor accessor)
+        {
+            ContextAccess.Configure(accessor);
+        }
         private static DateTime DefaultTime = new DateTime(1970, 1, 1, 0, 0, 0);
 
         [HttpPost]

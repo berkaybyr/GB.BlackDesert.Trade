@@ -1,3 +1,6 @@
+using GB.BlackDesert.Trade.Web.Lib.Util;
+using GB.BlackDesert.Trade.Web.Process.Api;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,11 +21,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+LogUtil.ConfigureLoggerConfigDebug("Process");
+
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-//ProcessApplication.InitializeOnceAsync();
+ProcessApplication.InitializeOnce();
 app.Run();

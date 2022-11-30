@@ -7,6 +7,7 @@
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
@@ -14,10 +15,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
 {
     public static class CookieLib
     {
-        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public static void SaveCookie(string cookieName, string cookieValue)
         {
-            httpContext.Response.Cookies.Append(cookieName, cookieValue, new CookieOptions
+            ContextAccess.Current.Response.Cookies.Append(cookieName, cookieValue, new CookieOptions
             {
                 Domain = ConstantMgr._cookieDomain,
                 HttpOnly = true,
@@ -32,7 +32,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
           string strCookieValue)
         {
 
-            httpContext.Response.Cookies.Append(strCookieName, strCookieValue, new CookieOptions
+            ContextAccess.Current.Response.Cookies.Append(strCookieName, strCookieValue, new CookieOptions
             {
                 Domain = strCookieDomain,
                 Path = "/",
@@ -44,17 +44,25 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
 
         public static string GetCookie(string _cookieName)
         {
-            var empty = string.Empty;
-            var cookies = httpContext.Request.Cookies[_cookieName];
-            if (cookies is null || cookies.Length == 0)
-                empty = httpContext.Request.Cookies[_cookieName].ToString();
-            return empty;
+            try
+            {
+                var empty = string.Empty;
+                var cookies = ContextAccess.Current.Request.Cookies[_cookieName];
+                if (cookies is null || cookies.Length == 0)
+                    empty = ContextAccess.Current.Request.Cookies[_cookieName].ToString();
+                return empty;
+            }
+            catch(Exception ex)
+            {
+                LogUtil.WriteLog("[Cookie Exception] HttpContext Exception: " + ex,"WARN");
+                return string.Empty;
+            }
         }
 
         public static void Delete(string domain, string name)
         {
 
-            httpContext.Response.Cookies.Delete(name, new CookieOptions
+            ContextAccess.Current.Response.Cookies.Delete(name, new CookieOptions
             {
                 Domain = domain,
                 Path = "/",
