@@ -24,7 +24,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         private static int currentIndex;
 
         [HttpPost]
-        public JsonResult SetMarketItemProcess()
+        public JsonResult SetMarketItemProcess([FromBody] GameTradeMarketItemInfo tradeMarketItemInfo2)
         {
             string empty1 = string.Empty;
             long num = 0;
@@ -45,23 +45,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)tradeMarketPayload);
             }
             string empty2 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]SetMarketItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                tradeMarketPayload.result.resultCode = 3;
-                tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-                return this.Json((object)tradeMarketPayload);
-            }
-            GameTradeMarketItemInfo tradeMarketItemInfo2 = JsonConvert.DeserializeObject<GameTradeMarketItemInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]SetMarketItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    tradeMarketPayload.result.resultCode = 3;
+            //    tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
+            //    return this.Json((object)tradeMarketPayload);
+            //}
+            //GameTradeMarketItemInfo tradeMarketItemInfo2 = JsonConvert.DeserializeObject<GameTradeMarketItemInfo>(end);
             if (tradeMarketItemInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]SetMarketItemProcess({0}) - pushItemModel is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]SetMarketItemProcess({0}) - pushItemModel is null", (object)tradeMarketItemInfo2), "WARN");
                 tradeMarketPayload.result.resultCode = 5;
                 tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)tradeMarketPayload);
@@ -75,14 +75,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     tradeMarketItemInfo3 = ItemInfoManager.This().getInfo(tradeMarketItemInfo2.mainKey, tradeMarketItemInfo2.subKey);
                     if (!tradeMarketItemInfo3.isValid() && 1 != tradeMarketItemInfo2.mainKey)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         tradeMarketPayload.result.resultCode = 8;
                         tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                         return this.Json((object)tradeMarketPayload);
                     }
                     if (tradeMarketItemInfo3._maxStackCount < tradeMarketItemInfo2.count && 1 != tradeMarketItemInfo2.mainKey)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) ItemStack is Invalid", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) ItemStack is Invalid", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         tradeMarketPayload.result.resultCode = 16;
                         tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack");
                         return this.Json((object)tradeMarketPayload);
@@ -93,21 +93,21 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     tradeMarketItemInfo3 = ItemInfoManager.This().getServantInfo(tradeMarketItemInfo2.mainKey, tradeMarketItemInfo2.subKey);
                     if (!tradeMarketItemInfo3.isValid())
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) Not Exist ServantInfo", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}, {2}) Not Exist ServantInfo", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         tradeMarketPayload.result.resultCode = 8;
                         tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                         return this.Json((object)tradeMarketPayload);
                     }
                     if (tradeMarketItemInfo3._maxStackCount < tradeMarketItemInfo2.count)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) ServantInfo({1}, {2}) ItemStack is Invalid", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) ServantInfo({1}, {2}) ItemStack is Invalid", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         tradeMarketPayload.result.resultCode = 16;
                         tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack");
                         return this.Json((object)tradeMarketPayload);
                     }
                     break;
                 default:
-                    LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}) Not Exist keyType", (object)end, (object)tradeMarketItemInfo2.keyType), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]SetMarketItemProcess({0}) itemInfo({1}) Not Exist keyType", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.keyType), "WARN");
                     tradeMarketPayload.result.resultCode = 8;
                     tradeMarketPayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)tradeMarketPayload);
@@ -129,7 +129,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         tradeMarketPayload.result.resultCode = int32;
                         tradeMarketPayload.result.resultMsg = str;
                         if (!Convert.ToBoolean(isNotError.Value))
-                            LogUtil.WriteLog(string.Format("[DB Error]SetMarketItemProcess - uspPrepareDepositToWorldMarket({0}/{1}), rv({2})", (object)end, (object)num, (object)int32), "WARN");
+                            LogUtil.WriteLog(string.Format("[DB Error]SetMarketItemProcess - uspPrepareDepositToWorldMarket({0}/{1}), rv({2})", (object)tradeMarketItemInfo2, (object)num, (object)int32), "WARN");
                         else
                             tradeMarketPayload.result.resultCode = 100;
                         return this.Json((object)tradeMarketPayload);
@@ -138,7 +138,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception] SetMarketItemProcess({0}) - uspPrepareDepositToWorldMarket() Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception] SetMarketItemProcess({0}) - uspPrepareDepositToWorldMarket() Exception : {1}", (object)tradeMarketItemInfo2, (object)ex.ToString()), "ERROR");
                 tradeMarketPayload.result.resultCode = 1;
                 return this.Json((object)tradeMarketPayload);
             }
@@ -159,7 +159,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult RegisterMarketItemProcess()
+        public JsonResult RegisterMarketItemProcess([FromBody] GameTradeMarketIncludePayload marketIncludePayload2)
         {
             string empty1 = string.Empty;
             GameTradeMarketIncludePayload marketIncludePayload1 = new GameTradeMarketIncludePayload();
@@ -178,23 +178,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)marketIncludePayload1);
             }
             string empty2 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]RegisterMarketItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                marketIncludePayload1.result.resultCode = 3;
-                marketIncludePayload1.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-                return this.Json((object)marketIncludePayload1);
-            }
-            GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]RegisterMarketItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    marketIncludePayload1.result.resultCode = 3;
+            //    marketIncludePayload1.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
+            //    return this.Json((object)marketIncludePayload1);
+            //}
+            //GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
             if (marketIncludePayload2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]RegisterMarketItemProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]RegisterMarketItemProcess({0}) - model is null", (object)marketIncludePayload2), "WARN");
                 return this.Json((object)new GameTradeMarketIncludePayload()
                 {
                     result = {
@@ -253,7 +253,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                             beforeCount1 = 0L,
                             afterCount1 = 0L
                         }, marketIncludePayload2.payload, (long)int32, marketIncludePayload2.param0, marketIncludePayload2.param1, marketIncludePayload2.param2, marketIncludePayload2.param3, marketIncludePayload2.param4, textParam1: textParam1);
-                        LogUtil.WriteLog(string.Format("[DB Error]RegisterMarketItemProcess() - uspProcessDepositToWorldMarket({0}), rv({1})", (object)end, (object)int32), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]RegisterMarketItemProcess() - uspProcessDepositToWorldMarket({0}), rv({1})", (object)marketIncludePayload2, (object)int32), "WARN");
                         marketIncludePayload2.result.resultCode = int32;
                         marketIncludePayload2.result.resultMsg = textParam1;
                         return this.Json((object)marketIncludePayload2);
@@ -272,7 +272,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]RegisterMarketItemProcess() - uspProcessDepositToWorldMarket({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]RegisterMarketItemProcess() - uspProcessDepositToWorldMarket({0}) Exception : {1}", (object)marketIncludePayload2, (object)ex.ToString()), "ERROR");
                 marketIncludePayload2.result.resultCode = 1;
                 return this.Json((object)marketIncludePayload2);
             }
@@ -294,7 +294,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult PreWithdrawItemProcess()
+        public JsonResult PreWithdrawItemProcess([FromBody] GameTradeMarketItemInfo tradeMarketItemInfo2)
         {
             string empty1 = string.Empty;
             GameTradeMarketItemInfo tradeMarketItemInfo1 = new GameTradeMarketItemInfo();
@@ -314,23 +314,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)marketIncludePayload);
             }
             string empty2 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]PreWithdrawItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                marketIncludePayload.result.resultCode = 3;
-                marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-                return this.Json((object)marketIncludePayload);
-            }
-            GameTradeMarketItemInfo tradeMarketItemInfo2 = JsonConvert.DeserializeObject<GameTradeMarketItemInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]PreWithdrawItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    marketIncludePayload.result.resultCode = 3;
+            //    marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
+            //    return this.Json((object)marketIncludePayload);
+            //}
+            //GameTradeMarketItemInfo tradeMarketItemInfo2 = JsonConvert.DeserializeObject<GameTradeMarketItemInfo>(end);
             if (tradeMarketItemInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]PreWithdrawItemProcess({0}) - popItemModel is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]PreWithdrawItemProcess({0}) - popItemModel is null", (object)tradeMarketItemInfo2), "WARN");
                 marketIncludePayload.result.resultCode = 5;
                 marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)marketIncludePayload);
@@ -344,14 +344,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     tradeMarketItemInfo3 = ItemInfoManager.This().getInfo(tradeMarketItemInfo2.mainKey, tradeMarketItemInfo2.subKey);
                     if (!tradeMarketItemInfo3.isValid() && 1 != tradeMarketItemInfo2.mainKey)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         marketIncludePayload.result.resultCode = 8;
                         marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                         return this.Json((object)marketIncludePayload);
                     }
                     if (tradeMarketItemInfo3._maxStackCount < tradeMarketItemInfo2.count && 1 != tradeMarketItemInfo2.mainKey)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) ItemStack is Invalid", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) ItemStack is Invalid", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         marketIncludePayload.result.resultCode = 16;
                         marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack");
                         return this.Json((object)marketIncludePayload);
@@ -362,21 +362,21 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     tradeMarketItemInfo3 = ItemInfoManager.This().getServantInfo(tradeMarketItemInfo2.mainKey, tradeMarketItemInfo2.subKey);
                     if (!tradeMarketItemInfo3.isValid())
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) Not Exist ServantInfo", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}, {2}) Not Exist ServantInfo", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         marketIncludePayload.result.resultCode = 8;
                         marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                         return this.Json((object)marketIncludePayload);
                     }
                     if (tradeMarketItemInfo3._maxStackCount < tradeMarketItemInfo2.count)
                     {
-                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) ServantInfo({1}, {2}) ItemStack is Invalid", (object)end, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
+                        LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) ServantInfo({1}, {2}) ItemStack is Invalid", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.mainKey, (object)tradeMarketItemInfo2.subKey), "WARN");
                         marketIncludePayload.result.resultCode = 16;
                         marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemStack");
                         return this.Json((object)marketIncludePayload);
                     }
                     break;
                 default:
-                    LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}) Not Exist keyType", (object)end, (object)tradeMarketItemInfo2.keyType), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]PreWithdrawItemProcess({0}) itemInfo({1}) Not Exist keyType", (object)tradeMarketItemInfo2, (object)tradeMarketItemInfo2.keyType), "WARN");
                     marketIncludePayload.result.resultCode = 8;
                     marketIncludePayload.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)marketIncludePayload);
@@ -398,7 +398,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     string str = Convert.ToString(symNo.Value);
                     if (int32 != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]PreWithdrawItemProcess - uspPrepareWithdrawFromWorldMarket({0}), rv({1})", (object)end, (object)int32), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]PreWithdrawItemProcess - uspPrepareWithdrawFromWorldMarket({0}), rv({1})", (object)tradeMarketItemInfo2, (object)int32), "WARN");
                         marketIncludePayload.result.resultCode = int32;
                         marketIncludePayload.result.resultMsg = str;
                         return this.Json((object)marketIncludePayload);
@@ -413,7 +413,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]PreWithdrawItemProcess() - uspPrepareWithdrawFromWorldMarket({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]PreWithdrawItemProcess() - uspPrepareWithdrawFromWorldMarket({0}) Exception : {1}", (object)tradeMarketItemInfo2, (object)ex.ToString()), "ERROR");
                 marketIncludePayload.result.resultCode = 1;
                 return this.Json((object)marketIncludePayload);
             }
@@ -433,7 +433,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult CompleteWithdrawItemProcess()
+        public JsonResult CompleteWithdrawItemProcess([FromBody] GameTradeMarketIncludePayload marketIncludePayload2)
         {
             string empty1 = string.Empty;
             GameTradeMarketIncludePayload marketIncludePayload1 = new GameTradeMarketIncludePayload();
@@ -452,23 +452,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)marketIncludePayload1);
             }
             string empty2 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CompleteWithdrawItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                marketIncludePayload1.result.resultCode = 3;
-                marketIncludePayload1.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-                return this.Json((object)marketIncludePayload1);
-            }
-            GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CompleteWithdrawItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    marketIncludePayload1.result.resultCode = 3;
+            //    marketIncludePayload1.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
+            //    return this.Json((object)marketIncludePayload1);
+            //}
+            //GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
             if (marketIncludePayload2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]CompleteWithdrawItemProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CompleteWithdrawItemProcess({0}) - model is null", (object)marketIncludePayload2), "WARN");
                 return this.Json((object)new GameTradeMarketIncludePayload()
                 {
                     result = {
@@ -517,7 +517,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                             beforeCount1 = 0L,
                             afterCount1 = 0L
                         }, marketIncludePayload2.payload, (long)int32, marketIncludePayload2.param0, marketIncludePayload2.param1, marketIncludePayload2.param2, marketIncludePayload2.param3, marketIncludePayload2.param4, textParam1: textParam1);
-                        LogUtil.WriteLog(string.Format("[DB Error]CompleteWithdrawItemProcess - uspProcessWithdrawFromWorldMarket({0}), rv({1})", (object)end, (object)int32), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]CompleteWithdrawItemProcess - uspProcessWithdrawFromWorldMarket({0}), rv({1})", (object)marketIncludePayload2, (object)int32), "WARN");
                         marketIncludePayload2.result.resultCode = int32;
                         marketIncludePayload2.result.resultMsg = textParam1;
                         return this.Json((object)marketIncludePayload2);
@@ -526,7 +526,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]CompleteWithdrawItemProcess() - uspProcessWithdrawFromWorldMarket({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]CompleteWithdrawItemProcess() - uspProcessWithdrawFromWorldMarket({0}) Exception : {1}", (object)marketIncludePayload2, (object)ex.ToString()), "ERROR");
                 marketIncludePayload2.result.resultCode = 1;
                 return this.Json((object)marketIncludePayload2);
             }
@@ -548,7 +548,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult CreateMyWalletProcess()
+        public JsonResult CreateMyWalletProcess([FromBody] GameTradeMarketUserInfo tradeMarketUserInfo2)
         {
             CommonResult commonResult = new CommonResult();
             GameTradeMarketUserInfo tradeMarketUserInfo1 = new GameTradeMarketUserInfo();
@@ -568,23 +568,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             string empty = string.Empty;
             bool flag = false;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CreateMyWalletProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
-            GameTradeMarketUserInfo tradeMarketUserInfo2 = JsonConvert.DeserializeObject<GameTradeMarketUserInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CreateMyWalletProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
+            //GameTradeMarketUserInfo tradeMarketUserInfo2 = JsonConvert.DeserializeObject<GameTradeMarketUserInfo>(end);
             if (tradeMarketUserInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]CreateMyWalletProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CreateMyWalletProcess({0}) - model is null", (object)tradeMarketUserInfo2), "WARN");
                 commonResult.resultCode = 5;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)tradeMarketUserInfo2);
@@ -623,7 +623,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]CreateMyWalletProcess() - uspCreateMyWallet({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]CreateMyWalletProcess() - uspCreateMyWallet({0}) Exception : {1}", (object)tradeMarketUserInfo2, (object)ex.ToString()), "ERROR");
                 commonResult.resultCode = 1;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                 return this.Json((object)commonResult);
@@ -647,7 +647,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult BuyItemProcess()
+        public JsonResult BuyItemProcess([FromBody] GameTradeMarketBuyInfo model)
         {
             CommonResult commonResult1 = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -675,7 +675,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             ObjectParameter registerMoneyCount = new ObjectParameter("registerMoneyCount", typeof(long));
             ObjectParameter boughtCount = new ObjectParameter("boughtCount", typeof(long));
             string empty1 = string.Empty;
-            GameTradeMarketBuyInfo model = new GameTradeMarketBuyInfo();
+            //GameTradeMarketBuyInfo model = new GameTradeMarketBuyInfo();
             if (!ServerControlManager.This().IsLoadComplete())
             {
                 LogUtil.WriteLog("BuyItemProcess Fail is Not Open", "WARN");
@@ -691,23 +691,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult1);
             }
             string empty2 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]BuyItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                commonResult1.resultCode = 2;
-                commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult1);
-            }
-            model = JsonConvert.DeserializeObject<GameTradeMarketBuyInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]BuyItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    commonResult1.resultCode = 2;
+            //    commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult1);
+            //}
+            //model = JsonConvert.DeserializeObject<GameTradeMarketBuyInfo>(end);
             if (model == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]BuyItemProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]BuyItemProcess({0}) - model is null", (object)model), "WARN");
                 commonResult1.resultCode = 5;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)model);
@@ -767,7 +767,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             long num1 = model.buyPrice % unitPrice;
             if (num1 != 0L)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) buyPrice Check Fail unitPrice({1} divide Result {2}", (object)end, (object)unitPrice, (object)num1), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) buyPrice Check Fail unitPrice({1} divide Result {2}", (object)model, (object)unitPrice, (object)num1), "WARN");
                 commonResult1.resultCode = 14;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_ERROR_MSG_PRICE_WORNG");
                 return this.Json((object)commonResult1);
@@ -775,14 +775,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info1 = ItemInfoManager.This().getInfo(model.buyMainKey, model.buyChooseKey);
             if (!info1.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)model.buyMainKey, (object)model.buyChooseKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)model, (object)model.buyMainKey, (object)model.buyChooseKey), "WARN");
                 commonResult1.resultCode = 8;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult1);
             }
             if (info1._maxRegisterForWorldMarket < model.buyCount)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) buyCount({1}) Process Count Over", (object)end, (object)model.buyCount), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) buyCount({1}) Process Count Over", (object)model, (object)model.buyCount), "WARN");
                 commonResult1.resultCode = 20;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemCountOver");
                 return this.Json((object)commonResult1);
@@ -790,7 +790,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             int enchantMaxGroup1 = ItemInfoManager.This().getEnchantMaxGroup(model.buyMainKey, info1._enchantGroup);
             if (info1._enchantGroup > model.buyChooseKey || model.buyChooseKey > enchantMaxGroup1)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)end, (object)model.buyMainKey, (object)info1._enchantGroup), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)model, (object)model.buyMainKey, (object)info1._enchantGroup), "WARN");
                 commonResult1.resultCode = 9;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup");
                 return this.Json((object)commonResult1);
@@ -801,7 +801,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 TradeMarketItemInfo info2 = ItemInfoManager.This().getInfo(model.buyMainKey, 1);
                 if (!info2.isValid())
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)model.buyMainKey, (object)model.buyChooseKey), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)model, (object)model.buyMainKey, (object)model.buyChooseKey), "WARN");
                     commonResult1.resultCode = 8;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)commonResult1);
@@ -814,7 +814,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 tradeMarketItemInfo = ItemInfoManager.This().getInfo(enchantMaterialKey, 0);
                 if (!info1.isValid())
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, 0) Not Exist Material ItemInfo", (object)end, (object)enchantMaterialKey), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) itemInfo({1}, 0) Not Exist Material ItemInfo", (object)model, (object)enchantMaterialKey), "WARN");
                     commonResult1.resultCode = 8;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)commonResult1);
@@ -825,7 +825,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 TradeMarketItemInfo info3 = ItemInfoManager.This().getInfo(model.buyMainKey, model.buySubKey);
                 if (!info3.isValid())
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) baseitemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)model.buyMainKey, (object)model.buySubKey), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) baseitemInfo({1}, {2}) Not Exist ItemInfo", (object)model, (object)model.buyMainKey, (object)model.buySubKey), "WARN");
                     commonResult1.resultCode = 8;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)commonResult1);
@@ -833,7 +833,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 int enchantMaxGroup2 = ItemInfoManager.This().getEnchantMaxGroup(model.buyMainKey, info3._enchantGroup);
                 if (info3._enchantGroup > model.buyChooseKey || model.buyChooseKey > enchantMaxGroup2)
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) getEnchantBaseMaxGroup({1}, {2}) Group : Out Of Range", (object)end, (object)model.buyMainKey, (object)info3._enchantGroup), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) getEnchantBaseMaxGroup({1}, {2}) Group : Out Of Range", (object)model, (object)model.buyMainKey, (object)info3._enchantGroup), "WARN");
                     commonResult1.resultCode = 9;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup");
                     return this.Json((object)commonResult1);
@@ -864,7 +864,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     SA_BETA_TRADEDB_0002.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
                     if (Convert.ToBoolean(blocked.Value))
                     {
-                        LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspCheckAndUpdateBlackUser({0}/{1})", (object)end, (object)buyCount), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspCheckAndUpdateBlackUser({0}/{1})", (object)model, (object)buyCount), "WARN");
                         commonResult1.resultCode = 24;
                         commonResult1.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult1);
@@ -872,7 +872,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspCheckAndUpdateBlackUser({0}/{1}) Exception : {2}", (object)end, (object)buyCount, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspCheckAndUpdateBlackUser({0}/{1}) Exception : {2}", (object)model, (object)buyCount, (object)ex.ToString()), "ERROR");
                     commonResult1.resultCode = 1;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult1);
@@ -896,7 +896,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                                 {
                                     if (5 == num4)
                                     {
-                                        LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}) Fail BuyBidding", (object)end, (object)buyCount), "WARN");
+                                        LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}) Fail BuyBidding", (object)model, (object)buyCount), "WARN");
                                         commonResult1.resultCode = 11;
                                         commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_BuyBiddingRepeatOverFail");
                                         return this.Json((object)commonResult1);
@@ -960,7 +960,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                                 }
                                 else
                                 {
-                                    LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}) StopReasonType({2}) is Invalid", (object)end, (object)buyCount, (object)(int)int32), "WARN");
+                                    LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}) StopReasonType({2}) is Invalid", (object)model, (object)buyCount, (object)(int)int32), "WARN");
                                     commonResult1.resultCode = 10;
                                     commonResult1.resultMsg = Convert.ToString(symNo.Value);
                                     return this.Json((object)commonResult1);
@@ -971,14 +971,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         }
                         else
                         {
-                            LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}), rv({2})", (object)end, (object)buyCount, (object)commonResult1.resultCode), "WARN");
+                            LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyBiddingFromWorldMarket({0}/{1}), rv({2})", (object)model, (object)buyCount, (object)commonResult1.resultCode), "WARN");
                             commonResult1.resultMsg = Convert.ToString(symNo.Value);
                             return this.Json((object)commonResult1);
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspBuyBiddingFromWorldMarket({0}/{1}) Exception : {2}", (object)end, (object)buyCount, (object)ex.ToString()), "ERROR");
+                        LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspBuyBiddingFromWorldMarket({0}/{1}) Exception : {2}", (object)model, (object)buyCount, (object)ex.ToString()), "ERROR");
                         commonResult1.resultCode = 1;
                         commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                         return this.Json((object)commonResult1);
@@ -1037,7 +1037,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         long num7 = num3 + int64_18;
                         if (num6 == 0L && int64_20 == 0L)
                         {
-                            LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) ReserveBiddingFail", (object)end), "WARN");
+                            LogUtil.WriteLog(string.Format("[Item Error]BuyItemProcess({0}) ReserveBiddingFail", (object)model), "WARN");
                             commonResult1.resultCode = 22;
                             commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveBuyBiddingFail");
                             return this.Json((object)commonResult1);
@@ -1074,14 +1074,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         Task.Run((Action)(() => TradeModule.SendPearlAppAlarm(ref sellUserIdList, model.buyMainKey, "SELL")));
                         return this.Json((object)commonResult1);
                     }
-                    LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyFromWorldMarket({0}/{1}), rv({2})", (object)end, (object)buyCount, (object)commonResult1.resultCode), "WARN");
+                    LogUtil.WriteLog(string.Format("[DB Error]BuyItemProcess - uspBuyFromWorldMarket({0}/{1}), rv({2})", (object)model, (object)buyCount, (object)commonResult1.resultCode), "WARN");
                     commonResult1.resultMsg = Convert.ToString(symNo.Value);
                     Task.Run((Action)(() => TradeModule.SendPearlAppAlarm(ref sellUserIdList, model.buyMainKey, "SELL")));
                     return this.Json((object)commonResult1);
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspBuyFromWorldMarket({0}/{1}) Exception : {2}", (object)end, (object)buyCount, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]BuyItemProcess() - uspBuyFromWorldMarket({0}/{1}) Exception : {2}", (object)model, (object)buyCount, (object)ex.ToString()), "ERROR");
                     commonResult1.resultCode = 1;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult1);
@@ -1139,7 +1139,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         {
                             try
                             {
-                                SA_BETA_TRADEDB_0002.uspBuyBiddingFromWorldMarketBySystem(1,new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
+                                SA_BETA_TRADEDB_0002.uspBuyBiddingFromWorldMarketBySystem(1, new int?(buyKeyType), new int?(buyMainKey), new int?(buySubKey), new long?(num1), new int?(buySubKey), new int?(tradeMarketItemInfo._mainKey), new long?(info._enchantNeedCount), new double?(WorldMarketOptionManager.This().BiddingRatio), realBuyCount, totalMoneyCount, sellNo, stopType, symNo, rv);
                                 int int32_1 = Convert.ToInt32(rv.Value);
                                 StopReasonType int32_2 = (StopReasonType)Convert.ToInt32(stopType.Value);
                                 if (int32_1 == 0)
@@ -1233,7 +1233,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult SellItemProcess()
+        public JsonResult SellItemProcess([FromBody] GameTradeMarketSellInfo model)
         {
             CommonResult commonResult1 = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -1268,7 +1268,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             ObjectParameter isCalculateRingBuff = new ObjectParameter("isCalculateRingBuff", typeof(bool));
             byte num1 = 2;
             long num2 = 0;
-            GameTradeMarketSellInfo model = new GameTradeMarketSellInfo();
+            //GameTradeMarketSellInfo model = new GameTradeMarketSellInfo();
             if (!ServerControlManager.This().IsLoadComplete())
             {
                 LogUtil.WriteLog("SellItemProcess Fail is Not Open", "WARN");
@@ -1284,23 +1284,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult1);
             }
             string empty = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]SellItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
-                commonResult1.resultCode = 2;
-                commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult1);
-            }
-            model = JsonConvert.DeserializeObject<GameTradeMarketSellInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]SellItemProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
+            //    commonResult1.resultCode = 2;
+            //    commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult1);
+            //}
+            //model = JsonConvert.DeserializeObject<GameTradeMarketSellInfo>(end);
             if (model == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]SellItemProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]SellItemProcess({0}) - model is null", (object)model), "WARN");
                 commonResult1.resultCode = 5;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)model);
@@ -1360,7 +1360,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             long num3 = model.sellPrice % unitPrice;
             if (num3 != 0L)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) sellPrice Check Fail unitPrice({1} divide Result {2}", (object)end, (object)unitPrice, (object)num3), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) sellPrice Check Fail unitPrice({1} divide Result {2}", (object)model, (object)unitPrice, (object)num3), "WARN");
                 commonResult1.resultCode = 14;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_ERROR_MSG_PRICE_WORNG");
                 return this.Json((object)commonResult1);
@@ -1368,7 +1368,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info1 = ItemInfoManager.This().getInfo(model.sellMainKey, model.sellChooseKey);
             if (!info1.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)model.sellMainKey, (object)model.sellChooseKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)model, (object)model.sellMainKey, (object)model.sellChooseKey), "WARN");
                 commonResult1.resultCode = 8;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult1);
@@ -1378,7 +1378,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 num4 = 100L;
             if (num4 < model.sellCount)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) sellCount({1}) Process Count Over", (object)end, (object)model.sellCount), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) sellCount({1}) Process Count Over", (object)model, (object)model.sellCount), "WARN");
                 commonResult1.resultCode = 20;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ItemCountOver");
                 return this.Json((object)commonResult1);
@@ -1389,7 +1389,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 tradeMarketItemInfo = ItemInfoManager.This().getInfo(info1._enchantMaterialKey, 0);
                 if (!info1.isValid())
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) itemInfo({1}, 0) Not Exist Material ItemInfo", (object)end, (object)info1._enchantMaterialKey), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) itemInfo({1}, 0) Not Exist Material ItemInfo", (object)model, (object)info1._enchantMaterialKey), "WARN");
                     commonResult1.resultCode = 8;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)commonResult1);
@@ -1398,7 +1398,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             int enchantMaxGroup1 = ItemInfoManager.This().getEnchantMaxGroup(model.sellMainKey, info1._enchantGroup);
             if (info1._enchantGroup > model.sellChooseKey || model.sellChooseKey > enchantMaxGroup1)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)end, (object)model.sellMainKey, (object)info1._enchantGroup), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)model, (object)model.sellMainKey, (object)info1._enchantGroup), "WARN");
                 commonResult1.resultCode = 9;
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup");
                 return this.Json((object)commonResult1);
@@ -1408,7 +1408,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 TradeMarketItemInfo info2 = ItemInfoManager.This().getInfo(model.sellMainKey, model.sellSubKey);
                 if (!info2.isValid())
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) baseitemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)model.sellMainKey, (object)model.sellSubKey), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) baseitemInfo({1}, {2}) Not Exist ItemInfo", (object)model, (object)model.sellMainKey, (object)model.sellSubKey), "WARN");
                     commonResult1.resultCode = 8;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                     return this.Json((object)commonResult1);
@@ -1416,7 +1416,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 int enchantMaxGroup2 = ItemInfoManager.This().getEnchantMaxGroup(model.sellMainKey, info2._enchantGroup);
                 if (info2._enchantGroup > model.sellChooseKey || model.sellChooseKey > enchantMaxGroup2)
                 {
-                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) getEnchantBaseMaxGroup({1}, {2}) Group : Out Of Range", (object)end, (object)model.sellMainKey, (object)info2._enchantGroup), "WARN");
+                    LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) getEnchantBaseMaxGroup({1}, {2}) Group : Out Of Range", (object)model, (object)model.sellMainKey, (object)info2._enchantGroup), "WARN");
                     commonResult1.resultCode = 9;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup");
                     return this.Json((object)commonResult1);
@@ -1443,7 +1443,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     SA_BETA_TRADEDB_0002.uspCheckAndUpdateBlackUser(new int?(model.nationCode), new int?(model.worldNo), new long?(model.userNo), blocked, symNo, rv);
                     if (Convert.ToBoolean(blocked.Value))
                     {
-                        LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspCheckAndUpdateBlackUser({0}) Exception ", (object)end), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspCheckAndUpdateBlackUser({0}) Exception ", (object)model), "WARN");
                         commonResult1.resultCode = 24;
                         commonResult1.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult1);
@@ -1451,7 +1451,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspCheckAndUpdateBlackUser({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspCheckAndUpdateBlackUser({0}) Exception : {1}", (object)model, (object)ex.ToString()), "ERROR");
                     commonResult1.resultCode = 1;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult1);
@@ -1483,7 +1483,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                                 {
                                     if (5 == num8)
                                     {
-                                        LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}) Fail BuyBidding", (object)end, (object)sellCount), "WARN");
+                                        LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}) Fail BuyBidding", (object)model, (object)sellCount), "WARN");
                                         commonResult1.resultCode = 13;
                                         commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_SellBiddingRepeatOverFail");
                                         return this.Json((object)commonResult1);
@@ -1555,7 +1555,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                                 }
                                 else
                                 {
-                                    LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}) StopReasonType({2}) is Invalid", (object)end, (object)sellCount, (object)(int)int32), "WARN");
+                                    LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}) StopReasonType({2}) is Invalid", (object)model, (object)sellCount, (object)(int)int32), "WARN");
                                     commonResult1.resultCode = 12;
                                     commonResult1.resultMsg = Convert.ToString(symNo.Value);
                                     return this.Json((object)commonResult1);
@@ -1566,14 +1566,14 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         }
                         else
                         {
-                            LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}), rv({2})", (object)end, (object)sellCount, (object)commonResult1.resultCode), "WARN");
+                            LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellBiddingToWorldMarket({0}/{1}), rv({2})", (object)model, (object)sellCount, (object)commonResult1.resultCode), "WARN");
                             commonResult1.resultMsg = Convert.ToString(symNo.Value);
                             return this.Json((object)commonResult1);
                         }
                     }
                     catch (Exception ex)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspSellBiddingToWorldMarket({0}/{1}) Exception : {2}", (object)end, (object)sellCount, (object)ex.ToString()), "ERROR");
+                        LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspSellBiddingToWorldMarket({0}/{1}) Exception : {2}", (object)model, (object)sellCount, (object)ex.ToString()), "ERROR");
                         commonResult1.resultCode = 1;
                         commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                         return this.Json((object)commonResult1);
@@ -1638,7 +1638,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                         long num11 = num7 + int64_20;
                         if (num10 == 0L && int64_22 == 0L)
                         {
-                            LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) ReserveBiddingFail", (object)end), "WARN");
+                            LogUtil.WriteLog(string.Format("[Item Error]SellItemProcess({0}) ReserveBiddingFail", (object)model), "WARN");
                             commonResult1.resultCode = 23;
                             commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_ReserveSellBiddingFail");
                             return this.Json((object)commonResult1);
@@ -1678,13 +1678,13 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                             Task.Run((Action)(() => TradeModule.SendPearlAppAlarm(ref buyUserIdList, model.sellMainKey, "BUY")));
                             return this.Json((object)commonResult1);
                         }
-                        LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellToWorldMarket({0}/{1}), rv({2})", (object)end, (object)sellCount, (object)commonResult1.resultCode), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]SellItemProcess - uspSellToWorldMarket({0}/{1}), rv({2})", (object)model, (object)sellCount, (object)commonResult1.resultCode), "WARN");
                         commonResult1.resultMsg = Convert.ToString(symNo.Value);
                     }
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspSellToWorldMarket({0}/{1}) Exception : {2}", (object)end, (object)sellCount, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]SellItemProcess() - uspSellToWorldMarket({0}/{1}) Exception : {2}", (object)model, (object)sellCount, (object)ex.ToString()), "ERROR");
                     commonResult1.resultCode = 1;
                     commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult1);
@@ -1695,7 +1695,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult WithdrawBuyBiddingProcess()
+        public JsonResult WithdrawBuyBiddingProcess([FromBody] GameTradeMarketBiddingInfo marketBiddingInfo2)
         {
             CommonResult commonResult = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -1721,23 +1721,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string empty = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]WithdrawBuyBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
-            GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]WithdrawBuyBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
+            //GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
             if (marketBiddingInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]WithdrawBuyBiddingProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]WithdrawBuyBiddingProcess({0}) - model is null", (object)marketBiddingInfo2), "WARN");
                 commonResult.resultCode = 5;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)commonResult);
@@ -1745,7 +1745,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info = ItemInfoManager.This().getInfo(marketBiddingInfo2.mainKey, marketBiddingInfo2.subKey);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]WithdrawBuyBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]WithdrawBuyBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)marketBiddingInfo2, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
@@ -1758,7 +1758,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]WithdrawBuyBiddingProcess - uspWithdrawBiddingBuy({0}), rv({1})", (object)end, (object)commonResult.resultCode), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]WithdrawBuyBiddingProcess - uspWithdrawBiddingBuy({0}), rv({1})", (object)marketBiddingInfo2, (object)commonResult.resultCode), "WARN");
                         commonResult.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult);
                     }
@@ -1784,7 +1784,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]WithdrawBuyBiddingProcess() - uspWithdrawBiddingBuy({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]WithdrawBuyBiddingProcess() - uspWithdrawBiddingBuy({0}) Exception : {1}", (object)marketBiddingInfo2, (object)ex.ToString()), "ERROR");
                     commonResult.resultCode = 1;
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult);
@@ -1794,7 +1794,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult CalculateBuyBiddingProcess()
+        public JsonResult CalculateBuyBiddingProcess([FromBody] GameTradeMarketBiddingInfo marketBiddingInfo2)
         {
             CommonResult commonResult = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -1820,23 +1820,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string empty = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateBuyBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
-            GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CalculateBuyBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
+            //GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
             if (marketBiddingInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateBuyBiddingProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CalculateBuyBiddingProcess({0}) - model is null", (object)marketBiddingInfo2), "WARN");
                 commonResult.resultCode = 5;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)commonResult);
@@ -1844,7 +1844,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info = ItemInfoManager.This().getInfo(marketBiddingInfo2.mainKey, marketBiddingInfo2.subKey);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]CalculateBuyBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]CalculateBuyBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)marketBiddingInfo2, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
@@ -1857,7 +1857,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]CalculateBuyBiddingProcess - uspCalculateBiddingBuy({0}), rv({1})", (object)end, (object)commonResult.resultCode), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]CalculateBuyBiddingProcess - uspCalculateBiddingBuy({0}), rv({1})", (object)marketBiddingInfo2, (object)commonResult.resultCode), "WARN");
                         commonResult.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult);
                     }
@@ -1879,7 +1879,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]CalculateBuyBiddingProcess() - uspCalculateBiddingBuy({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]CalculateBuyBiddingProcess() - uspCalculateBiddingBuy({0}) Exception : {1}", (object)marketBiddingInfo2, (object)ex.ToString()), "ERROR");
                     commonResult.resultCode = 1;
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult);
@@ -1889,7 +1889,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult WithdrawSellBiddingProcess()
+        public JsonResult WithdrawSellBiddingProcess([FromBody] GameTradeMarketBiddingInfo marketBiddingInfo2)
         {
             CommonResult commonResult = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -1914,23 +1914,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string empty = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]WithdrawSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
-            GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]WithdrawSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
+            //GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
             if (marketBiddingInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]WithdrawSellBiddingProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]WithdrawSellBiddingProcess({0}) - model is null", (object)marketBiddingInfo2), "WARN");
                 commonResult.resultCode = 5;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)commonResult);
@@ -1938,7 +1938,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info = ItemInfoManager.This().getInfo(marketBiddingInfo2.mainKey, marketBiddingInfo2.subKey);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]WithdrawSellBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]WithdrawSellBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)marketBiddingInfo2, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
@@ -1952,7 +1952,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]WithdrawSellBiddingProcess - uspWithdrawBiddingSell({0}), rv({1})", (object)end, (object)commonResult.resultCode), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]WithdrawSellBiddingProcess - uspWithdrawBiddingSell({0}), rv({1})", (object)marketBiddingInfo2, (object)commonResult.resultCode), "WARN");
                         commonResult.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult);
                     }
@@ -1974,7 +1974,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]WithdrawSellBiddingProcess() - uspWithdrawBiddingSell({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]WithdrawSellBiddingProcess() - uspWithdrawBiddingSell({0}) Exception : {1}", (object)marketBiddingInfo2, (object)ex.ToString()), "ERROR");
                     commonResult.resultCode = 1;
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult);
@@ -1984,7 +1984,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult CalculateSellBiddingProcess()
+        public JsonResult CalculateSellBiddingProcess([FromBody] GameTradeMarketBiddingInfo marketBiddingInfo2)
         {
             CommonResult commonResult = new CommonResult();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -2014,23 +2014,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string empty = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "WARN");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
-            GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "WARN");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
+            //GameTradeMarketBiddingInfo marketBiddingInfo2 = JsonConvert.DeserializeObject<GameTradeMarketBiddingInfo>(end);
             if (marketBiddingInfo2 == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - model is null", (object)marketBiddingInfo2), "WARN");
                 commonResult.resultCode = 5;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)commonResult);
@@ -2038,7 +2038,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             TradeMarketItemInfo info = ItemInfoManager.This().getInfo(marketBiddingInfo2.mainKey, marketBiddingInfo2.subKey);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error]CalculateSellBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)end, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]CalculateSellBiddingProcess({0}) itemInfo({1}, {2}) Not Exist ItemInfo", (object)marketBiddingInfo2, (object)marketBiddingInfo2.mainKey, (object)marketBiddingInfo2.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
@@ -2051,7 +2051,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     commonResult.resultCode = Convert.ToInt32(rv.Value);
                     if (commonResult.resultCode != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]CalculateSellBiddingProcess - uspCalculateBiddingSell({0}), rv({1})", (object)end, (object)commonResult.resultCode), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]CalculateSellBiddingProcess - uspCalculateBiddingSell({0}), rv({1})", (object)marketBiddingInfo2, (object)commonResult.resultCode), "WARN");
                         commonResult.resultMsg = Convert.ToString(symNo.Value);
                         return this.Json((object)commonResult);
                     }
@@ -2077,7 +2077,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("[DB Exception]CalculateSellBiddingProcess() - uspCalculateBiddingSell({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                    LogUtil.WriteLog(string.Format("[DB Exception]CalculateSellBiddingProcess() - uspCalculateBiddingSell({0}) Exception : {1}", (object)marketBiddingInfo2, (object)ex.ToString()), "ERROR");
                     commonResult.resultCode = 1;
                     commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                     return this.Json((object)commonResult);
@@ -2087,7 +2087,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult ProcessCommand()
+        public JsonResult ProcessCommand([FromBody] string commandString)
         {
             CommonResult commonResult = new CommonResult();
             if (!ServerControlManager.This().IsLoadComplete())
@@ -2098,34 +2098,34 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string str = string.Empty;
-            string commandString;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                str = new StreamReader(this.Request.Body).ReadToEnd();
-                commandString = JsonConvert.DeserializeObject<string>(str);
-                if (commandString == null)
-                {
-                    LogUtil.WriteLog(string.Format("[Http Error]ProcessCommand({0}) - command is null", (object)str), "WARN");
-                    commonResult.resultCode = 2;
-                    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                    return this.Json((object)commonResult);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]ProcessCommand({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonResult);
-            }
+            //string commandString;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    str = new StreamReader(this.Request.Body).ReadToEnd();
+            //    commandString = JsonConvert.DeserializeObject<string>(str);
+            //    if (commandString == null)
+            //    {
+            //        LogUtil.WriteLog(string.Format("[Http Error]ProcessCommand({0}) - command is null", (object)str), "WARN");
+            //        commonResult.resultCode = 2;
+            //        commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //        return this.Json((object)commonResult);
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]ProcessCommand({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonResult);
+            //}
             commonResult.resultCode = this._commnadProcess.process(commandString);
             commonResult.resultMsg = "";
             return this.Json((object)commonResult);
         }
 
         [HttpPost]
-        public JsonResult SyncNoticeItemListProcess()
+        public JsonResult SyncNoticeItemListProcess([FromBody] long num)
         {
             CommonDBResult<uspListNoticeItem_Result> commonDbResult = new CommonDBResult<uspListNoticeItem_Result>();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -2138,20 +2138,20 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonDbResult);
             }
             string str = string.Empty;
-            long num;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                str = new StreamReader(this.Request.Body).ReadToEnd();
-                num = JsonConvert.DeserializeObject<long>(str);
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]SyncNoticeItemListProcess({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
-                commonDbResult.resultCode = 2;
-                commonDbResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)commonDbResult);
-            }
+            //long num;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    str = new StreamReader(this.Request.Body).ReadToEnd();
+            //    num = JsonConvert.DeserializeObject<long>(str);
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]SyncNoticeItemListProcess({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
+            //    commonDbResult.resultCode = 2;
+            //    commonDbResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)commonDbResult);
+            //}
             using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
             {
                 try
@@ -2199,25 +2199,25 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult SetMaintenance()
+        public JsonResult SetMaintenance([FromBody] MaintenanceRequestModel maintenanceRequestModel)
         {
             CommonResult commonResult = new CommonResult();
             MaintenanceResponseModel maintenanceResponseModel = (MaintenanceResponseModel)null;
             string str = string.Empty;
-            MaintenanceRequestModel maintenanceRequestModel;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                str = new StreamReader(this.Request.Body).ReadToEnd();
-                maintenanceRequestModel = JsonConvert.DeserializeObject<MaintenanceRequestModel>(str);
-            }
-            catch (Exception ex)
-            {
-                commonResult.resultCode = -99970;
-                commonResult.resultMsg = "[Process]Maintenance Information Save Exception Error.";
-                LogUtil.WriteLog(string.Format("[Exception] SetMaintenance({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
-                return this.Json((object)commonResult);
-            }
+            //MaintenanceRequestModel maintenanceRequestModel;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    str = new StreamReader(this.Request.Body).ReadToEnd();
+            //    maintenanceRequestModel = JsonConvert.DeserializeObject<MaintenanceRequestModel>(str);
+            //}
+            //catch (Exception ex)
+            //{
+            //    commonResult.resultCode = -99970;
+            //    commonResult.resultMsg = "[Process]Maintenance Information Save Exception Error.";
+            //    LogUtil.WriteLog(string.Format("[Exception] SetMaintenance({0}) - HttpRequest errorMsg : {1}", (object)str, (object)ex.ToString()), "ERROR");
+            //    return this.Json((object)commonResult);
+            //}
             try
             {
                 using (SA_BETA_TRADEDB_0002 SA_BETA_TRADEDB_0002 = new SA_BETA_TRADEDB_0002())
@@ -2274,7 +2274,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult CheckWithDrawPayLoadProcess()
+        public JsonResult CheckWithDrawPayLoadProcess([FromBody] GameTradeMarketIncludePayload marketIncludePayload2)
         {
             string empty1 = string.Empty;
             CommonResult commonResult = new CommonResult();
@@ -2288,24 +2288,25 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)commonResult);
             }
             string empty2 = string.Empty;
-            string end;
-            try
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //    GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CheckWithDrawPayLoadProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
+            //    commonResult.resultCode = 2;
+            //    commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    tradeMarketState.result = commonResult;
+            //    return this.Json((object)tradeMarketState);
+            //}
+            //UNNECESSARY
+            if (marketIncludePayload2 is null)
             {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CheckWithDrawPayLoadProcess({0}) - HttpRequest errorMsg : {1}", (object)empty2, (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = 2;
-                commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                tradeMarketState.result = commonResult;
-                return this.Json((object)tradeMarketState);
-            }
-            GameTradeMarketIncludePayload marketIncludePayload2 = JsonConvert.DeserializeObject<GameTradeMarketIncludePayload>(end);
-            if (marketIncludePayload2 == null)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CheckWithDrawPayLoadProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CheckWithDrawPayLoadProcess({0}) - model is null", (object)marketIncludePayload2), "WARN");
                 commonResult.resultCode = 2;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 tradeMarketState.result = commonResult;
@@ -2324,7 +2325,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                     tradeMarketState.state = Convert.ToInt32(state.Value);
                     if (int32 != 0)
                     {
-                        LogUtil.WriteLog(string.Format("[DB Error]CheckWithDrawPayLoadProcess - uspGetWithDrawPayLoadState({0}/{1}), rv({2})", (object)end, (object)str, (object)int32), "WARN");
+                        LogUtil.WriteLog(string.Format("[DB Error]CheckWithDrawPayLoadProcess - uspGetWithDrawPayLoadState({0}/{1}), rv({2})", (object)marketIncludePayload2, (object)str, (object)int32), "WARN");
                         commonResult.resultCode = int32;
                         commonResult.resultMsg = str;
                         tradeMarketState.result = commonResult;
@@ -2334,7 +2335,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]CheckWithDrawPayLoadProcess() - uspGetWithDrawPayLoadState({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]CheckWithDrawPayLoadProcess() - uspGetWithDrawPayLoadState({0}) Exception : {1}", (object)marketIncludePayload2, (object)ex.ToString()), "ERROR");
                 commonResult.resultCode = 1;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                 tradeMarketState.result = commonResult;
@@ -2344,7 +2345,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
         }
 
         [HttpPost]
-        public JsonResult GetMyWalletInfoProcess()
+        public JsonResult GetMyWalletInfoProcess([FromBody] GameTradeMarketUserId tradeMarketUserId2)
         {
             UserInfomationResultModel infomationResultModel = new UserInfomationResultModel();
             GameTradeMarketUserId tradeMarketUserId1 = new GameTradeMarketUserId();
@@ -2371,23 +2372,23 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
                 return this.Json((object)infomationResultModel);
             }
             string empty = string.Empty;
-            string end;
-            try
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "WARN");
+            //    infomationResultModel._result.resultCode = 2;
+            //    infomationResultModel._result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
+            //    return this.Json((object)infomationResultModel);
+            //}
+            //GameTradeMarketUserId tradeMarketUserId2 = JsonConvert.DeserializeObject<GameTradeMarketUserId>(end);
+            if (tradeMarketUserId2 is null)
             {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - HttpRequest errorMsg : {1}", (object)empty, (object)ex.ToString()), "WARN");
-                infomationResultModel._result.resultCode = 2;
-                infomationResultModel._result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
-                return this.Json((object)infomationResultModel);
-            }
-            GameTradeMarketUserId tradeMarketUserId2 = JsonConvert.DeserializeObject<GameTradeMarketUserId>(end);
-            if (tradeMarketUserId2 == null)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CalculateSellBiddingProcess({0}) - model is null", (object)tradeMarketUserId2), "WARN");
                 infomationResultModel._result.resultCode = 5;
                 infomationResultModel._result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)infomationResultModel);
@@ -2415,7 +2416,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
             }
             catch (Exception ex)
             {
-                LogUtil.WriteLog(string.Format("[DB Exception]CalculateSellBiddingProcess() - uspCalculateBiddingSell({0}) Exception : {1}", (object)end, (object)ex.ToString()), "ERROR");
+                LogUtil.WriteLog(string.Format("[DB Exception]CalculateSellBiddingProcess() - uspCalculateBiddingSell({0}) Exception : {1}", (object)tradeMarketUserId2, (object)ex.ToString()), "ERROR");
                 infomationResultModel._result.resultCode = 1;
                 infomationResultModel._result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_DBException");
                 return this.Json((object)infomationResultModel);

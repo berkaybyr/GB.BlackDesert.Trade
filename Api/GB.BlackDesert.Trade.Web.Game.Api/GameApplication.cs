@@ -13,7 +13,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api
     public static class GameApplication
     {
         public static Task InitializeOnceAsync() => Task.Run((Action)(() => InitializeOnce()));
-        public static void InitializeOnce()
+        private static void InitializeOnce()
         {
             var openResult = ServerControlManager.This().Open(ServerType.eGame, ConstantMgr._isTradeWebOpen) == 0;
             var dataInitResult = ServerControlManager.This().dataInit(ServerType.eGame) == 0;

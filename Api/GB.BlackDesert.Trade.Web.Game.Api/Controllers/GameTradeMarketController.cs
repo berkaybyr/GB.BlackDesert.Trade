@@ -23,7 +23,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
         private static DateTime DefaultTime = new DateTime(1970, 1, 1, 0, 0, 0);
 
         [HttpPost]
-        public JsonResult CheckAuthKeyToView()
+        public JsonResult CheckAuthKeyToView([FromBody] ViewUserAuthModel viewUserAuthModel)
         {
             ViewUserAuthResultModel userAuthResultModel = new ViewUserAuthResultModel();
             UserInfomationModel userInfo = (UserInfomationModel)null;
@@ -37,23 +37,23 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 return this.Json((object)userAuthResultModel);
             }
             string empty3 = string.Empty;
-            string end;
-            try
-            {
-                this.Request.Body.Seek(0L, SeekOrigin.Begin);
-                end = new StreamReader(this.Request.Body).ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - HttpRequest errorMsg : {1}", (object)empty3, (object)ex.ToString()), "WARN");
-                userAuthResultModel.result.resultCode = 3;
-                userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-                return this.Json((object)userAuthResultModel);
-            }
-            ViewUserAuthModel viewUserAuthModel = JsonConvert.DeserializeObject<ViewUserAuthModel>(end);
+            //string end;
+            //try
+            //{
+            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
+            //    end = new StreamReader(this.Request.Body).ReadToEnd();
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - HttpRequest errorMsg : {1}", (object)empty3, (object)ex.ToString()), "WARN");
+            //    userAuthResultModel.result.resultCode = 3;
+            //    userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
+            //    return this.Json((object)userAuthResultModel);
+            //}
+            //ViewUserAuthModel viewUserAuthModel = JsonConvert.DeserializeObject<ViewUserAuthModel>(end);
             if (viewUserAuthModel == null)
             {
-                LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - model is null", (object)end), "WARN");
+                LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - model is null", (object)viewUserAuthModel), "WARN");
                 userAuthResultModel.result.resultCode = 5;
                 userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)userAuthResultModel);

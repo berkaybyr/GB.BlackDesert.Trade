@@ -8,7 +8,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api
     {
         public static Task InitializeOnceAsync() => Task.Run((Action)(() => InitializeOnce()));
 
-        public static void InitializeOnce()
+        private static void InitializeOnce()
         {
             var openResult = ServerControlManager.This().Open(ServerType.eProcess, ConstantMgr._isTradeWebOpen) == 0;
             var dataUpdateResult = ServerControlManager.This().DataUpdateByRepository(ServerType.eProcess) == 0;

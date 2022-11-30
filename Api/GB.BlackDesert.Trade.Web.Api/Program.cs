@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddResponseCaching();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession();
 builder.Services.AddLocalization(x => x.ResourcesPath = "Resources" );
 
 
@@ -46,10 +47,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseAuthentication();
+app.UseSession();
 
 
 app.MapControllers();
 app.UseResponseCaching();
 
-TradeApplication.InitializeOnce();
+TradeApplication.InitializeOnceAsync();
 app.Run();

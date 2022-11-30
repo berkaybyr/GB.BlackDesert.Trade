@@ -10,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
 
 
 var app = builder.Build();
@@ -29,6 +31,13 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseSession();
 
-ProcessApplication.InitializeOnce();
+//app.Use((context, next) =>
+//{
+//    context.Request.EnableBuffering();
+//    return next();
+//});
+
+ProcessApplication.InitializeOnceAsync();
 app.Run();
