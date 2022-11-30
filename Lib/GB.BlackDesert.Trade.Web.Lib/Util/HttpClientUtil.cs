@@ -23,11 +23,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
             ServicePointManager.Expect100Continue = true;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             HttpClientHandler handler = new HttpClientHandler();
-            if (ConstantMgr._isUseProxy)
-            {
-                handler.Proxy = (IWebProxy)new WebProxy(ConstantMgr._webProxyUrl + ":" + (object)ConstantMgr._webProxyPort);
-                handler.UseProxy = true;
-            }
             return new HttpClient((HttpMessageHandler)handler);
         }
 

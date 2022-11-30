@@ -32,7 +32,7 @@ namespace Resources
             get
             {
                 if (Resources.resourceMan == null)
-                    Resources.resourceMan = new ResourceManager("Resources.Resources", Assembly.Load("App_GlobalResources"));
+                    Resources.resourceMan = new ResourceManager("Resources", Assembly.Load("App_GlobalResources"));
                 return Resources.resourceMan;
             }
 

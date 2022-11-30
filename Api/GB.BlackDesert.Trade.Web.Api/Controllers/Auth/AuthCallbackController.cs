@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity.Core.Objects;
 using System.Net;
 using System.Text;
-using System.Web;
+
 
 namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
 {
@@ -36,18 +36,14 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     LogUtil.WriteLog("AuthCallbackController Invalid Param", "WARN");
                     return (ActionResult)this.Redirect(ConstantMgr._authRedirectUri);
                 }
-                callbackParam = HttpUtility.UrlEncode(callbackParam);
+                callbackParam = WebUtility.UrlEncode(callbackParam);
                 HttpWebRequest httpWebRequest;
                 if (ConstantMgr._serviceType.ToUpper().Equals("CS") && ConstantMgr._serviceRegion.IsNotNull())
                     httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}&region={3}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP(), (object)ConstantMgr._serviceRegion));
                 else
                     httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP()));
                 httpWebRequest.Method = "GET";
-                if (ConstantMgr._isUseProxy)
-                    httpWebRequest.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                    {
-                        BypassProxyOnLocal = false
-                    };
+                
                 httpWebRequest.Timeout = 60000;
                 HttpWebResponse response = (HttpWebResponse)httpWebRequest.GetResponse();
                 if (!response.StatusCode.Equals((object)HttpStatusCode.OK))
@@ -148,21 +144,21 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
             return (ActionResult)this.RedirectToAction(nameof(Index), "Home");
         }
 
-        [HttpPost]
-        public ActionResult Logout()
-        {
-            CommonResult commonResult = new CommonResult();
-            try
-            {
-                AuthenticateManager.RemoveAuthTicket();
-            }
-            catch (Exception ex)
-            {
-                LogUtil.WriteLog(string.Format("Logout Exception : {0}", (object)ex.ToString()), "ERROR");
-                commonResult.resultCode = -9999;
-                commonResult.resultMsg = ex.ToString();
-            }
-            return !string.IsNullOrEmpty(ConstantMgr._authRemoveUri) ? (ActionResult)this.Redirect(ConstantMgr._authRemoveUri) : (ActionResult)this.Redirect(ConstantMgr._redirectDomain);
-        }
+        //[HttpPost]
+        //public ActionResult Logout()
+        //{
+        //    CommonResult commonResult = new CommonResult();
+        //    try
+        //    {
+        //        AuthenticateManager.RemoveAuthTicket();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogUtil.WriteLog(string.Format("Logout Exception : {0}", (object)ex.ToString()), "ERROR");
+        //        commonResult.resultCode = -9999;
+        //        commonResult.resultMsg = ex.ToString();
+        //    }
+        //    return !string.IsNullOrEmpty(ConstantMgr._authRemoveUri) ? (ActionResult)this.Redirect(ConstantMgr._authRemoveUri) : (ActionResult)this.Redirect(ConstantMgr._redirectDomain);
+        //}
     }
 }

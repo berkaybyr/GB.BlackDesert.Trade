@@ -1068,8 +1068,13 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                 {
                     _accountNo = authInfo.accountNo
                 };
-                ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/TradeOtpCheck", (object)str), CommonModule.SerializeObjectToJsonString<OtpCheckParamModel>(deserializeObject), "POST", "application/json"), proxyData);
+                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(
+                    new HttpRequestModel(string.Format("{0}/TradeOtpCheck", 
+                    (object)str), 
+                    CommonModule.SerializeObjectToJsonString<OtpCheckParamModel>(deserializeObject), 
+                    "POST", 
+                    "application/json")
+                    );
                 if (httpRequestResult._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("HomeController OtpUseCheck Requset Fail  response._resultCode : {0}", (object)httpRequestResult._resultCode), "WARN");

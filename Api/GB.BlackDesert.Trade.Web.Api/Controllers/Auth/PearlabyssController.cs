@@ -84,8 +84,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     LogUtil.WriteLog(string.Format("{0} state is not Matching. decCookieState={1} decModelState={2}", (object)this._path, (object)str1, (object)str2), "WARN");
                 AccessTokenParamModel deserializeObject = new AccessTokenParamModel();
                 deserializeObject._code = model.code;
-                ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/Authorize/AccessToken", (object)ConstantMgr._apiBaseOauthUrl), CommonModule.SerializeObjectToJsonString<AccessTokenParamModel>(deserializeObject), "POST", "application/json"), proxyData);
+                HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/Authorize/AccessToken", (object)ConstantMgr._apiBaseOauthUrl), CommonModule.SerializeObjectToJsonString<AccessTokenParamModel>(deserializeObject), "POST", "application/json"));
                 if (httpRequestResult1._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("{0} GetAccesstoken request fail resultCode={1}", (object)this._path, (object)httpRequestResult1._resultCode), "WARN");
@@ -100,7 +99,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 HttpRequestResult httpRequestResult2 = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/Authorize/GetSessionInfo", (object)ConstantMgr._apiBaseOauthUrl), CommonModule.SerializeObjectToJsonString<GetSessionInfoParamModel>(new GetSessionInfoParamModel()
                 {
                     _accessToken = json1.access_token
-                }), "POST", "application/json"), proxyData);
+                }), "POST", "application/json"));
                 if (httpRequestResult2._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("{0} GetSessionInfo request fail resultCode={1}", (object)this._path, (object)httpRequestResult2._resultCode), "WARN");
@@ -144,8 +143,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 {
                     _accessToken = json1._accessToken
                 };
-                ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/Authorize/Check", (object)ConstantMgr._apiBaseOauthUrl), CommonModule.SerializeObjectToJsonString<CheckAccessTokenModel>(deserializeObject), "POST", "application/json"), proxyData);
+                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(string.Format("{0}/Authorize/Check", (object)ConstantMgr._apiBaseOauthUrl), CommonModule.SerializeObjectToJsonString<CheckAccessTokenModel>(deserializeObject), "POST", "application/json"));
                 if (httpRequestResult._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("Check AccessToken response fail, accessToken : {0} / reulstCode : {1}", (object)json1._accessToken, (object)httpRequestResult._resultCode), "WARN");

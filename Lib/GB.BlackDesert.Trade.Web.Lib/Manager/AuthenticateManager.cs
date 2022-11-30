@@ -9,17 +9,20 @@ using GB.BlackDesert.Trade.Web.Lib.DB;
 using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Manager
 {
     public class AuthenticateManager
     {
+
+        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public static ServerType _servcerType = ServerType.eCount;
 
         public static bool IsAutheticated
@@ -55,8 +58,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<AuthenticationInfo>(AuthenticationInfo), SecurityMgr.Enum.Des);
-                HttpContext.Current.Session[ConstantMgr._authCookieName] = (object)str;
-                HttpContext.Current.Session.Timeout = ConstantMgr._authenticationTimeOut;
+                httpContext.Session.Set(ConstantMgr._authCookieName,Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -70,8 +72,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<GetSessionInfoResultModel>(sessionInfo), SecurityMgr.Enum.AES);
-                HttpContext.Current.Session.Add(ConstantMgr._authCookieName, (object)str);
-                HttpContext.Current.Session.Timeout = 43200;
+                httpContext.Session.Set(ConstantMgr._authCookieName, Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -81,9 +82,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
 
         public static void RemoveAuthTicket()
         {
-            HttpContext.Current.Session[ConstantMgr._authCookieName] = (object)null;
-            HttpContext.Current.Session.Clear();
-            HttpContext.Current.Session.Abandon();
+
+            httpContext.Session.Remove(ConstantMgr._authCookieName);
+            httpContext.Session.Clear();
             CookieLib.Delete(ConstantMgr._cookieDomain, "ASP.NET_SessionId");
         }
 
@@ -95,9 +96,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string str = string.Empty;
             try
             {
-                if (HttpContext.Current.Session[ConstantMgr._authCookieName] != null)
+                if (httpContext.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                 {
-                    str = HttpContext.Current.Session[ConstantMgr._authCookieName].ToString();
+
+                    str = Encoding.Default.GetString(bytes);
                     if (!string.IsNullOrEmpty(str))
                     {
                         str = new SecurityLib().Decrypt(str, SecurityMgr.Enum.Des);
@@ -134,10 +136,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             bool flag = false;
             try
             {
-                if (HttpContext.Current.Session[ConstantMgr._authCookieName] == null)
+                if (!httpContext.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                     return (AuthenticationInfo)null;
-                string absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
-                GetSessionInfoResultModel json1 = CommonModule.DeserializeOjectToJson<GetSessionInfoResultModel>(new SecurityLib().Decrypt(HttpContext.Current.Session[ConstantMgr._authCookieName].ToString(), SecurityMgr.Enum.AES));
+                string absolutePath = httpContext.Request.Path;
+                var sessionVal = Encoding.Default.GetString(bytes);
+                GetSessionInfoResultModel json1 = CommonModule.DeserializeOjectToJson<GetSessionInfoResultModel>(new SecurityLib().Decrypt(sessionVal, SecurityMgr.Enum.AES));
                 DateTime dateTime1 = Convert.ToDateTime(json1._expireDate);
                 DateTime customTime = CommonModule.GetCustomTime();
                 if (!json1._isPearlApp)
@@ -149,11 +152,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     }
                     if (dateTime1.AddMinutes(-10.0) < customTime && customTime < dateTime1)
                     {
-                        absolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+                        absolutePath = httpContext.Request.Path;
                         UseRefreshtokenModel deserializeObject = new UseRefreshtokenModel();
                         deserializeObject._refreshtoken = json1._refreshToken;
-                        ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                        HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._apiBaseOauthUrl + "/Authorize/RefreshToken", CommonModule.SerializeObjectToJsonString<UseRefreshtokenModel>(deserializeObject), "POST", "application/json"), proxyData);
+                        HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._apiBaseOauthUrl + "/Authorize/RefreshToken", CommonModule.SerializeObjectToJsonString<UseRefreshtokenModel>(deserializeObject), "POST", "application/json"));
                         if (httpRequestResult1._resultCode != 0)
                         {
                             LogUtil.WriteLog(string.Format("{0} UseRefreshtoken request fail resultCode={1}", (object)absolutePath, (object)httpRequestResult1._resultCode), "WARN");
@@ -168,7 +170,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         HttpRequestResult httpRequestResult2 = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._apiBaseOauthUrl + "/Authorize/GetSessionInfo", CommonModule.SerializeObjectToJsonString<GetSessionInfoParamModel>(new GetSessionInfoParamModel()
                         {
                             _accessToken = json2.access_token
-                        }), "POST", "application/json"), proxyData);
+                        }), "POST", "application/json"));
                         if (httpRequestResult2._resultCode != 0)
                         {
                             LogUtil.WriteLog(string.Format("{0} GetSessionInfo request fail resultCode={1}", (object)absolutePath, (object)httpRequestResult2._resultCode), "WARN");
@@ -200,8 +202,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         _sessionID = json1._sessionId,
                         _ip = remoteIp
                     };
-                    ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                    HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._paSessionApiUrl + "/session/getAuthticket", CommonModule.SerializeObjectToJsonString<GetSessionAuthTicketParamModel>(deserializeObject), "POST", "application/json", proxyData._useTls12, "utf-8"), proxyData);
+                    HttpRequestResult httpRequestResult = CommonModule.HttpRequest(
+                        new HttpRequestModel(ConstantMgr._paSessionApiUrl + "/session/getAuthticket", 
+                        CommonModule.SerializeObjectToJsonString<GetSessionAuthTicketParamModel>(deserializeObject), 
+                        "POST", 
+                        "application/json",
+                        "utf-8"));
                     if (httpRequestResult._resultCode != 0)
                     {
                         LogUtil.WriteLog(string.Format("[Authenticatemanager][GetNewAuthenticationInfo][SessionAPIRequest][ERROR] {0}", (object)httpRequestResult._resultCode), "WARN");
@@ -340,18 +346,18 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             }
         }
 
-        public static bool getValidateDomain(string url)
-        {
-            if (string.IsNullOrEmpty(url))
-                return false;
-            foreach (string allKey in HttpContext.Current.Application.AllKeys)
-            {
-                int length = HttpContext.Current.Application[allKey].ToString().Length;
-                if (url.Length >= length && url.Substring(0, length) == HttpContext.Current.Application[allKey].ToString())
-                    return true;
-            }
-            return false;
-        }
+        //public static bool getValidateDomain(string url)
+        //{
+        //    if (string.IsNullOrEmpty(url))
+        //        return false;
+        //    foreach (string allKey in httpContext.Application.AllKeys)
+        //    {
+        //        int length = httpContext.Application[allKey].ToString().Length;
+        //        if (url.Length >= length && url.Substring(0, length) == httpContext.Application[allKey].ToString())
+        //            return true;
+        //    }
+        //    return false;
+        //}
 
         public static bool IsAccetpRefererDomain(string url)
         {
@@ -373,8 +379,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string empty = string.Empty;
             try
             {
-                HttpContext.Current.Session["PakageAuth"] = (object)new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<PakageAuthInfo>(pakageAuthInfo), SecurityMgr.Enum.Des);
-                HttpContext.Current.Session.Timeout = 525600;
+                var str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<PakageAuthInfo>(pakageAuthInfo), SecurityMgr.Enum.Des); ;
+                var bytes = Encoding.Default.GetBytes(str);
+                httpContext.Session.Set("PakageAuth", bytes); 
             }
             catch (Exception ex)
             {
@@ -388,9 +395,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             string str = string.Empty;
             try
             {
-                if (HttpContext.Current.Session["PakageAuth"] != null)
+                if (httpContext.Session.TryGetValue("PakageAuth", out var bytes))
                 {
-                    str = HttpContext.Current.Session["PakageAuth"].ToString();
+                    str = Encoding.Default.GetString(bytes);
                     if (!string.IsNullOrEmpty(str))
                     {
                         str = new SecurityLib().Decrypt(str, SecurityMgr.Enum.Des);

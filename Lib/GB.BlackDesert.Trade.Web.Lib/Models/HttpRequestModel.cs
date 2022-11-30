@@ -21,7 +21,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
 
         public string _encodingType { get; set; }
 
-        public bool _useTlsProtocol { get; set; }
 
         public bool _useCertificate { get; set; }
 
@@ -40,7 +39,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
             this._requestMethod = string.Empty;
             this._requesetContentType = string.Empty;
             this._encodingType = "default";
-            this._useTlsProtocol = false;
             this._useCertificate = false;
             this._accept = string.Empty;
             this._reqHeaders = (NameValueCollection)null;
@@ -58,7 +56,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
             this._requestMethod = _reqMethod;
             this._requesetContentType = _reqContentType;
             this._encodingType = "default";
-            this._useTlsProtocol = false;
             this._useCertificate = false;
             this._accept = string.Empty;
             this._reqHeaders = (NameValueCollection)null;
@@ -77,7 +74,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
             this._requestMethod = _reqMethod;
             this._requesetContentType = _reqContentType;
             this._encodingType = "default";
-            this._useTlsProtocol = false;
             this._useCertificate = false;
             this._accept = string.Empty;
             this._reqHeaders = (NameValueCollection)null;
@@ -89,7 +85,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
           string _reqParam,
           string _reqMethod,
           string _reqContentType,
-          bool _useTlsProtocol,
           string _encodingType)
         {
             this._requestUrl = _reqUrl;
@@ -97,7 +92,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Models
             this._requestMethod = _reqMethod;
             this._requesetContentType = _reqContentType;
             this._encodingType = _encodingType;
-            this._useTlsProtocol = _useTlsProtocol;
             this._useCertificate = false;
             this._accept = string.Empty;
             this._reqHeaders = (NameValueCollection)null;

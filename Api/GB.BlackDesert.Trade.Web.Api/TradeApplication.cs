@@ -12,9 +12,9 @@ namespace GB.BlackDesert.Trade.Web.Api
 {
     public static class TradeApplication
     {
-        private static Task InitializeOnceAsync() => Task.Run((Action)(() => InitializeOnce()));
+        public static Task InitializeOnceAsync() => Task.Run((Action)(() => InitializeOnce()));
 
-        private static void InitializeOnce()
+        public static void InitializeOnce()
         {
             var openResult = ServerControlManager.This().Open(ServerType.eView, ConstantMgr._isTradeWebOpen) == 0;
             if (!openResult)

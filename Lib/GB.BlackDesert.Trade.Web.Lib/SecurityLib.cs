@@ -5,16 +5,19 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Util;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+
 
 namespace GB.BlackDesert.Trade.Web.Lib
 {
     public class SecurityLib : SecurityMgr
     {
+        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public string Encrypt(string strMsg, SecurityMgr.Enum enumType)
         {
             switch (enumType)
@@ -93,7 +96,7 @@ namespace GB.BlackDesert.Trade.Web.Lib
                     byte[] bytes2;
                     try
                     {
-                        bytes2 = decryptor1.Decrypt(Convert.FromBase64String(HttpContext.Current.Server.UrlDecode(strEn)), bytes1);
+                        bytes2 = decryptor1.Decrypt(Convert.FromBase64String(WebUtility.UrlDecode(strEn)), bytes1);
                     }
                     catch
                     {
@@ -107,7 +110,7 @@ namespace GB.BlackDesert.Trade.Web.Lib
                     byte[] bytes4;
                     try
                     {
-                        bytes4 = decryptor2.Decrypt(Convert.FromBase64String(HttpContext.Current.Server.UrlDecode(strEn)), bytes3);
+                        bytes4 = decryptor2.Decrypt(Convert.FromBase64String(WebUtility.UrlDecode(strEn)), bytes3);
                     }
                     catch
                     {
@@ -121,7 +124,7 @@ namespace GB.BlackDesert.Trade.Web.Lib
                     byte[] bytes6;
                     try
                     {
-                        bytes6 = decryptor3.Decrypt(Convert.FromBase64String(HttpContext.Current.Server.UrlDecode(strEn)), bytes5);
+                        bytes6 = decryptor3.Decrypt(Convert.FromBase64String(WebUtility.UrlDecode(strEn)), bytes5);
                     }
                     catch
                     {
@@ -197,8 +200,8 @@ namespace GB.BlackDesert.Trade.Web.Lib
             return string2;
         }
 
-        public static string GetAES256EncryptToUrlTokenEncode(string plainText) => HttpServerUtility.UrlTokenEncode(new AESCrypto().EncryptAES256(plainText));
+        //public static string GetAES256EncryptToUrlTokenEncode(string plainText) => WebUtility.UrlEncodeToBytes(new AESCrypto().EncryptAES256(plainText));
 
-        public static string GetAES256DecryptFromUrlTokenEncode(string ciperText) => new AESCrypto().DecryptAES256(HttpServerUtility.UrlTokenDecode(ciperText));
+        public static string GetAES256DecryptFromUrlTokenEncode(string ciperText) => new AESCrypto().DecryptAES256(Encoding.Default.GetBytes(ciperText));
     }
 }

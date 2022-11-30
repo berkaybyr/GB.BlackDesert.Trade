@@ -9,6 +9,8 @@ using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -22,14 +24,13 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Script.Serialization;
 using System.Xml;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Common
 {
     public static class CommonModule
     {
+        public static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
         public const string HTTP_REQUEST_METHOD_GET = "GET";
         public const string HTTP_REQUEST_METHOD_DELETE = "DELETE";
         public const string HTTP_REQUEST_METHOD_POST = "POST";
@@ -38,14 +39,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         public const string HTTP_CONTENTS_TYPE_JSON = "text/json";
         public const string HTTP_CONTENTS_APP_TYPE_JSON = "application/json";
 
-        public static string SerializeObjectToJsonString<T>(T deserializeObject) => new JavaScriptSerializer().Serialize((object)deserializeObject);
+        public static string SerializeObjectToJsonString<T>(T deserializeObject) => JsonConvert.SerializeObject(deserializeObject);
 
-        public static T DeserializeOjectToJson<T>(string serializeObject) => new JavaScriptSerializer().Deserialize<T>(serializeObject);
+        public static T DeserializeOjectToJson<T>(string serializeObject) => JsonConvert.DeserializeObject<T>(serializeObject);
 
         public static string SerializeObjectToQueryString<T>(T deserializeObject)
         {
             string empty = string.Empty;
-            return string.Join("&", ((IEnumerable<PropertyInfo>)deserializeObject.GetType().GetProperties()).Where<PropertyInfo>((Func<PropertyInfo, bool>)(param => param.GetValue((object)(T)deserializeObject, (object[])null) != null)).Select<PropertyInfo, string>((Func<PropertyInfo, string>)(param => param.Name + "=" + HttpUtility.UrlEncode(param.GetValue((object)(T)deserializeObject, (object[])null).ToString()))).ToArray<string>());
+            return string.Join("&", ((IEnumerable<PropertyInfo>)deserializeObject.GetType().GetProperties()).Where<PropertyInfo>((Func<PropertyInfo, bool>)(param => param.GetValue((object)(T)deserializeObject, (object[])null) != null)).Select<PropertyInfo, string>((Func<PropertyInfo, string>)(param => param.Name + "=" + WebUtility.UrlEncode(param.GetValue((object)(T)deserializeObject, (object[])null).ToString()))).ToArray<string>());
         }
 
         public static string GetResourceValue(string _resKey)
@@ -62,7 +63,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 flag = string.IsNullOrEmpty(culture1);
                 CultureInfo culture2 = !flag.Equals(false) ? new CultureInfo(CommonModule.getBrowserCulture()) : new CultureInfo(culture1);
                 string classKey = "Resources";
-                object obj = (HttpContext.GetGlobalResourceObject(classKey, _resKey, culture2) ?? HttpContext.GetGlobalResourceObject(classKey, "TRADE_MARKET_WEB_ERROR_" + _resKey, culture2)) ?? HttpContext.GetGlobalResourceObject(classKey, "TRADE_MARKET_GAME_ERROR_" + _resKey, culture2);
+                //object obj = (httpContext.GetGlobalResourceObject(classKey, _resKey, culture2) ?? httpContext.GetGlobalResourceObject(classKey, "TRADE_MARKET_WEB_ERROR_" + _resKey, culture2)) ?? HttpContext.GetGlobalResourceObject(classKey, "TRADE_MARKET_GAME_ERROR_" + _resKey, culture2);
+                object obj = null;
                 resourceValue = obj != null ? obj.ToString() : _resKey;
             }
             catch (Exception ex)
@@ -105,21 +107,23 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
 
         public static string getBrowserCulture()
         {
-            string empty = string.Empty;
-            string browserCulture;
-            try
-            {
-                string[] userLanguages = HttpContext.Current.Request.UserLanguages;
-                if (userLanguages == null || userLanguages.Length == 0)
-                    return CommonModule.getDefaultCulture();
-                browserCulture = CommonModule.isAccessCulture(CultureInfo.CreateSpecificCulture(userLanguages[0].ToLowerInvariant().Trim()).ToString());
-            }
-            catch (Exception ex)
-            {
-                browserCulture = CommonModule.getDefaultCulture();
-                LogUtil.WriteLog(string.Format("Error Occurred. getBrowserCulture {0}", (object)ex.ToString()), "ERROR");
-            }
-            return browserCulture;
+            return CommonModule.getDefaultCulture();
+
+            //string empty = string.Empty;
+            //string browserCulture;
+            //try
+            //{
+            //    string[] userLanguages = httpContext.Request.;
+            //    if (userLanguages == null || userLanguages.Length == 0)
+            //        return CommonModule.getDefaultCulture();
+            //    browserCulture = CommonModule.isAccessCulture(CultureInfo.CreateSpecificCulture(userLanguages[0].ToLowerInvariant().Trim()).ToString());
+            //}
+            //catch (Exception ex)
+            //{
+            //    browserCulture = CommonModule.getDefaultCulture();
+            //    LogUtil.WriteLog(string.Format("Error Occurred. getBrowserCulture {0}", (object)ex.ToString()), "ERROR");
+            //}
+            //return browserCulture;
         }
 
         public static string isAccessCulture(string culture)
@@ -171,7 +175,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
           string httpContentType,
           out string relResult,
           out string errorMsg,
-          bool useProxy = false,
           bool isWriteLog = true)
         {
             relResult = string.Empty;
@@ -189,11 +192,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 {
                     httpWebRequest2 = (HttpWebRequest)WebRequest.Create(string.Format("{0}?{1}", (object)reqUrl, (object)reqParam));
                     httpWebRequest2.Method = httpMethod;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
                 }
                 else
                 {
@@ -202,11 +200,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     httpWebRequest2.Method = httpMethod;
                     httpWebRequest2.ContentType = httpContentType;
                     httpWebRequest2.ContentLength = (long)bytes.Length;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
                     Stream requestStream = httpWebRequest2.GetRequestStream();
                     requestStream.Write(bytes, 0, bytes.Length);
                     requestStream.Close();
@@ -261,11 +254,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 {
                     httpWebRequest2 = (HttpWebRequest)WebRequest.Create(string.Format("{0}?{1}", (object)reqUrl, (object)reqParam));
                     httpWebRequest2.Method = httpMethod;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
+                   
                 }
                 else
                 {
@@ -274,11 +263,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     httpWebRequest2.Method = httpMethod;
                     httpWebRequest2.ContentType = httpContentType;
                     httpWebRequest2.ContentLength = (long)reqParam.Length;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
+                    
                     Stream requestStream = httpWebRequest2.GetRequestStream();
                     requestStream.Write(bytes, 0, reqParam.Length);
                     requestStream.Close();
@@ -342,12 +327,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     _wRequest = (HttpWebRequest)WebRequest.Create(reqUrl + "?" + reqParam);
                     _wRequest.Method = httpMethod;
                     _wRequest.KeepAlive = false;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                    {
-                        _wProxy = new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort));
-                        _wProxy.BypassProxyOnLocal = false;
-                        _wRequest.Proxy = (IWebProxy)_wProxy;
-                    }
+                    
                 }
                 else
                 {
@@ -358,12 +338,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     _wRequest.ContentType = httpContentType;
                     _wRequest.ContentLength = (long)bytes.Length;
                     _wRequest.KeepAlive = false;
-                    if (ConstantMgr._isUseProxy && useProxy.Equals(true))
-                    {
-                        _wProxy = new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort));
-                        _wProxy.BypassProxyOnLocal = false;
-                        _wRequest.Proxy = (IWebProxy)_wProxy;
-                    }
+                   
                     _reqDataStream = _wRequest.GetRequestStream();
                     _reqDataStream.Write(bytes, 0, bytes.Length);
                 }
@@ -412,24 +387,24 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             string remoteIp = string.Empty;
             try
             {
-                if (HttpContext.Current.Request.Headers["X-Forwarded-For"] != null && !string.IsNullOrEmpty(HttpContext.Current.Request.Headers["X-Forwarded-For"].Trim()))
+                if (httpContext.Request.Headers["X-Forwarded-For"].ToString() != null && !string.IsNullOrEmpty(httpContext.Request.Headers["X-Forwarded-For"].ToString().Trim()))
                 {
-                    remoteIp = HttpContext.Current.Request.Headers["X-Forwarded-For"];
+                    remoteIp = httpContext.Request.Headers["X-Forwarded-For"];
                     if (remoteIp.IndexOf(",") > 0)
                         remoteIp = remoteIp.Split(',')[0];
                 }
-                if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].Trim()))
-                {
-                    remoteIp = HttpContext.Current.Request.Headers["HTTP_X_FORWARDED_FOR"];
-                    if (remoteIp.IndexOf(",") > 0)
-                        remoteIp = remoteIp.Split(',')[0];
-                }
-                if (HttpContext.Current.Request.Headers["X-PA-IP"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(HttpContext.Current.Request.Headers["X-PA-IP"].Trim()))
-                    remoteIp = HttpContext.Current.Request.Headers["X-PA-IP"];
-                if (HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"].Trim()))
-                    remoteIp = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-                if (string.IsNullOrEmpty(remoteIp))
-                    remoteIp = HttpContext.Current.Request.UserHostAddress;
+                //if (httpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(httpContext.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].Trim()))
+                //{
+                //    remoteIp = httpContext.Request.Headers["HTTP_X_FORWARDED_FOR"];
+                //    if (remoteIp.IndexOf(",") > 0)
+                //        remoteIp = remoteIp.Split(',')[0];
+                //}
+                //if (httpContext.Request.Headers["X-PA-IP"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(httpContext.Request.Headers["X-PA-IP"].ToString().Trim()))
+                //    remoteIp = httpContext.Request.Headers["X-PA-IP"];
+                //if (httpContext..ServerVariables["REMOTE_ADDR"] != null && string.IsNullOrEmpty(remoteIp) && !string.IsNullOrEmpty(httpContext.Request.ServerVariables["REMOTE_ADDR"].Trim()))
+                //    remoteIp = httpContext.Request.ServerVariables["REMOTE_ADDR"];
+                //if (string.IsNullOrEmpty(remoteIp))
+                //    remoteIp = httpContext.Request.UserHostAddress;
             }
             catch (Exception ex)
             {
@@ -468,16 +443,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             {
                 ServicePointManager.Expect100Continue = true;
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                if (serverType.Equals((object)ServerType.eProcess) && ConstantMgr._isUseLocalData)
-                {
-                    folder = string.IsNullOrEmpty(folder) ? "/" : folder + "/";
-                    xmlFile = XmlReader.Create(ConstantMgr.GetLocalDataFilePath() + folder + ConstantMgr._serviceProject + fileName, settings);
-                }
-                else
-                {
-                    folder = string.IsNullOrEmpty(folder) ? "/" : folder + "/";
-                    xmlFile = XmlReader.Create(ConstantMgr.GetDataFilePath() + folder + ConstantMgr._serviceProject + fileName, settings);
-                }
+                folder = string.IsNullOrEmpty(folder) ? "/" : folder + "/";
+                xmlFile = XmlReader.Create(ConstantMgr._xmlContentsLocalPath + folder + ConstantMgr._serviceProject + fileName, settings);
             }
             catch (Exception ex)
             {
@@ -523,7 +490,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             get
             {
                 bool isMobile = false;
-                string serverVariable = HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"];
+                string serverVariable = httpContext.Request.Headers["User-Agent"];
                 Regex regex1 = new Regex("(android|bb\\d+|meego).+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\\.(browser|link)|vodafone|wap|windows ce|xda|xiino", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 Regex regex2 = new Regex("1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\\-(n|u)|c55\\/|capi|ccwa|cdm\\-|cell|chtm|cldc|cmd\\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\\-s|devi|dica|dmob|do(c|p)o|ds(12|\\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\\-|_)|g1 u|g560|gene|gf\\-5|g\\-mo|go(\\.w|od)|gr(ad|un)|haie|hcit|hd\\-(m|p|t)|hei\\-|hi(pt|ta)|hp( i|ip)|hs\\-c|ht(c(\\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\\-(20|go|ma)|i230|iac( |\\-|\\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\\/)|klon|kpt |kwc\\-|kyo(c|k)|le(no|xi)|lg( g|\\/(k|l|u)|50|54|\\-[a-w])|libw|lynx|m1\\-w|m3ga|m50\\/|ma(te|ui|xo)|mc(01|21|ca)|m\\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\\-2|po(ck|rt|se)|prox|psio|pt\\-g|qa\\-a|qc(07|12|21|32|60|\\-[2-7]|i\\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\\-|oo|p\\-)|sdk\\/|se(c(\\-|0|1)|47|mc|nd|ri)|sgh\\-|shar|sie(\\-|m)|sk\\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\\-|v\\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\\-|tdg\\-|tel(i|m)|tim\\-|t\\-mo|to(pl|sh)|ts(70|m\\-|m3|m5)|tx\\-9|up(\\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\\-|your|zeto|zte\\-", RegexOptions.IgnoreCase | RegexOptions.Multiline);
                 Regex regex3 = new Regex("android|tablet|ipad|playbook|bb10|z30|nexus 10|nexus 7|gt-p|sch-i800|xoom|kindle|silk|kfapwi|pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline);
@@ -539,7 +506,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             get
             {
                 bool isPearlApp = false;
-                if (new Regex("pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline).IsMatch(HttpContext.Current.Request.ServerVariables["HTTP_USER_AGENT"]))
+                if (new Regex("pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline).IsMatch(httpContext.Request.Headers["User-Agent"]))
                     isPearlApp = true;
                 return isPearlApp;
             }
@@ -549,7 +516,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         {
             get
             {
-                List<string> list = ((IEnumerable<string>)ConstantMgr._allowBorwserList.Split('|')).ToList<string>();
+                List<string> list = ((IEnumerable<string>)ConstantMgr._allowBrowserList.Split('|')).ToList<string>();
                 if (list == null || list.Count < 1 || CommonModule.AgentInfo == null)
                     return false;
                 string str1 = CommonModule.AgentInfo[0];
@@ -630,7 +597,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         {
             get
             {
-                string lower = HttpContext.Current.Request.UserAgent.ToLower();
+                string lower = httpContext.Request.Headers["User-Agent"].ToString().ToLower();
                 string empty1 = string.Empty;
                 string empty2 = string.Empty;
                 List<string> agentInfo = new List<string>();
@@ -699,8 +666,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         }
 
         public static HttpRequestResult HttpRequest(
-          HttpRequestModel requestData,
-          ProxySettingModel proxyData)
+          HttpRequestModel requestData)
         {
             HttpRequestResult httpRequestResult = new HttpRequestResult();
             byte[] numArray = (byte[])null;
@@ -710,8 +676,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             StreamReader streamReader1 = (StreamReader)null;
             try
             {
-                if (proxyData._useTls12 || requestData._useTlsProtocol)
-                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                 if (requestData._useExpect100Continue)
                     ServicePointManager.Expect100Continue = true;
                 HttpWebRequest httpWebRequest2;
@@ -728,11 +692,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     }
                     if (requestData._useCertificate)
                         httpWebRequest2.ClientCertificates.Add((X509Certificate)requestData._wCertification);
-                    if (proxyData._useProxy)
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)proxyData._proxyUrl, (object)proxyData._proxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
                 }
                 else
                 {
@@ -748,11 +707,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     }
                     if (requestData._useCertificate)
                         httpWebRequest2.ClientCertificates.Add((X509Certificate)requestData._wCertification);
-                    if (proxyData._useProxy)
-                        httpWebRequest2.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)proxyData._proxyUrl, (object)proxyData._proxyPort))
-                        {
-                            BypassProxyOnLocal = false
-                        };
                     Stream requestStream = httpWebRequest2.GetRequestStream();
                     requestStream.Write(bytes, 0, bytes.Length);
                     requestStream.Close();
@@ -781,7 +735,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             {
                 httpRequestResult._resultCode = -99998;
                 httpRequestResult._resultMsg = ex.ToString();
-                LogUtil.WriteLog("[HttpRequestManager][HttpRequest][Exception] Exception : " + ex.ToString() + " , Param => " + CommonModule.SerializeObjectToJsonString<HttpRequestModel>(requestData) + " , useProxy : " + CommonModule.SerializeObjectToJsonString<ProxySettingModel>(proxyData), "ERROR");
+                LogUtil.WriteLog("[HttpRequestManager][HttpRequest][Exception] Exception : " + ex.ToString() + " , Param => " + CommonModule.SerializeObjectToJsonString<HttpRequestModel>(requestData), "ERROR");
             }
             finally
             {
@@ -873,8 +827,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     _accountNo = authInfo.accountNo,
                     _gameCode = num
                 };
-                ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
-                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(checkPakageUrl, CommonModule.SerializeObjectToJsonString<CheckPakageParamModel>(deserializeObject), "POST", "application/json"), proxyData);
+                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(new HttpRequestModel(checkPakageUrl, CommonModule.SerializeObjectToJsonString<CheckPakageParamModel>(deserializeObject), "POST", "application/json"));
                 if (httpRequestResult._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("CommonModule CheckPakage Requset Fail  response._resultCode : {0}", (object)httpRequestResult._resultCode), "WARN");
@@ -1011,12 +964,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     secret = otpAuthModel.otpKey,
                     isOtpBackupCode = str
                 };
-                ProxySettingModel proxyData = new ProxySettingModel(Convert.ToBoolean(ConstantMgr._isUseProxy), ConstantMgr._webProxyUrl, ConstantMgr._webProxyPort, true);
                 HttpRequestModel requestData = new HttpRequestModel(otpAuthUrl, CommonModule.SerializeObjectToJsonString<OtpAuthParamModel>(deserializeObject), "POST", "application/json");
                 WebHeaderCollection headerCollection = new WebHeaderCollection();
                 headerCollection.Add("WWW-Authenticate", string.Format("Basic realm=\"{0}\"", (object)"BlackDesert_Web"));
                 requestData._reqHeaders = (NameValueCollection)headerCollection;
-                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(requestData, proxyData);
+                HttpRequestResult httpRequestResult = CommonModule.HttpRequest(requestData);
                 if (httpRequestResult._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("CommonModule Otpauth Requset Fail  response._resultCode : {0}", (object)httpRequestResult._resultCode), "WARN");

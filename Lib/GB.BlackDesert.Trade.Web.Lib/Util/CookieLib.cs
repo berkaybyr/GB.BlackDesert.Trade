@@ -6,75 +6,66 @@
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
-using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Util
 {
     public static class CookieLib
     {
-        public static void SaveCookie(string cookieName, string cookieValue) => HttpContext.Current.Response.Cookies.Add(new HttpCookie(cookieName)
+        private static readonly HttpContext httpContext = new HttpContextAccessor().HttpContext;
+        public static void SaveCookie(string cookieName, string cookieValue)
         {
-            Domain = ConstantMgr._cookieDomain,
-            Value = cookieValue,
-            HttpOnly = true
-        });
+            httpContext.Response.Cookies.Append(cookieName, cookieValue, new CookieOptions
+            {
+                Domain = ConstantMgr._cookieDomain,
+                HttpOnly = true,
+                IsEssential = true,
+
+            });
+        }
 
         public static void SetCookie(
           string strCookieDomain,
           string strCookieName,
           string strCookieValue)
         {
-            HttpCookie cookie = new HttpCookie(strCookieName);
-            cookie.Value = strCookieValue;
-            cookie.Path = "/";
-            cookie.Domain = strCookieDomain;
-            cookie.Expires = CommonModule.GetCustomTime().AddMinutes((double)ConstantMgr._authenticationTimeOut);
-            if (ConstantMgr._useCookieProtect)
+
+            httpContext.Response.Cookies.Append(strCookieName, strCookieValue, new CookieOptions
             {
-                cookie.HttpOnly = true;
-                cookie.Secure = true;
-            }
-            HttpContext.Current.Response.Cookies.Add(cookie);
+                Domain = strCookieDomain,
+                Path = "/",
+                Expires = CommonModule.GetCustomTime().AddMinutes((double)ConstantMgr._authenticationTimeOut),
+                HttpOnly = ConstantMgr._useCookieProtect,
+                Secure = ConstantMgr._useCookieProtect
+            });
         }
 
         public static string GetCookie(string _cookieName)
         {
-            string empty = string.Empty;
-            if (HttpContext.Current.Request.Cookies[_cookieName] != null)
-                empty = HttpContext.Current.Request.Cookies[_cookieName].Value;
+            var empty = string.Empty;
+            var cookies = httpContext.Request.Cookies[_cookieName];
+            if (cookies is null || cookies.Length == 0)
+                empty = httpContext.Request.Cookies[_cookieName].ToString();
             return empty;
         }
 
         public static void Delete(string domain, string name)
         {
-            HttpCookie cookie = HttpContext.Current.Request.Cookies[name];
-            if (cookie == null)
-                return;
-            cookie.Expires = CommonModule.GetCustomTime().AddYears(-1);
-            cookie.Value = (string)null;
-            cookie.Path = "/";
-            cookie.Domain = domain;
-            HttpContext.Current.Response.Cookies.Add(cookie);
+
+            httpContext.Response.Cookies.Delete(name, new CookieOptions
+            {
+                Domain = domain,
+                Path = "/",
+                Expires = CommonModule.GetCustomTime().AddYears(-1),
+            });
         }
 
         public static void ChangeCookie(string domain, string name, string value)
         {
-            HttpCookie cookie = HttpContext.Current.Request.Cookies[name];
-            if (cookie != null)
-            {
-                cookie.Value = value;
-                cookie.Path = "/";
-                cookie.Domain = domain;
-                cookie.Expires = CommonModule.GetCustomTime().AddMinutes((double)ConstantMgr._authenticationTimeOut);
-                if (ConstantMgr._useCookieProtect)
-                {
-                    cookie.HttpOnly = true;
-                    cookie.Secure = true;
-                }
-                HttpContext.Current.Response.Cookies.Add(cookie);
-            }
-            else
-                CookieLib.SetCookie(domain, name, value);
+            Delete(domain, name);
+            SetCookie(domain, name, value);
         }
     }
 }

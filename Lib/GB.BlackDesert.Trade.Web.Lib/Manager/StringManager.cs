@@ -75,22 +75,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     foreach (string str2 in str1.Split(chArray1))
                     {
                         string end;
-                        if (ConstantMgr._isUseS3)
-                        {
-                            end = AmazonS3.Current.AmazonS3ObjectToString("/" + ConstantMgr.GetDefaultLanguage.ToUpper() + "/TradeMarket/Common/xml/" + ConstantMgr._serviceProject + "WorldMarketTranslationData/" + ConstantMgr._serviceType.ToUpper(), ConstantMgr._serviceProject + "LocalizedStringWorldTradeMarket_" + str2.ToUpper() + ".txt");
-                        }
-                        else
-                        {
-                            requestUriString = ConstantMgr._tradeXMLDomain + "/Common/xml/" + ConstantMgr._serviceProject + "WorldMarketTranslationData/" + ConstantMgr._serviceType.ToUpper() + "/" + ConstantMgr._serviceProject + "LocalizedStringWorldTradeMarket_" + str2.ToUpper() + ".txt";
-                            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
-                            if (ConstantMgr._isUseProxy)
-                                httpWebRequest.Proxy = (IWebProxy)new WebProxy(string.Format("{0}:{1}", (object)ConstantMgr._webProxyUrl, (object)ConstantMgr._webProxyPort))
-                                {
-                                    BypassProxyOnLocal = false
-                                };
-                            httpWebRequest.Timeout = 60000;
-                            end = new StreamReader(httpWebRequest.GetResponse().GetResponseStream(), Encoding.UTF8).ReadToEnd();
-                        }
+                        requestUriString = ConstantMgr._tradeXMLDomain + "/Common/xml/" + ConstantMgr._serviceProject + "WorldMarketTranslationData/" + ConstantMgr._serviceType.ToUpper() + "/" + ConstantMgr._serviceProject + "LocalizedStringWorldTradeMarket_" + str2.ToUpper() + ".txt";
+                        HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(requestUriString);
+                        
+                        httpWebRequest.Timeout = 60000;
+                        end = new StreamReader(httpWebRequest.GetResponse().GetResponseStream(), Encoding.UTF8).ReadToEnd();
                         string str3 = end;
                         char[] chArray2 = new char[1] { '\r' };
                         foreach (string str4 in str3.Split(chArray2))
