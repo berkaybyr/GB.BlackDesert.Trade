@@ -13,6 +13,8 @@ using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using EasMe;
+using GB.BlackDesert.Trade.Web.Api.Models.Request;
 
 namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
 {
@@ -20,12 +22,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
     [Route("[controller]/[action]")]
     public class TradeMarketController : Controller
     {
-        public TradeMarketController(IHttpContextAccessor accessor)
-        {
-            ContextAccess.Configure(accessor);
-        }
+     
 
-        [HttpPost]
         private CommonResult CheckAuthKeyToView(
           long userNo,
           string certifiedKey,
@@ -36,9 +34,9 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             ViewUserAuthModel viewUserAuthModel = new ViewUserAuthModel();
             string errorMsg = string.Empty;
             string relResult = string.Empty;
-            viewUserAuthModel.userNo = userNo;
+            viewUserAuthModel.userNo = userNo.ToString();
             viewUserAuthModel.certifiedKey = certifiedKey;
-            viewUserAuthModel.type = (int)type;
+            viewUserAuthModel.type = ((int)type).ToString();
             view.resultCode = CommonModule.HttpRequest(ConstantMgr._gameDomain + "/CheckAuthKeyToView", JsonConvert.SerializeObject((object)viewUserAuthModel), "POST", "text/json", out relResult, out errorMsg, isWriteLog: false);
             if (view.resultCode != 0)
             {
@@ -78,7 +76,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return Json((object)commonResult1);
             }
-            CommonResult view = this.CheckAuthKeyToView(authInfo.userNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_WalletList, ref userInfo);
+            CommonResult view = this.CheckAuthKeyToView(authInfo.numUserNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_WalletList, ref userInfo);
             if (view.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Http Error]GetMyWalletList({0}) - errorCode : {1}", (object)JsonConvert.SerializeObject((object)authInfo), (object)view.resultCode), "WARN");
@@ -184,7 +182,15 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
                 nationCode = userInfo.nationCode
             });
             view.resultMsg += "+";
-            view.resultMsg = view.resultMsg + Convert.ToString(totalWeight) + "_" + Convert.ToString(WorldMarketOptionManager.This().getMaxWeight()) + "_" + Convert.ToString(itemLimitedMaxCount) + "_" + Convert.ToString(addPearlItemLimitedCount) + "_" + Convert.ToString(currentPearlItemLimitedCount) + "_" + Convert.ToString(addWeight) + "_" + Convert.ToString(ringBuffCount) + "_" + Convert.ToString(lastOtpTimeUtc);
+            view.resultMsg = view.resultMsg + 
+                Convert.ToString(totalWeight) + "_" + 
+                Convert.ToString(WorldMarketOptionManager.This().getMaxWeight()) + "_" + 
+                Convert.ToString(itemLimitedMaxCount) + "_" + 
+                Convert.ToString(addPearlItemLimitedCount) + "_" + 
+                Convert.ToString(currentPearlItemLimitedCount) + "_" + 
+                Convert.ToString(addWeight) + "_" + 
+                Convert.ToString(ringBuffCount) + "_" + 
+                Convert.ToString(lastOtpTimeUtc);
             return ConstantMgr._isCompression ? File(CompressionModule.HaffmanCompression(view.resultMsg), "application/octet-stream") : Json((object)view);
         }
 
@@ -424,10 +430,10 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
         }
 
         [HttpPost]
-        public ActionResult GetBiddingInfoList(int? keyType, int? mainKey, int? subKey)
+        public ActionResult GetBiddingInfoList(ItemKeyInfo_Request item)
         {
             CommonDBResult<uspListBiddingInfo_Result> commonDbResult = new CommonDBResult<uspListBiddingInfo_Result>();
-            KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(mainKey.Value, subKey.Value);
+            KeyValuePair<int, int> keyValuePair = new KeyValuePair<int, int>(item.mainKey.Value, item.subKey.Value);
             CommonResult jsonResult = new CommonResult();
             if (!ServerControlManager.This().IsLoadComplete())
             {
@@ -436,33 +442,33 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
                 jsonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return Json((object)jsonResult);
             }
-            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(mainKey.Value, subKey.Value);
+            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(item.mainKey.Value, item.subKey.Value);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetBiddingInfoList({0}, {1}) Not Exist ItemInfo", (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetBiddingInfoList({0}, {1}) Not Exist ItemInfo", (object)item.mainKey, (object)item.subKey), "WARN");
                 jsonResult.resultCode = 8;
                 jsonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return Json((object)jsonResult);
             }
-            if (BiddingInfoManager.This().checkBiddingUpdateTimeXXX(mainKey.Value, info._enchantGroup, CommonModule.GetCustomTime()))
+            if (BiddingInfoManager.This().checkBiddingUpdateTimeXXX(item.mainKey.Value, info._enchantGroup, CommonModule.GetCustomTime()))
             {
-                CommonDBResult<uspListBiddingInfo_Result> list = WebDBManager.ListBiddingInfo(keyType, mainKey, new int?(info._enchantGroup), info._enchantMaterialKey, WorldMarketOptionManager.This().BiddingRatio);
+                CommonDBResult<uspListBiddingInfo_Result> list = WebDBManager.ListBiddingInfo(item.keyType, item.mainKey, new int?(info._enchantGroup), info._enchantMaterialKey, WorldMarketOptionManager.This().BiddingRatio);
                 jsonResult.resultCode = list.resultCode;
                 jsonResult.resultMsg = list.resultMsg;
                 if (jsonResult.resultCode != 0)
                     return Json((object)jsonResult);
-                if (!BiddingInfoManager.This().updateBiddingInfoListXXX(mainKey.Value, info._enchantGroup, ref list))
+                if (!BiddingInfoManager.This().updateBiddingInfoListXXX(item.mainKey.Value, info._enchantGroup, ref list))
                 {
                     jsonResult.resultMsg = "0";
                     return Json((object)jsonResult);
                 }
             }
-            BiddingInfoManager.This().getJsonStringByBiddingListXXX(mainKey.Value, info._enchantGroup, ref jsonResult);
+            BiddingInfoManager.This().getJsonStringByBiddingListXXX(item.mainKey.Value, info._enchantGroup, ref jsonResult);
             return ConstantMgr._isCompression ? File(CompressionModule.HaffmanCompression(jsonResult.resultMsg), "application/octet-stream") : Json((object)jsonResult);
         }
 
         [HttpPost]
-        public JsonResult GetAddEnchantLevelPrice(int? keyType, int? mainKey, int? subKey)
+        public JsonResult GetAddEnchantLevelPrice(ItemKeyInfo_Request item)
         {
             CommonDBResult<uspListWorldMarketDetail_Result> commonDbResult = new CommonDBResult<uspListWorldMarketDetail_Result>();
             CommonResult commonResult = new CommonResult();
@@ -473,32 +479,32 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult);
             }
-            if (mainKey.Value <= 0)
+            if (item.mainKey.Value <= 0)
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) [mainKey <= 0]", (object)keyType, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) [mainKey <= 0]", (object)item.keyType, (object)item.mainKey, (object)item.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
             }
-            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(mainKey.Value, subKey.Value);
+            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(item.mainKey.Value, item.subKey.Value);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)keyType, (object)mainKey, (object)subKey, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)item.keyType, (object)item.mainKey, (object)item.subKey, (object)item.mainKey, (object)item.subKey), "WARN");
                 commonResult.resultCode = 8;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItem");
                 return this.Json((object)commonResult);
             }
-            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(mainKey.Value, info._enchantGroup);
-            if (info._enchantGroup > subKey.Value || subKey.Value > enchantMaxGroup)
+            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(item.mainKey.Value, info._enchantGroup);
+            if (info._enchantGroup > item.subKey.Value || item.subKey.Value > enchantMaxGroup)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]GetAddEnchantLevelPrice({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)subKey.Value, (object)mainKey.Value, (object)info._enchantGroup), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]GetAddEnchantLevelPrice({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)item.subKey.Value, (object)item.mainKey.Value, (object)info._enchantGroup), "WARN");
                 commonResult.resultCode = 9;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_InvalidItemGroup");
                 return this.Json((object)commonResult);
             }
             if (enchantMaxGroup == info._enchantGroup)
             {
-                commonResult.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(subKey.Value);
+                commonResult.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(item.subKey.Value);
                 return this.Json((object)commonResult);
             }
             if (WorldMarketItemInfoManager.This().checkUpdateTimeByItemInof(info._enchantMaterialKey, CommonModule.GetCustomTime()))
@@ -524,12 +530,12 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             long num = WorldMarketItemInfoManager.This().getMaterialItemInfoXXX(info._enchantMaterialKey) * info._enchantNeedCount;
             if (num < 0L)
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) - enchantMaterialKey({3}) [totalPrice < 0]", (object)keyType, (object)mainKey, (object)subKey, (object)info._enchantMaterialKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetAddEnchantLevelPrice({0}, {1}, {2}) - enchantMaterialKey({3}) [totalPrice < 0]", (object)item.keyType, (object)item.mainKey, (object)item.subKey, (object)info._enchantMaterialKey), "WARN");
                 commonResult.resultCode = 14;
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_ERROR_MSG_PRICE_WORNG");
                 return this.Json((object)commonResult);
             }
-            commonResult.resultMsg = Convert.ToString(num) + "-" + Convert.ToString(subKey.Value);
+            commonResult.resultMsg = Convert.ToString(num) + "-" + Convert.ToString(item.subKey.Value);
             return this.Json((object)commonResult);
         }
 
@@ -549,7 +555,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             CommonDBResult<uspListUserBiddingSell_Result> commonDbResult2 = new CommonDBResult<uspListUserBiddingSell_Result>();
             CommonDBResult<uspListWorldMarketDetail_Result> commonDbResult3 = new CommonDBResult<uspListWorldMarketDetail_Result>();
             ViewUserAuthResultModel userInfo = new ViewUserAuthResultModel();
-            CommonResult view = this.CheckAuthKeyToView(authInfo.userNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_BiddingList, ref userInfo);
+            CommonResult view = this.CheckAuthKeyToView(authInfo.numUserNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_BiddingList, ref userInfo);
             if (view.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Http Error]GetMyBiddingList({0}, {1}) - errorCode : {2}", (object)authInfo.userNo, (object)authInfo.certifiedKey, (object)view.resultCode), "WARN");
@@ -652,32 +658,32 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
         }
 
         [HttpPost]
-        public JsonResult GetTradePrice(int? keyType, int? mainKey, int? subKey)
+        public JsonResult GetTradePrice(ItemKeyInfo_Request item)
         {
             CommonDBResult<uspListWorldMarketDetail_Result> commonDbResult = new CommonDBResult<uspListWorldMarketDetail_Result>();
             CommonResult commonResult1 = new CommonResult();
             CommonResult commonResult2 = new CommonResult();
-            commonResult2.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(mainKey.Value) + "-" + Convert.ToString(subKey.Value);
+            commonResult2.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(item.mainKey.Value) + "-" + Convert.ToString(item.subKey.Value);
             if (!ServerControlManager.This().IsLoadComplete())
             {
                 LogUtil.WriteLog(string.Format("GetTradePrice Fail is Not Open"), "WARN");
                 return this.Json((object)commonResult2);
             }
-            if (mainKey.Value <= 0)
+            if (item.mainKey.Value <= 0)
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) [mainKey <= 0]", (object)keyType, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) [mainKey <= 0]", (object)item.keyType, (object)item.mainKey, (object)item.subKey), "WARN");
                 return this.Json((object)commonResult2);
             }
-            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(mainKey.Value, subKey.Value);
+            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(item.mainKey.Value, item.subKey.Value);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)keyType, (object)mainKey, (object)subKey, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)item.keyType, (object)item.mainKey, (object)item.subKey, (object)item.mainKey, (object)item.subKey), "WARN");
                 return this.Json((object)commonResult2);
             }
-            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(mainKey.Value, info._enchantGroup);
-            if (info._enchantGroup > subKey.Value || subKey.Value > enchantMaxGroup)
+            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(item.mainKey.Value, info._enchantGroup);
+            if (info._enchantGroup > item.subKey.Value || item.subKey.Value > enchantMaxGroup)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]GetTradePrice({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)subKey.Value, (object)mainKey.Value, (object)info._enchantGroup), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]GetTradePrice({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)item.subKey.Value, (object)item.mainKey.Value, (object)info._enchantGroup), "WARN");
                 return this.Json((object)commonResult2);
             }
             long pricePerOne = 0;
@@ -687,12 +693,12 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             long totalTradeCount = 0;
             long lastTradePrice = 0;
             long lastTradeTime = 0;
-            CommonResult commonResult3 = WebDBManager.WorldMarketDetailOne(mainKey, info._enchantGroup, ref pricePerOne, ref count, ref minPrice, ref maxPrice, ref totalTradeCount, ref lastTradePrice, ref lastTradeTime);
+            CommonResult commonResult3 = WebDBManager.WorldMarketDetailOne(item.mainKey, info._enchantGroup, ref pricePerOne, ref count, ref minPrice, ref maxPrice, ref totalTradeCount, ref lastTradePrice, ref lastTradeTime);
             if (commonResult3.resultCode != 0)
                 return this.Json((object)commonResult2);
             if (enchantMaxGroup == info._enchantGroup)
             {
-                commonResult3.resultMsg = Convert.ToString(pricePerOne) + "-" + Convert.ToString(mainKey.Value) + "-" + Convert.ToString(subKey.Value);
+                commonResult3.resultMsg = Convert.ToString(pricePerOne) + "-" + Convert.ToString(item.mainKey.Value) + "-" + Convert.ToString(item.subKey.Value);
                 return this.Json((object)commonResult3);
             }
             if (WorldMarketItemInfoManager.This().checkUpdateTimeByItemInof(info._enchantMaterialKey, CommonModule.GetCustomTime()))
@@ -713,40 +719,40 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             long num = WorldMarketItemInfoManager.This().getMaterialItemInfoXXX(info._enchantMaterialKey) * info._enchantNeedCount;
             if (num < 0L)
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) - enchantMaterialKey({3}) [totalPrice < 0]", (object)keyType, (object)mainKey, (object)subKey, (object)info._enchantMaterialKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetTradePrice({0}, {1}, {2}) - enchantMaterialKey({3}) [totalPrice < 0]", (object)item.keyType, (object)item.mainKey, (object)item.subKey, (object)info._enchantMaterialKey), "WARN");
                 return this.Json((object)commonResult2);
             }
-            commonResult3.resultMsg = Convert.ToString(pricePerOne + num) + "-" + Convert.ToString(mainKey.Value) + "-" + Convert.ToString(subKey.Value);
+            commonResult3.resultMsg = Convert.ToString(pricePerOne + num) + "-" + Convert.ToString(item.mainKey.Value) + "-" + Convert.ToString(item.subKey.Value);
             return this.Json((object)commonResult3);
         }
 
         [HttpPost]
-        public JsonResult GetMarketPriceInfo(int? keyType, int? mainKey, int? subKey)
+        public JsonResult GetMarketPriceInfo(ItemKeyInfo_Request item)
         {
             CommonDBResult<uspGetMarketPriceInfo_Result> commonDbResult1 = new CommonDBResult<uspGetMarketPriceInfo_Result>();
             CommonResult commonResult1 = new CommonResult();
             CommonResult commonResult2 = new CommonResult();
-            commonResult2.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(mainKey.Value) + "-" + Convert.ToString(subKey.Value);
+            commonResult2.resultMsg = Convert.ToString(0) + "-" + Convert.ToString(item.mainKey.Value) + "-" + Convert.ToString(item.subKey.Value);
             if (!ServerControlManager.This().IsLoadComplete())
             {
                 LogUtil.WriteLog(string.Format("GetMarketPriceInfo Fail is Not Open"), "WARN");
                 return this.Json((object)commonResult2);
             }
-            if (mainKey.Value <= 0)
+            if (item.mainKey.Value <= 0)
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetMarketPriceInfo({0}, {1}, {2}) [mainKey <= 0]", (object)keyType, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetMarketPriceInfo({0}, {1}, {2}) [item.mainKey <= 0]", (object)item.keyType, (object)item.mainKey, (object)item.subKey), "WARN");
                 return this.Json((object)commonResult2);
             }
-            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(mainKey.Value, subKey.Value);
+            TradeMarketItemInfo info = ItemInfoManager.This().getInfo(item.mainKey.Value, item.subKey.Value);
             if (!info.isValid())
             {
-                LogUtil.WriteLog(string.Format("[Item Error] GetMarketPriceInfo({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)keyType, (object)mainKey, (object)subKey, (object)mainKey, (object)subKey), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error] GetMarketPriceInfo({0}, {1}, {2}) ItemInfo({3}, {4}) Not Exist ItemInfo ", (object)item.keyType, (object)item.mainKey, (object)item.subKey, (object)item.mainKey, (object)item.subKey), "WARN");
                 return this.Json((object)commonResult2);
             }
-            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(mainKey.Value, info._enchantGroup);
-            if (info._enchantGroup > subKey.Value || subKey.Value > enchantMaxGroup)
+            int enchantMaxGroup = ItemInfoManager.This().getEnchantMaxGroup(item.mainKey.Value, info._enchantGroup);
+            if (info._enchantGroup > item.subKey.Value || item.subKey.Value > enchantMaxGroup)
             {
-                LogUtil.WriteLog(string.Format("[Item Error]GetMarketPriceInfo({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)subKey.Value, (object)mainKey.Value, (object)info._enchantGroup), "WARN");
+                LogUtil.WriteLog(string.Format("[Item Error]GetMarketPriceInfo({0}) getEnchantMaxGroup({1}, {2}) Group : Out Of Range", (object)item.subKey.Value, (object)item.mainKey.Value, (object)info._enchantGroup), "WARN");
                 return this.Json((object)commonResult2);
             }
             long pricePerOne = 0;
@@ -756,8 +762,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
             long totalTradeCount = 0;
             long lastTradePrice = 0;
             long lastTradeTime = 0;
-            CommonResult commonResult3 = WebDBManager.WorldMarketDetailOne(mainKey, info._enchantGroup, ref pricePerOne, ref count, ref minPrice, ref maxPrice, ref totalTradeCount, ref lastTradePrice, ref lastTradeTime);
-            CommonDBResult<uspGetMarketPriceInfo_Result> commonDbResult2 = WebDBManager.WorldMarketPriceInfo(keyType, mainKey, subKey);
+            CommonResult commonResult3 = WebDBManager.WorldMarketDetailOne(item.mainKey, info._enchantGroup, ref pricePerOne, ref count, ref minPrice, ref maxPrice, ref totalTradeCount, ref lastTradePrice, ref lastTradeTime);
+            CommonDBResult<uspGetMarketPriceInfo_Result> commonDbResult2 = WebDBManager.WorldMarketPriceInfo(item.keyType, item.mainKey, item.subKey);
             if (commonResult3.resultCode != 0)
                 return this.Json((object)commonResult2);
             DateTime customTime = CommonModule.GetCustomTime();
@@ -820,7 +826,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.TradeMarket
                 commonResult.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult);
             }
-            CommonResult view = this.CheckAuthKeyToView(authInfo.userNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_WalletList, ref userInfo);
+            CommonResult view = this.CheckAuthKeyToView(authInfo.numUserNo, authInfo.certifiedKey, ViewAuthType.eViewAuthType_WalletList, ref userInfo);
             if (view.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Http Error]GetMyWaitNoticeList({0}) - errorCode : {1}", (object)JsonConvert.SerializeObject((object)authInfo), (object)view.resultCode), "WARN");

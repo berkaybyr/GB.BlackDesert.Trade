@@ -9,7 +9,6 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
 
         public IntroController(IHttpContextAccessor accessor)
         {
-            ContextAccess.Configure(accessor);
         }
 
         [HttpGet]

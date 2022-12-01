@@ -743,7 +743,6 @@
     <Compile Include="Util\CacheService.cs" />
     <Compile Include="Util\CookieLib.cs" />
     <Compile Include="Util\HttpClientUtil.cs" />
-    <Compile Include="Util\ContextAccess.cs" />
     <Compile Include="Util\PushUtil.cs" />
     <Compile Include="Util\LogDetailFlag.cs" />
     <Compile Include="Util\LogMessageModel.cs" />
@@ -853,19 +852,19 @@
     <Compile Include="Manager\Auth\OtpAuthParamModel.cs" />
     <Compile Include="Common\CommonDDLB.cs" />
     <Compile Include="Common\CommonModule.cs" />
-    <Compile Include="Common\ErrorNo.cs" />
-    <Compile Include="Common\WebResultNo.cs" />
-    <Compile Include="Common\ServerType.cs" />
-    <Compile Include="Common\ServerLoading.cs" />
-    <Compile Include="Common\ServerLogType.cs" />
-    <Compile Include="Common\KeyType.cs" />
-    <Compile Include="Common\CommonType.cs" />
-    <Compile Include="Common\FluctuationType.cs" />
-    <Compile Include="Common\StopReasonType.cs" />
-    <Compile Include="Common\SpecialKey.cs" />
-    <Compile Include="Common\ContentsMasterType.cs" />
-    <Compile Include="Common\ViewAuthType.cs" />
-    <Compile Include="Common\RingBuffType.cs" />
+    <Compile Include="Enum\ErrorNo.cs" />
+    <Compile Include="Enum\WebResultNo.cs" />
+    <Compile Include="Enum\ServerType.cs" />
+    <Compile Include="Enum\ServerLoading.cs" />
+    <Compile Include="Enum\ServerLogType.cs" />
+    <Compile Include="Enum\KeyType.cs" />
+    <Compile Include="Enum\CommonType.cs" />
+    <Compile Include="Enum\FluctuationType.cs" />
+    <Compile Include="Enum\StopReasonType.cs" />
+    <Compile Include="Enum\SpecialKey.cs" />
+    <Compile Include="Enum\ContentsMasterType.cs" />
+    <Compile Include="Enum\ViewAuthType.cs" />
+    <Compile Include="Enum\RingBuffType.cs" />
     <Compile Include="Common\TradeModule.cs" />
     <Compile Include="Common\WorldMarketBase.cs" />
     <Compile Include="Common\WorldMarketLog.cs" />
@@ -957,9 +956,7 @@
       <LastGenOutput>WorldDb.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameDb\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

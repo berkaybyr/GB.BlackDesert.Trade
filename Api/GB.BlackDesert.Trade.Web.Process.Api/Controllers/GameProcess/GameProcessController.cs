@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Data.Entity.Core.Objects;
 using System.Text;
+using EasMe;
 
 namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
 {
@@ -17,7 +18,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers.GameProcess
     {
         public GameProcessController(IHttpContextAccessor accessor)
         {
-            ContextAccess.Configure(accessor);
+            IEasLog.ConfigureHttpContext(accessor);
         }
 
         private CommandProcess _commnadProcess = new CommandProcess();

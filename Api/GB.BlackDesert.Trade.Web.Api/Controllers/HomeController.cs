@@ -26,9 +26,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
     [Route("[controller]/[action]")]
     public class HomeController : BaseController
     {
-        public HomeController(IHttpContextAccessor accessor)
+        public HomeController()
         {
-            ContextAccess.Configure(accessor);
         }
 
         private const int CACHE_SECOND = 1;
@@ -46,13 +45,13 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             string empty = string.Empty;
             try
             {
-                if (AuthenticateManager.IsAutheticated.Equals(false))
+                if (AuthenticateManager.IsAuthenticated(HttpContext).Equals(false))
                     return (ActionResult)this.Redirect(ConstantMgr._authRedirectUri);
                 if ((ConstantMgr._serviceType.Equals("DEV") || ConstantMgr._serviceType.Equals("CS") || ConstantMgr._serviceType.Equals("TR") || ConstantMgr._serviceType.Equals("ID")) && lang.IsNotNullOrEmpty())
-                    CommonModule.SetUserCulture(lang);
+                    CommonModule.SetUserCulture(HttpContext ,lang);
                 CommonResult commonResult = new CommonResult();
                 UserInfomationModel userInfo = (UserInfomationModel)null;
-                TradeModule.CheckAuthKey(ref userInfo, this._userinfo.accountNo, this._userinfo.certifiedKey);
+                TradeModule.CheckAuthKey(ref userInfo, HttpContext,this.UserInfo.accountNo, this.UserInfo.certifiedKey);
                 mainViewModel.categoryList = CategoryInfoManager.This().CategoryList;
                 mainViewModel.userNickName = this.AuthUserInfo._userNickName;
                 mainViewModel._secondPwdPass = this.AuthUserInfo._secondPwdPass;
@@ -74,7 +73,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             string empty = string.Empty;
             try
             {
-                CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, this._userinfo.accountNo, this._userinfo.certifiedKey);
+                CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext,this.UserInfo.accountNo, this.UserInfo.certifiedKey);
                 if (commonResult2.resultCode != 0)
                 {
                     myWalletListModel.resultCode = commonResult2.resultCode;
@@ -138,7 +137,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                     return this.Json((object)myWalletListModel);
                 }
                 myWalletListModel.maxWeight = WorldMarketOptionManager.This().getMaxWeight();
-                myWalletListModel.useValuePackage = !(this._userinfo.userInfoModel._valuePackageExpiration < CommonModule.GetCustomTime());
+                myWalletListModel.useValuePackage = !(this.UserInfo.userInfoModel._valuePackageExpiration < CommonModule.GetCustomTime());
                 myWalletListModel.feeRate = (double)WebDBManager.getAddTaxDiscountRate(userInfo._nationCode, userInfo._worldNo, userInfo._userNo);
                 myWalletListModel.feeRate /= 10000.0;
                 if (myWalletListModel.useValuePackage)
@@ -151,9 +150,9 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                 WebDBManager.getPearlItemTradeCount(new int?(userInfo._nationCode), new int?(userInfo._worldNo), new long?(userInfo._userNo), out addPearlItemLimitedCount, out currentPearlItemLimitedCount, out addWeight, out ringBuffCount);
                 myWalletListModel.addWeight = addWeight;
                 myWalletListModel.ringBuffCount = ringBuffCount;
-                myWalletListModel.useAddWeightBuff = !(this._userinfo.userInfoModel._addWeightBuffExpiration < CommonModule.GetCustomTime());
+                myWalletListModel.useAddWeightBuff = !(this.UserInfo.userInfoModel._addWeightBuffExpiration < CommonModule.GetCustomTime());
                 if (myWalletListModel.useAddWeightBuff)
-                    myWalletListModel.addWeight += (long)WorldMarketOptionManager.This().getIncreaseWeightByBuff(this._userinfo.userInfoModel._addWeightBuffExpiration);
+                    myWalletListModel.addWeight += (long)WorldMarketOptionManager.This().getIncreaseWeightByBuff(this.UserInfo.userInfoModel._addWeightBuffExpiration);
             }
             catch (Exception ex)
             {
@@ -176,7 +175,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             CommonResult commonResult1 = new CommonResult();
             UserInfomationModel userInfo = (UserInfomationModel)null;
             string empty = string.Empty;
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, this._userinfo.accountNo, this._userinfo.certifiedKey);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext ,this.UserInfo.accountNo, this.UserInfo.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]GetMyBiddingList() errorCode({0}) // errorMessage={1}", (object)commonResult2.resultCode, (object)commonResult2.resultMsg), "WARN");
@@ -203,7 +202,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             UserInfomationModel userInfomationModel = new UserInfomationModel();
             try
             {
-                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(HttpContext);
                 if (authInfo != null)
                 {
                     UserInfomationModel userInfoModel = authInfo.userInfoModel;
@@ -550,7 +549,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             string empty = string.Empty;
             try
             {
-                CommonResult commonResult = TradeModule.CheckAuthKey(ref userInfo, this._userinfo.accountNo, this._userinfo.certifiedKey);
+                CommonResult commonResult = TradeModule.CheckAuthKey(ref userInfo, HttpContext ,this.UserInfo.accountNo, this.UserInfo.certifiedKey);
                 if (commonResult.resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("[Auth Error]GetMyBiddingList() errorCode({0}) // errorMessage={1}", (object)commonResult.resultCode, (object)commonResult.resultMsg), "WARN");
@@ -966,7 +965,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                 bool result = false;
                 if (ConstantMgr._serviceType.ToLower().Equals("dev").Equals(true))
                 {
-                    AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+                    AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(HttpContext);
                     sellBuyInfoModel.resultCode = TradeModule.isOTPCheckItem(keyType, mainKey, subKey, out result);
                     if (sellBuyInfoModel.resultCode != 0)
                     {
@@ -997,8 +996,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SetLanguage(string lang)
         {
-            CookieLib.Delete(ConstantMgr._cookieDomain, "tradeHistory");
-            CommonModule.SetUserCulture(lang);
+            CookieLib.Delete(HttpContext,ConstantMgr._cookieDomain, "tradeHistory");
+            CommonModule.SetUserCulture(HttpContext, lang);
             return Redirect("/");
         }
 
@@ -1015,7 +1014,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                 using (SA_BETA_WORLDDB_0002 SA_BETA_WORLDDB_0002 = new SA_BETA_WORLDDB_0002())
                 {
                     ObjectParameter resultCode = new ObjectParameter("resultCode", typeof(int));
-                    AuthenticationInfo = AuthenticateManager.GetAuthInfo();
+                    AuthenticationInfo = AuthenticateManager.GetAuthInfo(HttpContext);
                     SA_BETA_WORLDDB_0002.uspCheckSecondPwd(new long?(AuthenticationInfo.userInfoModel._userNo), secondPwd, resultCode);
                     num = Convert.ToInt32(resultCode.Value);
                 }
@@ -1032,7 +1031,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                     if (num.Equals(0))
                     {
                         AuthenticationInfo.userInfoModel._secondPwdPass = true;
-                        AuthenticateManager.Authenticate(AuthenticationInfo);
+                        AuthenticateManager.Authenticate(HttpContext, AuthenticationInfo );
                         commonResult.resultCode = 0;
                         commonResult.resultMsg = "Success";
                     }
@@ -1062,7 +1061,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             CommonResult json;
             try
             {
-                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(HttpContext);
                 commonResult = new CommonResult();
                 if (authInfo.IsNull<AuthenticationInfo>())
                 {

@@ -10,12 +10,14 @@ using GB.BlackDesert.Trade.Web.Lib.Manager.Auth;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
+using System.Runtime.Remoting.Contexts;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Manager
 {
@@ -24,40 +26,38 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
 
         public static ServerType _servcerType = ServerType.eCount;
 
-        public static bool IsAutheticated
+        public static bool IsAuthenticated(HttpContext context)
         {
-            get
+            bool isAutheticated = false;
+            if (!ConstantMgr._isPaAccount)
             {
-                bool isAutheticated = false;
-                if (!ConstantMgr._isPaAccount)
+                AuthenticationInfo authenticationInfo = AuthenticateManager.GetAuthenticationInfo(context);
+                if (authenticationInfo != null)
                 {
-                    AuthenticationInfo authenticationInfo = AuthenticateManager.GetAuthenticationInfo();
-                    if (authenticationInfo != null)
+                    if (authenticationInfo.AuthExpiration > CommonModule.GetCustomTime())
                     {
-                        if (authenticationInfo.AuthExpiration > CommonModule.GetCustomTime())
-                        {
-                            isAutheticated = true;
-                        }
-                        else
-                        {
-                            isAutheticated = false;
-                            AuthenticateManager.RemoveAuthTicket();
-                        }
+                        isAutheticated = true;
+                    }
+                    else
+                    {
+                        isAutheticated = false;
+                        AuthenticateManager.RemoveAuthTicket(context);
                     }
                 }
-                else if (AuthenticateManager.NewGetAuthenticationInfo() != null)
-                    isAutheticated = true;
-                return isAutheticated;
             }
+            else if (AuthenticateManager.NewGetAuthenticationInfo(context) != null)
+                isAutheticated = true;
+            return isAutheticated;
         }
+        
 
-        public static void Authenticate(AuthenticationInfo AuthenticationInfo)
+        public static void Authenticate(HttpContext context, AuthenticationInfo AuthenticationInfo)
         {
             string empty = string.Empty;
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<AuthenticationInfo>(AuthenticationInfo), SecurityMgr.Enum.Des);
-                ContextAccess.Current.Session.Set(ConstantMgr._authCookieName,Encoding.Default.GetBytes(str));
+                context.Session.Set(ConstantMgr._authCookieName,Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -65,13 +65,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             }
         }
 
-        public static void SetAuthenticationInfo(GetSessionInfoResultModel sessionInfo)
+        public static void SetAuthenticationInfo(HttpContext context, GetSessionInfoResultModel sessionInfo)
         {
             string empty = string.Empty;
             try
             {
                 string str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<GetSessionInfoResultModel>(sessionInfo), SecurityMgr.Enum.AES);
-                ContextAccess.Current.Session.Set(ConstantMgr._authCookieName, Encoding.Default.GetBytes(str));
+                context.Session.Set(ConstantMgr._authCookieName, Encoding.Default.GetBytes(str));
             }
             catch (Exception ex)
             {
@@ -79,23 +79,23 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             }
         }
 
-        public static void RemoveAuthTicket()
+        public static void RemoveAuthTicket(HttpContext context)
         {
 
-            ContextAccess.Current.Session.Remove(ConstantMgr._authCookieName);
-            ContextAccess.Current.Session.Clear();
-            CookieLib.Delete(ConstantMgr._cookieDomain, "ASP.NET_SessionId");
+            context.Session.Remove(ConstantMgr._authCookieName);
+            context.Session.Clear();
+            CookieLib.Delete(context, ConstantMgr._cookieDomain, "ASP.NET_SessionId");
         }
 
-        public static AuthenticationInfo GetAuthInfo() => ConstantMgr._isPaAccount ? AuthenticateManager.NewGetAuthenticationInfo() : AuthenticateManager.GetAuthenticationInfo();
+        public static AuthenticationInfo GetAuthInfo(HttpContext context) => ConstantMgr._isPaAccount ? AuthenticateManager.NewGetAuthenticationInfo(context) : AuthenticateManager.GetAuthenticationInfo(context);
 
-        private static AuthenticationInfo GetAuthenticationInfo()
+        private static AuthenticationInfo GetAuthenticationInfo(HttpContext context)
         {
             AuthenticationInfo authenticationInfo = (AuthenticationInfo)null;
             string str = string.Empty;
             try
             {
-                if (ContextAccess.Current.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
+                if (context.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                 {
 
                     str = Encoding.Default.GetString(bytes);
@@ -108,7 +108,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             if (authenticationInfo.AuthExpiration < CommonModule.GetCustomTime())
                             {
                                 authenticationInfo = (AuthenticationInfo)null;
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                             }
                         }
                     }
@@ -118,12 +118,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 LogUtil.WriteLog("Authenticatemanager GetAuthenticationInfo authTicket : " + str + " \n Exception : " + ex.ToString(), "ERROR");
                 authenticationInfo = (AuthenticationInfo)null;
-                AuthenticateManager.RemoveAuthTicket();
+                AuthenticateManager.RemoveAuthTicket(context);
             }
             return authenticationInfo;
         }
 
-        private static AuthenticationInfo NewGetAuthenticationInfo()
+        private static AuthenticationInfo NewGetAuthenticationInfo(HttpContext context)
         {
             DateTime minValue1 = DateTime.MinValue;
             DateTime minValue2 = DateTime.MinValue;
@@ -135,9 +135,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             bool flag = false;
             try
             {
-                if (!ContextAccess.Current.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
+                if (!context.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))
                     return (AuthenticationInfo)null;
-                string absolutePath = ContextAccess.Current.Request.Path;
+                string absolutePath = context.Request.Path;
                 var sessionVal = Encoding.Default.GetString(bytes);
                 GetSessionInfoResultModel json1 = CommonModule.DeserializeOjectToJson<GetSessionInfoResultModel>(new SecurityLib().Decrypt(sessionVal, SecurityMgr.Enum.AES));
                 DateTime dateTime1 = Convert.ToDateTime(json1._expireDate);
@@ -146,12 +146,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 {
                     if (dateTime1 < customTime)
                     {
-                        AuthenticateManager.RemoveAuthTicket();
+                        AuthenticateManager.RemoveAuthTicket(context);
                         return (AuthenticationInfo)null;
                     }
                     if (dateTime1.AddMinutes(-10.0) < customTime && customTime < dateTime1)
                     {
-                        absolutePath = ContextAccess.Current.Request.Path;
+                        absolutePath = context.Request.Path;
                         UseRefreshtokenModel deserializeObject = new UseRefreshtokenModel();
                         deserializeObject._refreshtoken = json1._refreshToken;
                         HttpRequestResult httpRequestResult1 = CommonModule.HttpRequest(new HttpRequestModel(ConstantMgr._apiBaseOauthUrl + "/Authorize/RefreshToken", CommonModule.SerializeObjectToJsonString<UseRefreshtokenModel>(deserializeObject), "POST", "application/json"));
@@ -188,13 +188,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         dateTime2 = dateTime2.AddMilliseconds((double)json2.expires_in);
                         string str = dateTime2.ToString("yyyy-MM-dd HH:mm:ss");
                         sessionInfoResultModel._expireDate = str;
-                        AuthenticateManager.SetAuthenticationInfo(json1);
+                        AuthenticateManager.SetAuthenticationInfo(context, json1);
                     }
                 }
                 TimeSpan timeSpan = CommonModule.GetCustomTime() - json1._sessionSearchTime;
                 if (string.IsNullOrEmpty(json1._authTicket) || 1.0 <= timeSpan.TotalSeconds)
                 {
-                    string remoteIp = CommonModule.GetRemoteIP();
+                    string remoteIp = CommonModule.GetRemoteIP(context);
                     GetSessionAuthTicketParamModel deserializeObject = new GetSessionAuthTicketParamModel()
                     {
                         _accountNo = json1._accountNo,
@@ -210,14 +210,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                     if (httpRequestResult._resultCode != 0)
                     {
                         LogUtil.WriteLog(string.Format("[Authenticatemanager][GetNewAuthenticationInfo][SessionAPIRequest][ERROR] {0}", (object)httpRequestResult._resultCode), "WARN");
-                        AuthenticateManager.RemoveAuthTicket();
+                        AuthenticateManager.RemoveAuthTicket(context);
                         return (AuthenticationInfo)null;
                     }
                     GetSessionAuthTicketResultModel json3 = CommonModule.DeserializeOjectToJson<GetSessionAuthTicketResultModel>(httpRequestResult._resultData);
                     if (json3 == null || string.IsNullOrEmpty(json3._authTicket))
                     {
                         LogUtil.WriteLog("[Authenticatemanager][GetNewAuthenticationInfo][GetSessionAuthTicket][ERROR]", "WARN");
-                        AuthenticateManager.RemoveAuthTicket();
+                        AuthenticateManager.RemoveAuthTicket(context);
                         return (AuthenticationInfo)null;
                     }
                     if (!json1._isPearlApp && new DateTime(json1._ipCheckTime).AddHours(1.0) < customTime)
@@ -225,14 +225,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                         if (!string.IsNullOrEmpty(json3._ip) && !remoteIp.Equals(new SecurityLib().Decrypt(json3._ip, SecurityMgr.Enum.AES)))
                         {
                             LogUtil.WriteLog("[Authenticatemanager][GetAuthenticationInfo] Ip not match", "WARN");
-                            AuthenticateManager.RemoveAuthTicket();
+                            AuthenticateManager.RemoveAuthTicket(context);
                             return (AuthenticationInfo)null;
                         }
                         json1._ipCheckTime = customTime.Ticks;
                     }
                     json1._authTicket = json3._authTicket;
                     json1._sessionSearchTime = CommonModule.GetCustomTime();
-                    AuthenticateManager.SetAuthenticationInfo(json1);
+                    AuthenticateManager.SetAuthenticationInfo(context, json1);
                 }
                 AuthModel json4 = CommonModule.DeserializeOjectToJson<AuthModel>(new SecurityLib().Decrypt(json1._authTicket, SecurityMgr.Enum.AES));
                 if (json1.userInfoModel == null)
@@ -261,13 +261,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             if (int32 != 0)
                             {
                                 LogUtil.WriteLog(string.Format("{0} NewGetAuthenticationInfo uspGetMyWalletInfo error {1}", (object)absolutePath, (object)int32), "WARN");
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                                 return (AuthenticationInfo)null;
                             }
                             if (Convert.ToInt64(userNo.Value) == 0L)
                             {
                                 LogUtil.WriteLog(absolutePath + " NewGetAuthenticationInfo userNo is zero", "WARN");
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                                 return (AuthenticationInfo)null;
                             }
                             GetSessionInfoResultModel sessionInfoResultModel = json1;
@@ -282,7 +282,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             userInfomationModel._addWeightBuffExpiration = dateTime3.AddHours((double)ConstantMgr._serviceUtcTime);
                             userInfomationModel._secondPwdPass = flag;
                             sessionInfoResultModel.userInfoModel = userInfomationModel;
-                            AuthenticateManager.SetAuthenticationInfo(json1);
+                            AuthenticateManager.SetAuthenticationInfo(context, json1);
                             break;
                         case ServerType.eGame:
                             UserInfomationResultModel infomationResultModel1 = new UserInfomationResultModel();
@@ -294,20 +294,20 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                             if (num != 0)
                             {
                                 LogUtil.WriteLog(string.Format("{0} [Http Error]NewGetAuthenticationInfo({1}) - HttpRequest NewGetAuthenticationInfo errorMsg : {2}", (object)absolutePath, (object)getWalletInfoModel._accountNo, (object)errorMsg), "WARN");
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                                 return (AuthenticationInfo)null;
                             }
                             UserInfomationResultModel infomationResultModel2 = JsonConvert.DeserializeObject<UserInfomationResultModel>(relResult);
                             if (infomationResultModel2 == null)
                             {
                                 LogUtil.WriteLog(string.Format("{0} [Http Error]NewGetAuthenticationInfo({1}) - HttpRequest NewGetAuthenticationInfo result : _result null, errorMsg : {2}", (object)absolutePath, (object)getWalletInfoModel._accountNo, (object)errorMsg), "WARN");
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                                 return (AuthenticationInfo)null;
                             }
                             if (infomationResultModel2._result.resultCode != 0)
                             {
                                 LogUtil.WriteLog(string.Format("{0} NewGetAuthenticationInfo  HttpRequest NewGetAuthenticationInfo resultCode : {1}", (object)absolutePath, (object)num), "WARN");
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(context);
                                 return (AuthenticationInfo)null;
                             }
                             json1.userInfoModel = new UserInfomationModel()
@@ -320,11 +320,11 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                                 _addWeightBuffExpiration = infomationResultModel2._userInfo._addWeightBuffExpiration,
                                 _secondPwdPass = flag
                             };
-                            AuthenticateManager.SetAuthenticationInfo(json1);
+                            AuthenticateManager.SetAuthenticationInfo(context, json1);
                             break;
                         default:
                             LogUtil.WriteLog(string.Format("{0} NewGetAuthenticationInfo serverType chech fail {1}", (object)absolutePath, (object)AuthenticateManager._servcerType), "WARN");
-                            AuthenticateManager.RemoveAuthTicket();
+                            AuthenticateManager.RemoveAuthTicket(context);
                             return (AuthenticationInfo)null;
                     }
                 }
@@ -332,7 +332,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 {
                     accountNo = json4._accountNo,
                     AuthExpiration = dateTime1,
-                    LoginIP = CommonModule.GetRemoteIP(),
+                    LoginIP = CommonModule.GetRemoteIP(context),
                     LoginTime = CommonModule.GetCustomTime(),
                     userInfoModel = json1.userInfoModel
                 };
@@ -340,7 +340,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             catch (Exception ex)
             {
                 LogUtil.WriteLog("[Authenticatemanager][NewGetAuthenticationInfo][Exception][ERROR] " + ex.ToString(), "ERROR");
-                AuthenticateManager.RemoveAuthTicket();
+                AuthenticateManager.RemoveAuthTicket(context);
                 return (AuthenticationInfo)null;
             }
         }
@@ -373,14 +373,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             return false;
         }
 
-        public static void SetPakageInfo(PakageAuthInfo pakageAuthInfo)
+        public static void SetPakageInfo(HttpContext context, PakageAuthInfo pakageAuthInfo)
         {
             string empty = string.Empty;
             try
             {
                 var str = new SecurityLib().Encrypt(CommonModule.SerializeObjectToJsonString<PakageAuthInfo>(pakageAuthInfo), SecurityMgr.Enum.Des); ;
                 var bytes = Encoding.Default.GetBytes(str);
-                ContextAccess.Current.Session.Set("PakageAuth", bytes); 
+                context.Session.Set("PakageAuth", bytes); 
             }
             catch (Exception ex)
             {
@@ -388,13 +388,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             }
         }
 
-        public static PakageAuthInfo GetPakageInfo()
+        public static PakageAuthInfo GetPakageInfo(HttpContext context)
         {
             PakageAuthInfo pakageInfo = (PakageAuthInfo)null;
             string str = string.Empty;
             try
             {
-                if (ContextAccess.Current.Session.TryGetValue("PakageAuth", out var bytes))
+                if (context.Session.TryGetValue("PakageAuth", out var bytes))
                 {
                     str = Encoding.Default.GetString(bytes);
                     if (!string.IsNullOrEmpty(str))
@@ -408,7 +408,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             {
                 LogUtil.WriteLog("Authenticatemanager pakageAuthInfo authTicket : " + str + " \n Exception : " + ex.ToString(), "ERROR");
                 pakageInfo = (PakageAuthInfo)null;
-                AuthenticateManager.RemoveAuthTicket();
+                AuthenticateManager.RemoveAuthTicket(context);
             }
             return pakageInfo;
         }

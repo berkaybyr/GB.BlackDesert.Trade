@@ -5,6 +5,7 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
+using GB.BlackDesert.Trade.Web.Lib.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -85,8 +86,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         public static readonly string _authCookieName = ConfigurationManager.AppSettings["authCookie"] ?? string.Empty;
         public static readonly string _branches = ConfigurationManager.AppSettings["Branches"];
         public static readonly string _platform = ConfigurationManager.AppSettings["PlatForm"] != null ? ConfigurationManager.AppSettings["PlatForm"] : "BDO";
-        public static string _accountDomain => ConfigurationManager.AppSettings["accountDomain"] + "/" + CommonModule.GetCulture();
-        public static string GetDefaultLanguage => CommonModule.GetCulture() ?? CommonModule.getBrowserCulture();
+        public static string _accountDomain => ConfigurationManager.AppSettings["accountDomain"] + "/" + CommonModule.getDefaultCulture(); // CommonModule.GetCulture();
+        public static string GetDefaultLanguage => CommonModule.getDefaultCulture() ?? CommonModule.getBrowserCulture();
 
         //public static string GetDataFilePath() => ConstantMgr._tradeXMLDomain + "/Common/xml";
 

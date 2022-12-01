@@ -21,9 +21,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
     //[Route("[controller]/[action]")]
     public class AuthCallbackController : Controller
     {
-        public AuthCallbackController(IHttpContextAccessor accessor)
+        public AuthCallbackController()
         {
-            ContextAccess.Configure(accessor);
         }
 
         [HttpGet]
@@ -33,7 +32,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
             string empty2 = string.Empty;
             try
             {
-                if (AuthenticateManager.IsAutheticated.Equals(true))
+                if (AuthenticateManager.IsAuthenticated(HttpContext))
                     return (ActionResult)this.Redirect("/");
                 bool flag1 = string.IsNullOrEmpty(callbackParam);
                 if (flag1.Equals(true))
@@ -44,9 +43,9 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 callbackParam = WebUtility.UrlEncode(callbackParam);
                 HttpWebRequest httpWebRequest;
                 if (ConstantMgr._serviceType.ToUpper().Equals("CS") && ConstantMgr._serviceRegion.IsNotNull())
-                    httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}&region={3}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP(), (object)ConstantMgr._serviceRegion));
+                    httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}&region={3}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP(HttpContext), (object)ConstantMgr._serviceRegion));
                 else
-                    httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP()));
+                    httpWebRequest = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}&remoteIp={2}", (object)ConstantMgr._authCheckRequestUri, (object)callbackParam, (object)CommonModule.GetRemoteIP(HttpContext)));
                 httpWebRequest.Method = "GET";
                 
                 httpWebRequest.Timeout = 60000;
@@ -67,8 +66,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 int int32_1 = Convert.ToInt32(str.Split('|')[0]);
                 if (int32_1 != 0)
                 {
-                    if (CookieLib.GetCookie("tradeRegion").IsNotNullOrEmpty())
-                        CookieLib.Delete(ConstantMgr._cookieDomain, "tradeRegion");
+                    if (CookieLib.GetCookie(HttpContext,"tradeRegion").IsNotNullOrEmpty())
+                        CookieLib.Delete(HttpContext, ConstantMgr._cookieDomain, "tradeRegion");
                     if (int32_1 == 72)
                         return (ActionResult)this.Redirect("/Error?param=AGE");
                     if (int32_1 == 73)
@@ -107,20 +106,20 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     flag1 = int32_2.Equals(0);
                     if (flag1.Equals(false))
                     {
-                        if (CookieLib.GetCookie("tradeRegion").IsNotNullOrEmpty())
-                            CookieLib.Delete(ConstantMgr._cookieDomain, "tradeRegion");
+                        if (CookieLib.GetCookie(HttpContext,"tradeRegion").IsNotNullOrEmpty())
+                            CookieLib.Delete(HttpContext ,ConstantMgr._cookieDomain, "tradeRegion");
                         LogUtil.WriteLog(string.Format("AuthCallbackController Check UserInfo Error ResultCode={0} // Token={1}", (object)int32_2, (object)callbackParam), "WARN");
                         return (ActionResult)this.Redirect("/Error?param=Wallet");
                     }
                     if (Convert.ToInt64(userNo.Value) == 0L)
                     {
-                        if (CookieLib.GetCookie("tradeRegion").IsNotNullOrEmpty())
-                            CookieLib.Delete(ConstantMgr._cookieDomain, "tradeRegion");
+                        if (CookieLib.GetCookie(HttpContext, "tradeRegion").IsNotNullOrEmpty())
+                            CookieLib.Delete(HttpContext, ConstantMgr._cookieDomain, "tradeRegion");
                         return (ActionResult)this.Redirect("/Error?param=Wallet");
                     }
                     AuthenticationInfo.accountNo = Convert.ToInt64(userNo.Value);
                     AuthenticationInfo.AuthExpiration = CommonModule.GetCustomTime().AddMinutes((double)ConstantMgr._authenticationTimeOut);
-                    AuthenticationInfo.LoginIP = CommonModule.GetRemoteIP();
+                    AuthenticationInfo.LoginIP = CommonModule.GetRemoteIP(HttpContext);
                     AuthenticationInfo.LoginTime = CommonModule.GetCustomTime();
                     if (ConstantMgr._publishServiceType.ToLower() == "kr")
                     {
@@ -139,7 +138,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     };
                     AuthenticationInfo.accountNo = Convert.ToInt64(userId);
                 }
-                AuthenticateManager.Authenticate(AuthenticationInfo);
+                AuthenticateManager.Authenticate(HttpContext, AuthenticationInfo);
             }
             catch (Exception ex)
             {

@@ -9,15 +9,16 @@ using GB.BlackDesert.Trade.Web.Lib.Manager;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography.X509Certificates;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Util
 {
     public static class CookieLib
     {
-        public static void SaveCookie(string cookieName, string cookieValue)
+        public static void SaveCookie(HttpContext context ,string cookieName, string cookieValue)
         {
-            ContextAccess.Current.Response.Cookies.Append(cookieName, cookieValue, new CookieOptions
+            context.Response.Cookies.Append(cookieName, cookieValue, new CookieOptions
             {
                 Domain = ConstantMgr._cookieDomain,
                 HttpOnly = true,
@@ -27,12 +28,13 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
         }
 
         public static void SetCookie(
+            HttpContext context,
           string strCookieDomain,
           string strCookieName,
           string strCookieValue)
         {
 
-            ContextAccess.Current.Response.Cookies.Append(strCookieName, strCookieValue, new CookieOptions
+            context.Response.Cookies.Append(strCookieName, strCookieValue, new CookieOptions
             {
                 Domain = strCookieDomain,
                 Path = "/",
@@ -42,14 +44,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
             });
         }
 
-        public static string GetCookie(string _cookieName)
+        public static string GetCookie(HttpContext context,string _cookieName)
         {
             try
             {
                 var empty = string.Empty;
-                var cookies = ContextAccess.Current.Request.Cookies[_cookieName];
+                var cookies = context.Request.Cookies[_cookieName];
                 if (cookies is null || cookies.Length == 0)
-                    empty = ContextAccess.Current.Request.Cookies[_cookieName].ToString();
+                    empty = context.Request.Cookies[_cookieName].ToString();
                 return empty;
             }
             catch(Exception ex)
@@ -59,10 +61,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
             }
         }
 
-        public static void Delete(string domain, string name)
+        public static void Delete(HttpContext context,string domain, string name)
         {
 
-            ContextAccess.Current.Response.Cookies.Delete(name, new CookieOptions
+            context.Response.Cookies.Delete(name, new CookieOptions
             {
                 Domain = domain,
                 Path = "/",
@@ -70,10 +72,10 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
             });
         }
 
-        public static void ChangeCookie(string domain, string name, string value)
+        public static void ChangeCookie(HttpContext context, string domain, string name, string value)
         {
-            Delete(domain, name);
-            SetCookie(domain, name, value);
+            Delete(context ,domain, name);
+            SetCookie(context ,domain, name, value);
         }
     }
 }

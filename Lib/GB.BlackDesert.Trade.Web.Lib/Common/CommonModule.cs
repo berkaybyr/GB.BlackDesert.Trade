@@ -25,6 +25,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Runtime.Remoting.Contexts;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Common
 {
@@ -50,7 +51,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
 
         public static string GetResourceValue(string _resKey)
         {
-            string culture1 = CommonModule.GetCulture();
+            string culture1 = CommonModule.getDefaultCulture();
+            //string culture1 = CommonModule.GetCulture();
             string empty1 = string.Empty;
             string empty2 = string.Empty;
             string resourceValue;
@@ -74,14 +76,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             return resourceValue;
         }
 
-        public static string GetCulture()
+        public static string GetCulture(HttpContext context)
         {
             string str = string.Empty;
             try
             {
-                if (CookieLib.GetCookie(ConstantMgr._cultureCookieName) != null && !string.IsNullOrEmpty(CookieLib.GetCookie(ConstantMgr._cultureCookieName)))
+                if (CookieLib.GetCookie(context , ConstantMgr._cultureCookieName) != null && !string.IsNullOrEmpty(CookieLib.GetCookie(context ,ConstantMgr._cultureCookieName)))
                 {
-                    str = CookieLib.GetCookie(ConstantMgr._cultureCookieName);
+                    str = CookieLib.GetCookie(context, ConstantMgr._cultureCookieName);
                     if (str.IsNotNullOrEmpty() && str.ToUpper().Equals("ES-ES") && ConstantMgr._serviceType.ToUpper().Equals("NA"))
                         str = "es-US";
                 }
@@ -144,7 +146,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             return str;
         }
 
-        public static void SetUserCulture(string cultureCode)
+        public static void SetUserCulture(HttpContext context,string cultureCode)
         {
             string empty = string.Empty;
             try
@@ -152,14 +154,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 if (cultureCode.IsNotNullOrEmpty() && cultureCode.ToUpper().Contains("EN"))
                     cultureCode = "en-US";
                 string strCookieValue = CommonModule.isAccessCulture(cultureCode);
-                if (CookieLib.GetCookie(ConstantMgr._cultureCookieName) != null && string.IsNullOrEmpty(CookieLib.GetCookie(ConstantMgr._cultureCookieName)).Equals(false))
+                if (CookieLib.GetCookie(context, ConstantMgr._cultureCookieName) != null && string.IsNullOrEmpty(CookieLib.GetCookie(context,ConstantMgr._cultureCookieName)).Equals(false))
                 {
-                    if (CookieLib.GetCookie(ConstantMgr._cultureCookieName).Equals(strCookieValue))
+                    if (CookieLib.GetCookie(context, ConstantMgr._cultureCookieName).Equals(strCookieValue))
                         return;
-                    CookieLib.ChangeCookie(ConstantMgr._cookieDomain, ConstantMgr._cultureCookieName, strCookieValue);
+                    CookieLib.ChangeCookie(context, ConstantMgr._cookieDomain, ConstantMgr._cultureCookieName, strCookieValue);
                 }
                 else
-                    CookieLib.SetCookie(ConstantMgr._cookieDomain, ConstantMgr._cultureCookieName, strCookieValue);
+                    CookieLib.SetCookie(context, ConstantMgr._cookieDomain, ConstantMgr._cultureCookieName, strCookieValue);
             }
             catch (Exception ex)
             {
@@ -381,14 +383,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             return _resultCode;
         }
 
-        public static string GetRemoteIP()
+        public static string GetRemoteIP(HttpContext context)
         {
             string remoteIp = string.Empty;
             try
             {
-                if (ContextAccess.Current.Request.Headers["X-Forwarded-For"].ToString() != null && !string.IsNullOrEmpty(ContextAccess.Current.Request.Headers["X-Forwarded-For"].ToString().Trim()))
+                if (context.Request.Headers["X-Forwarded-For"].ToString() != null && !string.IsNullOrEmpty(context.Request.Headers["X-Forwarded-For"].ToString().Trim()))
                 {
-                    remoteIp = ContextAccess.Current.Request.Headers["X-Forwarded-For"];
+                    remoteIp = context.Request.Headers["X-Forwarded-For"];
                     if (remoteIp.IndexOf(",") > 0)
                         remoteIp = remoteIp.Split(',')[0];
                 }
@@ -422,6 +424,8 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
         public static DateTime GetCustomTime()
         {
             DateTime utcNow = DateTime.UtcNow;
+            return utcNow;
+            //TODO: Check later already using UTC timezone doesnt really matter
             return TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Utc.StandardName), ConstantMgr._isServerTime ? TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id) : TimeZoneInfo.FindSystemTimeZoneById(ConstantMgr._utcTimeZoneID));
         }
 
@@ -483,50 +487,42 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             }
             return flag;
         }
-
-        public static bool IsMobile
+        public static bool IsMobile(HttpContext context)
         {
-            get
-            {
-                bool isMobile = false;
-                string serverVariable = ContextAccess.Current.Request.Headers["User-Agent"];
-                Regex regex1 = new Regex("(android|bb\\d+|meego).+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\\.(browser|link)|vodafone|wap|windows ce|xda|xiino", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                Regex regex2 = new Regex("1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\\-(n|u)|c55\\/|capi|ccwa|cdm\\-|cell|chtm|cldc|cmd\\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\\-s|devi|dica|dmob|do(c|p)o|ds(12|\\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\\-|_)|g1 u|g560|gene|gf\\-5|g\\-mo|go(\\.w|od)|gr(ad|un)|haie|hcit|hd\\-(m|p|t)|hei\\-|hi(pt|ta)|hp( i|ip)|hs\\-c|ht(c(\\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\\-(20|go|ma)|i230|iac( |\\-|\\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\\/)|klon|kpt |kwc\\-|kyo(c|k)|le(no|xi)|lg( g|\\/(k|l|u)|50|54|\\-[a-w])|libw|lynx|m1\\-w|m3ga|m50\\/|ma(te|ui|xo)|mc(01|21|ca)|m\\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\\-2|po(ck|rt|se)|prox|psio|pt\\-g|qa\\-a|qc(07|12|21|32|60|\\-[2-7]|i\\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\\-|oo|p\\-)|sdk\\/|se(c(\\-|0|1)|47|mc|nd|ri)|sgh\\-|shar|sie(\\-|m)|sk\\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\\-|v\\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\\-|tdg\\-|tel(i|m)|tim\\-|t\\-mo|to(pl|sh)|ts(70|m\\-|m3|m5)|tx\\-9|up(\\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\\-|your|zeto|zte\\-", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                Regex regex3 = new Regex("android|tablet|ipad|playbook|bb10|z30|nexus 10|nexus 7|gt-p|sch-i800|xoom|kindle|silk|kfapwi|pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline);
-                string input = serverVariable;
-                if (regex1.IsMatch(input) || regex2.IsMatch(serverVariable.Substring(0, 4)) || regex3.IsMatch(serverVariable))
-                    isMobile = true;
-                return isMobile;
-            }
+            bool isMobile = false;
+            string serverVariable = context.Request.Headers["User-Agent"];
+            Regex regex1 = new Regex("(android|bb\\d+|meego).+mobile|avantgo|bada\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\\.(browser|link)|vodafone|wap|windows ce|xda|xiino", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            Regex regex2 = new Regex("1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\\-(n|u)|c55\\/|capi|ccwa|cdm\\-|cell|chtm|cldc|cmd\\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\\-s|devi|dica|dmob|do(c|p)o|ds(12|\\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\\-|_)|g1 u|g560|gene|gf\\-5|g\\-mo|go(\\.w|od)|gr(ad|un)|haie|hcit|hd\\-(m|p|t)|hei\\-|hi(pt|ta)|hp( i|ip)|hs\\-c|ht(c(\\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\\-(20|go|ma)|i230|iac( |\\-|\\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\\/)|klon|kpt |kwc\\-|kyo(c|k)|le(no|xi)|lg( g|\\/(k|l|u)|50|54|\\-[a-w])|libw|lynx|m1\\-w|m3ga|m50\\/|ma(te|ui|xo)|mc(01|21|ca)|m\\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\\-2|po(ck|rt|se)|prox|psio|pt\\-g|qa\\-a|qc(07|12|21|32|60|\\-[2-7]|i\\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\\-|oo|p\\-)|sdk\\/|se(c(\\-|0|1)|47|mc|nd|ri)|sgh\\-|shar|sie(\\-|m)|sk\\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\\-|v\\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\\-|tdg\\-|tel(i|m)|tim\\-|t\\-mo|to(pl|sh)|ts(70|m\\-|m3|m5)|tx\\-9|up(\\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\\-|your|zeto|zte\\-", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            Regex regex3 = new Regex("android|tablet|ipad|playbook|bb10|z30|nexus 10|nexus 7|gt-p|sch-i800|xoom|kindle|silk|kfapwi|pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            string input = serverVariable;
+            if (regex1.IsMatch(input) || regex2.IsMatch(serverVariable.Substring(0, 4)) || regex3.IsMatch(serverVariable))
+                isMobile = true;
+            return isMobile;
         }
-
-        public static bool IsPearlApp
+        
+        public static bool IsPealApp(HttpContext context)
         {
-            get
-            {
-                bool isPearlApp = false;
-                if (new Regex("pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline).IsMatch(ContextAccess.Current.Request.Headers["User-Agent"]))
-                    isPearlApp = true;
-                return isPearlApp;
-            }
-        }
-
-        public static bool IsAllowBrowser
+            bool isPearlApp = false;
+            if (new Regex("pearlApp", RegexOptions.IgnoreCase | RegexOptions.Multiline).IsMatch(context.Request.Headers["User-Agent"]))
+                isPearlApp = true;
+            return isPearlApp;
+        } 
+      
+        public static bool IsAllowBrowser(this HttpContext context)
         {
-            get
-            {
-                List<string> list = ((IEnumerable<string>)ConstantMgr._allowBrowserList.Split('|')).ToList<string>();
-                if (list == null || list.Count < 1 || CommonModule.AgentInfo == null)
-                    return false;
-                string str1 = CommonModule.AgentInfo[0];
-                foreach (string str2 in list)
-                {
-                    if (str1.ToUpper().Equals(str2.ToUpper()))
-                        return true;
-                }
+            var agent = context.GetAgentInfo();
+            List<string> list = ((IEnumerable<string>)ConstantMgr._allowBrowserList.Split('|')).ToList<string>();
+            if (list == null || list.Count < 1 || agent == null)
                 return false;
+            string str1 = agent[0];
+            foreach (string str2 in list)
+            {
+                if (str1.ToUpper().Equals(str2.ToUpper()))
+                    return true;
             }
+            return false;
         }
+    
 
         public static string GetCultureCode(string languageType)
         {
@@ -591,28 +587,24 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             }
             return cultureCode;
         }
-
-        public static List<string> AgentInfo
+        public static List<string> GetAgentInfo(this HttpContext context)
         {
-            get
+            string lower = context.Request.Headers["User-Agent"].ToString().ToLower();
+            string empty1 = string.Empty;
+            string empty2 = string.Empty;
+            List<string> agentInfo = new List<string>();
+            try
             {
-                string lower = ContextAccess.Current.Request.Headers["User-Agent"].ToString().ToLower();
-                string empty1 = string.Empty;
-                string empty2 = string.Empty;
-                List<string> agentInfo = new List<string>();
-                try
-                {
-                    string str1 = lower.Contains("trident") || lower.Contains("msie") ? "IE" : (!lower.Contains("samsungbrowser") ? (!lower.Contains("miui") ? (!lower.Contains("edge") ? (!lower.Contains("naver") ? (!lower.Contains("daum") ? (lower.Contains("opr/") || lower.Contains("opera") ? "Opera" : (!lower.Contains("chrome/") || !lower.Contains("like gecko") ? (!lower.Contains("safari") ? (!lower.Contains("firefox") ? (!lower.Contains("android") ? (lower.Contains("ipad") || lower.Contains("ipd") || lower.Contains("iphone") ? "IOS Browser" : "ETC Browser") : "Android Browser") : "FireFox") : "Safari") : "Chrome")) : "Daum") : "Naver") : "Edge") : "XiaomiBrowser") : "SamusngBrowser");
-                    string str2 = !lower.Contains("windows nt 5.1") ? (!lower.Contains("windows nt 6.0") ? (!lower.Contains("windows nt 6.1") ? (!lower.Contains("windows nt 6.2") ? (!lower.Contains("windows nt 6.3") ? (!lower.Contains("windows nt 10.0") ? (!lower.Contains("windows phone 8.1") ? (!lower.Contains("windows phone 10.0") ? (!lower.Contains("android") ? (!lower.Contains("blackberry") ? (!lower.Contains("iphone") ? (!lower.Contains("ipad") ? (!lower.Contains("ipod") ? (!lower.Contains("mac") ? (!lower.Contains("x11") ? (!lower.Contains("tizen") ? "Undefined OS" : "Tizen") : "Linux(X Windows)") : "Mac") : "ipod") : "ipad") : "iphone") : "blackberryOS") : "Android") : "Win phone 10") : "Win phone 8.1") : "Win 10") : "Win 8.1") : "Win 8") : "Win 7") : "Win Vista") : "Win XP";
-                    agentInfo.Add(str1);
-                    agentInfo.Add(str2);
-                }
-                catch (Exception ex)
-                {
-                    LogUtil.WriteLog("CommonModule AgentInfo Exception=" + ex.ToString(), "ERROR");
-                }
-                return agentInfo;
+                string str1 = lower.Contains("trident") || lower.Contains("msie") ? "IE" : (!lower.Contains("samsungbrowser") ? (!lower.Contains("miui") ? (!lower.Contains("edge") ? (!lower.Contains("naver") ? (!lower.Contains("daum") ? (lower.Contains("opr/") || lower.Contains("opera") ? "Opera" : (!lower.Contains("chrome/") || !lower.Contains("like gecko") ? (!lower.Contains("safari") ? (!lower.Contains("firefox") ? (!lower.Contains("android") ? (lower.Contains("ipad") || lower.Contains("ipd") || lower.Contains("iphone") ? "IOS Browser" : "ETC Browser") : "Android Browser") : "FireFox") : "Safari") : "Chrome")) : "Daum") : "Naver") : "Edge") : "XiaomiBrowser") : "SamusngBrowser");
+                string str2 = !lower.Contains("windows nt 5.1") ? (!lower.Contains("windows nt 6.0") ? (!lower.Contains("windows nt 6.1") ? (!lower.Contains("windows nt 6.2") ? (!lower.Contains("windows nt 6.3") ? (!lower.Contains("windows nt 10.0") ? (!lower.Contains("windows phone 8.1") ? (!lower.Contains("windows phone 10.0") ? (!lower.Contains("android") ? (!lower.Contains("blackberry") ? (!lower.Contains("iphone") ? (!lower.Contains("ipad") ? (!lower.Contains("ipod") ? (!lower.Contains("mac") ? (!lower.Contains("x11") ? (!lower.Contains("tizen") ? "Undefined OS" : "Tizen") : "Linux(X Windows)") : "Mac") : "ipod") : "ipad") : "iphone") : "blackberryOS") : "Android") : "Win phone 10") : "Win phone 8.1") : "Win 10") : "Win 8.1") : "Win 8") : "Win 7") : "Win Vista") : "Win XP";
+                agentInfo.Add(str1);
+                agentInfo.Add(str2);
             }
+            catch (Exception ex)
+            {
+                LogUtil.WriteLog("CommonModule AgentInfo Exception=" + ex.ToString(), "ERROR");
+            }
+            return agentInfo;
         }
 
         public static string GetItemString(string itemName, int _subKey)
@@ -752,14 +744,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             return httpRequestResult;
         }
 
-        public static bool CheckPakage()
+        public static bool CheckPakage(HttpContext context)
         {
             int num = 0;
             bool flag = false;
             string empty = string.Empty;
             try
             {
-                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(context);
                 DateTime customTime = CommonModule.GetCustomTime(new CustomTimeModel()
                 {
                     useServerTime = false,
@@ -767,7 +759,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 });
                 if (authInfo.IsNull<AuthenticationInfo>())
                     return false;
-                PakageAuthInfo pakageInfo = AuthenticateManager.GetPakageInfo();
+                PakageAuthInfo pakageInfo = AuthenticateManager.GetPakageInfo(context);
                 string checkPakageUrl = ConstantMgr._checkPakageUrl;
                 switch (ConstantMgr._serviceType.ToUpper())
                 {
@@ -811,14 +803,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     return false;
                 if (pakageInfo.IsNotNull() && pakageInfo.pakageExpiration <= customTime)
                 {
-                    AuthenticateManager.RemoveAuthTicket();
+                    AuthenticateManager.RemoveAuthTicket(context);
                     return true;
                 }
                 if (pakageInfo.IsNotNull() && customTime < pakageInfo.pakageExpiration)
                     return false;
                 if (authInfo.accountNo <= 0L)
                 {
-                    AuthenticateManager.RemoveAuthTicket();
+                    AuthenticateManager.RemoveAuthTicket(context);
                     return false;
                 }
                 CheckPakageParamModel deserializeObject = new CheckPakageParamModel()
@@ -830,24 +822,24 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 if (httpRequestResult._resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("CommonModule CheckPakage Requset Fail  response._resultCode : {0}", (object)httpRequestResult._resultCode), "WARN");
-                    AuthenticateManager.RemoveAuthTicket();
+                    AuthenticateManager.RemoveAuthTicket(context);
                     return false;
                 }
                 if (string.IsNullOrEmpty(httpRequestResult._resultData))
                 {
                     LogUtil.WriteLog("CommonModule CheckPakage Requset Fail  response._resultData Is NULL", "WARN");
-                    AuthenticateManager.RemoveAuthTicket();
+                    AuthenticateManager.RemoveAuthTicket(context);
                     return false;
                 }
                 CheckPakageResultModel json = CommonModule.DeserializeOjectToJson<CheckPakageResultModel>(httpRequestResult._resultData);
                 if (json._result.resultCode.Equals(0).Equals(false) || json._list._accountNo <= 0L)
                 {
                     LogUtil.WriteLog("CommonModule CheckPakage Requset Fail : checkPakageResultModel " + CommonModule.SerializeObjectToJsonString<CheckPakageResultModel>(json), "WARN");
-                    AuthenticateManager.RemoveAuthTicket();
+                    AuthenticateManager.RemoveAuthTicket(context);
                     return false;
                 }
                 if (json._list._expireDateUnixTime.IsNullOrEmpty())
-                    AuthenticateManager.SetPakageInfo(new PakageAuthInfo()
+                    AuthenticateManager.SetPakageInfo(context, new PakageAuthInfo()
                     {
                         _accountNo = authInfo.accountNo,
                         _gameCode = num,
@@ -856,9 +848,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                 if (json._list._expireDateUnixTime.IsNotNullOrEmpty())
                 {
                     if (CommonModule.ConvertUnixTimeStampToDateTime(json._list._expireDateUnixTime) <= customTime)
-                        AuthenticateManager.RemoveAuthTicket();
+                        AuthenticateManager.RemoveAuthTicket(context);
                     else
-                        AuthenticateManager.SetPakageInfo(new PakageAuthInfo()
+                        AuthenticateManager.SetPakageInfo(context, new PakageAuthInfo()
                         {
                             _accountNo = authInfo.accountNo,
                             _gameCode = num,
@@ -869,7 +861,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             catch (Exception ex)
             {
                 LogUtil.WriteLog("CommonModule CheckPakage Exception : " + ex.ToString(), "ERROR");
-                AuthenticateManager.RemoveAuthTicket();
+                AuthenticateManager.RemoveAuthTicket(context);
                 return false;
             }
             return true;
@@ -892,8 +884,14 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
 
         public static DateTime GetCustomTime(CustomTimeModel model)
         {
+
             DateTime utcNow = DateTime.UtcNow;
-            return TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Utc.StandardName), model.useServerTime ? TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id) : TimeZoneInfo.FindSystemTimeZoneById(model.utcTimeZoneID));
+            return utcNow;
+            //TODO: Check later already using UTC timezone doesnt really matter
+            return TimeZoneInfo.ConvertTime(DateTime.UtcNow, 
+                TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Utc.StandardName), 
+                model.useServerTime ? TimeZoneInfo.FindSystemTimeZoneById(TimeZoneInfo.Local.Id) : 
+                TimeZoneInfo.FindSystemTimeZoneById(model.utcTimeZoneID));
         }
 
         public static CommonResult Otpauth(OtpAuthModel otpAuthModel)

@@ -4,6 +4,7 @@
 // MVID: 3DEAC0B8-1FEA-450C-A995-66A8A3C53BCF
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.dll
 
+using EasMe;
 using GB.BlackDesert.Trade.Web.Api.Models.Base;
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
@@ -18,15 +19,18 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
     {
         public ErrorController(IHttpContextAccessor accessor)
         {
-            ContextAccess.Configure(accessor);
+            IEasLog.ConfigureHttpContext(accessor);
         }
 
         [HttpGet]
         [Route("/")]
-        public IActionResult Error(string param)
+        public IActionResult Error()
         {
+            IEasLog.StaticLogger.Debug("test");
+            return StatusCode(500);
+            string? param = "";
             ErrorViewPageModel errorViewPageModel = new ErrorViewPageModel();
-            if (!AuthenticateManager.IsAutheticated && string.IsNullOrEmpty(param))
+            if (!AuthenticateManager.IsAuthenticated(HttpContext) && string.IsNullOrEmpty(param))
                 param = "Wallet";
             else if (string.IsNullOrEmpty(param))
                 return this.View(nameof(Index));
@@ -46,10 +50,12 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
             return this.Json("Error", (object)errorViewPageModel);
         }
         [HttpGet]
-        public IActionResult Index(string param)
+        public IActionResult Index(string? param)
         {
+            IEasLog.StaticLogger.Debug("test");
+            return StatusCode(403);
             ErrorViewPageModel errorViewPageModel = new ErrorViewPageModel();
-            if (!AuthenticateManager.IsAutheticated && string.IsNullOrEmpty(param))
+            if (!AuthenticateManager.IsAuthenticated(HttpContext) && string.IsNullOrEmpty(param))
                 param = "Wallet";
             else if (string.IsNullOrEmpty(param))
                 return this.View(nameof(Index));

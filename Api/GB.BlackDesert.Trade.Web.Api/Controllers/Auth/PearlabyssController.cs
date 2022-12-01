@@ -21,7 +21,6 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
     {
         public PearlabyssController(IHttpContextAccessor accessor)
         {
-            ContextAccess.Configure(accessor);
         }
 
         private string _path = "/Pearlabyss";
@@ -41,7 +40,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     LogUtil.WriteLog(string.Format("{0} serviceType not match {1}", (object)this._path, (object)ConstantMgr._serviceType), "WARN");
                     return this.Redirect("/Error");
                 }
-                if (AuthenticateManager.IsAutheticated)
+                if (AuthenticateManager.IsAuthenticated(HttpContext))
                     return this.Redirect("/Home");
                 string strMsg;
                 string str;
@@ -57,7 +56,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     str = "profile";
                 }
                 string strCookieValue = WebUtility.UrlEncode(new SecurityLib().Encrypt(strMsg, SecurityMgr.Enum.AES));
-                CookieLib.SetCookie(ConstantMgr._cookieDomain, ConstantMgr._oauthCookieName, strCookieValue);
+                CookieLib.SetCookie(HttpContext ,ConstantMgr._cookieDomain, ConstantMgr._oauthCookieName, strCookieValue);
                 return this.Redirect(string.Format("{0}/Member/Login/AuthorizeOauth?response_type=code&scope={1}&state={2}&client_id=client_id&redirect_uri={3}/Pearlabyss/Oauth2CallBack", (object)ConstantMgr._accountDomain, (object)str, (object)strCookieValue, (object)ConstantMgr._tradeDomain));
             }
             catch (Exception ex)
@@ -82,8 +81,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                     LogUtil.WriteLog("Oauth2CallBack modelstate not valid.", "WARN");
                     return (ActionResult)this.Redirect(string.Format("{0}/Error", (object)ConstantMgr._tradeDomain));
                 }
-                string str1 = new SecurityLib().Decrypt(WebUtility.UrlDecode(CookieLib.GetCookie(ConstantMgr._oauthCookieName)), SecurityMgr.Enum.AES);
-                CookieLib.Delete(ConstantMgr._cookieDomain, ConstantMgr._oauthCookieName);
+                string str1 = new SecurityLib().Decrypt(WebUtility.UrlDecode(CookieLib.GetCookie(HttpContext, ConstantMgr._oauthCookieName)), SecurityMgr.Enum.AES);
+                CookieLib.Delete(HttpContext, ConstantMgr._cookieDomain, ConstantMgr._oauthCookieName);
                 string str2 = new SecurityLib().Decrypt(model.state, SecurityMgr.Enum.AES);
                 if (!str1.Equals(str2))
                     LogUtil.WriteLog(string.Format("{0} state is not Matching. decCookieState={1} decModelState={2}", (object)this._path, (object)str1, (object)str2), "WARN");
@@ -121,8 +120,8 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 json2._expireDate = CommonModule.GetCustomTime().AddMilliseconds((double)json1.expires_in).ToString("yyyy-MM-dd HH:mm:ss");
                 json2._ipCheckTime = 0L;
                 json2._isPearlApp = "pearlApp".Equals(json1.scope);
-                AuthenticateManager.SetAuthenticationInfo(json2);
-                return !AuthenticateManager.IsAutheticated ? (ActionResult)this.Redirect(string.Format("{0}/Error", (object)ConstantMgr._tradeDomain)) : (ActionResult)this.RedirectToAction("Index", "Home");
+                AuthenticateManager.SetAuthenticationInfo(HttpContext,json2);
+                return !AuthenticateManager.IsAuthenticated(HttpContext) ? (ActionResult)this.Redirect(string.Format("{0}/Error", (object)ConstantMgr._tradeDomain)) : (ActionResult)this.RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
@@ -141,7 +140,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 var current = HttpContext.Request;
                 if (string.IsNullOrEmpty(current.Headers["accesstoken"]))
                     return (ActionResult)this.View();
-                if (AuthenticateManager.IsAutheticated)
+                if (AuthenticateManager.IsAuthenticated(HttpContext))
                     return (ActionResult)this.RedirectToAction("Index", "Home");
                 PearlAppTokenModel json1 = CommonModule.DeserializeOjectToJson<PearlAppTokenModel>(SecurityLib.GetAES256DecryptFromUrlTokenEncode(CommonModule.DeserializeOjectToJson<PAAuthModel>(SecurityLib.GetAES256DecryptFromUrlTokenEncode(current.Headers["accesstoken"]).Split('|')[1]).Token));
                 CheckAccessTokenModel deserializeObject = new CheckAccessTokenModel()
@@ -167,7 +166,7 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers.Auth
                 }
                 else
                 {
-                    AuthenticateManager.SetAuthenticationInfo(new GetSessionInfoResultModel()
+                    AuthenticateManager.SetAuthenticationInfo(HttpContext,new GetSessionInfoResultModel()
                     {
                         _sessionId = json1._pearAppSessionInfoModel._sessionId,
                         _accountNo = json1._pearAppSessionInfoModel._accountNo,

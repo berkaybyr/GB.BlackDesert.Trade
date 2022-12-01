@@ -14,8 +14,11 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
     public class BaseController : Controller
     {
 
-        public AuthenticationInfo _userinfo = AuthenticateManager.GetAuthInfo();
-
+        public BaseController()
+        {
+            UserInfo = AuthenticateManager.GetAuthInfo(HttpContext);
+        }
+        public AuthenticationInfo UserInfo { get; private set; }
         public UserInfomationModel AuthUserInfo
         {
             get
@@ -23,9 +26,9 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
                 UserInfomationModel userInfo = (UserInfomationModel)null;
                 try
                 {
-                    if (this._userinfo == null)
+                    if (this.UserInfo == null)
                         return new UserInfomationModel();
-                    if (TradeModule.CheckAuthKey(ref userInfo, this._userinfo.accountNo, this._userinfo.certifiedKey).resultCode != 0)
+                    if (TradeModule.CheckAuthKey(ref userInfo, HttpContext,this.UserInfo.accountNo, this.UserInfo.certifiedKey).resultCode != 0)
                         userInfo = new UserInfomationModel();
                 }
                 catch (Exception ex)
@@ -37,3 +40,4 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
         }
     }
 }
+

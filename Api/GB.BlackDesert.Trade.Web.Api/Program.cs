@@ -1,4 +1,5 @@
 using GB.BlackDesert.Trade.Web.Api;
+using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,35 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+
+
+
 builder.Services.AddMvc();
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddResponseCaching();
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ConstantMgr._cookieDomain;
+    options.IdleTimeout = TimeSpan.FromMinutes(1440);
+    options.Cookie.IsEssential = true;
+
+});
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
+
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSession();
-builder.Services.AddLocalization(x => x.ResourcesPath = "Resources" );
 
-
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,30 +48,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//var supportedCultures = new[]
-//        {
-//            new CultureInfo("en"),
-//            new CultureInfo("tr"),
-//            new CultureInfo("es"),
-//        };
-//app.UseRequestLocalization(x =>
-//{
-//    x.DefaultRequestCulture = new RequestCulture("en");
-//    x.SupportedCultures = supportedCultures;
-//    x.SupportedUICultures = supportedCultures;
-//});
-
-LogUtil.ConfigureLoggerConfigDebug("Trade");
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-app.UseAuthentication();
+app.UseStaticFiles();
 app.UseSession();
 
 
-app.MapControllers();
-app.UseResponseCaching();
 
+
+app.UseHttpsRedirection();
+
+app.UseCookiePolicy();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+
+
+app.MapControllers();
+
+LogUtil.ConfigureLoggerConfigDebug("Trade");
 TradeApplication.InitializeOnceAsync();
 app.Run();

@@ -16,15 +16,14 @@ namespace GB.BlackDesert.Trade.Web.Api.Controllers
     {
         public MaintenanceController(IHttpContextAccessor accessor)
         {
-            ContextAccess.Configure(accessor);
         }
         public ActionResult Index() => (ActionResult)this.View();
 
         public ActionResult WebMaintanace()
         {
             string cultureCode = ConstantMgr._defaultCulture;
-            if (!string.IsNullOrEmpty(CookieLib.GetCookie("lang")))
-                cultureCode = CookieLib.GetCookie("lang");
+            if (!string.IsNullOrEmpty(CookieLib.GetCookie(HttpContext, "lang")))
+                cultureCode = CookieLib.GetCookie(HttpContext ,"lang");
             uspGetShutDownCheckUseWeb_Result checkUseWebResult = new uspGetShutDownCheckUseWeb_Result();
             try
             {

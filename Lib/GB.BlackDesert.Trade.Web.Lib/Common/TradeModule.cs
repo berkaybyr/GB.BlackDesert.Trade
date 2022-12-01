@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace GB.BlackDesert.Trade.Web.Lib.Common
 {
@@ -21,6 +22,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
     {
         public static CommonResult CheckAuthKey(
           ref UserInfomationModel userInfo,
+          HttpContext context,
           long userNo = 0,
           string certifiedKey = "",
           bool isRecord = false)
@@ -28,7 +30,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
             CommonResult commonResult = new CommonResult();
             try
             {
-                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+                AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(context);
                 if (authInfo != null)
                 {
                     userInfo = authInfo.userInfoModel;

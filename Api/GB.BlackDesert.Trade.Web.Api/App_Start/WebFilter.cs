@@ -21,22 +21,22 @@ namespace GB.BlackDesert.Trade.Web.Api.App_Start
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            string remoteIp = CommonModule.GetRemoteIP();
-            CommonModule.GetCulture();
+            string remoteIp = CommonModule.GetRemoteIP(filterContext.HttpContext);
+            CommonModule.GetCulture(filterContext.HttpContext);
             var httpContext = filterContext.HttpContext;
             var request = httpContext.Request;
             var actionName = request.RouteValues["Controller"];
             var controllerName = request.RouteValues["Action"];
             string str = string.Empty;
             CommonModule.GetCustomTime();
-            AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo();
+            AuthenticationInfo authInfo = AuthenticateManager.GetAuthInfo(filterContext.HttpContext);
             string empty = string.Empty;
             bool flag;
             if (ConstantMgr._isLive)
             {
-                if (CommonModule.IsMobile.Equals(false))
+                if (CommonModule.IsMobile(filterContext.HttpContext).Equals(false))
                 {
-                    flag = CommonModule.IsAllowBrowser;
+                    flag = CommonModule.IsAllowBrowser(filterContext.HttpContext);
                     str = !flag.Equals(false) ? string.Empty : "Browser";
                 }
                 if (request.Headers["PAChecker"].ToString() is not null)
@@ -44,7 +44,7 @@ namespace GB.BlackDesert.Trade.Web.Api.App_Start
                     string header = request.Headers["PAChecker"];
                     flag = string.IsNullOrEmpty(header);
                     if (flag.Equals(false) && header.Equals("PearlAbyss"))
-                        CookieLib.SetCookie(ConstantMgr._cookieDomain, "ViewAgent", "APP");
+                        CookieLib.SetCookie(filterContext.HttpContext, ConstantMgr._cookieDomain, "ViewAgent", "APP");
                 }
                 flag = string.IsNullOrEmpty(str);
                 if (flag.Equals(false))
@@ -87,7 +87,7 @@ namespace GB.BlackDesert.Trade.Web.Api.App_Start
             }
             if (this._isLogin.Equals(false) && (authInfo == null || authInfo.accountNo.Equals(0L)))
             {
-                AuthenticateManager.RemoveAuthTicket();
+                AuthenticateManager.RemoveAuthTicket(filterContext.HttpContext);
                 LogUtil.WriteLog(string.Format("WebFilter OnActionExecuting Error UserInformation is Empty. IPAddress={0} Controller={1} Action={2}", (object)remoteIp, (object)controllerName, (object)actionName), "WARN");
                 if (!request.IsAjaxRequest())
                     return;
@@ -102,22 +102,22 @@ namespace GB.BlackDesert.Trade.Web.Api.App_Start
             {
                 try
                 {
-                    flag = AuthenticateManager.IsAutheticated;
+                    flag = AuthenticateManager.IsAuthenticated(filterContext.HttpContext);
                     if (flag.Equals(true))
                     {
                         CommonResult commonResult = new CommonResult();
-                        AuthenticateManager.GetAuthInfo();
+                        AuthenticateManager.GetAuthInfo(filterContext.HttpContext);
                         if (!(ConstantMgr._publishServiceType.ToLower() == "jp"))
                         {
                             if (!(ConstantMgr._publishServiceType.ToLower() == "sa"))
                                 goto label_30;
                         }
-                        string cookie = CookieLib.GetCookie(ConstantMgr._serviceAuthCookieName);
+                        string cookie = CookieLib.GetCookie(filterContext.HttpContext, ConstantMgr._serviceAuthCookieName);
                         if (string.IsNullOrEmpty(cookie))
                         {
                             try
                             {
-                                AuthenticateManager.RemoveAuthTicket();
+                                AuthenticateManager.RemoveAuthTicket(filterContext.HttpContext);
                                 LogUtil.WriteLog(string.Format("Not Found TradeMarket Cookie Param / _gcAuthInfo={0}", (object)cookie), "WARN");
                             }
                             catch (Exception ex)

@@ -4,21 +4,37 @@
 // MVID: 4566C30B-F0F5-4951-81D2-B4EE3D7A09A1
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Game.dll
 
+using System.Net;
+
 namespace GB.BlackDesert.Trade.Web.Game.Api.Models
 {
     public class ViewUserAuthModel
     {
-        public long userNo { set; get; }
+        public string userNo { set; get; }
 
         public string certifiedKey { set; get; }
 
-        public int type { set; get; }
+        public string type { set; get; }
 
+        public long numUserNo 
+        { 
+            get
+            {
+                return userNo.ConvertTo<long>();
+            }
+        }
+        public long numType
+        {
+            get
+            {
+                return type.ConvertTo<long>();
+            }
+        }
         public ViewUserAuthModel()
         {
-            this.userNo = 0L;
+            this.userNo = "0";
             this.certifiedKey = string.Empty;
-            this.type = 0;
+            this.type = "0";
         }
     }
 }
