@@ -32,7 +32,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                     return -1;
                 }
                 Stopwatch stopwatch = new Stopwatch();
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(HistoryManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(HistoryManager));
                 stopwatch.Start();
                 if (serverInfo._isInitHistory)
                 {
@@ -66,7 +66,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                     }
                 }
                 stopwatch.Stop();
-                ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(HistoryManager), stopwatch.ElapsedMilliseconds.ToString());
+                ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(HistoryManager), stopwatch.ElapsedMilliseconds.ToString());
             }
             return num1;
         }

@@ -18,7 +18,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             try
             {
                 fetchCommand();
-                ServerLogManager.serverLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]FetchCommand", state));
+                ServerLogManager.ServerLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]FetchCommand", state));
             }
             catch (Exception ex)
             {

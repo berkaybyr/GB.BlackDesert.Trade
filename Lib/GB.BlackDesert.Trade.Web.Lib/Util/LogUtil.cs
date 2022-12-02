@@ -4,15 +4,14 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-using BlackDesert.TradeMarket.Lib.Models;
 using EasMe;
 using EasMe.Extensions;
-using GB.BlackDesert.Trade.Web.Lib.Models;
 
 namespace BlackDesert.TradeMarket.Lib.Util
 {
     public static class LogUtil
     {
+
         public static string[] permitHeadersArr = new string[20]
         {
       "HOST",
@@ -105,7 +104,6 @@ namespace BlackDesert.TradeMarket.Lib.Util
                 LogFileExtension = ".json",
             });
         }
-        private static readonly EasLog logger = IEasLog.CreateLogger("TradeMarket");
         public static void WriteLog(
         string Message,
           string Level,

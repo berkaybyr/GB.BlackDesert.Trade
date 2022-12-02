@@ -37,10 +37,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(VariedTradeCountManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(VariedTradeCountManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(VariedTradeCountManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(VariedTradeCountManager));
                 stopwatch.Start();
                 try
                 {
@@ -91,7 +91,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(VariedTradeCountManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(VariedTradeCountManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 

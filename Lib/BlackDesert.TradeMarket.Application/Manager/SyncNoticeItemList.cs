@@ -19,7 +19,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             try
             {
                 syncNoticeItemList();
-                ServerLogManager.serverLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]SyncNoticeItemList", state));
+                ServerLogManager.ServerLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]SyncNoticeItemList", state));
             }
             catch (Exception ex)
             {

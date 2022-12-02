@@ -11,4 +11,10 @@
     <ProjectReference Include="..\GB.BlackDesert.Trade.Web.Lib\BlackDesert.TradeMarket.Lib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EasMe">
+      <HintPath>..\..\..\..\easme-lib\EasMe\bin\Release\net6.0\EasMe.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

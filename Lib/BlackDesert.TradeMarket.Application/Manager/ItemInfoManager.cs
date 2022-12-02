@@ -49,10 +49,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(ItemInfoManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(ItemInfoManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(ItemInfoManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(ItemInfoManager));
                 stopwatch.Start();
                 try
                 {
@@ -201,13 +201,13 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(ItemInfoManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(ItemInfoManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
         public int updateItemInfoToRepositoryXXX()
         {
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "ItemInfoManager updateItemInfoToRepositoryXXX");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "ItemInfoManager updateItemInfoToRepositoryXXX");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -248,7 +248,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 }
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "ItemInfoManager updateItemInfoToRepositoryXXX", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "ItemInfoManager updateItemInfoToRepositoryXXX", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 

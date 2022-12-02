@@ -30,7 +30,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 num = timerList.Count;
             if (0 < num)
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eAlready, "WorldMarketServerInfoManager");
+                ServerLogManager.ServerLogWrite(ServerLogType.eAlready, "WorldMarketServerInfoManager");
                 return -1;
             }
             bool flag = false;
@@ -45,7 +45,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 flag = serverInfo._setTimer;
             }
             Stopwatch stopwatch = new Stopwatch();
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "WorldMarketServerInfoManager");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "WorldMarketServerInfoManager");
             stopwatch.Start();
             switch (serverType)
             {
@@ -55,24 +55,24 @@ namespace BlackDesert.TradeMarket.Application.Manager
                         if (ConstantMgr._serviceProject.Equals("BDO"))
                         {
                             timerList.Add(new Timer(new TimerCallback(FetchCommand.Excute), ServerType.eGame, 10000, 10000));
-                            ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})FetchCommand", serverType));
+                            ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})FetchCommand", serverType));
                         }
                         timerList.Add(new Timer(new TimerCallback(SyncNoticeItemList.Excute), ServerType.eGame, 10000, 10000));
-                        ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})SyncNoticeItemList", serverType));
+                        ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})SyncNoticeItemList", serverType));
                         timerList.Add(new Timer(new TimerCallback(UpdateCurrentPrice.Excute), ServerType.eGame, 60000, 60000));
-                        ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateCurrentPrice", serverType));
+                        ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateCurrentPrice", serverType));
                         break;
                     }
                     break;
                 case ServerType.eProcess:
                     timerList.Add(new Timer(new TimerCallback(UpdateTickCount.Excute), ServerType.eProcess, 1800000, 1800000));
-                    ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateTickCount", serverType));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateTickCount", serverType));
                     if (flag)
                     {
                         timerList.Add(new Timer(new TimerCallback(UpdateSystemCount.Excute), ServerType.eProcess, 600000, 600000));
-                        ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateSystemCount", serverType));
+                        ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})UpdateSystemCount", serverType));
                         timerList.Add(new Timer(new TimerCallback(WaitSellItem.Excute), ServerType.eProcess, 10000, 10000));
-                        ServerLogManager.serverLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})waitSellItem", serverType));
+                        ServerLogManager.ServerLogWrite(ServerLogType.eSetTimer, "WorldMarketServerInfoManager" + string.Format("-({0})waitSellItem", serverType));
                         break;
                     }
                     break;
@@ -84,7 +84,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 num = timerList.Count;
             stopwatch.Stop();
             LogUtil.WriteLog(string.Format("[{0}]TimerManager 생성 = ({1})", serverType, num), "INFO");
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "WorldMarketServerInfoManager", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "WorldMarketServerInfoManager", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
     }

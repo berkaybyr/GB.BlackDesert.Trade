@@ -46,10 +46,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(VariedPriceInfoManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(VariedPriceInfoManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(VariedPriceInfoManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(VariedPriceInfoManager));
                 stopwatch.Start();
                 try
                 {
@@ -118,7 +118,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(VariedPriceInfoManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(VariedPriceInfoManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
@@ -136,11 +136,11 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             if (!_isOpen)
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eNotOpen, nameof(initCalculatePrice));
+                ServerLogManager.ServerLogWrite(ServerLogType.eNotOpen, nameof(initCalculatePrice));
                 return -1;
             }
             Stopwatch stopwatch = new Stopwatch();
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "VariedPriceInfoManager initCalculatePrice");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "VariedPriceInfoManager initCalculatePrice");
             stopwatch.Start();
             lock (_locker)
             {
@@ -162,7 +162,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 }
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "VariedPriceInfoManager initCalculatePrice", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "VariedPriceInfoManager initCalculatePrice", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 

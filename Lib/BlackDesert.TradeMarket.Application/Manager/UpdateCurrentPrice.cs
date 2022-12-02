@@ -18,7 +18,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             try
             {
                 updateCurrentPrice();
-                ServerLogManager.serverLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]UpdateCurrentPrice", state));
+                ServerLogManager.ServerLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]UpdateCurrentPrice", state));
             }
             catch (Exception ex)
             {

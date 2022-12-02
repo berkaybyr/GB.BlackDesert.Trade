@@ -7,20 +7,18 @@ namespace BlackDesert.TradeMarket.Application.Manager
     {
         private static volatile WorldMarketServerInfoManager _singleton;
         private static object _locker = new object();
-        private bool _isOpen;
+        private bool _isOpen = false;
         private const string _managerName = "WorldMarketServerInfoManager";
         public Dictionary<string, TradeMarketServerInfo> _serverInfoList = new Dictionary<string, TradeMarketServerInfo>();
 
-        public WorldMarketServerInfoManager() => _isOpen = false;
-
+        private WorldMarketServerInfoManager() {  }
         public static WorldMarketServerInfoManager This()
         {
             if (_singleton == null)
             {
                 lock (_locker)
                 {
-                    if (_singleton == null)
-                        _singleton = new WorldMarketServerInfoManager();
+                    _singleton = new WorldMarketServerInfoManager();
                 }
             }
             return _singleton;
@@ -33,10 +31,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(WorldMarketServerInfoManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(WorldMarketServerInfoManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(WorldMarketServerInfoManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(WorldMarketServerInfoManager));
                 try
                 {
                     XmlReader xmlFile = CommonModule.GetXmlFile("/" + ConstantMgr._serviceProject + "WorldTradeMarketItemData/" + ConstantMgr._serviceType, "WorldTradeMarketServerInfo.xml", serverType);
@@ -107,7 +105,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(WorldMarketServerInfoManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(WorldMarketServerInfoManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 

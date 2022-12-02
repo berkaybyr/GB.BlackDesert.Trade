@@ -19,7 +19,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             try
             {
                 updateTickCount();
-                ServerLogManager.serverLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]UpdateTickCount", state));
+                ServerLogManager.ServerLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]UpdateTickCount", state));
             }
             catch (Exception ex)
             {

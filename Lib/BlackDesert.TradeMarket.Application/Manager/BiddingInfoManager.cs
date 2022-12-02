@@ -36,7 +36,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             if (!ItemInfoManager.This().isOpen())
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eNotOpen, "BiddingInfoManager-ItemInfoManager");
+                ServerLogManager.ServerLogWrite(ServerLogType.eNotOpen, "BiddingInfoManager-ItemInfoManager");
                 return -1;
             }
             Stopwatch stopwatch = new Stopwatch();
@@ -44,10 +44,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(BiddingInfoManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(BiddingInfoManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(BiddingInfoManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(BiddingInfoManager));
                 stopwatch.Start();
                 foreach (KeyValuePair<KeyValuePair<int, int>, TradeMarketItemInfo> keyValuePair in ItemInfoManager.This().getItemListXXX())
                 {
@@ -59,7 +59,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(BiddingInfoManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(BiddingInfoManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 

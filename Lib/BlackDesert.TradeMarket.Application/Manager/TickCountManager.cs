@@ -1,4 +1,7 @@
 ﻿using BlackDesert.TradeMarket.Application.Xml;
+using EasMe;
+using EasMe.Extensions;
+using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 
 namespace BlackDesert.TradeMarket.Application.Manager
 {
@@ -6,42 +9,36 @@ namespace BlackDesert.TradeMarket.Application.Manager
     {
         private static volatile TickCountManager _singleton;
         private static object _locker = new object();
-        private Dictionary<int, int> _tickCountList;
-        private List<int> _mainGroupList;
-        private bool _isOpen;
-        private const string _managerName = "TickCountManager";
-
-        public TickCountManager()
-        {
-            _tickCountList = new Dictionary<int, int>();
-            _mainGroupList = new List<int>();
-            _isOpen = false;
-        }
-
+        private Dictionary<int, int> _tickCountList = new();
+        private List<int> _mainGroupList = new();
+        private bool _isOpen = false;
+        private const string _managerName = nameof(TickCountManager);
+        
+        private static readonly EasLog logger = IEasLog.CreateLogger(_managerName);
+        private TickCountManager() { }
         public static TickCountManager This()
         {
             if (_singleton == null)
             {
                 lock (_locker)
                 {
-                    if (_singleton == null)
-                        _singleton = new TickCountManager();
+                    _singleton ??= new TickCountManager();
                 }
             }
             return _singleton;
         }
 
-        public int open(ServerType serverType)
+        public int Open(ServerType serverType)
         {
-            Stopwatch stopwatch = new Stopwatch();
+            var stopwatch = new Stopwatch();
             lock (_locker)
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(TickCountManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, _managerName);
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(TickCountManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart,_managerName);
                 stopwatch.Start();
                 _tickCountList = Xml_ItemMarketTickCount.Read(serverType);
                 _mainGroupList = _tickCountList.Select(x => x.Key).ToList();
@@ -53,13 +50,13 @@ namespace BlackDesert.TradeMarket.Application.Manager
                     string str1 = count.ToString();
                     count = tickCountList.Count;
                     string str2 = count.ToString();
-                    LogUtil.WriteLog(string.Format("TickCountManager UpdateTick Count Fail Mismatch xmlCount : {0}  DB Count : {1} ", str1, str2), "WARN");
+                    logger.Warn($"UpdateTick Count Fail Mismatch xmlCount({str1}) dbCount({str2})");
                     return -2;
                 }
-                List<int> allowMainGroup = WorldMarketServerInfoManager.This().getAllowMainGroup();
+                var allowMainGroup = WorldMarketServerInfoManager.This().getAllowMainGroup();
                 if (allowMainGroup == null)
                 {
-                    LogUtil.WriteLog(string.Format("[Http Info]TickCountManager getAllowMainGroup is Empty"), "WARN");
+                    logger.Warn($"GetAllowMainGroup is null");
                     return -3;
                 }
                 foreach (var listTickCountResult in tickCountList)
@@ -70,21 +67,21 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 }
                 if (_mainGroupList.Count == 0)
                 {
-                    LogUtil.WriteLog(string.Format("[Http Info]TickCountManager _mainGroupList is  Empty"), "WARN");
+                    logger.Warn($"MainGroupList is Empty");
                     return -5;
                 }
                 foreach (int mainGroup in _mainGroupList)
-                    LogUtil.WriteLog(string.Format("[Http Info]TickCountManager Init GroupNo : {0} ", mainGroup.ToString()), "INFO");
+                    logger.Info($"MainGroup({mainGroup})");
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(TickCountManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
-        public int updateTickCountToRepositoryXXX()
+        public int UpdateTickCountToRepositoryXXX()
         {
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "TickCountManager updateTickCountToRepositoryXXX");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "TickCountManager updateTickCountToRepositoryXXX");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             Dictionary<int, int> dictionary = new Dictionary<int, int>(_tickCountList);
@@ -95,7 +92,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 string str1 = count.ToString();
                 count = tickCountList.Count;
                 string str2 = count.ToString();
-                LogUtil.WriteLog(string.Format("updateTickCountToRepositoryXXX Fail xmlCount : {0}  DB Count : {1} ", str1, str2), "WARN");
+                logger.Error($"updateTickCountToRepositoryXXX Fail xmlCount : {str1}  DB Count : {str2} ");
                 return -3;
             }
             foreach (var listTickCountResult in tickCountList)
@@ -109,10 +106,11 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 int key = keyValuePair.Key;
                 int num = keyValuePair.Value;
                 var res = ApiDbManger.uspSetUpdateTickCount(key, num);
-                //TODO: Do logging ??
+                if (!res.IsSuccess)
+                    logger.Warn($"UpdateTickCountToRepository Fail MainGroupNo({key})");
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "TickCountManager updateTickCountToRepositoryXXX", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "TickCountManager updateTickCountToRepositoryXXX", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
@@ -124,14 +122,14 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 try
                 {
                     var res = ApiDbManger.uspIncreaseTickCount(mainGroup);
-                    if (res.IsSuccess)
-                        LogUtil.WriteLog(string.Format("[DB Error] uspIncreaseTickCount({0}), rv({1})", mainGroup, res.resultCode), "WARN");
+                    if (!res.IsSuccess)
+                        logger.Warn("Db Error", $"updateTickCountXXX({mainGroup}), rv({res.resultCode})");
                     else if (Convert.ToBoolean(res.IsSuccess)) //TODO Check Here
                         intList.Add(mainGroup);
                 }
                 catch (Exception ex)
                 {
-                    LogUtil.WriteLog(string.Format("uspIncreaseTickCount Exception : {0}", ex.ToString()), "ERROR");
+                    logger.Exception(ex, "uspIncreaseTickCount");
                 }
             }
             foreach (int mainGroupNo in intList)
@@ -160,7 +158,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                     if (passBiddingCount == 0L || worldMarketPricePoint == 0L)
                     {
                         beforeEnchantPrice = 0L;
-                        LogUtil.WriteLog(string.Format("getWorldMarketPassCount({0}, {1}),  Error pricePerOne {2} ", passBiddingCount, worldMarketPricePoint, item.PricePerOne), "WARN");
+                        logger.Warn("getWorldMarketPassCount({0}, {1}),  Error pricePerOne {2} ", passBiddingCount, worldMarketPricePoint, item.PricePerOne);
                     }
                     else if (0L < item.PriceGroupKey)
                     {
@@ -183,13 +181,13 @@ namespace BlackDesert.TradeMarket.Application.Manager
                                 try
                                 {
                                     var ratio = WorldMarketOptionManager.This().BiddingRatio;
-                                    var res = ApiDbManger.uspUpdateWorldMarketPassCount(item.KeyType,item.MainKey, item.SubKey);
+                                    var res = ApiDbManger.uspUpdateWorldMarketPassCount(item.KeyType, item.MainKey, item.SubKey);
                                     if (!res.IsSuccess)
-                                        LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail Record({0}) , Result({1})", JsonConvert.SerializeObject(item), JsonConvert.SerializeObject(res)), "WARN");
+                                        logger.Warn($"uspUpdateWorldMarketPrice fail Record({item.AsJson()}) , Result({res.AsJson()})");
                                 }
                                 catch (Exception ex)
                                 {
-                                    LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPassCount Exception : {0}", ex.ToString()), "ERROR");
+                                    logger.Exception(ex ,"uspUpdateWorldMarketPassCount");
                                 }
                                 TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
                             }
@@ -215,12 +213,12 @@ namespace BlackDesert.TradeMarket.Application.Manager
                                     {
                                         var ratio = WorldMarketOptionManager.This().BiddingRatio;
                                         //uspListBiddingPrice_Result
-                                        var res = ApiDbManger.uspListBiddingPrice(item.KeyType,item.MainKey,item.SubKey, enchantMaxGroup, ratio, item.PricePerOne);
+                                        var res = ApiDbManger.uspListBiddingPrice(item.KeyType, item.MainKey, item.SubKey, enchantMaxGroup, ratio, item.PricePerOne);
                                     }
                                     catch (Exception ex)
                                     {
                                         TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
-                                        LogUtil.WriteLog(string.Format("uspListBiddingPrice Exception : {0}", ex.ToString()), "ERROR");
+                                        logger.Exception(ex,"uspListBiddingPrice ");
                                         continue;
                                     }
                                     if (biddingPriceList.list != null && 0 < biddingPriceList.list.Count)
@@ -248,7 +246,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                             else
                             {
                                 TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
-                                LogUtil.WriteLog(string.Format("newPrice fail keyType - {0}, mainKey - {1}, subKey - {2}", item.KeyType, item.MainKey, item.SubKey), "WARN");
+                                logger.Warn("newPrice fail keyType - {0}, mainKey - {1}, subKey - {2}".FormatString(item.KeyType, item.MainKey, item.SubKey));
                                 continue;
                             }
                             long nextGraphPrice = newPrice;
@@ -263,7 +261,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                             if (price == 0L)
                             {
                                 TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
-                                LogUtil.WriteLog(string.Format("calculatePrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}", item.KeyType, item.MainKey, item.SubKey, price), "WARN");
+                                logger.Warn("calculatePrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}".FormatString(item.KeyType, item.MainKey, item.SubKey, price));
                             }
                             else
                             {
@@ -280,10 +278,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
                                     TickCountCommon.fluctuationCalc(price, cPricePerOne, ref fluctuationType, ref fluctuationPrice);
                                     try
                                     {
-                                        var res =  ApiDbManger.uspUpdateWorldMarketPrice(item.KeyType, item.MainKey, item.SubKey, price, nextGraphPrice, fluctuationType, fluctuationPrice);
+                                        var res = ApiDbManger.uspUpdateWorldMarketPrice(item.KeyType, item.MainKey, item.SubKey, price, nextGraphPrice, fluctuationType, fluctuationPrice);
                                         if (!res.IsSuccess)
                                         {
-                                            LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}", item.KeyType, item.MainKey, item.SubKey, price), "WARN");
+                                            logger.Warn("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}", item.KeyType, item.MainKey, item.SubKey, price);
                                             TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
                                         }
                                         else
@@ -291,7 +289,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                                     }
                                     catch (Exception ex)
                                     {
-                                        LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice Exception : {0}", ex.ToString()), "ERROR");
+                                        logger.Exception(ex,"uspUpdateWorldMarketPrice");
                                         TickCountCommon.enchantLevelCalc(cPricePerOne, item.SubKey, ref beforeEnchantPrice);
                                     }
                                 }
@@ -314,7 +312,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                         var record = changer._item;
                         var res = ApiDbManger.uspUpdateWorldMarketPrice(record.KeyType, record.MainKey, record.SubKey, changer.nextPrice, changer.nextGraphPrice, fluctuationType, fluctuationPrice, cMaxTradeCount);
                         if (!res.IsSuccess)
-                            LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}", record.KeyType, record.MainKey, record.SubKey, changer.nextPrice), "WARN");
+                            logger.Warn("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}".FormatString(record.KeyType, record.MainKey, record.SubKey, changer.nextPrice));
                     }
                     catch (Exception ex)
                     {
@@ -328,16 +326,16 @@ namespace BlackDesert.TradeMarket.Application.Manager
                         var record = changer._item;
                         var res = ApiDbManger.uspUpdateWorldMarketPassCount(record.KeyType, record.MainKey, record.SubKey, WorldMarketOptionManager.This().BiddingRatio);
                         if (!res.IsSuccess)
-                            LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}", record.KeyType, record.MainKey, record.SubKey), "WARN");
+                            logger.Warn("uspUpdateWorldMarketPrice fail keyType - {0}, mainKey - {1}, subKey - {2}".FormatString(record.KeyType, record.MainKey, record.SubKey));
                     }
                     catch (Exception ex)
                     {
-                        LogUtil.WriteLog(string.Format("uspUpdateWorldMarketPassCount Exception : {0}", ex.ToString()), "ERROR");
+                        logger.Exception(ex,"uspUpdateWorldMarketPassCount");
                     }
                 }
             }
             GroupWeaponPriceChangerManager.This().update();
-            LogUtil.WriteLog(string.Format("updatePriceWorldMarketXXX complete mainGroupNo:{0},  ", mainGroupNo), "INFO");
+            logger.Info($"updatePriceWorldMarketXXX complete mainGroupNo:{mainGroupNo}");
         }
 
         public bool isExistsMainGroupNo(int mainGroupNo) => _tickCountList.ContainsKey(mainGroupNo);
@@ -349,7 +347,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             var pricePerOne = ApiDbManger.uspGetItemPrice(keyType, mainKey, subKey);
             if (pricePerOne == 0)
             {
-                LogUtil.WriteLog(string.Format("[DB Error] updatePriceTargetXXX(), rv({0})", pricePerOne), "WARN");
+                logger.Warn("DB Error", "updatePriceTargetXXX(), rv({0})", pricePerOne);
             }
             else
             {
@@ -371,9 +369,9 @@ namespace BlackDesert.TradeMarket.Application.Manager
                     fluctuationType = FluctuationType.eWorldMarket_FluctuationType_Down;
                     num = int64 - price;
                 }
-                var res = ApiDbManger.uspUpdateWorldMarketPrice(keyType, mainKey, subKey, price, fluctuationType, num); 
+                var res = ApiDbManger.uspUpdateWorldMarketPrice(keyType, mainKey, subKey, price, fluctuationType, num);
                 if (!res.IsSuccess)
-                    LogUtil.WriteLog(string.Format("updatePriceTargetXXX fail keyType - {0}, mainKey - {1}, subKey - {2}, newPrice - {3}", keyType, mainKey, subKey, price), "WARN");
+                    logger.Warn($"updatePriceTargetXXX fail keyType - {keyType}, mainKey - {mainKey}, subKey - {subKey}, newPrice - {price}");
             }
         }
     }

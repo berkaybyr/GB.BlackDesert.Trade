@@ -33,17 +33,17 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (ServerLoading.eOpen == _dataOpenType)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, "ServerControlManager " + getConvertServerName(serverType));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, "ServerControlManager " + getConvertServerName(serverType));
                     return 0;
                 }
                 if (ServerLoading.eLoading == _dataOpenType)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eLoading, "ServerControlManager " + getConvertServerName(serverType));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eLoading, "ServerControlManager " + getConvertServerName(serverType));
                     return 0;
                 }
                 _dataOpenType = ServerLoading.eLoading;
             }
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "ServerControlManager " + getConvertServerName(serverType));
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "ServerControlManager " + getConvertServerName(serverType));
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             if (ServerType.eProcess == serverType || ServerType.eGame == serverType)
@@ -51,7 +51,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 errorCode1 = WorldMarketServerInfoManager.This().open(serverType);
                 if (errorCode1 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode1, "WorldMarketServerInfoManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode1, "WorldMarketServerInfoManager open");
                     return errorCode1;
                 }
             }
@@ -60,7 +60,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 lock (_locker)
                     _dataOpenType = ServerLoading.eOpen;
                 stopwatch.Stop();
-                ServerLogManager.serverLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType), stopwatch.ElapsedMilliseconds.ToString());
+                ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType), stopwatch.ElapsedMilliseconds.ToString());
                 return errorCode1;
             }
             //if (ServerType.eView == serverType && isWebOpen)
@@ -75,13 +75,13 @@ namespace BlackDesert.TradeMarket.Application.Manager
             int errorCode3 = WorldMarketOptionManager.This().open(serverType);
             if (errorCode3 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode3, "WorldMarketOptionManager open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode3, "WorldMarketOptionManager open");
                 return errorCode3;
             }
             int errorCode4 = VariedPriceInfoManager.This().open(serverType);
             if (errorCode4 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode4, "VariedPriceInfoManager open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode4, "VariedPriceInfoManager open");
                 return errorCode4;
             }
             if (ServerType.eView == serverType)
@@ -89,28 +89,28 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 int price = VariedPriceInfoManager.This().initCalculatePrice();
                 if (price != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), price, "VariedPriceInfoManager initCalculatePrice");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), price, "VariedPriceInfoManager initCalculatePrice");
                     return price;
                 }
             }
             int errorCode5 = ItemInfoManager.This().open(serverType);
             if (errorCode5 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode5, "ItemInfoManager open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode5, "ItemInfoManager open");
                 return errorCode5;
             }
             if (ServerType.eProcess == serverType)
             {
-                int errorCode6 = TickCountManager.This().open(serverType);
+                int errorCode6 = TickCountManager.This().Open(serverType);
                 if (errorCode6 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode6, "TickCountManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode6, "TickCountManager open");
                     return errorCode6;
                 }
                 int errorCode7 = VariedTradeCountManager.This().open(serverType);
                 if (errorCode7 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode7, "VariedTradeCountManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode7, "VariedTradeCountManager open");
                     return errorCode7;
                 }
             }
@@ -119,38 +119,38 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 int errorCode8 = BiddingInfoManager.This().open(serverType);
                 if (errorCode8 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode8, "BiddingInfoManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode8, "BiddingInfoManager open");
                     return errorCode8;
                 }
                 int errorCode9 = WorldMarketItemInfoManager.This().open(serverType);
                 if (errorCode9 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode9, "WorldMarketItemInfoManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode9, "WorldMarketItemInfoManager open");
                     return errorCode9;
                 }
                 int errorCode10 = WorldMarketServantInfoManager.This().open(serverType);
                 if (errorCode10 != 0)
                 {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode10, "WorldMarketServantInfoManager open");
+                    ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode10, "WorldMarketServantInfoManager open");
                     return errorCode10;
                 }
             }
             int errorCode11 = CategoryInfoManager.This().open(serverType);
             if (errorCode11 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode11, "CategoryInfoManager open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode11, "CategoryInfoManager open");
                 return errorCode11;
             }
             int errorCode12 = FamilySkillManager.This().open(serverType);
             if (errorCode12 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode12, "FamilySkillManager open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), errorCode12, "FamilySkillManager open");
                 return errorCode12;
             }
             lock (_locker)
                 _dataOpenType = ServerLoading.eOpen;
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
@@ -160,7 +160,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             lock (_locker)
                 _isLoadComplete = true;
-            ServerLogManager.serverLogWrite(ServerLogType.eOpen, "ServerControlManager " + getConvertServerName(serverType) + " Service Start!!!");
+            ServerLogManager.ServerLogWrite(ServerLogType.eOpen, "ServerControlManager " + getConvertServerName(serverType) + " Service Start!!!");
         }
 
         public bool IsDataLoad() => _dataOpenType == ServerLoading.eOpen;
@@ -169,12 +169,12 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             if (ServerType.eProcess != serverType)
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
+                ServerLogManager.ServerLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
                 return -1;
             }
             if (!IsDataLoad())
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
+                ServerLogManager.ServerLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
                 return -2;
             }
             bool flag = false;
@@ -197,41 +197,41 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (ServerLoading.eOpen == _dbUpdateType)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
                     return 0;
                 }
                 if (ServerLoading.eLoading == _dbUpdateType)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eLoading, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
+                    ServerLogManager.ServerLogWrite(ServerLogType.eLoading, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
                     return 0;
                 }
                 _dbUpdateType = ServerLoading.eLoading;
             }
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             int repositoryXxx1 = ItemInfoManager.This().updateItemInfoToRepositoryXXX();
             if (repositoryXxx1 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), repositoryXxx1 - 100, "updateItemInfoToRepositoryXXX open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), repositoryXxx1 - 100, "updateItemInfoToRepositoryXXX open");
                 return repositoryXxx1 - 100;
             }
-            int repositoryXxx2 = TickCountManager.This().updateTickCountToRepositoryXXX();
+            int repositoryXxx2 = TickCountManager.This().UpdateTickCountToRepositoryXXX();
             if (repositoryXxx2 != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), repositoryXxx2 - 200, "updateTickCountToRepositoryXXX open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), repositoryXxx2 - 200, "updateTickCountToRepositoryXXX open");
                 return repositoryXxx2 - 200;
             }
             int num = WorldMarketOptionManager.This().updateRingBuffRateXXX();
             if (num != 0)
             {
-                ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), num - 300, "updateRingBuffRateXXX open");
+                ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), num - 300, "updateRingBuffRateXXX open");
                 return num - 300;
             }
             lock (_locker)
                 _dbUpdateType = ServerLoading.eOpen;
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "ServerControlManager " + getConvertServerName(serverType) + " DataUpdateByRepository", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
@@ -239,18 +239,18 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             if (ServerType.eProcess != serverType && ServerType.eGame != serverType)
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " TimerOpen");
+                ServerLogManager.ServerLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " TimerOpen");
                 return -1;
             }
             if (!IsDataLoad())
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " TimerOpen");
+                ServerLogManager.ServerLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " TimerOpen");
                 return -2;
             }
             int num = TimerManager.This().Open(serverType);
             if (num == 0)
                 return 0;
-            ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), num - 100, "TimerManager open");
+            ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), num - 100, "TimerManager open");
             return num - 100;
         }
 
@@ -258,18 +258,18 @@ namespace BlackDesert.TradeMarket.Application.Manager
         {
             if (ServerType.eProcess != serverType && ServerType.eGame != serverType)
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " dataInit");
+                ServerLogManager.ServerLogWrite(ServerLogType.eImpossible, "ServerControlManager " + getConvertServerName(serverType) + " dataInit");
                 return -1;
             }
             if (!IsDataLoad())
             {
-                ServerLogManager.serverLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " dataInit");
+                ServerLogManager.ServerLogWrite(ServerLogType.eNotOpen, "ServerControlManager " + getConvertServerName(serverType) + " dataInit");
                 return -2;
             }
             int num = HistoryManager.This().Open(serverType);
             if (num == 0)
                 return 0;
-            ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), num - 100, "dataInit complete fail");
+            ServerLogManager.ServerErrorLogWrite(nameof(ServerControlManager), num - 100, "dataInit complete fail");
             return num - 100;
         }
 

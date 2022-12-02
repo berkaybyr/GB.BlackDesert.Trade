@@ -19,7 +19,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
             try
             {
                 waitSellItem();
-                ServerLogManager.serverLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]waitSellItem", state));
+                ServerLogManager.ServerLogWrite(ServerLogType.eRunTimer, string.Format("[{0}]waitSellItem", state));
             }
             catch (Exception ex)
             {

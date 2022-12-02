@@ -82,10 +82,10 @@ namespace BlackDesert.TradeMarket.Application.Manager
             {
                 if (_isOpen)
                 {
-                    ServerLogManager.serverLogWrite(ServerLogType.eAlready, nameof(WorldMarketOptionManager));
+                    ServerLogManager.ServerLogWrite(ServerLogType.eAlready, nameof(WorldMarketOptionManager));
                     return 0;
                 }
-                ServerLogManager.serverLogWrite(ServerLogType.eStart, nameof(WorldMarketOptionManager));
+                ServerLogManager.ServerLogWrite(ServerLogType.eStart, nameof(WorldMarketOptionManager));
                 stopwatch.Start();
                 try
                 {
@@ -240,7 +240,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 _isOpen = true;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, nameof(WorldMarketOptionManager), stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, nameof(WorldMarketOptionManager), stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
 
@@ -290,7 +290,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
 
         public int updateRingBuffRateXXX()
         {
-            ServerLogManager.serverLogWrite(ServerLogType.eStart, "WorldMarketOptionManager updateRingBuffRateXXX");
+            ServerLogManager.ServerLogWrite(ServerLogType.eStart, "WorldMarketOptionManager updateRingBuffRateXXX");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             try
@@ -315,7 +315,7 @@ namespace BlackDesert.TradeMarket.Application.Manager
                 return -2;
             }
             stopwatch.Stop();
-            ServerLogManager.serverLogWrite(ServerLogType.eComplete, "WorldMarketOptionManager updateRingBuffRateXXX", stopwatch.ElapsedMilliseconds.ToString());
+            ServerLogManager.ServerLogWrite(ServerLogType.eComplete, "WorldMarketOptionManager updateRingBuffRateXXX", stopwatch.ElapsedMilliseconds.ToString());
             return 0;
         }
     }
