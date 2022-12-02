@@ -16,7 +16,7 @@ using EasMe;
 using GB.BlackDesert.Trade.Web.Api.Models.Request;
 using BlackDesert.TradeMarket.Lib.Compression;
 
-namespace GB.BlackDesert.Trade.Web.Api.Controllers
+namespace BlackDesert.TradeMarket.Trade.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

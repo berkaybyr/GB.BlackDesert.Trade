@@ -4,7 +4,7 @@ using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System.Data.Entity.Core.Objects;
 
-namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
+namespace BlackDesert.TradeMarket.Process.Api.Controllers
 {
     //[ApiController]
     //[Route("[controller]/[action]")]

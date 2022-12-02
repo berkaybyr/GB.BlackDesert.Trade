@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
+namespace BlackDesert.TradeMarket.Game.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

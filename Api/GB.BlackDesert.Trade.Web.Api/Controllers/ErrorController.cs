@@ -7,7 +7,7 @@
 using EasMe;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GB.BlackDesert.Trade.Web.Api.Controllers
+namespace BlackDesert.TradeMarket.Trade.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

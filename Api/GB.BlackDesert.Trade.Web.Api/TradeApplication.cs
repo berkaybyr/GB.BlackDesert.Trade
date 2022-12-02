@@ -8,7 +8,7 @@ using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 
 
-namespace GB.BlackDesert.Trade.Web.Api
+namespace BlackDesert.TradeMarket.Trade.Api
 {
     public static class TradeApplication
     {

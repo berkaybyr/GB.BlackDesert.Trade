@@ -10,7 +10,7 @@ using System.Data.Entity.Core.Objects;
 using System.Text;
 using EasMe;
 
-namespace GB.BlackDesert.Trade.Web.Process.Api.Controllers
+namespace BlackDesert.TradeMarket.Process.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

@@ -9,7 +9,7 @@ using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GB.BlackDesert.Trade.Web.Api.Controllers
+namespace BlackDesert.TradeMarket.Trade.Api.Controllers
 {
     public class BaseController : Controller
     {

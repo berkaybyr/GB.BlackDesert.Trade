@@ -11,7 +11,7 @@ using System.Data.Entity.Core.Objects;
 using System.Text;
 using EasMe;
 
-namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
+namespace BlackDesert.TradeMarket.Game.Api.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]

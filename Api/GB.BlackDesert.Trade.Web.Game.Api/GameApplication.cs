@@ -8,7 +8,7 @@ using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 
 
-namespace GB.BlackDesert.Trade.Web.Game.Api
+namespace BlackDesert.TradeMarket.Game.Api
 {
     public static class GameApplication
     {

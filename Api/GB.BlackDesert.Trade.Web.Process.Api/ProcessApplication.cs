@@ -2,7 +2,7 @@
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 
-namespace GB.BlackDesert.Trade.Web.Process.Api
+namespace BlackDesert.TradeMarket.Process.Api
 {
     public static class ProcessApplication
     {
