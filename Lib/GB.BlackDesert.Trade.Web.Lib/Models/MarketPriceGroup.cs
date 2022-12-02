@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Models
+namespace BlackDesert.TradeMarket.Lib.Models
 {
     public class MarketPriceGroup
     {

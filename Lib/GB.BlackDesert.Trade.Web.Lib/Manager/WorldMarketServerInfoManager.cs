@@ -15,7 +15,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Xml;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class WorldMarketServerInfoManager
     {

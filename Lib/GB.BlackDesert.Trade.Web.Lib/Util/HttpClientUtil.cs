@@ -13,7 +13,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     public static class HttpClientUtil
     {

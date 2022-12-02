@@ -1,0 +1,72 @@
+﻿namespace BlackDesert.TradeMarket.Db.GameContext
+{
+	public partial class TblTradeGroupList
+	{
+		public long OwnerUserNo { get; set; }
+		public short TradeGroupIndex { get; set; }
+		public long WorkerNo1 { get; set; }
+		public long WorkerNo2 { get; set; }
+		public long Money { get; set; }
+		public int Carriage { get; set; }
+		public int Amulet { get; set; }
+		public int Porter { get; set; }
+		public int Guard { get; set; }
+		public byte State { get; set; }
+		public int MoveSpeed { get; set; }
+		public double Luck { get; set; }
+		public double Defense { get; set; }
+		public double TransportCapacity { get; set; }
+		public short CurDestIndex { get; set; }
+		public double MoveDistance { get; set; }
+		public int? ItemKey1 { get; set; }
+		public int ItemCount1 { get; set; }
+		public int BuyPrice1 { get; set; }
+		public int ContractedPrice1 { get; set; }
+		public int? ItemKey2 { get; set; }
+		public int ItemCount2 { get; set; }
+		public int BuyPrice2 { get; set; }
+		public int ContractedPrice2 { get; set; }
+		public int? ItemKey3 { get; set; }
+		public int ItemCount3 { get; set; }
+		public int BuyPrice3 { get; set; }
+		public int ContractedPrice3 { get; set; }
+		public int? ItemKey4 { get; set; }
+		public int ItemCount4 { get; set; }
+		public int BuyPrice4 { get; set; }
+		public int ContractedPrice4 { get; set; }
+		public int? ItemKey5 { get; set; }
+		public int ItemCount5 { get; set; }
+		public int BuyPrice5 { get; set; }
+		public int ContractedPrice5 { get; set; }
+		public int? ItemKey6 { get; set; }
+		public int ItemCount6 { get; set; }
+		public int BuyPrice6 { get; set; }
+		public int ContractedPrice6 { get; set; }
+		public int? ItemKey7 { get; set; }
+		public int ItemCount7 { get; set; }
+		public int BuyPrice7 { get; set; }
+		public int ContractedPrice7 { get; set; }
+		public int? ItemKey8 { get; set; }
+		public int ItemCount8 { get; set; }
+		public int BuyPrice8 { get; set; }
+		public int ContractedPrice8 { get; set; }
+		public int? ItemKey9 { get; set; }
+		public int ItemCount9 { get; set; }
+		public int BuyPrice9 { get; set; }
+		public int ContractedPrice9 { get; set; }
+		public int? ItemKey10 { get; set; }
+		public int ItemCount10 { get; set; }
+		public int BuyPrice10 { get; set; }
+		public int ContractedPrice10 { get; set; }
+		public int? TradeNode1 { get; set; }
+		public int? TradeNode2 { get; set; }
+		public int? TradeNode3 { get; set; }
+		public int? TradeNode4 { get; set; }
+		public int? TradeNode5 { get; set; }
+		public int? TradeNode6 { get; set; }
+		public int? TradeNode7 { get; set; }
+		public int? TradeNode8 { get; set; }
+		public int? TradeNode9 { get; set; }
+		public int? TradeNode10 { get; set; }
+	}
+}

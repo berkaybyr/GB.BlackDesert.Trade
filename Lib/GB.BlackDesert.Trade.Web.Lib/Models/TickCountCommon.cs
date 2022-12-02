@@ -7,7 +7,7 @@
 using GB.BlackDesert.Trade.Web.Lib.Common;
 using GB.BlackDesert.Trade.Web.Lib.Manager;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Models
+namespace BlackDesert.TradeMarket.Lib.Models
 {
     public class TickCountCommon
     {

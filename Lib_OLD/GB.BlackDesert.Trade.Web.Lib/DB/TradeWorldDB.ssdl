@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeWORLDDB_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="uspAccessByTradeWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="serviceType" Type="int" Mode="InOut" />
+    <Parameter Name="worldNo" Type="int" Mode="InOut" />
+    <Parameter Name="isAdmissionToSpeedServer" Type="tinyint" Mode="InOut" />
+    <Parameter Name="isUpdatePackageBuff" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCheckAuthKey" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="certifeidKey" Type="varchar" Mode="In" />
+    <Parameter Name="requestDate" Type="datetime" Mode="In" />
+    <Parameter Name="serviceType" Type="int" Mode="InOut" />
+    <Parameter Name="worldNo" Type="int" Mode="InOut" />
+    <Parameter Name="userNickName" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspClearTradeAuthHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspIsGameMaster" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="isGameMaster" Type="bit" Mode="InOut" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspListWorldTradeMarketCommand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaOperationPublic">
+    <Parameter Name="symNo" Type="varchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspSetWorldTradeMarketCommandResult" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaOperationPublic">
+    <Parameter Name="commandNo" Type="bigint" Mode="In" />
+    <Parameter Name="status" Type="tinyint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspCheckSecondPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaWebGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="secondPW" Type="nvarchar" Mode="In" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+  </Function>
+  <Function Name="uspGetSecondPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaWebGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+  </Function>
+  <Function Name="uspGetUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaWebGamePublic">
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="userId" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="resultCode" Type="int" Mode="InOut" />
+    <Parameter Name="resultMsg" Type="nvarchar" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="TradeWORLDDB_ModelStoreContainer" />
+</Schema>

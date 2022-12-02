@@ -8,7 +8,7 @@ using GB.BlackDesert.Trade.Web.Lib.Models;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class stockInfoListWrapper :
     IEnumerable<KeyValuePair<KeyValuePair<int, int>, TradeMarketItemInfo>>,

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GB.BlackDesert.Trade.Web.Lib.Sql
+namespace BlackDesert.TradeMarket.Lib.Sql
 {
     using System;
     

@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class BiddingInfoManager
     {

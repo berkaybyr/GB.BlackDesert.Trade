@@ -6,24 +6,9 @@
 
 using EasMe;
 using EasMe.Extensions;
-using GB.BlackDesert.Trade.Web.Lib.Common;
-using GB.BlackDesert.Trade.Web.Lib.Sql;
-using GB.BlackDesert.Trade.Web.Lib.Manager;
 using GB.BlackDesert.Trade.Web.Lib.Models;
-using log4net;
-using log4net.Appender;
-using log4net.Layout;
-using log4net.Layout.Pattern;
-using log4net.Repository;
-using log4net.Util;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     public static class LogUtil
     {

@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SA_BETA_GAMEDB_0002Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="uspCheckPayloadForRegisterItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="serviceType" Type="int" Mode="In" />
+          <Parameter Name="worldNo" Type="int" Mode="In" />
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="keyType" Type="int" Mode="In" />
+          <Parameter Name="itemKey" Type="int" Mode="In" />
+          <Parameter Name="enchantLevel" Type="int" Mode="In" />
+          <Parameter Name="itemCount" Type="bigint" Mode="In" />
+          <Parameter Name="isSealed" Type="bit" Mode="In" />
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="param0" Type="bigint" Mode="In" />
+          <Parameter Name="param1" Type="bigint" Mode="In" />
+          <Parameter Name="param2" Type="bigint" Mode="In" />
+          <Parameter Name="param3" Type="bigint" Mode="In" />
+          <Parameter Name="param4" Type="bigint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspClearNoticeItemList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspCompletePayloadForRegisterItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="serviceType" Type="int" Mode="In" />
+          <Parameter Name="worldNo" Type="int" Mode="In" />
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="keyType" Type="int" Mode="In" />
+          <Parameter Name="itemKey" Type="int" Mode="In" />
+          <Parameter Name="enchantLevel" Type="int" Mode="In" />
+          <Parameter Name="itemCount" Type="bigint" Mode="In" />
+          <Parameter Name="isSealed" Type="bit" Mode="In" />
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="param0" Type="bigint" Mode="In" />
+          <Parameter Name="param1" Type="bigint" Mode="In" />
+          <Parameter Name="param2" Type="bigint" Mode="In" />
+          <Parameter Name="param3" Type="bigint" Mode="In" />
+          <Parameter Name="param4" Type="bigint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspCreateForWithdrawToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="nationCode" Type="int" Mode="In" />
+          <Parameter Name="serverNo" Type="int" Mode="In" />
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="keyType" Type="int" Mode="In" />
+          <Parameter Name="mainKey" Type="int" Mode="In" />
+          <Parameter Name="subKey" Type="int" Mode="In" />
+          <Parameter Name="isSealed" Type="bit" Mode="In" />
+          <Parameter Name="param0" Type="bigint" Mode="In" />
+          <Parameter Name="param1" Type="bigint" Mode="In" />
+          <Parameter Name="param2" Type="bigint" Mode="In" />
+          <Parameter Name="param3" Type="bigint" Mode="In" />
+          <Parameter Name="param4" Type="bigint" Mode="In" />
+          <Parameter Name="count" Type="bigint" Mode="In" />
+          <Parameter Name="state" Type="smallint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspFamilySKillListFromWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspGetChargeBuffExpiration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="type" Type="tinyint" Mode="In" />
+          <Parameter Name="packageExpiration" Type="datetime" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspGetFamilyPointForWorldTradeMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="levelPoint" Type="int" Mode="InOut" />
+          <Parameter Name="lifeLevelPoint" Type="int" Mode="InOut" />
+          <Parameter Name="etcPoint" Type="int" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="uspGetPremiumPackageExpiration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="packageExpiration" Type="datetime" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspGetTradeMaidCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="maidCount" Type="int" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="uspGetTradeRingBuff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="ringBuffMaxCount" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspInsertToNoticeItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="registtimeStamp" Type="bigint" Mode="In" />
+          <Parameter Name="keyType" Type="int" Mode="In" />
+          <Parameter Name="mainKey" Type="int" Mode="In" />
+          <Parameter Name="subKey" Type="int" Mode="In" />
+          <Parameter Name="price" Type="bigint" Mode="In" />
+          <Parameter Name="changedValue" Type="bigint" Mode="In" />
+          <Parameter Name="noticeType" Type="smallint" Mode="In" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="uspListFailPayload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="serviceType" Type="int" Mode="In" />
+          <Parameter Name="worldNo" Type="int" Mode="In" />
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="uspRemoveForDepositToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="nationCode" Type="int" Mode="In" />
+          <Parameter Name="serverNo" Type="int" Mode="In" />
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="keyType" Type="int" Mode="In" />
+          <Parameter Name="mainKey" Type="int" Mode="In" />
+          <Parameter Name="subKey" Type="int" Mode="In" />
+          <Parameter Name="isSealed" Type="bit" Mode="In" />
+          <Parameter Name="param0" Type="bigint" Mode="In" />
+          <Parameter Name="param1" Type="bigint" Mode="In" />
+          <Parameter Name="param2" Type="bigint" Mode="In" />
+          <Parameter Name="param3" Type="bigint" Mode="In" />
+          <Parameter Name="param4" Type="bigint" Mode="In" />
+          <Parameter Name="count" Type="bigint" Mode="In" />
+          <Parameter Name="state" Type="smallint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspUpdateForWithdrawToWorldMarket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspUpdatePackageBuffByWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="serviceType" Type="smallint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="uspUsingTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="ticketType" Type="tinyint" Mode="In" />
+          <Parameter Name="ticketNo" Type="varchar" Mode="In" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="uspWithdrawPayloadDestroy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaGamePublic">
+          <Parameter Name="userNo" Type="bigint" Mode="In" />
+          <Parameter Name="nationCode" Type="int" Mode="In" />
+          <Parameter Name="serverNo" Type="int" Mode="In" />
+          <Parameter Name="payload" Type="bigint" Mode="In" />
+          <Parameter Name="mainKey" Type="int" Mode="In" />
+          <Parameter Name="subKey" Type="int" Mode="In" />
+          <Parameter Name="isSealed" Type="bit" Mode="In" />
+          <Parameter Name="count" Type="bigint" Mode="In" />
+          <Parameter Name="param0" Type="bigint" Mode="In" />
+          <Parameter Name="param1" Type="bigint" Mode="In" />
+          <Parameter Name="param2" Type="bigint" Mode="In" />
+          <Parameter Name="param3" Type="bigint" Mode="In" />
+          <Parameter Name="param4" Type="bigint" Mode="In" />
+          <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="rv" Type="int" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="SA_BETA_GAMEDB_0002ModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SA_BETA_GAMEDB_0002Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SA_BETA_GAMEDB_0002" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="uspCheckPayloadForRegisterItem">
+            <Parameter Name="serviceType" Mode="In" Type="Int32" />
+            <Parameter Name="worldNo" Mode="In" Type="Int32" />
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="keyType" Mode="In" Type="Int32" />
+            <Parameter Name="itemKey" Mode="In" Type="Int32" />
+            <Parameter Name="enchantLevel" Mode="In" Type="Int32" />
+            <Parameter Name="itemCount" Mode="In" Type="Int64" />
+            <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="param0" Mode="In" Type="Int64" />
+            <Parameter Name="param1" Mode="In" Type="Int64" />
+            <Parameter Name="param2" Mode="In" Type="Int64" />
+            <Parameter Name="param3" Mode="In" Type="Int64" />
+            <Parameter Name="param4" Mode="In" Type="Int64" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspClearNoticeItemList">
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspCompletePayloadForRegisterItem">
+            <Parameter Name="serviceType" Mode="In" Type="Int32" />
+            <Parameter Name="worldNo" Mode="In" Type="Int32" />
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="keyType" Mode="In" Type="Int32" />
+            <Parameter Name="itemKey" Mode="In" Type="Int32" />
+            <Parameter Name="enchantLevel" Mode="In" Type="Int32" />
+            <Parameter Name="itemCount" Mode="In" Type="Int64" />
+            <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="param0" Mode="In" Type="Int64" />
+            <Parameter Name="param1" Mode="In" Type="Int64" />
+            <Parameter Name="param2" Mode="In" Type="Int64" />
+            <Parameter Name="param3" Mode="In" Type="Int64" />
+            <Parameter Name="param4" Mode="In" Type="Int64" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspCreateForWithdrawToWorldMarket">
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="nationCode" Mode="In" Type="Int32" />
+            <Parameter Name="serverNo" Mode="In" Type="Int32" />
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="keyType" Mode="In" Type="Int32" />
+            <Parameter Name="mainKey" Mode="In" Type="Int32" />
+            <Parameter Name="subKey" Mode="In" Type="Int32" />
+            <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+            <Parameter Name="param0" Mode="In" Type="Int64" />
+            <Parameter Name="param1" Mode="In" Type="Int64" />
+            <Parameter Name="param2" Mode="In" Type="Int64" />
+            <Parameter Name="param3" Mode="In" Type="Int64" />
+            <Parameter Name="param4" Mode="In" Type="Int64" />
+            <Parameter Name="count" Mode="In" Type="Int64" />
+            <Parameter Name="state" Mode="In" Type="Int16" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFamilySKillListFromWorldMarket" ReturnType="Collection(Int32)">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetChargeBuffExpiration">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="type" Mode="In" Type="Byte" />
+            <Parameter Name="packageExpiration" Mode="InOut" Type="DateTime" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetFamilyPointForWorldTradeMarket">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="levelPoint" Mode="InOut" Type="Int32" />
+            <Parameter Name="lifeLevelPoint" Mode="InOut" Type="Int32" />
+            <Parameter Name="etcPoint" Mode="InOut" Type="Int32" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetPremiumPackageExpiration">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="packageExpiration" Mode="InOut" Type="DateTime" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetTradeMaidCount">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="maidCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspGetTradeRingBuff">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="ringBuffMaxCount" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertToNoticeItem">
+            <Parameter Name="registtimeStamp" Mode="In" Type="Int64" />
+            <Parameter Name="keyType" Mode="In" Type="Int32" />
+            <Parameter Name="mainKey" Mode="In" Type="Int32" />
+            <Parameter Name="subKey" Mode="In" Type="Int32" />
+            <Parameter Name="price" Mode="In" Type="Int64" />
+            <Parameter Name="changedValue" Mode="In" Type="Int64" />
+            <Parameter Name="noticeType" Mode="In" Type="Int16" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspListFailPayload" ReturnType="Collection(SA_BETA_GAMEDB_0002Model.uspListFailPayload_Result)">
+            <Parameter Name="serviceType" Mode="In" Type="Int32" />
+            <Parameter Name="worldNo" Mode="In" Type="Int32" />
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspRemoveForDepositToWorldMarket">
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="nationCode" Mode="In" Type="Int32" />
+            <Parameter Name="serverNo" Mode="In" Type="Int32" />
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="keyType" Mode="In" Type="Int32" />
+            <Parameter Name="mainKey" Mode="In" Type="Int32" />
+            <Parameter Name="subKey" Mode="In" Type="Int32" />
+            <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+            <Parameter Name="param0" Mode="In" Type="Int64" />
+            <Parameter Name="param1" Mode="In" Type="Int64" />
+            <Parameter Name="param2" Mode="In" Type="Int64" />
+            <Parameter Name="param3" Mode="In" Type="Int64" />
+            <Parameter Name="param4" Mode="In" Type="Int64" />
+            <Parameter Name="count" Mode="In" Type="Int64" />
+            <Parameter Name="state" Mode="In" Type="Int16" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateForWithdrawToWorldMarket">
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdatePackageBuffByWeb">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="serviceType" Mode="In" Type="Int16" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspUsingTicket">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="ticketType" Mode="In" Type="Byte" />
+            <Parameter Name="ticketNo" Mode="In" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspWithdrawPayloadDestroy">
+            <Parameter Name="userNo" Mode="In" Type="Int64" />
+            <Parameter Name="nationCode" Mode="In" Type="Int32" />
+            <Parameter Name="serverNo" Mode="In" Type="Int32" />
+            <Parameter Name="payload" Mode="In" Type="Int64" />
+            <Parameter Name="mainKey" Mode="In" Type="Int32" />
+            <Parameter Name="subKey" Mode="In" Type="Int32" />
+            <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+            <Parameter Name="count" Mode="In" Type="Int64" />
+            <Parameter Name="param0" Mode="In" Type="Int64" />
+            <Parameter Name="param1" Mode="In" Type="Int64" />
+            <Parameter Name="param2" Mode="In" Type="Int64" />
+            <Parameter Name="param3" Mode="In" Type="Int64" />
+            <Parameter Name="param4" Mode="In" Type="Int64" />
+            <Parameter Name="symNo" Mode="InOut" Type="String" />
+            <Parameter Name="rv" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="uspListFailPayload_Result">
+          <Property Type="Int64" Name="C_payload" Nullable="true" />
+          <Property Type="Int16" Name="C_state" Nullable="true" />
+          <Property Type="Int32" Name="C_nationCode" Nullable="true" />
+          <Property Type="Int32" Name="C_serverNo" Nullable="true" />
+          <Property Type="Int64" Name="C_userNo" Nullable="true" />
+          <Property Type="Int32" Name="C_keyType" Nullable="true" />
+          <Property Type="Int32" Name="C_mainKey" Nullable="true" />
+          <Property Type="Int32" Name="C_subKey" Nullable="true" />
+          <Property Type="Boolean" Name="C_isSealed" Nullable="true" />
+          <Property Type="Int64" Name="C_param0" Nullable="true" />
+          <Property Type="Int64" Name="C_param1" Nullable="true" />
+          <Property Type="Int64" Name="C_param2" Nullable="true" />
+          <Property Type="Int64" Name="C_param3" Nullable="true" />
+          <Property Type="Int64" Name="C_param4" Nullable="true" />
+          <Property Type="Int64" Name="C_count" Nullable="true" />
+          <Property Type="Boolean" Name="C_isMovingTradeWeb" Nullable="true" />
+          <Property Type="DateTime" Name="C_registerDate" Nullable="true" Precision="23" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SA_BETA_GAMEDB_0002ModelStoreContainer" CdmEntityContainer="SA_BETA_GAMEDB_0002" >
+          <FunctionImportMapping FunctionImportName="uspCheckPayloadForRegisterItem" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspCheckPayloadForRegisterItem" />
+          <FunctionImportMapping FunctionImportName="uspClearNoticeItemList" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspClearNoticeItemList" />
+          <FunctionImportMapping FunctionImportName="uspCompletePayloadForRegisterItem" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspCompletePayloadForRegisterItem" />
+          <FunctionImportMapping FunctionImportName="uspCreateForWithdrawToWorldMarket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspCreateForWithdrawToWorldMarket" />
+          <FunctionImportMapping FunctionImportName="uspFamilySKillListFromWorldMarket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspFamilySKillListFromWorldMarket" />
+          <FunctionImportMapping FunctionImportName="uspGetChargeBuffExpiration" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspGetChargeBuffExpiration" />
+          <FunctionImportMapping FunctionImportName="uspGetFamilyPointForWorldTradeMarket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspGetFamilyPointForWorldTradeMarket" />
+          <FunctionImportMapping FunctionImportName="uspGetPremiumPackageExpiration" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspGetPremiumPackageExpiration" />
+          <FunctionImportMapping FunctionImportName="uspGetTradeMaidCount" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspGetTradeMaidCount" />
+          <FunctionImportMapping FunctionImportName="uspGetTradeRingBuff" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspGetTradeRingBuff" />
+          <FunctionImportMapping FunctionImportName="uspInsertToNoticeItem" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspInsertToNoticeItem" />
+          <FunctionImportMapping FunctionImportName="uspListFailPayload" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspListFailPayload">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SA_BETA_GAMEDB_0002Model.uspListFailPayload_Result">
+                <ScalarProperty Name="C_payload" ColumnName="_payload" />
+                <ScalarProperty Name="C_state" ColumnName="_state" />
+                <ScalarProperty Name="C_nationCode" ColumnName="_nationCode" />
+                <ScalarProperty Name="C_serverNo" ColumnName="_serverNo" />
+                <ScalarProperty Name="C_userNo" ColumnName="_userNo" />
+                <ScalarProperty Name="C_keyType" ColumnName="_keyType" />
+                <ScalarProperty Name="C_mainKey" ColumnName="_mainKey" />
+                <ScalarProperty Name="C_subKey" ColumnName="_subKey" />
+                <ScalarProperty Name="C_isSealed" ColumnName="_isSealed" />
+                <ScalarProperty Name="C_param0" ColumnName="_param0" />
+                <ScalarProperty Name="C_param1" ColumnName="_param1" />
+                <ScalarProperty Name="C_param2" ColumnName="_param2" />
+                <ScalarProperty Name="C_param3" ColumnName="_param3" />
+                <ScalarProperty Name="C_param4" ColumnName="_param4" />
+                <ScalarProperty Name="C_count" ColumnName="_count" />
+                <ScalarProperty Name="C_isMovingTradeWeb" ColumnName="_isMovingTradeWeb" />
+                <ScalarProperty Name="C_registerDate" ColumnName="_registerDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspRemoveForDepositToWorldMarket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspRemoveForDepositToWorldMarket" />
+          <FunctionImportMapping FunctionImportName="uspUpdateForWithdrawToWorldMarket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspUpdateForWithdrawToWorldMarket" />
+          <FunctionImportMapping FunctionImportName="uspUpdatePackageBuffByWeb" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspUpdatePackageBuffByWeb" />
+          <FunctionImportMapping FunctionImportName="uspUsingTicket" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspUsingTicket" />
+          <FunctionImportMapping FunctionImportName="uspWithdrawPayloadDestroy" FunctionName="SA_BETA_GAMEDB_0002Model.Store.uspWithdrawPayloadDestroy" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

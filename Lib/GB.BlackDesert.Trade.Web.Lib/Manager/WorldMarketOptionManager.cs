@@ -12,7 +12,7 @@ using System.Data.Entity.Core.Objects;
 using System.Diagnostics;
 using System.Xml;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class WorldMarketOptionManager
     {

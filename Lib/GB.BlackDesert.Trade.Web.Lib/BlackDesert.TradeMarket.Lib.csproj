@@ -1,0 +1,126 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DB\**" />
+    <EmbeddedResource Remove="DB\**" />
+    <None Remove="DB\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EasMe">
+      <HintPath>..\..\..\..\easme-lib\EasMe\bin\Release\net6.0\EasMe.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Sql\GameDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GameDb.Context.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\GameDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GameDb.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\LogDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LogDb.Context.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\LogDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LogDb.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\TradeDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TradeDb.Context.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\TradeDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TradeDb.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\WorldDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WorldDb.Context.cs</LastGenOutput>
+    </None>
+    <None Update="Sql\WorldDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WorldDb.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Sql\GameDb.Context.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GameDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\GameDb.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GameDb.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\LogDb.Context.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LogDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\LogDb.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LogDb.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\TradeDb.Context.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TradeDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\TradeDb.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TradeDb.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\WorldDb.Context.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WorldDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sql\WorldDb.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WorldDb.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Trade\Response\" />
+  </ItemGroup>
+
+</Project>

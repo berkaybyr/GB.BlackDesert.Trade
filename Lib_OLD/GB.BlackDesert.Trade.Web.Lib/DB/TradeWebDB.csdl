@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeWebDB_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TradeWebDB" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="uspUnRegisterBuyableReserve">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetAndUpdatePersonalTradeCount">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="personalTradeBuyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="personalTradeSellCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspLoadWorldMarketInfo" ReturnType="Collection(TradeWebDB_Model.uspLoadWorldMarketInfo_Result)">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyablePersonalTradeList" ReturnType="Collection(TradeWebDB_Model.uspBuyablePersonalTradeList_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspPersonalTradeList" ReturnType="Collection(TradeWebDB_Model.uspPersonalTradeList_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUnregisterPersonalTrade">
+      <Parameter Name="marketNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="pricePerOne" Mode="In" Type="Int64" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="fromNationCode" Mode="In" Type="Int32" />
+      <Parameter Name="fromServerNo" Mode="In" Type="Int32" />
+      <Parameter Name="fromUserNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketAccumulateTradeByStock" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketAccumulateTradeByStock_Result)">
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateWorldMarketStock">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="newStockCount" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspFindUser" ReturnType="Collection(TradeWebDB_Model.uspFindUser_Result)">
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNickname" Mode="In" Type="String" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetUpdateTickCount">
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="updateTickCount" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertBlockItem">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspRemoveBlockItem">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyItemFromPersonalTrade">
+      <Parameter Name="marketNo" Mode="In" Type="Int64" />
+      <Parameter Name="buyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="buyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyCount" Mode="In" Type="Int64" />
+      <Parameter Name="moneyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="moneyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="moneySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="moneyCount" Mode="In" Type="Int64" />
+      <Parameter Name="toNationCode" Mode="In" Type="Int32" />
+      <Parameter Name="toServerNo" Mode="In" Type="Int32" />
+      <Parameter Name="toUserNo" Mode="In" Type="Int64" />
+      <Parameter Name="maxBuyCount" Mode="In" Type="Int32" />
+      <Parameter Name="maxSellCount" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspRegisterPersonalTrade">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="chooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="fromNationCode" Mode="In" Type="Int32" />
+      <Parameter Name="fromServerNo" Mode="In" Type="Int32" />
+      <Parameter Name="fromUserNo" Mode="In" Type="Int64" />
+      <Parameter Name="toNationCode" Mode="In" Type="Int32" />
+      <Parameter Name="toServerNo" Mode="In" Type="Int32" />
+      <Parameter Name="toUserNickname" Mode="In" Type="String" />
+      <Parameter Name="maxSellCount" Mode="In" Type="Int32" />
+      <Parameter Name="toUserNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="marketNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="pricePerOne" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspIsBlockUser__XXX">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspRemoveBlockUser">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateMyWalletWeight">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="calculateWeight" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyBiddingFromWorldMarketBySystem">
+      <Parameter Name="buyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="buyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyCount" Mode="In" Type="Int64" />
+      <Parameter Name="buyChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyerMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="realBuyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="sellNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="stopType" Mode="InOut" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyFromWorldMarketBySystem">
+      <Parameter Name="buyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="buyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyCount" Mode="In" Type="Int64" />
+      <Parameter Name="buyChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="needMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="realBuyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="buyNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateMarketState">
+      <Parameter Name="isOpen" Mode="In" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketByMainGroup" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketByMainGroup_Result)">
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspPrepareWithdrawFromWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="itemWeight" Mode="In" Type="Int64" />
+      <Parameter Name="payload" Mode="InOut" Type="Int64" />
+      <Parameter Name="param0" Mode="InOut" Type="Int64" />
+      <Parameter Name="param1" Mode="InOut" Type="Int64" />
+      <Parameter Name="param2" Mode="InOut" Type="Int64" />
+      <Parameter Name="param3" Mode="InOut" Type="Int64" />
+      <Parameter Name="param4" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketMyWallet" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketMyWallet_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspWorldMarketMyWallet">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="count" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetShutDownInfo" ReturnType="Collection(TradeWebDB_Model.uspGetShutDownInfo_Result)">
+      <Parameter Name="groupContentNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListNoticeItem" ReturnType="Collection(TradeWebDB_Model.uspListNoticeItem_Result)">
+      <Parameter Name="checkDateTimeStamp" Mode="In" Type="Int64" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateWorldMarketPassCount">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListBiddingInfo" ReturnType="Collection(TradeWebDB_Model.uspListBiddingInfo_Result)">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspIsMarketOpen__XXX">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetMarketPriceInfo" ReturnType="Collection(TradeWebDB_Model.uspGetMarketPriceInfo_Result)">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspPayloadRestoration">
+      <Parameter Name="payload" Mode="In" Type="Int64" />
+      <Parameter Name="state" Mode="In" Type="Int16" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="param0" Mode="In" Type="Int64" />
+      <Parameter Name="param1" Mode="In" Type="Int64" />
+      <Parameter Name="param2" Mode="In" Type="Int64" />
+      <Parameter Name="param3" Mode="In" Type="Int64" />
+      <Parameter Name="param4" Mode="In" Type="Int64" />
+      <Parameter Name="isNot" Mode="InOut" Type="Boolean" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketCurrentPrice" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketCurrentPrice_Result)">
+      <Parameter Name="mainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="subCategory" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetLogWriteEnable" ReturnType="Collection(TradeWebDB_Model.uspGetLogWriteEnable_Result)" />
+    <FunctionImport Name="uspAddTrade">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int64" />
+      <Parameter Name="price" Mode="In" Type="Int64" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListBiddingPrice" ReturnType="Collection(TradeWebDB_Model.uspListBiddingPrice_Result)">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="maxGroupKey" Mode="In" Type="Int32" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="pricePerOne" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspCheckAndUpdateBlackUser">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="blocked" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetMaxPrice">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int64" />
+      <Parameter Name="isMax" Mode="In" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListTickCount" ReturnType="Collection(TradeWebDB_Model.uspListTickCount_Result)">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetWithDrawPayLoadState">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="payload" Mode="In" Type="Int64" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="param0" Mode="In" Type="Int64" />
+      <Parameter Name="param1" Mode="In" Type="Int64" />
+      <Parameter Name="param2" Mode="In" Type="Int64" />
+      <Parameter Name="param3" Mode="In" Type="Int64" />
+      <Parameter Name="param4" Mode="In" Type="Int64" />
+      <Parameter Name="state" Mode="InOut" Type="Int16" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspWorldMarketDetailOne">
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="pricePerOne" Mode="InOut" Type="Int64" />
+      <Parameter Name="count" Mode="InOut" Type="Int64" />
+      <Parameter Name="minPrice" Mode="InOut" Type="Int64" />
+      <Parameter Name="maxPrice" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalTradeCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="lastTradePrice" Mode="InOut" Type="Int64" />
+      <Parameter Name="lastTradeTime" Mode="InOut" Type="DateTime" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetContentsInsUseWeb">
+      <Parameter Name="groupContentNo" Mode="In" Type="Int32" />
+      <Parameter Name="contentStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="contentEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="isDisplay" Mode="In" Type="Byte" />
+      <Parameter Name="isDelete" Mode="In" Type="Byte" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetContentsUpdUseWeb">
+      <Parameter Name="groupContentNo" Mode="In" Type="Int32" />
+      <Parameter Name="contentStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="contentEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="isDisplay" Mode="In" Type="Byte" />
+      <Parameter Name="isDelete" Mode="In" Type="Byte" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetShutDownInfoInsUseWeb">
+      <Parameter Name="groupContentsNo" Mode="In" Type="Int32" />
+      <Parameter Name="cultureCode" Mode="In" Type="String" />
+      <Parameter Name="mainMessage" Mode="In" Type="String" />
+      <Parameter Name="subMessage" Mode="In" Type="String" />
+      <Parameter Name="redirectUrl" Mode="In" Type="String" />
+      <Parameter Name="memo" Mode="In" Type="String" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetShutDownInfoUpdUseWeb">
+      <Parameter Name="groupContentsNo" Mode="In" Type="Int32" />
+      <Parameter Name="cultureCode" Mode="In" Type="String" />
+      <Parameter Name="mainMessage" Mode="In" Type="String" />
+      <Parameter Name="subMessage" Mode="In" Type="String" />
+      <Parameter Name="redirectUrl" Mode="In" Type="String" />
+      <Parameter Name="memo" Mode="In" Type="String" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetShutDownCheckUseWeb" ReturnType="Collection(TradeWebDB_Model.uspGetShutDownCheckUseWeb_Result)">
+      <Parameter Name="cultureCode" Mode="In" Type="String" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetAddTaxDiscountRate">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="addTaxDiscountRate" Mode="InOut" Type="Int32" />
+      <Parameter Name="familySkillAddTaxDiscountRate" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetSecondPwdInfo">
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="failFlag" Mode="In" Type="Boolean" />
+      <Parameter Name="failCount" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetAppPushEnable" ReturnType="Collection(Boolean)" />
+    <FunctionImport Name="uspGetMyWalletInfo">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="userNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="userNickName" Mode="InOut" Type="String" />
+      <Parameter Name="serviceType" Mode="InOut" Type="Int32" />
+      <Parameter Name="worldNo" Mode="InOut" Type="Int32" />
+      <Parameter Name="valuepackage" Mode="InOut" Type="DateTime" />
+      <Parameter Name="addWeightBuff" Mode="InOut" Type="DateTime" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+      <Parameter Name="resultMsg" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspPrepareDepositToWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="param0" Mode="In" Type="Int64" />
+      <Parameter Name="param1" Mode="In" Type="Int64" />
+      <Parameter Name="param2" Mode="In" Type="Int64" />
+      <Parameter Name="param3" Mode="In" Type="Int64" />
+      <Parameter Name="param4" Mode="In" Type="Int64" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="itemWeight" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="payload" Mode="InOut" Type="Int64" />
+      <Parameter Name="isNotError" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketDetailByCategory" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketDetailByCategory_Result)">
+      <Parameter Name="mainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="subCategory" Mode="In" Type="Int32" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketHot" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketHot_Result)">
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspSearchListWorldMarket" ReturnType="Collection(TradeWebDB_Model.uspSearchListWorldMarket_Result)">
+      <Parameter Name="searchResultString" Mode="In" Type="String" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetItemPrice">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="pricePerOne" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspCreateMyWallet">
+      <Parameter Name="userId" Mode="In" Type="String" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="userNickname" Mode="In" Type="String" />
+      <Parameter Name="packageExpiration" Mode="In" Type="DateTime" />
+      <Parameter Name="addWeightBuffExpiration" Mode="In" Type="DateTime" />
+      <Parameter Name="addPearlItemLimitedCount" Mode="In" Type="Int32" />
+      <Parameter Name="maidCount" Mode="In" Type="Int32" />
+      <Parameter Name="isGameMaster" Mode="In" Type="Boolean" />
+      <Parameter Name="addTaxDiscountRate" Mode="In" Type="Double" />
+      <Parameter Name="familySkillAddTaxDiscountRate" Mode="In" Type="Int32" />
+      <Parameter Name="inceaseWeight" Mode="In" Type="Int32" />
+      <Parameter Name="inceaseWeightByBuff" Mode="In" Type="Int32" />
+      <Parameter Name="ringCount" Mode="In" Type="Int32" />
+      <Parameter Name="isCreateWallet" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateRingBuffRate">
+      <Parameter Name="ringRate" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetPearlItemLimitedCount">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="addPearlItemLimitedCount" Mode="InOut" Type="Int32" />
+      <Parameter Name="currentPearlItemLimitedCount" Mode="InOut" Type="Int32" />
+      <Parameter Name="addWeight" Mode="InOut" Type="Int64" />
+      <Parameter Name="ringBuffCount" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListUserBiddingSell" ReturnType="Collection(TradeWebDB_Model.uspListUserBiddingSell_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetServantNo">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="servantNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertBlockUser">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="dueDate" Mode="In" Type="DateTime" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarket" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarket_Result)">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="subCategory" Mode="In" Type="Int32" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketDetail" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketDetail_Result)">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="isUseTotalTradeCount" Mode="In" Type="Boolean" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateItemInfo">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="subGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="baseCount" Mode="In" Type="Int64" />
+      <Parameter Name="minCount" Mode="In" Type="Int64" />
+      <Parameter Name="maxCount" Mode="In" Type="Int64" />
+      <Parameter Name="basePrice" Mode="In" Type="Int64" />
+      <Parameter Name="maxPrice" Mode="In" Type="Int64" />
+      <Parameter Name="minPrice" Mode="In" Type="Int64" />
+      <Parameter Name="realMaxPrice" Mode="In" Type="Int64" />
+      <Parameter Name="realMinPrice" Mode="In" Type="Int64" />
+      <Parameter Name="marketPriceGroupKey" Mode="In" Type="Int64" />
+      <Parameter Name="isDisplay" Mode="In" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateWorldMarketPrice">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="newPrice" Mode="In" Type="Int64" />
+      <Parameter Name="newGraphPrice" Mode="In" Type="Int64" />
+      <Parameter Name="fluctuationType" Mode="In" Type="Byte" />
+      <Parameter Name="fluctuationPrice" Mode="In" Type="Int64" />
+      <Parameter Name="newStockCount" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketAccumulateTrade" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketAccumulateTrade_Result)">
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListGroupBiddingPrice" ReturnType="Collection(TradeWebDB_Model.uspListGroupBiddingPrice_Result)">
+      <Parameter Name="priceGroupKey" Mode="In" Type="Int64" />
+      <Parameter Name="biddingRate" Mode="In" Type="Double" />
+      <Parameter Name="pricePerOne" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateWorldMarketGroupPrice">
+      <Parameter Name="priceGroupKey" Mode="In" Type="Int64" />
+      <Parameter Name="newPrice" Mode="In" Type="Int64" />
+      <Parameter Name="newGraphPrice" Mode="In" Type="Int64" />
+      <Parameter Name="fluctuationType" Mode="In" Type="Byte" />
+      <Parameter Name="fluctuationPrice" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWaitBiddingSell" ReturnType="Collection(TradeWebDB_Model.uspListWaitBiddingSell_Result)">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspWorldMarketWaitNoticeList" ReturnType="Collection(TradeWebDB_Model.uspWorldMarketWaitNoticeList_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspIncreaseTickCount">
+      <Parameter Name="mainGroupNo" Mode="In" Type="Int32" />
+      <Parameter Name="isUpdatePrice" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspClearNoticeItemList">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspCheckOTPItem">
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="isOTPItem" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyBiddingFromWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="buyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="buyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyPrice" Mode="In" Type="Int64" />
+      <Parameter Name="buyCount" Mode="In" Type="Int64" />
+      <Parameter Name="buyChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyerMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="retryBiddingNo" Mode="In" Type="Int64" />
+      <Parameter Name="walletMoney" Mode="InOut" Type="Int64" />
+      <Parameter Name="realBuyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="sellNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="sellUserNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="sellUserId" Mode="InOut" Type="String" />
+      <Parameter Name="sellLeftCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="raceCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="stopType" Mode="InOut" Type="Int32" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount3" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount3" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount4" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount4" Mode="InOut" Type="Int64" />
+      <Parameter Name="leftCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="registerMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="boughtCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSellBiddingToWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="sellKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="sellMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="sellSubKey" Mode="In" Type="Int32" />
+      <Parameter Name="sellMainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="sellPrice" Mode="In" Type="Int64" />
+      <Parameter Name="sellCount" Mode="In" Type="Int64" />
+      <Parameter Name="sellChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="needMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="isNoticeItem" Mode="In" Type="Boolean" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="maxPearlItemLimitedCount" Mode="In" Type="Int64" />
+      <Parameter Name="currentTime" Mode="In" Type="DateTime" />
+      <Parameter Name="applyRingBuffType" Mode="In" Type="Byte" />
+      <Parameter Name="waitNo" Mode="In" Type="Int64" />
+      <Parameter Name="isRingBuff" Mode="In" Type="Boolean" />
+      <Parameter Name="retryBiddingNo" Mode="In" Type="Int64" />
+      <Parameter Name="walletMoney" Mode="InOut" Type="Int64" />
+      <Parameter Name="realSellCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="originalTotalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="packageExpiration" Mode="InOut" Type="DateTime" />
+      <Parameter Name="buyNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="buyUserNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="buyUserId" Mode="InOut" Type="String" />
+      <Parameter Name="buyLeftCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="stopType" Mode="InOut" Type="Int32" />
+      <Parameter Name="isNextApplyRingBuff" Mode="InOut" Type="Boolean" />
+      <Parameter Name="resultWaitNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="raceCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount3" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount3" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount4" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount4" Mode="InOut" Type="Int64" />
+      <Parameter Name="soldCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="leftCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="moneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="calculateMoney" Mode="InOut" Type="Int64" />
+      <Parameter Name="isCalculateRingBuff" Mode="InOut" Type="Boolean" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateWaitFail">
+      <Parameter Name="waitNo" Mode="In" Type="Int64" />
+      <Parameter Name="pushWeight" Mode="In" Type="Int64" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspCalculateBiddingBuy">
+      <Parameter Name="buyNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="boughtCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="chooseSubKey" Mode="InOut" Type="Int32" />
+      <Parameter Name="isDelete" Mode="InOut" Type="Boolean" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspWithdrawBiddingBuy">
+      <Parameter Name="buyNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="chooseSubKey" Mode="In" Type="Int32" />
+      <Parameter Name="differenceMoney" Mode="InOut" Type="Int64" />
+      <Parameter Name="withdrawMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="isDelete" Mode="InOut" Type="Boolean" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspCalculateBiddingSell">
+      <Parameter Name="sellNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="mainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="chooseSubKey" Mode="In" Type="Int32" />
+      <Parameter Name="soldCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="isDelete" Mode="InOut" Type="Boolean" />
+      <Parameter Name="amountMoney" Mode="InOut" Type="Int64" />
+      <Parameter Name="originalTotalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="packageExpiration" Mode="InOut" Type="DateTime" />
+      <Parameter Name="isAppledRingBuff" Mode="InOut" Type="Boolean" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspWithdrawBiddingSell">
+      <Parameter Name="sellNo" Mode="In" Type="Int64" />
+      <Parameter Name="keyType" Mode="In" Type="Int32" />
+      <Parameter Name="mainKey" Mode="In" Type="Int32" />
+      <Parameter Name="subKey" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="count" Mode="In" Type="Int64" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="maxPearlItemLimitedCount" Mode="In" Type="Int64" />
+      <Parameter Name="currentTime" Mode="In" Type="DateTime" />
+      <Parameter Name="chooseSubKey" Mode="InOut" Type="Int32" />
+      <Parameter Name="isDelete" Mode="InOut" Type="Boolean" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSellToWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="sellKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="sellMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="sellSubKey" Mode="In" Type="Int32" />
+      <Parameter Name="sellMainCategory" Mode="In" Type="Int32" />
+      <Parameter Name="isSealed" Mode="In" Type="Boolean" />
+      <Parameter Name="sellPrice" Mode="In" Type="Int64" />
+      <Parameter Name="sellCount" Mode="In" Type="Int64" />
+      <Parameter Name="sellChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="needMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="isNoticeItem" Mode="In" Type="Boolean" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxPearlItemLimitedCount" Mode="In" Type="Int64" />
+      <Parameter Name="currentTime" Mode="In" Type="DateTime" />
+      <Parameter Name="applyRingBuffType" Mode="In" Type="Byte" />
+      <Parameter Name="waitNo" Mode="In" Type="Int64" />
+      <Parameter Name="sellPricePerOne" Mode="InOut" Type="Int64" />
+      <Parameter Name="realSellCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="originalTotalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="packageExpiration" Mode="InOut" Type="DateTime" />
+      <Parameter Name="sellNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="isAppledRingBuff" Mode="InOut" Type="Boolean" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspBuyFromWorldMarket">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="buyKeyType" Mode="In" Type="Int32" />
+      <Parameter Name="buyMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="buySubKey" Mode="In" Type="Int32" />
+      <Parameter Name="buyPrice" Mode="In" Type="Int64" />
+      <Parameter Name="buyCount" Mode="In" Type="Int64" />
+      <Parameter Name="buyChooseKey" Mode="In" Type="Int32" />
+      <Parameter Name="metarialMainKey" Mode="In" Type="Int32" />
+      <Parameter Name="needMetarialCount" Mode="In" Type="Int64" />
+      <Parameter Name="BiddingRate" Mode="In" Type="Double" />
+      <Parameter Name="isCashCategory" Mode="In" Type="Boolean" />
+      <Parameter Name="weightPerOne" Mode="In" Type="Int64" />
+      <Parameter Name="maxWeight" Mode="In" Type="Int64" />
+      <Parameter Name="realBuyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="totalMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="buyNo" Mode="InOut" Type="Int64" />
+      <Parameter Name="biddingMoneyCount" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount2" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspProcessDepositToWorldMarket">
+      <Parameter Name="payload" Mode="In" Type="Int64" />
+      <Parameter Name="reason" Mode="InOut" Type="Int16" />
+      <Parameter Name="keyType" Mode="InOut" Type="Int32" />
+      <Parameter Name="mainKey" Mode="InOut" Type="Int32" />
+      <Parameter Name="subKey" Mode="InOut" Type="Int32" />
+      <Parameter Name="isSealed" Mode="InOut" Type="Boolean" />
+      <Parameter Name="param0" Mode="InOut" Type="Int64" />
+      <Parameter Name="param1" Mode="InOut" Type="Int64" />
+      <Parameter Name="param2" Mode="InOut" Type="Int64" />
+      <Parameter Name="param3" Mode="InOut" Type="Int64" />
+      <Parameter Name="param4" Mode="InOut" Type="Int64" />
+      <Parameter Name="count" Mode="InOut" Type="Int64" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspProcessWithdrawFromWorldMarket">
+      <Parameter Name="payload" Mode="In" Type="Int64" />
+      <Parameter Name="reason" Mode="InOut" Type="Int16" />
+      <Parameter Name="beforeCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="afterCount1" Mode="InOut" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspListUserBiddingBuy" ReturnType="Collection(TradeWebDB_Model.uspListUserBiddingBuy_Result)">
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="serverNo" Mode="In" Type="Int32" />
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspListWorldMarketWait" ReturnType="Collection(TradeWebDB_Model.uspListWorldMarketWait_Result)">
+      <Parameter Name="symNo" Mode="InOut" Type="String" />
+      <Parameter Name="rv" Mode="InOut" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="uspCheckLastOtpTime">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="worldNo" Mode="In" Type="Int32" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspGetLastOtpTime">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="worldNo" Mode="In" Type="Int32" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="lastConfirmOtpTime" Mode="InOut" Type="DateTime" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspSetLastOtpTime">
+      <Parameter Name="userNo" Mode="In" Type="Int64" />
+      <Parameter Name="worldNo" Mode="In" Type="Int32" />
+      <Parameter Name="nationCode" Mode="In" Type="Int32" />
+      <Parameter Name="resultCode" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="uspLoadWorldMarketInfo_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_maxPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int32" Name="C_mainCategory" Nullable="false" />
+    <Property Type="Int32" Name="C_subCategory" Nullable="false" />
+    <Property Type="Int64" Name="C_maxTradeCount" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspBuyablePersonalTradeList_Result">
+    <Property Type="Int64" Name="C_marketNo" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_count" Nullable="false" />
+    <Property Type="Int32" Name="C_fromNationCode" Nullable="false" />
+    <Property Type="Int32" Name="C_fromServerNo" Nullable="false" />
+    <Property Type="Int64" Name="C_fromUserNo" Nullable="false" />
+    <Property Type="String" Name="C_userNickName" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="uspPersonalTradeList_Result">
+    <Property Type="Int64" Name="C_marketNo" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_count" Nullable="false" />
+    <Property Type="Int32" Name="C_toNationCode" Nullable="false" />
+    <Property Type="Int32" Name="C_toServerNo" Nullable="false" />
+    <Property Type="Int64" Name="C_toUserNo" Nullable="false" />
+    <Property Type="String" Name="C_userNickName" Nullable="false" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketAccumulateTradeByStock_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_maxTradeCount" Nullable="false" />
+    <Property Type="Int64" Name="C_sumTradeCountByStock" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspFindUser_Result">
+    <Property Type="Int32" Name="C_nationCode" Nullable="false" />
+    <Property Type="Int32" Name="C_serverNo" Nullable="false" />
+    <Property Type="Int64" Name="C_userNo" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketByMainGroup_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_count" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketMyWallet_Result">
+    <Property Type="Int32" Name="C_nationCode" Nullable="false" />
+    <Property Type="Int32" Name="C_serverNo" Nullable="false" />
+    <Property Type="Int64" Name="C_userNo" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Boolean" Name="C_isSealed" Nullable="false" />
+    <Property Type="Int64" Name="C_count" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspGetShutDownInfo_Result">
+    <Property Type="String" Name="C_contentName" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="C_shutDownKey" Nullable="false" />
+    <Property Type="DateTime" Name="C_contentStartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="C_contentEndDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="C_mainMessage" Nullable="true" />
+    <Property Type="String" Name="C_subMessage" Nullable="true" />
+    <Property Type="String" Name="C_redirectUrl" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="C_memo" Nullable="true" MaxLength="200" />
+    <Property Type="Boolean" Name="C_isDisplay" Nullable="false" />
+    <Property Type="Boolean" Name="C_isDelete" Nullable="false" />
+    <Property Type="String" Name="C_cultureCode" Nullable="false" MaxLength="8" />
+  </ComplexType>
+  <ComplexType Name="uspListNoticeItem_Result">
+    <Property Type="Int64" Name="C_registTimeStamp" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_price" Nullable="false" />
+    <Property Type="Int64" Name="C_changedValue" Nullable="false" />
+    <Property Type="Int16" Name="C_noticeType" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListBiddingInfo_Result">
+    <Property Type="Int64" Name="C_buyCount" Nullable="false" />
+    <Property Type="Int64" Name="C_sellCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspGetMarketPriceInfo_Result">
+    <Property Type="Int64" Name="C_price" Nullable="false" />
+    <Property Type="DateTime" Name="C_datetime" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketCurrentPrice_Result">
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspGetLogWriteEnable_Result">
+    <Property Type="Boolean" Name="C_writeDebugLog" Nullable="false" />
+    <Property Type="Boolean" Name="C_writeInfoLog" Nullable="false" />
+    <Property Type="Boolean" Name="C_writeWarringLog" Nullable="false" />
+    <Property Type="Boolean" Name="C_writeErrorLog" Nullable="false" />
+    <Property Type="Boolean" Name="C_writeFatalLog" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListBiddingPrice_Result">
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListTickCount_Result">
+    <Property Type="String" Name="C_serverIp" Nullable="false" MaxLength="15" />
+    <Property Type="Int32" Name="C_mainGroupNo" Nullable="false" />
+    <Property Type="Int32" Name="C_updateTickCount" Nullable="false" />
+    <Property Type="Int32" Name="C_allowIndex" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspGetShutDownCheckUseWeb_Result">
+    <Property Type="String" Name="C_mainMessage" Nullable="true" />
+    <Property Type="String" Name="C_subMessage" Nullable="true" />
+    <Property Type="String" Name="C_memo" Nullable="true" MaxLength="200" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketDetailByCategory_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="true" />
+    <Property Type="Int64" Name="C_count" Nullable="true" />
+    <Property Type="Int64" Name="C_totalTradeCount" Nullable="true" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_maxPrice" Nullable="false" />
+    <Property Type="Int32" Name="C_isDisplay" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketHot_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="true" />
+    <Property Type="Int64" Name="C_count" Nullable="true" />
+    <Property Type="Int64" Name="C_totalTradeCount" Nullable="true" />
+    <Property Type="Byte" Name="C_fluctuationType" Nullable="false" />
+    <Property Type="Int64" Name="C_fluctuationPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_maxPrice" Nullable="false" />
+    <Property Type="DateTime" Name="C_lastTradeTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="C_lastTradePrice" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspSearchListWorldMarket_Result">
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int64" Name="C_sumCount" Nullable="true" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="true" />
+    <Property Type="Int64" Name="C_totalTradeCount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspListUserBiddingSell_Result">
+    <Property Type="Int64" Name="C_sellNo" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int32" Name="C_chooseSubKey" Nullable="false" />
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_soldCount" Nullable="false" />
+    <Property Type="Int64" Name="C_accumulateMoneyCount" Nullable="false" />
+    <Property Type="Boolean" Name="C_isSealed" Nullable="false" />
+    <Property Type="Boolean" Name="C_isRingBuff" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarket_Result">
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int64" Name="C_sumCount" Nullable="true" />
+    <Property Type="Int64" Name="C_totalSumCount" Nullable="true" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="true" />
+    <Property Type="Int32" Name="C_isDisplay" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketDetail_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="true" />
+    <Property Type="Int64" Name="C_count" Nullable="true" />
+    <Property Type="Int64" Name="C_totalTradeCount" Nullable="true" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_maxPrice" Nullable="false" />
+    <Property Type="DateTime" Name="C_lastTradeTime" Nullable="false" Precision="23" />
+    <Property Type="Int64" Name="C_lastTradePrice" Nullable="false" />
+    <Property Type="Int32" Name="C_isDisplay" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketAccumulateTrade_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_sumTradeCount" Nullable="false" />
+    <Property Type="Int64" Name="C_sumTradePrice" Nullable="false" />
+    <Property Type="Int64" Name="C_maxPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_maxTradeCount" Nullable="false" />
+    <Property Type="Int64" Name="C_accumulateTickCount" Nullable="false" />
+    <Property Type="Int64" Name="C_accumulateBiddingCount" Nullable="false" />
+    <Property Type="Int64" Name="C_priceGroupKey" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListGroupBiddingPrice_Result">
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListWaitBiddingSell_Result">
+    <Property Type="Int64" Name="C_waitNo" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Boolean" Name="C_isSealed" Nullable="false" />
+    <Property Type="Int32" Name="C_chooseSubKey" Nullable="false" />
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Boolean" Name="C_isRingBuff" Nullable="false" />
+    <Property Type="Int32" Name="C_nationCode" Nullable="false" />
+    <Property Type="Int32" Name="C_serverNo" Nullable="false" />
+    <Property Type="Int64" Name="C_userNo" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspWorldMarketWaitNoticeList_Result">
+    <Property Type="Int64" Name="C_waitNo" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_chooseSubKey" Nullable="false" />
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_resultMoneyCount" Nullable="false" />
+    <Property Type="Byte" Name="C_usedType" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListUserBiddingBuy_Result">
+    <Property Type="Int64" Name="C_buyNo" Nullable="false" />
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_subKey" Nullable="false" />
+    <Property Type="Int32" Name="C_chooseSubKey" Nullable="false" />
+    <Property Type="Int64" Name="C_leftCount" Nullable="false" />
+    <Property Type="Int64" Name="C_boughtCount" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="Int64" Name="C_basePrice" Nullable="false" />
+    <Property Type="Int64" Name="C_minPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_addEnchantPrice" Nullable="false" />
+    <Property Type="Int64" Name="C_registerMoneyCount" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="uspListWorldMarketWait_Result">
+    <Property Type="Int32" Name="C_keyType" Nullable="false" />
+    <Property Type="Int32" Name="C_mainKey" Nullable="false" />
+    <Property Type="Int32" Name="C_chooseSubKey" Nullable="false" />
+    <Property Type="Int64" Name="C_pricePerOne" Nullable="false" />
+    <Property Type="DateTime" Name="C_waitEndTime" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

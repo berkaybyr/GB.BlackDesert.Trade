@@ -5,10 +5,10 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Manager;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Web.Mvc;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Common
+namespace BlackDesert.TradeMarket.Lib.Common
 {
     public static class CommonDDLB
     {

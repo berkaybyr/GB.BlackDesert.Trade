@@ -15,7 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Xml;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class TickCountManager
     {

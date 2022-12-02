@@ -14,7 +14,7 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class WaitSellItem
     {

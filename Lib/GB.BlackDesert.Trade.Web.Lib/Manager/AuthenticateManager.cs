@@ -17,9 +17,11 @@ using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
-using System.Runtime.Remoting.Contexts;
+using EasMe;
+using EasMe.Extensions;
+using BlackDesert.TradeMarket.Lib.Crypt;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public static class AuthenticateManager
     {
@@ -87,12 +89,35 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             CookieLib.Delete(context, ConstantMgr._cookieDomain, "ASP.NET_SessionId");
         }
 
-        public static AuthenticationInfo GetAuthInfo(HttpContext context) => ConstantMgr._isPaAccount ? AuthenticateManager.NewGetAuthenticationInfo(context) : AuthenticateManager.GetAuthenticationInfo(context);
+        public static AuthenticationInfo GetAuthInfo(HttpContext context) => 
+            ConstantMgr._isPaAccount ? 
+            AuthenticateManager.NewGetAuthenticationInfo(context) : 
+            AuthenticateManager.GetAuthenticationInfo(context);
 
         private static AuthenticationInfo GetAuthenticationInfo(HttpContext context)
         {
             AuthenticationInfo authenticationInfo = (AuthenticationInfo)null;
             string str = string.Empty;
+
+            if(context is null)
+            {
+                LogUtil.WriteLog("Authenticatemanager GetAuthenticationInfo NULL CONTEXT", "FATAL");
+                authenticationInfo = (AuthenticationInfo)null;
+                AuthenticateManager.RemoveAuthTicket(context);
+            }
+            if (context.Session is null)
+            {
+                LogUtil.WriteLog("Authenticatemanager GetAuthenticationInfo NULL SESSION", "FATAL");
+                authenticationInfo = (AuthenticationInfo)null;
+                AuthenticateManager.RemoveAuthTicket(context);
+            }
+            if (!context.Session.Keys.Any())
+            {
+                LogUtil.WriteLog("Authenticatemanager GetAuthenticationInfo EMPTY SESSION", "FATAL");
+                authenticationInfo = (AuthenticationInfo)null;
+                AuthenticateManager.RemoveAuthTicket(context);
+            }
+            IEasLog.StaticLogger.Debug(context.Session.Keys.JsonSerialize());
             try
             {
                 if (context.Session.TryGetValue(ConstantMgr._authCookieName, out var bytes))

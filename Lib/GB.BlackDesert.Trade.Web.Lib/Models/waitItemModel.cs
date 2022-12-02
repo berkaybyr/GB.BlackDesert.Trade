@@ -6,7 +6,7 @@
 
 using GB.BlackDesert.Trade.Web.Lib.Sql;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Models
+namespace BlackDesert.TradeMarket.Lib.Models
 {
     public class waitItemModel
     {

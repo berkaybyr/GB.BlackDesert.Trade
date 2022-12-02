@@ -7,7 +7,7 @@
 using GB.BlackDesert.Trade.Web.Lib.Models;
 using System.Collections.Generic;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     public class LogMessageModel
     {

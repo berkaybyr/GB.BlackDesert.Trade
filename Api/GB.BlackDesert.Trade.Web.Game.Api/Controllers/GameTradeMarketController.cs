@@ -17,11 +17,6 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
     [Route("[controller]/[action]")]
     public class GameTradeMarketController : Controller
     {
-        public GameTradeMarketController()
-        {
-            AuthenticationInfo _userinfo = AuthenticateManager.GetAuthInfo(HttpContext);
-            bool _isPakageCheck = CommonModule.CheckPakage(HttpContext);
-        }
         private static DateTime DefaultTime = new DateTime(1970, 1, 1, 0, 0, 0);
 
         [HttpPost]
@@ -38,21 +33,6 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)userAuthResultModel);
             }
-            string empty3 = string.Empty;
-            //string end;
-            //try
-            //{
-            //    this.Request.Body.Seek(0L, SeekOrigin.Begin);
-            //    end = new StreamReader(this.Request.Body).ReadToEnd();
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - HttpRequest errorMsg : {1}", (object)empty3, (object)ex.ToString()), "WARN");
-            //    userAuthResultModel.result.resultCode = 3;
-            //    userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONException");
-            //    return this.Json((object)userAuthResultModel);
-            //}
-            //ViewUserAuthModel viewUserAuthModel = JsonConvert.DeserializeObject<ViewUserAuthModel>(end);
             if (viewUserAuthModel == null)
             {
                 LogUtil.WriteLog(string.Format("[Http Error]CheckAuthKeyToView({0}) - model is null", (object)viewUserAuthModel), "WARN");
@@ -60,7 +40,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 userAuthResultModel.result.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_JSONIsNull");
                 return this.Json((object)userAuthResultModel);
             }
-            userAuthResultModel.result = TradeModule.CheckAuthKey(ref userInfo, HttpContext ,viewUserAuthModel.numUserNo, viewUserAuthModel.certifiedKey);
+            userAuthResultModel.result = TradeModule.CheckAuthKey(ref userInfo , HttpContext, viewUserAuthModel.numUserNo, viewUserAuthModel.certifiedKey);
             if (userAuthResultModel.result.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error] CheckAuthKeyToView({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)viewUserAuthModel), (object)userAuthResultModel.result.resultCode), "WARN");
@@ -86,7 +66,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext,model.userNo, model.certifiedKey);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, model.userNo, model.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error] SetMarketItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)model), (object)commonResult2.resultCode), "WARN");
@@ -295,7 +275,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext ,model.userNo, model.certifiedKey);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo , HttpContext, model.userNo, model.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]WithdrawItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)model), (object)commonResult2.resultCode), "WARN");
@@ -681,7 +661,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, buyAuthmodel.userNo, buyAuthmodel.certifiedKey, true);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, buyAuthmodel.userNo, buyAuthmodel.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]BuyItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)buyAuthmodel), (object)commonResult2.resultCode), "WARN");
@@ -689,12 +669,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             if (!userInfo._isWebAccess)
             {
-                commonResult2 = TradeModule.CheckTicketNo(userInfo._userNo, this.Request.Host.ToString(), userInfo._worldNo, (byte)0, buyAuthmodel.ticketNo);
-                if (commonResult2.resultCode != 0)
-                {
-                    LogUtil.WriteLog(string.Format("[Ticket Error]BuyItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)buyAuthmodel), (object)commonResult2.resultCode), "WARN");
-                    return this.Json((object)commonResult2);
-                }
+                
             }
             commonResult2.resultCode = WorldMarketBase.checkValidCount<long, long>(buyAuthmodel.buyPrice, buyAuthmodel.buyCount);
             if (commonResult2.resultCode != 0)
@@ -756,7 +731,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, sellAuthModel.userNo, sellAuthModel.certifiedKey, true);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, sellAuthModel.userNo, sellAuthModel.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]SellItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)sellAuthModel), (object)commonResult2.resultCode), "WARN");
@@ -764,7 +739,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
             }
             if (!userInfo._isWebAccess)
             {
-                commonResult2 = TradeModule.CheckTicketNo(userInfo._userNo, this.Request.Host.ToString(), userInfo._worldNo, (byte)1, sellAuthModel.ticketNo);
+                commonResult2 = TradeModule.CheckTicketNo(userInfo._userNo, userInfo._worldNo, (byte)1, sellAuthModel.ticketNo);
                 if (commonResult2.resultCode != 0)
                 {
                     LogUtil.WriteLog(string.Format("[Ticket Error]SellItem({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)sellAuthModel), (object)commonResult2.resultCode), "WARN");
@@ -899,7 +874,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, buyBiddingAuthModel.userNo, buyBiddingAuthModel.certifiedKey, true);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, buyBiddingAuthModel.userNo, buyBiddingAuthModel.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]CalculateBuyBidding({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)buyBiddingAuthModel), (object)commonResult2.resultCode), "WARN");
@@ -1015,7 +990,7 @@ namespace GB.BlackDesert.Trade.Web.Game.Api.Controllers
                 commonResult1.resultMsg = CommonModule.GetResourceValue("TRADE_MARKET_WEB_ERROR_eWorldTradeMarketErrorNo_HttpException");
                 return this.Json((object)commonResult1);
             }
-            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, sellBiddingAuthModel.userNo, sellBiddingAuthModel.certifiedKey, true);
+            CommonResult commonResult2 = TradeModule.CheckAuthKey(ref userInfo, HttpContext, sellBiddingAuthModel.userNo, sellBiddingAuthModel.certifiedKey);
             if (commonResult2.resultCode != 0)
             {
                 LogUtil.WriteLog(string.Format("[Auth Error]CalculateSellBidding({0}) errorCode({1})", (object)JsonConvert.SerializeObject((object)sellBiddingAuthModel), (object)commonResult2.resultCode), "WARN");

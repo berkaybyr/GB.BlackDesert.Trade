@@ -16,7 +16,7 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Common
+namespace BlackDesert.TradeMarket.Lib.Common
 {
     public static class TradeModule
     {
@@ -36,12 +36,12 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
                     userInfo = authInfo.userInfoModel;
                     userInfo._isWebAccess = true;
                     userInfo._isReturn = false;
-                    if (authInfo.userInfoModel._secondPwdPass.Equals(false))
-                    {
-                        commonResult.resultCode = 28877;
-                        commonResult.resultMsg = "TRADE_MARKET_ERROR_MSG_UNAUTHORIZED";
-                        return commonResult;
-                    }
+                    //if (authInfo.userInfoModel._secondPwdPass.Equals(false))
+                    //{
+                    //    commonResult.resultCode = 28877;
+                    //    commonResult.resultMsg = "TRADE_MARKET_ERROR_MSG_UNAUTHORIZED";
+                    //    return commonResult;
+                    //}
                     if (isRecord)
                     {
                         ObjectParameter rv = new ObjectParameter("rv", typeof(int));
@@ -129,7 +129,6 @@ namespace GB.BlackDesert.Trade.Web.Lib.Common
 
         public static CommonResult CheckTicketNo(
           long userNo,
-          string hostName,
           int worldNo,
           byte ticketType,
           string ticketNo)

@@ -16,7 +16,7 @@ namespace GB.BlackDesert.Trade.Web.Api
 
         private static void InitializeOnce()
         {
-            var openResult = ServerControlManager.This().Open(ServerType.eView, ConstantMgr._isTradeWebOpen) == 0;
+            var openResult = ServerControlManager.This().Open(ServerType.eView) == 0;
             if (!openResult)
                 return;
             AuthenticateManager._servcerType = ServerType.eView;

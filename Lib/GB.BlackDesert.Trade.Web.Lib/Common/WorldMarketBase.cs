@@ -6,7 +6,7 @@
 
 using System;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Common
+namespace BlackDesert.TradeMarket.Lib.Common
 {
     public static class WorldMarketBase
     {

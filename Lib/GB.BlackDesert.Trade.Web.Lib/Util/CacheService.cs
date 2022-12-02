@@ -5,20 +5,21 @@
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
 using GB.BlackDesert.Trade.Web.Lib.Common;
+using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Runtime.Caching;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
-    public class CacheService
+    public static class CacheService
     {
-        public T Get<T>(string cacheKey, int durationInSec, Func<T> getItemCached) where T : class
+        private static readonly IMemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
+        public static T Get<T>(string cacheKey, int durationInSec, Func<T> getItemCached) where T : class
         {
-            if (!(MemoryCache.Default.Get(cacheKey, (string)null) is T obj))
+            var obj = getItemCached();
+            if (_cache.Get(cacheKey) is not null)
             {
-                obj = getItemCached();
                 if ((object)obj != null)
-                    MemoryCache.Default.Add(cacheKey, (object)obj, (DateTimeOffset)CommonModule.GetCustomTime().AddSeconds((double)durationInSec));
+                    _cache.Set(cacheKey, (object)obj, (DateTimeOffset)CommonModule.GetCustomTime().AddSeconds((double)durationInSec));
             }
             return obj;
         }

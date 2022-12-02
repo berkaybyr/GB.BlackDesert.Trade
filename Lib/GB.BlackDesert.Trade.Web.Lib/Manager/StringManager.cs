@@ -13,7 +13,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class StringManager
     {

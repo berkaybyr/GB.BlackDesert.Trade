@@ -7,7 +7,7 @@
 using System.Collections.Specialized;
 using System.Security.Cryptography.X509Certificates;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Models
+namespace BlackDesert.TradeMarket.Lib.Models
 {
     public class HttpRequestModel
     {

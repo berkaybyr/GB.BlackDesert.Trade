@@ -10,7 +10,7 @@ namespace GB.BlackDesert.Trade.Web.Process.Api
 
         private static void InitializeOnce()
         {
-            var openResult = ServerControlManager.This().Open(ServerType.eProcess, ConstantMgr._isTradeWebOpen) == 0;
+            var openResult = ServerControlManager.This().Open(ServerType.eProcess) == 0;
             var dataUpdateResult = ServerControlManager.This().DataUpdateByRepository(ServerType.eProcess) == 0;
             var dataInitResult = ServerControlManager.This().dataInit(ServerType.eProcess) == 0;
             var timerOpenResult = ServerControlManager.This().TimerOpen(ServerType.eProcess) == 0;

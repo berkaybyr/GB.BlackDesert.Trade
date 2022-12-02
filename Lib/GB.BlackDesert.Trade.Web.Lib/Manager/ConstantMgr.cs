@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Linq;
 
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public static class ConstantMgr
     {
@@ -55,7 +55,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
         public static readonly bool _isLive = ConfigurationManager.AppSettings["isLive"].ConvertTo<bool>(false);
 
         public static readonly string _allowIPList = ConfigurationManager.AppSettings["AllowIPList"] ?? string.Empty;
-        public static readonly bool _isTradeWebOpen = false;             //ConfigurationManager.AppSettings["isTradeWebOpen"].ConvertTo<bool>(false);
+        //public static readonly bool _isTradeWebOpen = false;             //ConfigurationManager.AppSettings["isTradeWebOpen"].ConvertTo<bool>(false);
         public static readonly string _selfServerIP = ConfigurationManager.AppSettings["selfServerIP"] ?? string.Empty;
 
         public static readonly string _allowBrowserList = ConfigurationManager.AppSettings["AllowBrowserList"] ?? string.Empty;

@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager.Interface
+namespace BlackDesert.TradeMarket.Lib.Manager.Interface
 {
     public abstract class StockInfoManger
     {

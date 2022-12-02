@@ -6,7 +6,7 @@
 
 using System;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     [Flags]
     public enum LogDetailFlag

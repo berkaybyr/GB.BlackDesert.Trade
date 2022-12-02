@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GB.BlackDesert.Trade.Web.Lib.Sql
+namespace BlackDesert.TradeMarket.Lib.Sql
 {
     using System;
     using System.Data.Entity;
@@ -15,9 +15,9 @@ namespace GB.BlackDesert.Trade.Web.Lib.Sql
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class PF_BETA_LOGDB_0001 : DbContext
+    public partial class PF_BETA_LOGDB_000 : DbContext
     {
-        public PF_BETA_LOGDB_0001()
+        public PF_BETA_LOGDB_000()
             : base("name=PF_BETA_LOGDB_000")
         {
         }

@@ -6,7 +6,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager.Auth
+namespace BlackDesert.TradeMarket.Lib.Manager.Auth
 {
     public class Oauth2CallBackModel
     {

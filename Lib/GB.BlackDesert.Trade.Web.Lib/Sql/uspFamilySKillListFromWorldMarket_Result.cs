@@ -4,7 +4,7 @@
 // MVID: D2C0DA5E-915E-4539-97D5-41BCE7B5ABE2
 // Assembly location: C:\Users\kkass\OneDrive\Masaüstü\MarketDLL\GB.BlackDesert.Trade.Web.Lib.dll
 
-namespace GB.BlackDesert.Trade.Web.Lib.Sql
+namespace BlackDesert.TradeMarket.Lib.Sql
 {
     public class uspFamilySKillListFromWorldMarket_Result
     {

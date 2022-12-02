@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TradeLogDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="uspLogWorldMarketForOperation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PaWebGamePublic">
+    <Parameter Name="operationLogType" Type="smallint" Mode="In" />
+    <Parameter Name="registerDate" Type="datetime" Mode="In" />
+    <Parameter Name="nationCode" Type="int" Mode="In" />
+    <Parameter Name="serverNo" Type="int" Mode="In" />
+    <Parameter Name="userNo" Type="bigint" Mode="In" />
+    <Parameter Name="keyType1" Type="int" Mode="In" />
+    <Parameter Name="mainKey1" Type="int" Mode="In" />
+    <Parameter Name="subKey1" Type="int" Mode="In" />
+    <Parameter Name="count1" Type="bigint" Mode="In" />
+    <Parameter Name="beforeCount1" Type="bigint" Mode="In" />
+    <Parameter Name="afterCount1" Type="bigint" Mode="In" />
+    <Parameter Name="keyType2" Type="int" Mode="In" />
+    <Parameter Name="mainKey2" Type="int" Mode="In" />
+    <Parameter Name="subKey2" Type="int" Mode="In" />
+    <Parameter Name="count2" Type="bigint" Mode="In" />
+    <Parameter Name="beforeCount2" Type="bigint" Mode="In" />
+    <Parameter Name="afterCount2" Type="bigint" Mode="In" />
+    <Parameter Name="param1" Type="bigint" Mode="In" />
+    <Parameter Name="param2" Type="bigint" Mode="In" />
+    <Parameter Name="param3" Type="bigint" Mode="In" />
+    <Parameter Name="param4" Type="bigint" Mode="In" />
+    <Parameter Name="param5" Type="bigint" Mode="In" />
+    <Parameter Name="param6" Type="bigint" Mode="In" />
+    <Parameter Name="param7" Type="bigint" Mode="In" />
+    <Parameter Name="param8" Type="bigint" Mode="In" />
+    <Parameter Name="param9" Type="bigint" Mode="In" />
+    <Parameter Name="param10" Type="bigint" Mode="In" />
+    <Parameter Name="param11" Type="bigint" Mode="In" />
+    <Parameter Name="param12" Type="bigint" Mode="In" />
+    <Parameter Name="textParam1" Type="nvarchar" Mode="In" />
+    <Parameter Name="textParam2" Type="nvarchar" Mode="In" />
+    <Parameter Name="reason" Type="smallint" Mode="In" />
+    <Parameter Name="symNo" Type="nvarchar" Mode="InOut" />
+    <Parameter Name="rv" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="TradeLogDBModelStoreContainer" />
+</Schema>

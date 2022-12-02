@@ -9,7 +9,7 @@ using GB.BlackDesert.Trade.Web.Lib.Models;
 using GB.BlackDesert.Trade.Web.Lib.Util;
 using System.Diagnostics;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Manager
+namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public class ServerControlManager
     {
@@ -33,7 +33,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
             return ServerControlManager._singleton;
         }
 
-        public int Open(ServerType serverType, bool isWebOpen)
+        public int Open(ServerType serverType)
         {
             int errorCode1 = 0;
             lock (ServerControlManager._locker)
@@ -70,15 +70,15 @@ namespace GB.BlackDesert.Trade.Web.Lib.Manager
                 ServerLogManager.serverLogWrite(ServerLogType.eComplete, "ServerControlManager " + this.getConvertServerName(serverType), stopwatch.ElapsedMilliseconds.ToString());
                 return errorCode1;
             }
-            if (ServerType.eView == serverType && isWebOpen)
-            {
-                int errorCode2 = StringManager.This().Load();
-                if (errorCode2 != 0)
-                {
-                    ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode2, "StringManager Load");
-                    return errorCode2;
-                }
-            }
+            //if (ServerType.eView == serverType && isWebOpen)
+            //{
+            //    int errorCode2 = StringManager.This().Load();
+            //    if (errorCode2 != 0)
+            //    {
+            //        ServerLogManager.serverErrorLogWrite(nameof(ServerControlManager), errorCode2, "StringManager Load");
+            //        return errorCode2;
+            //    }
+            //}
             int errorCode3 = WorldMarketOptionManager.This().open(serverType);
             if (errorCode3 != 0)
             {

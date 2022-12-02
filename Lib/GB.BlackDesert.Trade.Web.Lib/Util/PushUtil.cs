@@ -9,11 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     public static class PushUtil
     {
-        public static string EnableAppPushFlag => new CacheService().Get<string>("EnablePushFlag", 600, (Func<string>)(() =>
+        public static string EnableAppPushFlag => CacheService.Get<string>("EnablePushFlag", 600, (Func<string>)(() =>
         {
             bool? nullable = new bool?();
             string enableAppPushFlag = "false";
@@ -30,8 +30,7 @@ namespace GB.BlackDesert.Trade.Web.Lib.Util
             }
             finally
             {
-                if (enableAppPushFlag == null)
-                    enableAppPushFlag = "false";
+                enableAppPushFlag ??= "false";
             }
             return enableAppPushFlag;
         }));

@@ -9,10 +9,10 @@ using GB.BlackDesert.Trade.Web.Lib.Manager;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
+
 using System.Security.Cryptography.X509Certificates;
 
-namespace GB.BlackDesert.Trade.Web.Lib.Util
+namespace BlackDesert.TradeMarket.Lib.Util
 {
     public static class CookieLib
     {
