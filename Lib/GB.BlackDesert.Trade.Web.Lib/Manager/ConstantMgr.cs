@@ -16,13 +16,8 @@ namespace BlackDesert.TradeMarket.Lib.Manager
 {
     public static class ConstantMgr
     {
-
+        
         public static readonly string _xmlContentsLocalPath = ConfigurationManager.AppSettings["xmlContentsLocalPath"] ?? string.Empty;
-
-
-
-
-
 
 
 

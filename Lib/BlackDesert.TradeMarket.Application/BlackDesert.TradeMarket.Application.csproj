@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlackDesert.TradeMarket.Db\BlackDesert.TradeMarket.Db.csproj" />
+    <ProjectReference Include="..\GB.BlackDesert.Trade.Web.Lib\BlackDesert.TradeMarket.Lib.csproj" />
+  </ItemGroup>
+
+</Project>
