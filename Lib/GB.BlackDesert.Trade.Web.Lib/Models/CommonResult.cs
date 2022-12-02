@@ -12,6 +12,7 @@ namespace BlackDesert.TradeMarket.Lib.Models
 
         public string resultMsg { get; set; }
 
+        public bool IsSuccess { get => resultCode == 0; }
         public CommonResult()
         {
             this.resultCode = 0;
